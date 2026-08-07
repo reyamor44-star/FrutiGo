@@ -101,6 +101,29 @@ export default function OnlineStore({
   const [localOrderCompleted, setLocalOrderCompleted] = useState<OrderSummary | null>(null);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [pdfToast, setPdfToast] = useState<string | null>(null);
+
+  const handleDownloadPriceList = async () => {
+    if (isGeneratingPdf) return;
+    setIsGeneratingPdf(true);
+    setPdfToast("📄 Generando Lista de Precios PDF...");
+    try {
+      await generatePriceListPDF(products, {
+        pdfLogoUrl: pdfConfig?.pdfLogoUrl || undefined,
+        pdfQrUrl: pdfConfig?.pdfQrUrl || undefined,
+        lang: lang || "es"
+      });
+      setPdfToast("✅ ¡Lista de Precios PDF descargada!");
+      setTimeout(() => setPdfToast(null), 3500);
+    } catch (err) {
+      console.error("Error al generar Lista de Precios PDF:", err);
+      setPdfToast("❌ Error al generar la Lista de Precios PDF");
+      setTimeout(() => setPdfToast(null), 3500);
+    } finally {
+      setIsGeneratingPdf(false);
+    }
+  };
 
   // State for Checkout Modal and Card Info
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
@@ -1377,18 +1400,19 @@ export default function OnlineStore({
               {/* Botón de Descarga Lista de Precios como una categoría más */}
               <button
                 type="button"
-                onClick={async () => {
-                  await generatePriceListPDF(products, {
-                    pdfLogoUrl: pdfConfig?.pdfLogoUrl || undefined,
-                    pdfQrUrl: pdfConfig?.pdfQrUrl || undefined,
-                    lang: lang || "es"
-                  });
-                }}
-                className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer bg-emerald-800 hover:bg-brand-green text-white shadow-xs active:scale-95 border border-emerald-700 flex-shrink-0"
+                onClick={handleDownloadPriceList}
+                disabled={isGeneratingPdf}
+                className={`px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer bg-emerald-800 hover:bg-brand-green text-white shadow-xs active:scale-95 border border-emerald-700 flex-shrink-0 ${
+                  isGeneratingPdf ? "opacity-75 cursor-wait" : ""
+                }`}
                 title="Descargar Lista de Precios en PDF agrupada por categorías y precio menor primero"
               >
-                <FileText className="w-3.5 h-3.5 text-brand-yellow flex-shrink-0" />
-                <span>Descargar lista</span>
+                {isGeneratingPdf ? (
+                  <Loader2 className="w-3.5 h-3.5 text-brand-yellow animate-spin flex-shrink-0" />
+                ) : (
+                  <FileText className="w-3.5 h-3.5 text-brand-yellow flex-shrink-0" />
+                )}
+                <span>{isGeneratingPdf ? "Generando PDF..." : "Descargar lista"}</span>
                 <span className="px-1.5 py-0.2 text-[10px] rounded-full font-extrabold bg-white/20 text-white">
                   PDF
                 </span>
@@ -1396,6 +1420,14 @@ export default function OnlineStore({
             </div>
           </div>
         </div>
+
+        {/* Floating Toast Notification for PDF Generation */}
+        {pdfToast && (
+          <div className="fixed bottom-5 right-5 z-50 bg-zinc-900 text-white px-4 py-3 rounded-2xl shadow-2xl border border-emerald-500/40 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-300">
+            {isGeneratingPdf && <Loader2 className="w-4 h-4 text-brand-yellow animate-spin shrink-0" />}
+            <span className="text-xs font-extrabold">{pdfToast}</span>
+          </div>
+        )}
       </header>
 
       {/* MOBILE SLIDE-OVER MENU DRAWER */}
@@ -1446,18 +1478,19 @@ export default function OnlineStore({
 
               {/* Download Price List PDF */}
               <button
-                onClick={async () => {
+                onClick={() => {
                   setIsMobileMenuOpen(false);
-                  await generatePriceListPDF(products, {
-                    pdfLogoUrl: pdfConfig?.pdfLogoUrl || undefined,
-                    pdfQrUrl: pdfConfig?.pdfQrUrl || undefined,
-                    lang: lang || "es"
-                  });
+                  handleDownloadPriceList();
                 }}
+                disabled={isGeneratingPdf}
                 className="w-full flex items-center gap-2 p-3 bg-brand-green text-white hover:bg-emerald-800 rounded-2xl font-black text-xs border border-emerald-700 shadow-sm cursor-pointer"
               >
-                <FileText className="w-4 h-4 text-brand-yellow" />
-                <span>Descargar Lista de Precios (PDF)</span>
+                {isGeneratingPdf ? (
+                  <Loader2 className="w-4 h-4 text-brand-yellow animate-spin shrink-0" />
+                ) : (
+                  <FileText className="w-4 h-4 text-brand-yellow shrink-0" />
+                )}
+                <span>{isGeneratingPdf ? "Generando PDF..." : "Descargar Lista de Precios (PDF)"}</span>
               </button>
 
               {/* My Profile / Orders */}

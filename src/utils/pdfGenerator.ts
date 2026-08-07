@@ -2,6 +2,7 @@ import jsPDF from "jspdf";
 import QRCode from "qrcode";
 import { OrderSummary, Product } from "../types";
 import { Language, getLocalizedProduct } from "../translations";
+import { DEFAULT_PRODUCTS } from "../data/defaultStoreData";
 
 /**
  * Helper to safely convert an image URL or image element into a base64 Data URL.
@@ -14,9 +15,11 @@ async function loadImageAsDataUrl(url: string | null | undefined): Promise<strin
   if (url.startsWith("data:image/")) return url;
 
   return new Promise((resolve) => {
+    const timer = setTimeout(() => resolve(null), 3500); // 3.5s timeout guard
     const img = new Image();
     img.crossOrigin = "Anonymous";
     img.onload = () => {
+      clearTimeout(timer);
       try {
         const canvas = document.createElement("canvas");
         canvas.width = img.width || 200;
@@ -33,7 +36,10 @@ async function loadImageAsDataUrl(url: string | null | undefined): Promise<strin
         resolve(null);
       }
     };
-    img.onerror = () => resolve(null);
+    img.onerror = () => {
+      clearTimeout(timer);
+      resolve(null);
+    };
     img.src = url;
   });
 }
@@ -125,7 +131,11 @@ function createPlayStoreBadgeDataUrl(lang: Language = "es"): string {
   // Dark background button
   ctx.fillStyle = "#000000";
   ctx.beginPath();
-  ctx.roundRect(0, 0, 240, 70, 12);
+  if (typeof (ctx as any).roundRect === "function") {
+    (ctx as any).roundRect(0, 0, 240, 70, 12);
+  } else {
+    ctx.rect(0, 0, 240, 70);
+  }
   ctx.fill();
 
   // White border
@@ -729,9 +739,10 @@ export async function generateOrderPDF(
  * sale notes and invoices.
  */
 export async function generatePriceListPDF(
-  products: Product[],
+  productsInput: Product[],
   options: PdfGenerationOptions = {}
 ): Promise<void> {
+  const products = (productsInput && productsInput.length > 0) ? productsInput : DEFAULT_PRODUCTS;
   const lang: Language = options.lang || "es";
   const doc = new jsPDF({
     orientation: "portrait",
@@ -745,13 +756,31 @@ export async function generatePriceListPDF(
   const contentWidth = pageWidth - margin * 2; // 182mm
   const rightX = pageWidth - margin;
 
-  // Pre-load images (logo & QR code & Play Store badge)
+  // Pre-load images (logo & QR code & Play Store badge) with try/catch safety
   const logoUrl = options.pdfLogoUrl || getStoredPdfLogoUrl();
-  const logoDataUrl = await loadImageAsDataUrl(logoUrl);
-  const qrDataUrl = options.pdfQrUrl 
-    ? await loadImageAsDataUrl(options.pdfQrUrl) || createDefaultQrDataUrl()
-    : createDefaultQrDataUrl();
-  const playStoreBadgeUrl = createPlayStoreBadgeDataUrl(lang);
+  let logoDataUrl: string | null = null;
+  try {
+    logoDataUrl = await loadImageAsDataUrl(logoUrl);
+  } catch (err) {
+    console.warn("Logo load warning:", err);
+  }
+
+  let qrDataUrl = "";
+  try {
+    qrDataUrl = options.pdfQrUrl 
+      ? (await loadImageAsDataUrl(options.pdfQrUrl)) || createDefaultQrDataUrl()
+      : createDefaultQrDataUrl();
+  } catch (err) {
+    console.warn("QR load warning:", err);
+    qrDataUrl = createDefaultQrDataUrl();
+  }
+
+  let playStoreBadgeUrl = "";
+  try {
+    playStoreBadgeUrl = createPlayStoreBadgeDataUrl(lang);
+  } catch (err) {
+    console.warn("Play store badge warning:", err);
+  }
 
   // Exact matching brand palette
   const darkGreen = [6, 78, 59];        // #064e3b

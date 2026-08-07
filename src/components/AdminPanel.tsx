@@ -1721,11 +1721,18 @@ export default function AdminPanel({
 
                   <button
                     onClick={async () => {
-                      await generatePriceListPDF(productList, {
-                        pdfLogoUrl: pdfLogoInput || customLogo || undefined,
-                        pdfQrUrl: pdfQrInput || undefined,
-                        lang: "es"
-                      });
+                      showToast("📄 Generando Lista de Precios en PDF...");
+                      try {
+                        await generatePriceListPDF(productList, {
+                          pdfLogoUrl: pdfLogoInput || customLogo || undefined,
+                          pdfQrUrl: pdfQrInput || undefined,
+                          lang: "es"
+                        });
+                        showToast("✅ ¡Lista de Precios descargada con éxito!");
+                      } catch (err) {
+                        console.error("Error al generar Lista de Precios PDF:", err);
+                        showToast("Error al descargar la Lista de Precios PDF.");
+                      }
                     }}
                     className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-800 hover:bg-brand-green text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md transition-all cursor-pointer border border-emerald-700"
                     title="Descargar Lista de Precios en PDF agrupada por categorías y precio menor primero"
@@ -2594,11 +2601,18 @@ export default function AdminPanel({
 
                 <button
                   onClick={async () => {
-                    await generatePriceListPDF(productList, {
-                      pdfLogoUrl: pdfLogoInput || customLogo || undefined,
-                      pdfQrUrl: pdfQrInput || undefined,
-                      lang: "es"
-                    });
+                    showToast("📄 Generando Lista de Precios en PDF...");
+                    try {
+                      await generatePriceListPDF(productList, {
+                        pdfLogoUrl: pdfLogoInput || customLogo || undefined,
+                        pdfQrUrl: pdfQrInput || undefined,
+                        lang: "es"
+                      });
+                      showToast("✅ ¡Lista de Precios descargada con éxito!");
+                    } catch (err) {
+                      console.error("Error al generar Lista de Precios PDF:", err);
+                      showToast("Error al descargar la Lista de Precios PDF.");
+                    }
                   }}
                   className="py-3.5 px-5 bg-emerald-800 hover:bg-brand-green text-white font-extrabold text-sm rounded-xl shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 border border-emerald-700"
                 >

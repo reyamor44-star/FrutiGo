@@ -2593,6 +2593,21 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     }
   });
 
+  // Direct redirection route for official photo (https://n9.cl/p8dxzb)
+  app.get([
+    "/p8dxzb", 
+    "/foto",
+    "/fotografia",
+    "/foro", 
+    "/forum", 
+    "/n9.cl/p8dxzb", 
+    "/n9.cl/*",
+    "/https://n9.cl/p8dxzb",
+    "/url/p8dxzb"
+  ], (req, res) => {
+    return res.redirect(301, "https://n9.cl/p8dxzb");
+  });
+
   // Explicit SEO Routes for sitemap.xml and robots.txt
   app.get("/sitemap.xml", (req, res) => {
     const sitemapPath = path.join(process.cwd(), "public", "sitemap.xml");
@@ -2739,6 +2754,44 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
             "@context": "https://schema.org",
             "@graph": [
               {
+                "@type": "ProfilePage",
+                "@id": "https://frutigo.com.mx/sobre-el-desarrollador#profilepage",
+                "url": "https://frutigo.com.mx/sobre-el-desarrollador",
+                "name": "Alberto Reyes Sandoval | Creador y Desarrollador de Fruti Go",
+                "description": profile.bioP1 || "Perfil oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx).",
+                "primaryImageOfPage": {
+                  "@type": "ImageObject",
+                  "@id": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg#primaryimage",
+                  "url": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                  "contentUrl": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                  "width": "1200",
+                  "height": "1600",
+                  "caption": "Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go",
+                  "representativeOfPage": true
+                },
+                "mainEntity": {
+                  "@type": "Person",
+                  "@id": "https://frutigo.com.mx/#founder",
+                  "name": "Alberto Reyes Sandoval",
+                  "jobTitle": "Creador y Desarrollador de Fruti Go",
+                  "image": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                  "worksFor": {
+                    "@type": "Organization",
+                    "@id": "https://frutigo.com.mx/#organization",
+                    "name": "Fruti Go",
+                    "url": "https://frutigo.com.mx"
+                  },
+                  "sameAs": [
+                    "https://play.google.com/store/apps/details?id=com.frutigo.app",
+                    profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                    "https://www.wikidata.org/wiki/Q140880376",
+                    profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                    "https://github.com/reyamor44-star",
+                    "https://n9.cl/p8dxzb"
+                  ]
+                }
+              },
+              {
                 "@type": "Person",
                 "@id": "https://frutigo.com.mx/#founder",
                 "name": profile.name || "Alberto Reyes Sandoval",
@@ -2749,13 +2802,8 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 "url": "https://frutigo.com.mx/sobre-el-desarrollador",
                 "email": profile.email ? `mailto:${profile.email}` : "mailto:frutigo33@gmail.com",
                 "image": [
-                  {
-                    "@type": "ImageObject",
-                    "url": "https://frutigo.com.mx/logo.png",
-                    "width": "1200",
-                    "height": "630",
-                    "caption": "Alberto Reyes Sandoval - Fundador, Creador y CEO de Fruti Go"
-                  },
+                  "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                  "https://n9.cl/p8dxzb",
                   ...devPhotos
                 ],
                 "worksFor": {
@@ -2767,7 +2815,9 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 "sameAs": [
                   "https://www.wikidata.org/wiki/Q140880376",
                   profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
-                  profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval"
+                  profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                  "https://github.com/reyamor44-star",
+                  "https://n9.cl/p8dxzb"
                 ]
               },
               {
@@ -2807,7 +2857,9 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 "sameAs": [
                   "https://play.google.com/store/apps/details?id=com.frutigo.app",
                   profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
-                  "https://www.wikidata.org/wiki/Q140880376"
+                  "https://www.wikidata.org/wiki/Q140880376",
+                  profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                  "https://github.com/reyamor44-star"
                 ]
               },
               {
@@ -2834,7 +2886,10 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 "description": "Marca registrada y propiedad exclusiva de Alberto Reyes Sandoval para la plataforma tecnológica Fruti Go (frutigo.com.mx). No guarda relación con empresas con guión o variaciones ortográficas externas.",
                 "sameAs": [
                   "https://play.google.com/store/apps/details?id=com.frutigo.app",
-                  profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt"
+                  profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                  "https://www.wikidata.org/wiki/Q140880376",
+                  profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                  "https://github.com/reyamor44-star"
                 ]
               },
               {
@@ -2855,7 +2910,10 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 },
                 "sameAs": [
                   "https://play.google.com/store/apps/details?id=com.frutigo.app",
-                  profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt"
+                  profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                  "https://www.wikidata.org/wiki/Q140880376",
+                  profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                  "https://github.com/reyamor44-star"
                 ],
                 "publisher": {
                   "@type": "Organization",
@@ -2878,7 +2936,10 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                   },
                   "sameAs": [
                     "https://play.google.com/store/apps/details?id=com.frutigo.app",
-                    profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt"
+                    profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                    "https://www.wikidata.org/wiki/Q140880376",
+                    profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                    "https://github.com/reyamor44-star"
                   ]
                 },
                 "author": {
@@ -2892,11 +2953,10 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
           jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(developerJsonLdObj, null, 2)}\n</script>`;
 
-          const ogImagesMeta = devPhotos.map((url: string, idx: number) => 
-            `<meta property="og:image" content="${url}" />\n<meta property="og:image:alt" content="Alberto Reyes Sandoval - Foto ${idx + 1}" />`
-          ).join("\n");
+          const primaryDevPhoto = "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg";
+          const ogImagesMeta = `<meta property="og:image" content="${primaryDevPhoto}" />\n<meta property="og:image:url" content="${primaryDevPhoto}" />\n<meta property="og:image:secure_url" content="${primaryDevPhoto}" />\n<meta property="og:image:type" content="image/jpeg" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="1600" />\n<meta property="og:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
 
-          const twitterImagesMeta = `<meta name="twitter:image" content="${devPhotos[0]}" />`;
+          const twitterImagesMeta = `<meta name="twitter:image" content="${primaryDevPhoto}" />\n<meta name="twitter:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
 
           html = html.replace(/<meta property="og:image" content=".*?" \/>/i, ogImagesMeta);
           html = html.replace(/<meta name="twitter:image" content=".*?" \/>/i, twitterImagesMeta);

@@ -289,6 +289,24 @@ export default function App() {
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
 
+      // Check if user is navigating directly to photo link
+      if (
+        path.includes("p8dxzb") ||
+        path.includes("foto") ||
+        path.includes("fotografia") ||
+        path.includes("foro") ||
+        path.includes("forum") ||
+        path.includes("n9.cl") ||
+        search.includes("p8dxzb") ||
+        search.includes("foto") ||
+        search.includes("foro") ||
+        search.includes("forum") ||
+        hash.includes("p8dxzb") ||
+        hash.includes("foto")
+      ) {
+        window.location.href = "https://n9.cl/p8dxzb";
+      }
+
       // Check if user is navigating directly to cliente / bodega / tienda route
       if (
         path === "/cliente" ||

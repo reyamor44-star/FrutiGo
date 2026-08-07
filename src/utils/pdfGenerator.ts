@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 import QRCode from "qrcode";
-import { OrderSummary } from "../types";
+import { OrderSummary, Product } from "../types";
 import { Language, getLocalizedProduct } from "../translations";
 
 /**
@@ -719,6 +719,398 @@ export async function generateOrderPDF(
 
   // Save the PDF
   const filename = `Nota_Fruti_Go_${order.orderId}.pdf`;
+  doc.save(filename);
+}
+
+/**
+ * Generates and downloads a professional Price List PDF ("Lista de Precios")
+ * grouped by category, with products sorted by price ascending (lowest price first).
+ * Features the exact design aesthetic, typography, colors, headers, and footers as
+ * sale notes and invoices.
+ */
+export async function generatePriceListPDF(
+  products: Product[],
+  options: PdfGenerationOptions = {}
+): Promise<void> {
+  const lang: Language = options.lang || "es";
+  const doc = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4"
+  });
+
+  const pageWidth = doc.internal.pageSize.getWidth(); // 210mm
+  const pageHeight = doc.internal.pageSize.getHeight(); // 297mm
+  const margin = 14;
+  const contentWidth = pageWidth - margin * 2; // 182mm
+  const rightX = pageWidth - margin;
+
+  // Pre-load images (logo & QR code & Play Store badge)
+  const logoUrl = options.pdfLogoUrl || getStoredPdfLogoUrl();
+  const logoDataUrl = await loadImageAsDataUrl(logoUrl);
+  const qrDataUrl = options.pdfQrUrl 
+    ? await loadImageAsDataUrl(options.pdfQrUrl) || createDefaultQrDataUrl()
+    : createDefaultQrDataUrl();
+  const playStoreBadgeUrl = createPlayStoreBadgeDataUrl(lang);
+
+  // Exact matching brand palette
+  const darkGreen = [6, 78, 59];        // #064e3b
+  const emeraldAccent = [16, 185, 129]; // #10b981
+  const bgLight = [248, 250, 249];      // #f8faf9
+  const textDark = [30, 41, 59];        // #1e293b
+  const textMuted = [100, 116, 139];    // #64748b
+  const borderGray = [226, 232, 240];   // #e2e8f0
+
+  // Standard category priority order
+  const categoryPriority: Record<string, number> = {
+    "Frutas": 1,
+    "Verduras": 2,
+    "Hierbas y Aromáticas": 3,
+    "Secos y Especias": 4,
+    "Otros": 5
+  };
+
+  // Group products by category
+  const categoriesMap: Record<string, Product[]> = {};
+  (products || []).forEach((p) => {
+    if (!p) return;
+    const cat = (p.category || "Otros").trim();
+    if (!categoriesMap[cat]) categoriesMap[cat] = [];
+    categoriesMap[cat].push(p);
+  });
+
+  // Sort products within each category by price ascending (lowest price first)
+  Object.keys(categoriesMap).forEach((cat) => {
+    categoriesMap[cat].sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
+  });
+
+  // Get sorted list of categories according to priority
+  const categoryNames = Object.keys(categoriesMap).sort((a, b) => {
+    const prioA = categoryPriority[a] || 99;
+    const prioB = categoryPriority[b] || 99;
+    if (prioA !== prioB) return prioA - prioB;
+    return a.localeCompare(b);
+  });
+
+  const totalProductsCount = (products || []).length;
+  const totalCategoriesCount = categoryNames.length;
+  const now = new Date();
+  const formattedDate = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+  let currentY = 0;
+
+  // Helper to draw page header
+  const drawPageHeader = (isFirstPage: boolean) => {
+    // 1. TOP HEADER ACCENT BAR
+    doc.setFillColor(darkGreen[0], darkGreen[1], darkGreen[2]);
+    doc.rect(0, 0, pageWidth, 8, "F");
+
+    doc.setFillColor(emeraldAccent[0], emeraldAccent[1], emeraldAccent[2]);
+    doc.rect(0, 8, pageWidth, 2, "F");
+
+    currentY = 16;
+
+    // Logo / Brand Title
+    if (logoDataUrl) {
+      try {
+        doc.addImage(logoDataUrl, "PNG", margin, currentY, 32, 22);
+      } catch {
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(20);
+        doc.setTextColor(darkGreen[0], darkGreen[1], darkGreen[2]);
+        doc.text("FRUTI GO", margin, currentY + 12);
+      }
+    } else {
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(22);
+      doc.setTextColor(darkGreen[0], darkGreen[1], darkGreen[2]);
+      doc.text("FRUTI GO", margin, currentY + 10);
+      
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(emeraldAccent[0], emeraldAccent[1], emeraldAccent[2]);
+      doc.text("SUMINISTRO B2B & MAYOREO RESTAURANTES", margin, currentY + 16);
+    }
+
+    // Header Right
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(15);
+    doc.setTextColor(darkGreen[0], darkGreen[1], darkGreen[2]);
+    doc.text("LISTA DE PRECIOS MAYOREO", rightX, currentY + 8, { align: "right" });
+
+    doc.setFontSize(8.5);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+    doc.text(`Emisión: ${formattedDate}`, rightX, currentY + 14, { align: "right" });
+
+    // Status / Vigencia Badge
+    doc.setFillColor(16, 185, 129); // #10b981
+    doc.roundedRect(rightX - 38, currentY + 17, 38, 6, 2, 2, "F");
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7);
+    doc.setTextColor(255, 255, 255);
+    doc.text("CATÁLOGO VIGENTE", rightX - 19, currentY + 21, { align: "center" });
+
+    currentY += 28;
+
+    // Horizontal Divider
+    doc.setDrawColor(borderGray[0], borderGray[1], borderGray[2]);
+    doc.setLineWidth(0.5);
+    doc.line(margin, currentY, rightX, currentY);
+
+    currentY += 6;
+
+    if (isFirstPage) {
+      // 2-Column Info Boxes: Provider & Catalog Summary
+      const colWidth = (contentWidth - 6) / 2; // ~88mm
+
+      // Box 1: BODEGA CENTRAL FRUTI GO
+      const box1X = margin;
+      doc.setFillColor(bgLight[0], bgLight[1], bgLight[2]);
+      doc.setDrawColor(borderGray[0], borderGray[1], borderGray[2]);
+      doc.roundedRect(box1X, currentY, colWidth, 40, 3, 3, "FD");
+
+      doc.setFillColor(darkGreen[0], darkGreen[1], darkGreen[2]);
+      doc.roundedRect(box1X, currentY, colWidth, 7, 3, 3, "F");
+      doc.rect(box1X, currentY + 4, colWidth, 3, "F");
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(7.5);
+      doc.setTextColor(255, 255, 255);
+      doc.text("DATOS DE BODEGA CENTRAL (PROVEEDOR)", box1X + 4, currentY + 5);
+
+      let b1Y = currentY + 12;
+      doc.setFontSize(8.5);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+      doc.text("Fruti Go S.A. de C.V. / Bodega Central GDL", box1X + 4, b1Y);
+
+      b1Y += 5;
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+      doc.text("RFC: FRG-240815-B2B", box1X + 4, b1Y);
+      b1Y += 4.5;
+      doc.text("Mercado de Abastos, Guadalajara, Jal.", box1X + 4, b1Y);
+      b1Y += 4.5;
+      doc.text("Teléfono: +52 (33) 2614 0390", box1X + 4, b1Y);
+      b1Y += 4.5;
+      doc.text("Atención B2B: pedidos@frutigo.mx", box1X + 4, b1Y);
+
+      // Box 2: RESUMEN DEL CATÁLOGO DE PRECIOS
+      const box2X = margin + colWidth + 6;
+      doc.setFillColor(bgLight[0], bgLight[1], bgLight[2]);
+      doc.setDrawColor(borderGray[0], borderGray[1], borderGray[2]);
+      doc.roundedRect(box2X, currentY, colWidth, 40, 3, 3, "FD");
+
+      doc.setFillColor(darkGreen[0], darkGreen[1], darkGreen[2]);
+      doc.roundedRect(box2X, currentY, colWidth, 7, 3, 3, "F");
+      doc.rect(box2X, currentY + 4, colWidth, 3, "F");
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(7.5);
+      doc.setTextColor(255, 255, 255);
+      doc.text("RESUMEN DEL CATÁLOGO DE PRECIOS", box2X + 4, currentY + 5);
+
+      let b2Y = currentY + 12;
+      doc.setFontSize(8);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+      doc.text(`Total Insumos: ${totalProductsCount} productos`, box2X + 4, b2Y);
+
+      b2Y += 5;
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+      doc.text(`Categorías Activas: ${totalCategoriesCount}`, box2X + 4, b2Y);
+      b2Y += 4.5;
+      doc.text("Precios ordenados de menor a mayor por categoría", box2X + 4, b2Y);
+
+      b2Y += 4.5;
+      doc.setFillColor(236, 253, 245);
+      doc.setDrawColor(16, 185, 129);
+      doc.roundedRect(box2X + 3, b2Y, colWidth - 6, 6, 1.5, 1.5, "FD");
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(7);
+      doc.setTextColor(6, 78, 59);
+      doc.text("ENTREGA DIARIA A RESTAURANTES Y NEGOCIOS", box2X + 5, b2Y + 4.2);
+
+      currentY += 46;
+    }
+  };
+
+  // Helper to check page break
+  const checkPageBreak = (neededSpace: number = 10) => {
+    if (currentY + neededSpace > pageHeight - 25) {
+      doc.addPage();
+      drawPageHeader(false);
+    }
+  };
+
+  // Draw Page 1 Header
+  drawPageHeader(true);
+
+  // Table Column x-positions
+  const c0 = margin;          // # (8mm)
+  const c1 = margin + 8;      // Producto (82mm)
+  const c2 = margin + 90;     // Presentación / Unidad (38mm)
+  const c3 = margin + 128;    // Clave SAT (24mm)
+  const c4 = margin + 182;    // Precio Unitario (Right-aligned at margin+182)
+
+  let globalItemCounter = 0;
+
+  // Render each category section
+  categoryNames.forEach((catName) => {
+    const catProducts = categoriesMap[catName] || [];
+    if (catProducts.length === 0) return;
+
+    // Check space for category header + table header + at least 1 row (~22mm)
+    checkPageBreak(22);
+
+    // Category Header Banner
+    doc.setFillColor(6, 78, 59); // Dark green
+    doc.roundedRect(margin, currentY, contentWidth, 7, 2, 2, "F");
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8.5);
+    doc.setTextColor(255, 255, 255);
+    const catTitle = `CATEGORÍA: ${catName.toUpperCase()} (${catProducts.length} productos) — Ordenado por menor precio`;
+    doc.text(catTitle, margin + 4, currentY + 4.8);
+
+    currentY += 8;
+
+    // Table Header
+    doc.setFillColor(241, 245, 249);
+    doc.setDrawColor(226, 232, 240);
+    doc.rect(margin, currentY, contentWidth, 6, "FD");
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7.5);
+    doc.setTextColor(100, 116, 139);
+    doc.text("#", c0 + 2, currentY + 4.2);
+    doc.text("PRODUCTO / INSUMO", c1, currentY + 4.2);
+    doc.text("PRESENTACIÓN", c2, currentY + 4.2);
+    doc.text("CLAVE SAT", c3, currentY + 4.2);
+    doc.text("PRECIO UNITARIO (MXN)", c4, currentY + 4.2, { align: "right" });
+
+    currentY += 6;
+
+    // Products in Category (Sorted Lowest to Highest Price)
+    catProducts.forEach((p, idx) => {
+      checkPageBreak(7);
+      globalItemCounter++;
+
+      const isEven = idx % 2 === 0;
+      doc.setFillColor(isEven ? 255 : 248, isEven ? 255 : 250, isEven ? 255 : 249);
+      doc.rect(margin, currentY, contentWidth, 6.5, "F");
+
+      // Row divider line
+      doc.setDrawColor(241, 245, 249);
+      doc.setLineWidth(0.3);
+      doc.line(margin, currentY + 6.5, rightX, currentY + 6.5);
+
+      // # Index
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(7.5);
+      doc.setTextColor(100, 116, 139);
+      doc.text(String(globalItemCounter), c0 + 2, currentY + 4.5);
+
+      // Product Name
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(30, 41, 59);
+      const prodName = (p.name || "Insumo").slice(0, 45);
+      doc.text(prodName, c1, currentY + 4.5);
+
+      // Presentation / Unit
+      const rawPres = p.presentation || p.unit || "1 Kg";
+      const cleanPres = rawPres.replace(/\(Desde.*?\)/gi, "").replace(/\$\d+(\.\d+)?/g, "").trim() || "1 Kg";
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(100, 116, 139);
+      doc.text(cleanPres.slice(0, 22), c2, currentY + 4.5);
+
+      // Clave SAT
+      const claveSat = p.clave_sat || "50111500";
+      doc.setFont("helvetica", "normal");
+      doc.text(claveSat, c3, currentY + 4.5);
+
+      // Price Unitary (Bold Green)
+      const priceVal = Number(p.price) || 0;
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(8);
+      doc.setTextColor(6, 78, 59);
+      doc.text(`$${priceVal.toFixed(2)} MXN`, c4, currentY + 4.5, { align: "right" });
+
+      currentY += 6.5;
+    });
+
+    currentY += 4; // Space between categories
+  });
+
+  // Check space for bottom App Promotional Box
+  checkPageBreak(40);
+
+  // App Promotional / QR Code Box at bottom
+  const footerBoxY = Math.max(currentY + 2, pageHeight - 48);
+  const footerBoxHeight = 34;
+
+  doc.setFillColor(240, 253, 244);
+  doc.setDrawColor(16, 185, 129);
+  doc.setLineWidth(0.6);
+  doc.roundedRect(margin, footerBoxY, contentWidth, footerBoxHeight, 3, 3, "FD");
+
+  try {
+    doc.addImage(qrDataUrl, "PNG", margin + 3, footerBoxY + 3, 28, 28);
+  } catch {}
+
+  const qrTextX = margin + 34;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.setTextColor(6, 78, 59);
+  doc.text("¡DESCARGA NUESTRA APP OFICIAL EN GOOGLE PLAY!", qrTextX, footerBoxY + 7);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(7.5);
+  doc.setTextColor(51, 65, 85);
+  doc.text("Haz tus pedidos de mayoreo de frutas y verduras directo desde tu celular Android.", qrTextX, footerBoxY + 12);
+  doc.text("Precios actualizados en tiempo real y entregas programadas en Guadalajara y ZMG.", qrTextX, footerBoxY + 16);
+
+  try {
+    doc.addImage(playStoreBadgeUrl, "PNG", qrTextX, footerBoxY + 18, 44, 13);
+  } catch {}
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(7);
+  doc.setTextColor(16, 185, 129);
+  doc.text("ESCANEA EL CÓDIGO QR O BUSCA 'FRUTI GO' EN PLAY STORE", qrTextX + 48, footerBoxY + 26);
+
+  // Page numbers and legal footer across all pages
+  const totalPages = doc.getNumberOfPages();
+  for (let page = 1; page <= totalPages; page++) {
+    doc.setPage(page);
+
+    // Page X of Y on top right
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7.5);
+    doc.setTextColor(148, 163, 184);
+    doc.text(`Página ${page} de ${totalPages}`, rightX, 13, { align: "right" });
+
+    // Legal Footer
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7);
+    doc.setTextColor(148, 163, 184);
+    doc.text(
+      "Fruti Go S.A. de C.V. • Lista Oficial de Precios de Mayoreo para Restaurantes • Mercado de Abastos GDL • www.frutigo.com.mx",
+      pageWidth / 2,
+      pageHeight - 5,
+      { align: "center" }
+    );
+  }
+
+  // Save the PDF
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  const filename = `Lista_de_Precios_Fruti_Go_${yyyy}-${mm}-${dd}.pdf`;
   doc.save(filename);
 }
 

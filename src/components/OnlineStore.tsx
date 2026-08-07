@@ -41,7 +41,7 @@ import {
   MessageCircle
 } from "lucide-react";
 import { Product, CartItem, OpenPayConfig, OrderSummary, ShippingInfo, ProductCategory, PdfConfig, BillingInfo } from "../types";
-import { generateOrderPDF, generateCFDIPDF, downloadCFDIXML } from "../utils/pdfGenerator";
+import { generateOrderPDF, generateCFDIPDF, downloadCFDIXML, generatePriceListPDF } from "../utils/pdfGenerator";
 import { getProductWhiteBgImage } from "../utils/productImages";
 import { 
   Language, 
@@ -1373,6 +1373,26 @@ export default function OnlineStore({
                   </button>
                 );
               })}
+
+              {/* Botón de Descarga Lista de Precios como una categoría más */}
+              <button
+                type="button"
+                onClick={async () => {
+                  await generatePriceListPDF(products, {
+                    pdfLogoUrl: pdfConfig?.pdfLogoUrl || undefined,
+                    pdfQrUrl: pdfConfig?.pdfQrUrl || undefined,
+                    lang: lang || "es"
+                  });
+                }}
+                className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-xl text-xs font-black whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer bg-emerald-800 hover:bg-brand-green text-white shadow-xs active:scale-95 border border-emerald-700 flex-shrink-0"
+                title="Descargar Lista de Precios en PDF agrupada por categorías y precio menor primero"
+              >
+                <FileText className="w-3.5 h-3.5 text-brand-yellow flex-shrink-0" />
+                <span>Descargar lista</span>
+                <span className="px-1.5 py-0.2 text-[10px] rounded-full font-extrabold bg-white/20 text-white">
+                  PDF
+                </span>
+              </button>
             </div>
           </div>
         </div>
@@ -1423,6 +1443,22 @@ export default function OnlineStore({
                   ))}
                 </div>
               </div>
+
+              {/* Download Price List PDF */}
+              <button
+                onClick={async () => {
+                  setIsMobileMenuOpen(false);
+                  await generatePriceListPDF(products, {
+                    pdfLogoUrl: pdfConfig?.pdfLogoUrl || undefined,
+                    pdfQrUrl: pdfConfig?.pdfQrUrl || undefined,
+                    lang: lang || "es"
+                  });
+                }}
+                className="w-full flex items-center gap-2 p-3 bg-brand-green text-white hover:bg-emerald-800 rounded-2xl font-black text-xs border border-emerald-700 shadow-sm cursor-pointer"
+              >
+                <FileText className="w-4 h-4 text-brand-yellow" />
+                <span>Descargar Lista de Precios (PDF)</span>
+              </button>
 
               {/* My Profile / Orders */}
               <button

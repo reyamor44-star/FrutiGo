@@ -23,6 +23,20 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Foro Oficial -->
+  <url>
+    <loc>https://frutigo.com.mx/p8dxzb</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://frutigo.com.mx/foro</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Páginas del Desarrollador y Fundador - Alberto Reyes Sandoval -->
   <url>
     <loc>https://frutigo.com.mx/desarrollador</loc>

@@ -236,14 +236,22 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             
             {/* Dedicated Photo Section */}
             <div className="w-full flex flex-col items-center space-y-3">
-              {/* Photo Frame Container */}
-              <div className="relative group/photo w-full max-w-xs flex justify-center">
-                <div className="w-56 sm:w-64 min-h-[260px] max-h-[380px] rounded-2xl sm:rounded-3xl bg-transparent border-2 sm:border-4 border-emerald-200 shadow-md p-1 sm:p-2 relative overflow-hidden flex items-center justify-center">
+              {/* Photo Frame Container - Linked to Official Photo URL */}
+              <div className="relative group/photo w-full max-w-xs flex flex-col items-center">
+                <a
+                  href="https://n9.cl/p8dxzb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-56 sm:w-64 min-h-[260px] max-h-[380px] rounded-2xl sm:rounded-3xl bg-transparent border-2 sm:border-4 border-emerald-200 shadow-md p-1 sm:p-2 relative overflow-hidden flex items-center justify-center cursor-pointer group/link hover:border-emerald-500 transition-all"
+                  title="Haga clic para abrir la Fotografía Oficial de Alberto Reyes Sandoval en Alta Resolución (https://n9.cl/p8dxzb)"
+                >
                   {hasPhoto ? (
                     <img
                       src={photoUrl}
-                      alt="Alberto Reyes Sandoval - Creador, Desarrollador Principal y Fundador de Fruti Go"
-                      title="Alberto Reyes Sandoval - Foto oficial de perfil de desarrollador y fundador"
+                      alt="Alberto Reyes Sandoval - Fotografía Oficial"
+                      width={1200}
+                      height={1600}
+                      title="Alberto Reyes Sandoval - Foto oficial de perfil de desarrollador y fundador (https://n9.cl/p8dxzb)"
                       itemProp="image"
                       loading="eager"
                       decoding="async"
@@ -259,13 +267,25 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                       <p className="text-[11px] text-zinc-500">Espacio reservado para foto del desarrollador</p>
                     </div>
                   )}
-                </div>
+                </a>
 
                 {/* Verified Badge Icon on Corner */}
                 <div className="absolute -bottom-2 -right-2 bg-brand-green text-white p-2.5 rounded-2xl shadow-lg ring-4 ring-white flex items-center justify-center" title="Desarrollador y Creador Oficial">
                   <ShieldCheck className="w-5 h-5 font-black" />
                 </div>
               </div>
+
+              {/* Direct Link to Official Photo for Indexing & Instant Access */}
+              <a
+                href="https://n9.cl/p8dxzb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline-flex items-center justify-center gap-2 px-3.5 py-2 bg-emerald-800 hover:bg-brand-green text-white rounded-xl text-xs font-extrabold transition-all shadow-xs active:scale-95 border border-emerald-700 cursor-pointer"
+                title="Abrir Fotografía Oficial en Alta Resolución (https://n9.cl/p8dxzb)"
+              >
+                <ExternalLink className="w-3.5 h-3.5 text-brand-yellow shrink-0" />
+                <span>Ver Fotografía Oficial (Alta Resolución)</span>
+              </a>
             </div>
 
             {/* Direct Contact & App Download Buttons */}
@@ -494,6 +514,43 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
               "@context": "https://schema.org",
               "@graph": [
                 {
+                  "@type": "ProfilePage",
+                  "@id": "https://frutigo.com.mx/sobre-el-desarrollador#profilepage",
+                  "url": "https://frutigo.com.mx/sobre-el-desarrollador",
+                  "name": "Alberto Reyes Sandoval | Creador y Desarrollador de Fruti Go",
+                  "description": "Perfil oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx).",
+                  "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "@id": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg#primaryimage",
+                    "url": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                    "contentUrl": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                    "width": "1200",
+                    "height": "1600",
+                    "caption": "Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go",
+                    "representativeOfPage": true
+                  },
+                  "mainEntity": {
+                    "@type": "Person",
+                    "@id": "https://frutigo.com.mx/#founder",
+                    "name": "Alberto Reyes Sandoval",
+                    "jobTitle": "Creador y Desarrollador de Fruti Go",
+                    "image": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                    "worksFor": {
+                      "@type": "Organization",
+                      "@id": "https://frutigo.com.mx/#organization",
+                      "name": "Fruti Go",
+                      "url": "https://frutigo.com.mx"
+                    },
+                    "sameAs": [
+                      "https://play.google.com/store/apps/details?id=com.frutigo.app",
+                      founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                      "https://www.wikidata.org/wiki/Q140880376",
+                      founderData.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                      "https://github.com/reyamor44-star"
+                    ]
+                  }
+                },
+                {
                   "@type": "Person",
                   "@id": "https://frutigo.com.mx/#founder",
                   "name": "Alberto Reyes Sandoval",
@@ -501,9 +558,11 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   "url": "https://frutigo.com.mx/sobre-el-desarrollador",
                   "email": `mailto:${displayEmail}`,
                   "sameAs": [
-                    "https://www.wikidata.org/wiki/Q140880376",
+                    "https://play.google.com/store/apps/details?id=com.frutigo.app",
                     founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                    "https://www.wikidata.org/wiki/Q140880376",
                     founderData.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                    "https://github.com/reyamor44-star",
                     "https://frutigo.com.mx/desarrollador",
                     "https://frutigo.com.mx/sobre-el-desarrollador"
                   ],
@@ -546,7 +605,9 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   "sameAs": [
                     "https://play.google.com/store/apps/details?id=com.frutigo.app",
                     founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
-                    "https://www.wikidata.org/wiki/Q140880376"
+                    "https://www.wikidata.org/wiki/Q140880376",
+                    founderData.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                    "https://github.com/reyamor44-star"
                   ]
                 },
                 {
@@ -573,7 +634,10 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   "description": "Marca registrada y propiedad exclusiva de Alberto Reyes Sandoval para la plataforma tecnológica Fruti Go (frutigo.com.mx). No guarda relación con empresas con guión o variaciones ortográficas externas.",
                   "sameAs": [
                     "https://play.google.com/store/apps/details?id=com.frutigo.app",
-                    founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt"
+                    founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                    "https://www.wikidata.org/wiki/Q140880376",
+                    founderData.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                    "https://github.com/reyamor44-star"
                   ]
                 },
                 {
@@ -594,7 +658,10 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   },
                   "sameAs": [
                     "https://play.google.com/store/apps/details?id=com.frutigo.app",
-                    founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt"
+                    founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                    "https://www.wikidata.org/wiki/Q140880376",
+                    founderData.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                    "https://github.com/reyamor44-star"
                   ],
                   "publisher": {
                     "@type": "Organization",
@@ -617,7 +684,10 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                     },
                     "sameAs": [
                       "https://play.google.com/store/apps/details?id=com.frutigo.app",
-                      founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt"
+                      founderData.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+                      "https://www.wikidata.org/wiki/Q140880376",
+                      founderData.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                      "https://github.com/reyamor44-star"
                     ]
                   },
                   "author": {

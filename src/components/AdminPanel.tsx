@@ -43,7 +43,7 @@ import {
 import { Product, TopBannerData, OpenPayConfig, OrderSummary, PdfConfig, ClientProfile } from "../types";
 import { DEFAULT_PRODUCTS } from "../data/defaultStoreData";
 import { DEFAULT_CLIENTS } from "../data/defaultClients";
-import { generateOrderPDF, generateCFDIPDF, downloadCFDIXML } from "../utils/pdfGenerator";
+import { generateOrderPDF, generateCFDIPDF, downloadCFDIXML, generatePriceListPDF } from "../utils/pdfGenerator";
 import { SAT_PRODUCT_CODES, SAT_UNITS, SAT_TAX_OPTIONS, SAT_OBJETO_IMP_OPTIONS } from "../data/satProductCodes";
 import { getProductWhiteBgImage } from "../utils/productImages";
 import { FounderProfileCard, FounderData, DEFAULT_FOUNDER_DATA } from "./FounderProfileCard";
@@ -1720,6 +1720,21 @@ export default function AdminPanel({
                   </button>
 
                   <button
+                    onClick={async () => {
+                      await generatePriceListPDF(productList, {
+                        pdfLogoUrl: pdfLogoInput || customLogo || undefined,
+                        pdfQrUrl: pdfQrInput || undefined,
+                        lang: "es"
+                      });
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-800 hover:bg-brand-green text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md transition-all cursor-pointer border border-emerald-700"
+                    title="Descargar Lista de Precios en PDF agrupada por categorías y precio menor primero"
+                  >
+                    <FileText className="w-4 h-4 text-brand-yellow" />
+                    <span>Lista de Precios (PDF)</span>
+                  </button>
+
+                  <button
                     onClick={handleOpenAddProduct}
                     className="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-green hover:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md transition-all cursor-pointer"
                   >
@@ -2575,6 +2590,20 @@ export default function AdminPanel({
                 >
                   <Download className="w-4 h-4 text-brand-yellow" />
                   <span>Descargar Nota de Prueba (PDF)</span>
+                </button>
+
+                <button
+                  onClick={async () => {
+                    await generatePriceListPDF(productList, {
+                      pdfLogoUrl: pdfLogoInput || customLogo || undefined,
+                      pdfQrUrl: pdfQrInput || undefined,
+                      lang: "es"
+                    });
+                  }}
+                  className="py-3.5 px-5 bg-emerald-800 hover:bg-brand-green text-white font-extrabold text-sm rounded-xl shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 border border-emerald-700"
+                >
+                  <FileText className="w-4 h-4 text-brand-yellow" />
+                  <span>Descargar Lista de Precios (PDF)</span>
                 </button>
               </div>
             </div>

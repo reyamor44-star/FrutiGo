@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "founderProfile": {
+      "title": "Founder Profile",
+      "description": "Founder profile information, biography, photos and metadata",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "bio": { "type": "string" },
+        "photo": { "type": "string" },
+        "photos": { "type": "array" },
+        "articles": { "type": "array" }
+      }
+    },
+    "articles": {
+      "title": "Articles",
+      "description": "Published articles and news by the founder",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "summary": { "type": "string" },
+        "category": { "type": "string" },
+        "authorName": { "type": "string" },
+        "date": { "type": "string" },
+        "images": { "type": "array" }
+      }
+    },
+    "founderMedia": {
+      "title": "Founder Media Gallery",
+      "description": "Media items, photos and press gallery for the founder",
+      "type": "object",
+      "properties": {
+        "items": { "type": "array" },
+        "updatedAt": { "type": "number" }
+      }
+    },
+    "products": {
+      "title": "Products",
+      "description": "Store products catalogue",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" }
+      }
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "Customer orders",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "total": { "type": "number" },
+        "status": { "type": "string" }
+      }
+    },
+    "settings": {
+      "title": "Application Settings & Logo",
+      "description": "Global application configuration, logo metadata for Google indexation, and banners",
+      "type": "object",
+      "properties": {
+        "logoUrl": { "type": "string" },
+        "altText": { "type": "string" },
+        "caption": { "type": "string" },
+        "publisher": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  }
+}

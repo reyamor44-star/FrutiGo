@@ -1,0 +1,6 @@
+{
+  "name": "Fruti Go Legal",
+  "description": "Plataforma legal y Tienda en Línea Fruti Go con términos, privacidad, banner interactivo, catálogo de productos con carrito LocalStorage y panel de administración.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

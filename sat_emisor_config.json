@@ -1,0 +1,11 @@
+{
+  "emisorRfc": "FRG240815B2B",
+  "emisorRazonSocial": "FRUTI GO DISTRIBUIDORA B2B S.A. DE C.V.",
+  "emisorRegimenFiscal": "601 - General de Ley Personas Morales",
+  "emisorZipCode": "44100",
+  "sfApiToken": "sfv2_4BOJ0TMGNe5raAdX6vThmfIcs41q3jUf39d9zHX1sahscSArYWyS9V4eIxuRiJ83",
+  "sfEnvironment": "production",
+  "csdCertPem": "",
+  "csdKeyPem": "",
+  "csdPassword": ""
+}

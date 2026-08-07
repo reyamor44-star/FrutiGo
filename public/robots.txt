@@ -1,0 +1,13 @@
+# Robots.txt para Fruti Go
+User-agent: *
+Allow: /
+
+# Desbloquear todas las rutas clave e imágenes
+Allow: /sobre-nosotros
+Allow: /soporte
+Allow: /terminos
+Allow: /privacidad
+Allow: /uploads/
+
+# Ubicación oficial del Mapa del Sitio
+Sitemap: https://frutigo.com.mx/sitemap.xml

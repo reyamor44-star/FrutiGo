@@ -1,0 +1,8 @@
+{
+  "openpayUrl": "https://sandbox-api.openpay.mx/v1/",
+  "merchantId": "mhary0zwpt8y6jwt6fju",
+  "publicKey": "pk_ecd829b752774461b8cbc9383f4a414c",
+  "privateKey": "sk_cc06c6561cf34230ba69f1751da1596d",
+  "sandboxMode": true,
+  "updatedAt": "2026-07-28T12:15:00.000Z"
+}

@@ -450,10 +450,15 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             </div>
 
             {/* Bio Narrative */}
-            <div className="space-y-4 text-zinc-700 text-sm sm:text-base leading-relaxed font-normal">
+            <div className="space-y-4 text-zinc-700 text-sm sm:text-base leading-relaxed font-normal" itemProp="description">
+              {/* Metaetiquetas explícitas de autoría y perfil */}
+              <meta itemProp="author" content={founderData.name} />
+              <meta itemProp="creator" content={founderData.name} />
+              <meta itemProp="jobTitle" content={founderData.role} />
+              
               {founderData.bioP1 ? (
                 <>
-                  <p className="whitespace-pre-line">{founderData.bioP1}</p>
+                  <p className="whitespace-pre-line" itemProp="knowsAbout">{founderData.bioP1}</p>
                   {founderData.bioP2 && <p className="whitespace-pre-line">{founderData.bioP2}</p>}
                   {founderData.bioP3 && <p className="whitespace-pre-line">{founderData.bioP3}</p>}
                 </>

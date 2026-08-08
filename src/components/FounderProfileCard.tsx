@@ -81,12 +81,6 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
         const saved = localStorage.getItem("fg_founder_profile");
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (parsed.bioP1 && parsed.bioP1.includes("Como arquitecto y desarrollador integral de Fruti Go, diseñé y construí")) {
-            delete parsed.bioP1;
-            delete parsed.bioP2;
-            delete parsed.bioP3;
-            delete parsed.bio;
-          }
           return { ...DEFAULT_FOUNDER_DATA, ...parsed };
         }
       } catch (e) {}
@@ -149,12 +143,6 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
         const saved = localStorage.getItem("fg_founder_profile");
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (parsed.bioP1 && parsed.bioP1.includes("Como arquitecto y desarrollador integral de Fruti Go, diseñé y construí")) {
-            delete parsed.bioP1;
-            delete parsed.bioP2;
-            delete parsed.bioP3;
-            delete parsed.bio;
-          }
           setFounderData({ ...DEFAULT_FOUNDER_DATA, ...parsed });
           setImageError(false);
         }
@@ -463,18 +451,20 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
 
             {/* Bio Narrative */}
             <div className="space-y-4 text-zinc-700 text-sm sm:text-base leading-relaxed font-normal">
-              {founderData.bio1 ? (
+              {founderData.bioP1 ? (
+                <>
+                  <p className="whitespace-pre-line">{founderData.bioP1}</p>
+                  {founderData.bioP2 && <p className="whitespace-pre-line">{founderData.bioP2}</p>}
+                  {founderData.bioP3 && <p className="whitespace-pre-line">{founderData.bioP3}</p>}
+                </>
+              ) : founderData.bio1 ? (
                 <>
                   <p className="whitespace-pre-line">{founderData.bio1}</p>
                   {founderData.bio2 && <p className="whitespace-pre-line">{founderData.bio2}</p>}
                 </>
-              ) : (
-                <>
-                  {founderData.bioP1 && <p>{founderData.bioP1}</p>}
-                  {founderData.bioP2 && <p>{founderData.bioP2}</p>}
-                  {founderData.bioP3 && <p>{founderData.bioP3}</p>}
-                </>
-              )}
+              ) : founderData.bio ? (
+                <p className="whitespace-pre-line">{founderData.bio}</p>
+              ) : null}
             </div>
 
             {/* Founder Quote Card */}

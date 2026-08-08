@@ -516,17 +516,6 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     if (remoteProfile && typeof remoteProfile === "object" && Object.keys(remoteProfile).length > 0) {
       console.log("¡Perfil de fundador sincronizado exitosamente desde Firebase Firestore!");
       
-      // If remote profile has old default bio text, update it to the new exact biography
-      const isOldBio = !remoteProfile.bioP1 || remoteProfile.bioP1.includes("Como arquitecto y desarrollador integral de Fruti Go, diseñé y construí");
-      if (isOldBio || !remoteProfile.bio1 || !remoteProfile.bio2) {
-        remoteProfile.bioP1 = DEFAULT_FOUNDER_SERVER_DATA.bioP1;
-        remoteProfile.bioP2 = DEFAULT_FOUNDER_SERVER_DATA.bioP2;
-        remoteProfile.bioP3 = DEFAULT_FOUNDER_SERVER_DATA.bioP3;
-        remoteProfile.bio1 = DEFAULT_FOUNDER_SERVER_DATA.bio1;
-        remoteProfile.bio2 = DEFAULT_FOUNDER_SERVER_DATA.bio2;
-        remoteProfile.bio = DEFAULT_FOUNDER_SERVER_DATA.bio;
-      }
-
       memoryFounderProfile = {
         ...DEFAULT_FOUNDER_SERVER_DATA,
         ...currentLocal,

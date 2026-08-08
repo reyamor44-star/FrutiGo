@@ -4124,20 +4124,40 @@ export default function AdminPanel({
                           }
 
                           try {
+                            const payloadWithBios = {
+                              ...founderForm,
+                              bio1: founderForm.bio1 || [founderForm.bioP1, founderForm.bioP2].filter(Boolean).join("\n\n"),
+                              bio2: founderForm.bio2 || founderForm.bioP3 || "",
+                              bioP1: founderForm.bioP1 || "",
+                              bioP2: founderForm.bioP2 || "",
+                              bioP3: founderForm.bioP3 || "",
+                              bio: [founderForm.bioP1, founderForm.bioP2, founderForm.bioP3].filter(Boolean).join("\n\n"),
+                              photoUrl: founderForm.photoUrl || founderForm.photo || ""
+                            };
+
                             const res = await fetch("/api/founder/profile", {
                               method: "POST",
                               headers: { "Content-Type": "application/json" },
-                              body: JSON.stringify(founderForm)
+                              body: JSON.stringify(payloadWithBios)
                             });
                             const data = await res.json();
-                            const profileToSave = (data && data.profile) ? data.profile : founderForm;
+                            const profileToSave = (data && data.profile) ? data.profile : payloadWithBios;
                             setFounderForm(profileToSave);
                             if (typeof window !== "undefined") {
                               localStorage.setItem("fg_founder_profile", JSON.stringify(profileToSave));
                               window.dispatchEvent(new Event("storage"));
                               window.dispatchEvent(new Event("fg_founder_profile_updated"));
                             }
-                            showToast("¡Perfil del Desarrollador guardado exitosamente en el servidor!");
+
+                            // Save directly to Firebase Firestore from client as well
+                            try {
+                              const { saveFounderProfileToFirestore } = await import("../lib/firebaseService");
+                              await saveFounderProfileToFirestore(profileToSave);
+                            } catch (e) {
+                              console.warn("Client Firestore direct save notice:", e);
+                            }
+
+                            showToast("¡Perfil del Desarrollador guardado exitosamente en el servidor y Firebase Firestore!");
                           } catch (err) {
                             console.error("Error al guardar perfil en servidor:", err);
                             showToast("¡Perfil del Desarrollador guardado en la memoria local!");

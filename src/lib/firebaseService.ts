@@ -204,6 +204,30 @@ export async function saveFounderProfileToFirestore(data: any): Promise<boolean>
     }
 
     profileCopy = await replaceBase64WithFirebaseStorageUrls(profileCopy, "founder-photos");
+
+    // Ensure all bio variations and photos are explicitly defined in Firestore document
+    if (!profileCopy.bio1 && profileCopy.bioP1) {
+      profileCopy.bio1 = [profileCopy.bioP1, profileCopy.bioP2].filter(Boolean).join("\n\n");
+    }
+    if (!profileCopy.bio2 && profileCopy.bioP3) {
+      profileCopy.bio2 = profileCopy.bioP3;
+    }
+    if (!profileCopy.bio && (profileCopy.bio1 || profileCopy.bioP1)) {
+      profileCopy.bio = [profileCopy.bio1 || profileCopy.bioP1, profileCopy.bio2 || profileCopy.bioP2, profileCopy.bioP3].filter(Boolean).join("\n\n");
+    }
+    if (!profileCopy.photoUrl && profileCopy.photo) {
+      profileCopy.photoUrl = profileCopy.photo;
+    }
+
+    // Ensure fields exist explicitly
+    profileCopy.bio1 = profileCopy.bio1 || profileCopy.bioP1 || "";
+    profileCopy.bio2 = profileCopy.bio2 || profileCopy.bioP3 || "";
+    profileCopy.bioP1 = profileCopy.bioP1 || "";
+    profileCopy.bioP2 = profileCopy.bioP2 || "";
+    profileCopy.bioP3 = profileCopy.bioP3 || "";
+    profileCopy.bio = profileCopy.bio || "";
+    profileCopy.photoUrl = profileCopy.photoUrl || profileCopy.photo || "";
+
     const cleanData = cleanPayloadForFirestore(profileCopy);
     await setDoc(docRef, cleanData, { merge: true });
     return true;

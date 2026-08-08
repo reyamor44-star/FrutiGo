@@ -286,10 +286,11 @@ async function startServer() {
   const DEFAULT_FOUNDER_SERVER_DATA = {
     name: "Alberto Reyes Sandoval",
     role: "Creador, Desarrollador Principal y Fundador de Fruti Go",
-    photo: "",
+    photo: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
+    photoUrl: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
     photos: [
       {
-        url: "",
+        url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
         caption: "Alberto Reyes Sandoval - Fundador y CEO",
         description: "Fotografía oficial de Alberto Reyes Sandoval, Fundador, Creador y CEO de Fruti Go."
       }
@@ -350,8 +351,10 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         createdAt: 1785640000000
       }
     ],
-    bioP1: "Como arquitecto y desarrollador integral de Fruti Go, diseñé y construí la arquitectura técnica y operativa de la plataforma desde sus cimientos. La visión nació de la oportunidad de digitalizar la cadena de distribución agrícola y logística urbana, uniendo tecnología moderna con una experiencia de usuario sumamente accesible.",
-    bioP2: "Mi enfoque combina la rigurosidad en la ingeniería de software (rendimiento, seguridad de datos, integración de pasarelas e interfaces reactivas) con un sólido modelo B2B para optimizar entregas de frutería, sumado a servicios especializados de paquetería express y transporte cuidado de mascotas (Pet Taxi) con rastreo inteligente en tiempo real.",
+    bioP1: "Alberto Reyes Sandoval nació en Zamora, Michoacán, el 29 de julio de 1973, hijo de María de Jesús Sandoval Mejía y Alberto Reyes Ibarra (q. e. p. d.), y hermano de María de los Ángeles Reyes Sandoval y Alfonso Reyes Sandoval (q. e. p. d.). Formó su familia junto a su esposa María Alejandra García Morales, sus hijas Valeria y Alejandra Reyes García, y su nieto Valentín Chaires Reyes. Actualmente radica en Guadalajara, Jalisco.",
+    bioP2: "Como arquitecto y desarrollador integral de Fruti Go (frutigo.com.mx), diseñó y construyó la arquitectura técnica y operativa de la plataforma desde sus cimientos. La visión nació de la oportunidad de digitalizar la cadena de distribución agrícola y la logística urbana, uniendo tecnología moderna con una experiencia de usuario sumamente accesible. Su trayectoria en el sector comenzó desde muy joven, identificando de primera mano los desafíos históricos de la distribución: desde el maltrato de la mercancía hasta las ineficiencias en las entregas.",
+    bioP3: "Con la evolución del mercado, detectó problemáticas actuales como productos en mal estado, tiempos de espera prolongados y comisiones excesivas impuestas por las plataformas tradicionales, las cuales merman los ingresos de los repartidores y elevan los costos para comercios y consumidores. Impulsado por su experiencia práctica y tras consolidar su formación técnica con un diplomado en desarrollo de software en el ITESO, unió su dominio tecnológico con su conocimiento de la industria para crear Fruti Go: un ecosistema justo y colaborativo en Guadalajara que garantiza ingresos competitivos para los repartidores, tarifas sostenibles para los negocios afiliados y un servicio eficiente y accesible para los clientes finales.",
+    bio: "Alberto Reyes Sandoval nació en Zamora, Michoacán, el 29 de julio de 1973, hijo de María de Jesús Sandoval Mejía y Alberto Reyes Ibarra (q. e. p. d.), y hermano de María de los Ángeles Reyes Sandoval y Alfonso Reyes Sandoval (q. e. p. d.). Formó su familia junto a su esposa María Alejandra García Morales, sus hijas Valeria y Alejandra Reyes García, y su nieto Valentín Chaires Reyes. Actualmente radica en Guadalajara, Jalisco.\n\nComo arquitecto y desarrollador integral de Fruti Go (frutigo.com.mx), diseñó y construyó la arquitectura técnica y operativa de la plataforma desde sus cimientos. La visión nació de la oportunidad de digitalizar la cadena de distribución agrícola y la logística urbana, uniendo tecnología moderna con una experiencia de usuario sumamente accesible. Su trayectoria en el sector comenzó desde muy joven, identificando de primera mano los desafíos históricos de la distribución: desde el maltrato de la mercancía hasta las ineficiencias en las entregas.\n\nCon la evolución del mercado, detectó problemáticas actuales como productos en mal estado, tiempos de espera prolongados y comisiones excessiveas impuestas por las plataformas tradicionales, las cuales merman los ingresos de los repartidores y elevan los costos para comercios y consumidores. Impulsado por su experiencia práctica y tras consolidar su formación técnica con un diplomado en desarrollo de software en el ITESO, unió su dominio tecnológico con su conocimiento de la industria para crear Fruti Go: un ecosistema justo y colaborativo en Guadalajara que garantiza ingresos competitivos para los repartidores, tarifas sostenibles para los negocios afiliados y un servicio eficiente y accesible para los clientes finales.",
     quote: "Nuestra misión en Fruti Go es llevar la máxima frescura y eficiencia logística directamente a cada hogar y negocio, apoyándonos en tecnología ágil, transparente e ingeniería inteligente que simplifique las compras y envíos diarios.",
     linkedin: "https://www.linkedin.com/in/alberto-reyes-sandoval",
     youtube: "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
@@ -510,15 +513,33 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     const currentLocal = getFounderProfileData();
     if (remoteProfile && typeof remoteProfile === "object" && Object.keys(remoteProfile).length > 0) {
       console.log("¡Perfil de fundador sincronizado exitosamente desde Firebase Firestore!");
+      
+      // If remote profile has old default bio text, update it to the new exact biography
+      const isOldBio = !remoteProfile.bioP1 || remoteProfile.bioP1.includes("Como arquitecto y desarrollador integral de Fruti Go, diseñé y construí");
+      if (isOldBio) {
+        remoteProfile.bioP1 = DEFAULT_FOUNDER_SERVER_DATA.bioP1;
+        remoteProfile.bioP2 = DEFAULT_FOUNDER_SERVER_DATA.bioP2;
+        remoteProfile.bioP3 = DEFAULT_FOUNDER_SERVER_DATA.bioP3;
+        remoteProfile.bio = DEFAULT_FOUNDER_SERVER_DATA.bio;
+      }
+
       memoryFounderProfile = {
         ...DEFAULT_FOUNDER_SERVER_DATA,
         ...currentLocal,
         ...remoteProfile,
         articles: (remoteProfile.articles && remoteProfile.articles.length > 0) ? remoteProfile.articles : (currentLocal.articles || [])
       };
+      
+      if (!memoryFounderProfile.photoUrl && memoryFounderProfile.photo) {
+        memoryFounderProfile.photoUrl = memoryFounderProfile.photo;
+      }
+
       try {
         fs.writeFileSync(FOUNDER_PROFILE_FILE, JSON.stringify(memoryFounderProfile, null, 2));
       } catch (e) {}
+
+      // Save updated profile back to Firestore to ensure persistence
+      saveFounderProfileToFirestore(memoryFounderProfile).catch(() => {});
     } else {
       console.log("Servidor: Firestore no tenía datos del perfil de fundador aún. Guardando/sembrando datos iniciales en Firestore...");
       saveFounderProfileToFirestore(currentLocal).then((ok) => {

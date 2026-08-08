@@ -27,31 +27,37 @@ export interface FounderData {
   name: string;
   role: string;
   photo: string;
+  photoUrl?: string;
   photos?: FounderPhotoItem[];
   articles?: any[];
   bioP1: string;
   bioP2: string;
+  bioP3?: string;
+  bio?: string;
   quote: string;
   linkedin: string;
   youtube?: string;
   email: string;
 }
 
-export const DEFAULT_FOUNDER_PHOTO = "";
+export const DEFAULT_FOUNDER_PHOTO = "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9";
 
 export const DEFAULT_FOUNDER_DATA: FounderData = {
   name: "Alberto Reyes Sandoval",
   role: "Creador, Desarrollador Principal y Fundador de Fruti Go",
-  photo: "",
+  photo: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
+  photoUrl: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
   photos: [
     {
-      url: "",
+      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
       caption: "Alberto Reyes Sandoval - Fundador y CEO",
       description: "Fotografía oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y CEO de Fruti Go."
     }
   ],
-  bioP1: "Como arquitecto y desarrollador integral de Fruti Go, diseñé y construí la arquitectura técnica y operativa de la plataforma desde sus cimientos. La visión nació de la oportunidad de digitalizar la cadena de distribución agrícola y logística urbana, uniendo tecnología moderna con una experiencia de usuario sumamente accesible.",
-  bioP2: "Mi enfoque combina la rigurosidad en la ingeniería de software (rendimiento, seguridad de datos, integración de pasarelas e interfaces reactivas) con un sólido modelo B2B para optimizar entregas de frutería, sumado a servicios especializados de paquetería express y transporte cuidado de mascotas (Pet Taxi) con rastreo inteligente en tiempo real.",
+  bioP1: "Alberto Reyes Sandoval nació en Zamora, Michoacán, el 29 de julio de 1973, hijo de María de Jesús Sandoval Mejía y Alberto Reyes Ibarra (q. e. p. d.), y hermano de María de los Ángeles Reyes Sandoval y Alfonso Reyes Sandoval (q. e. p. d.). Formó su familia junto a su esposa María Alejandra García Morales, sus hijas Valeria y Alejandra Reyes García, y su nieto Valentín Chaires Reyes. Actualmente radica en Guadalajara, Jalisco.",
+  bioP2: "Como arquitecto y desarrollador integral de Fruti Go (frutigo.com.mx), diseñó y construyó la arquitectura técnica y operativa de la plataforma desde sus cimientos. La visión nació de la oportunidad de digitalizar la cadena de distribución agrícola y la logística urbana, uniendo tecnología moderna con una experiencia de usuario sumamente accesible. Su trayectoria en el sector comenzó desde muy joven, identificando de primera mano los desafíos históricos de la distribución: desde el maltrato de la mercancía hasta las ineficiencias en las entregas.",
+  bioP3: "Con la evolución del mercado, detectó problemáticas actuales como productos en mal estado, tiempos de espera prolongados y comisiones excesivas impuestas por las plataformas tradicionales, las cuales merman los ingresos de los repartidores y elevan los costos para comercios y consumidores. Impulsado por su experiencia práctica y tras consolidar su formación técnica con un diplomado en desarrollo de software en el ITESO, unió su dominio tecnológico con su conocimiento de la industria para crear Fruti Go: un ecosistema justo y colaborativo en Guadalajara que garantiza ingresos competitivos para los repartidores, tarifas sostenibles para los negocios afiliados y un servicio eficiente y accesible para los clientes finales.",
+  bio: "Alberto Reyes Sandoval nació en Zamora, Michoacán, el 29 de julio de 1973, hijo de María de Jesús Sandoval Mejía y Alberto Reyes Ibarra (q. e. p. d.), y hermano de María de los Ángeles Reyes Sandoval y Alfonso Reyes Sandoval (q. e. p. d.). Formó su familia junto a su esposa María Alejandra García Morales, sus hijas Valeria y Alejandra Reyes García, y su nieto Valentín Chaires Reyes. Actualmente radica en Guadalajara, Jalisco.\n\nComo arquitecto y desarrollador integral de Fruti Go (frutigo.com.mx), diseñó y construyó la arquitectura técnica y operativa de la plataforma desde sus cimientos. La visión nació de la oportunidad de digitalizar la cadena de distribución agrícola y la logística urbana, uniendo tecnología moderna con una experiencia de usuario sumamente accesible. Su trayectoria en el sector comenzó desde muy joven, identificando de primera mano los desafíos históricos de la distribución: desde el maltrato de la mercancía hasta las ineficiencias en las entregas.\n\nCon la evolución del mercado, detectó problemáticas actuales como productos en mal estado, tiempos de espera prolongados y comisiones excessiveas impuestas por las plataformas tradicionales, las cuales merman los ingresos de los repartidores y elevan los costos para comercios y consumidores. Impulsado por su experiencia práctica y tras consolidar su formación técnica con un diplomado en desarrollo de software en el ITESO, unió su dominio tecnológico con su conocimiento de la industria para crear Fruti Go: un ecosistema justo y colaborativo en Guadalajara que garantiza ingresos competitivos para los repartidores, tarifas sostenibles para los negocios afiliados y un servicio eficiente y accesible para los clientes finales.",
   quote: "Nuestra misión en Fruti Go es llevar la máxima frescura y eficiencia logística directamente a cada hogar y negocio, apoyándonos en tecnología ágil, transparente e ingeniería inteligente que simplifique las compras y envíos diarios.",
   linkedin: "https://www.linkedin.com/in/alberto-reyes-sandoval",
   youtube: "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
@@ -70,7 +76,14 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
       try {
         const saved = localStorage.getItem("fg_founder_profile");
         if (saved) {
-          return { ...DEFAULT_FOUNDER_DATA, ...JSON.parse(saved) };
+          const parsed = JSON.parse(saved);
+          if (parsed.bioP1 && parsed.bioP1.includes("Como arquitecto y desarrollador integral de Fruti Go, diseñé y construí")) {
+            delete parsed.bioP1;
+            delete parsed.bioP2;
+            delete parsed.bioP3;
+            delete parsed.bio;
+          }
+          return { ...DEFAULT_FOUNDER_DATA, ...parsed };
         }
       } catch (e) {}
     }
@@ -131,7 +144,14 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
       try {
         const saved = localStorage.getItem("fg_founder_profile");
         if (saved) {
-          setFounderData({ ...DEFAULT_FOUNDER_DATA, ...JSON.parse(saved) });
+          const parsed = JSON.parse(saved);
+          if (parsed.bioP1 && parsed.bioP1.includes("Como arquitecto y desarrollador integral de Fruti Go, diseñé y construí")) {
+            delete parsed.bioP1;
+            delete parsed.bioP2;
+            delete parsed.bioP3;
+            delete parsed.bio;
+          }
+          setFounderData({ ...DEFAULT_FOUNDER_DATA, ...parsed });
           setImageError(false);
         }
       } catch (e) {}
@@ -168,8 +188,9 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
   });
 
   // Selected photo for preview box (slot 0 is main photo)
-  const activePhotoItem = photosList[selectedImageIndex] || photosList[0] || { url: founderData.photo || "" };
-  const photoUrl = activePhotoItem?.url || founderData.photo || "";
+  const resolvedPhoto = founderData.photoUrl || founderData.photo || "";
+  const activePhotoItem = photosList[selectedImageIndex] || photosList[0] || { url: resolvedPhoto };
+  const photoUrl = activePhotoItem?.url || resolvedPhoto;
   const hasPhoto = Boolean(photoUrl) && photoUrl !== "/logo.svg" && photoUrl !== "/alberto-reyes-sandoval-desarrollador.svg" && !imageError;
   const displayEmail = founderData.email || "frutigo33@gmail.com";
 
@@ -440,6 +461,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             <div className="space-y-4 text-zinc-700 text-sm sm:text-base leading-relaxed font-normal">
               {founderData.bioP1 && <p>{founderData.bioP1}</p>}
               {founderData.bioP2 && <p>{founderData.bioP2}</p>}
+              {founderData.bioP3 && <p>{founderData.bioP3}</p>}
             </div>
 
             {/* Founder Quote Card */}

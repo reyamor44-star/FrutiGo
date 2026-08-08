@@ -3934,23 +3934,34 @@ export default function AdminPanel({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-black text-zinc-700 mb-1">Biografía - Párrafo 1 (Arquitectura & Tecnología)</label>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Biografía - Párrafo 1 (Orígenes, Familia & Zamora)</label>
                       <textarea
                         rows={3}
-                        value={founderForm.bioP1}
+                        value={founderForm.bioP1 || ""}
                         onChange={(e) => setFounderForm({ ...founderForm, bioP1: e.target.value })}
-                        placeholder="Descripción técnica..."
+                        placeholder="Biografía Párrafo 1..."
                         className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-medium text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green resize-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-black text-zinc-700 mb-1">Biografía - Párrafo 2 (Enfoque B2B & Negocio)</label>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Biografía - Párrafo 2 (Arquitectura & Trayectoria Fruti Go)</label>
                       <textarea
                         rows={3}
-                        value={founderForm.bioP2}
+                        value={founderForm.bioP2 || ""}
                         onChange={(e) => setFounderForm({ ...founderForm, bioP2: e.target.value })}
-                        placeholder="Descripción de visión B2B..."
+                        placeholder="Biografía Párrafo 2..."
+                        className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-medium text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green resize-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Biografía - Párrafo 3 (Problemáticas del Mercado, ITESO & Visión)</label>
+                      <textarea
+                        rows={3}
+                        value={founderForm.bioP3 || ""}
+                        onChange={(e) => setFounderForm({ ...founderForm, bioP3: e.target.value })}
+                        placeholder="Biografía Párrafo 3..."
                         className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-medium text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green resize-none"
                       />
                     </div>

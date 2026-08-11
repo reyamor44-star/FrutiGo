@@ -14,7 +14,9 @@ import {
   Award,
   UserCheck,
   Download,
-  Smartphone
+  Smartphone,
+  X,
+  ZoomIn
 } from "lucide-react";
 
 export interface FounderPhotoItem {
@@ -42,18 +44,38 @@ export interface FounderData {
   email: string;
 }
 
-export const DEFAULT_FOUNDER_PHOTO = "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9";
+export const DEFAULT_FOUNDER_PHOTO = "/alberto-reyes-sandoval.jpg";
 
 export const DEFAULT_FOUNDER_DATA: FounderData = {
   name: "Alberto Reyes Sandoval",
   role: "Creador, Desarrollador Principal y Fundador de Fruti Go",
-  photo: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
-  photoUrl: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
+  photo: "/alberto-reyes-sandoval.jpg",
+  photoUrl: "/alberto-reyes-sandoval.jpg",
   photos: [
     {
-      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
-      caption: "Alberto Reyes Sandoval - Fundador y CEO",
+      url: "/alberto-reyes-sandoval.jpg",
+      caption: "Alberto Reyes Sandoval - Fundador y CEO (Foto Principal)",
       description: "Fotografía oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y CEO de Fruti Go."
+    },
+    {
+      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786036709329_0lv8vs.jpg?alt=media&token=713ae710-4b15-4c75-aa7f-78d207840aaf",
+      caption: "Alberto Reyes Sandoval - Trayectoria y Formación ITESO",
+      description: "Fotografía oficial de respaldo 1 de Alberto Reyes Sandoval."
+    },
+    {
+      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786036709329_0lv8vs.jpg?alt=media&token=713ae710-4b15-4c75-aa7f-78d207840aaf",
+      caption: "Alberto Reyes Sandoval - Entorno Familiar y Valores",
+      description: "Fotografía de respaldo 2 de Alberto Reyes Sandoval."
+    },
+    {
+      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786036687729_lm6dez.jpg?alt=media&token=0ac22ada-54c8-45ba-88d0-3f16d07a9677",
+      caption: "Alberto Reyes Sandoval - Arquitectura Logística y B2B",
+      description: "Fotografía de respaldo 3 de Alberto Reyes Sandoval."
+    },
+    {
+      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786036722557_49cq0x.jpg?alt=media&token=cd5c973f-5bab-4f12-a638-93bda11f82a5",
+      caption: "Alberto Reyes Sandoval - Expansión y Liderazgo Tecnológico",
+      description: "Fotografía de respaldo 4 de Alberto Reyes Sandoval."
     }
   ],
   bioP1: "Alberto Reyes Sandoval nació en Zamora, Michoacán, el 29 de julio de 1973, hijo de María de Jesús Sandoval Mejía y Alberto Reyes Ibarra (q. e. p. d.), y hermano de María de los Ángeles Reyes Sandoval y Alfonso Reyes Sandoval (q. e. p. d.). Formó su familia junto a su esposa María Alejandra García Morales, sus hijas Valeria y Alejandra Reyes García, y su nieto Valentín Chaires Reyes. Actualmente radica en Guadalajara, Jalisco.",
@@ -158,6 +180,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
   }, [propData]);
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [lightboxPhoto, setLightboxPhoto] = useState<FounderPhotoItem | null>(null);
 
   useEffect(() => {
     setImageError(false);
@@ -249,14 +272,19 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             
             {/* Dedicated Photo Section */}
             <div className="w-full flex flex-col items-center space-y-3">
-              {/* Photo Frame Container - Linked to Official Photo URL */}
+              {/* Photo Frame Container - Linked to Lightbox & Official Photo URL */}
               <div className="relative group/photo w-full max-w-xs flex flex-col items-center">
-                <a
-                  href="https://n9.cl/p8dxzb"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <div
+                  onClick={() => {
+                    const mainPhotoItem = photosList[0] || {
+                      url: photoUrl,
+                      caption: "Alberto Reyes Sandoval - Fundador, Creador y CEO de Fruti Go",
+                      description: "Fotografía oficial de Alberto Reyes Sandoval."
+                    };
+                    setLightboxPhoto(mainPhotoItem);
+                  }}
                   className="w-56 sm:w-64 min-h-[260px] max-h-[380px] rounded-2xl sm:rounded-3xl bg-transparent border-2 sm:border-4 border-emerald-200 shadow-md p-1 sm:p-2 relative overflow-hidden flex items-center justify-center cursor-pointer group/link hover:border-emerald-500 transition-all"
-                  title="Haga clic para abrir la Fotografía Oficial de Alberto Reyes Sandoval en Alta Resolución (https://n9.cl/p8dxzb)"
+                  title="Haga clic para ampliar la Fotografía Oficial de Alberto Reyes Sandoval"
                 >
                   {hasPhoto ? (
                     <img
@@ -264,7 +292,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                       alt="Alberto Reyes Sandoval - Fotografía Oficial"
                       width={1200}
                       height={1600}
-                      title="Alberto Reyes Sandoval - Foto oficial de perfil de desarrollador y fundador (https://n9.cl/p8dxzb)"
+                      title="Alberto Reyes Sandoval - Foto oficial de perfil (Haga clic para ampliar)"
                       itemProp="image"
                       loading="eager"
                       decoding="async"
@@ -280,7 +308,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                       <p className="text-[11px] text-zinc-500">Espacio reservado para foto del desarrollador</p>
                     </div>
                   )}
-                </a>
+                </div>
 
                 {/* Verified Badge Icon on Corner */}
                 <div className="absolute -bottom-2 -right-2 bg-brand-green text-white p-2.5 rounded-2xl shadow-lg ring-4 ring-white flex items-center justify-center" title="Desarrollador y Creador Oficial">
@@ -289,89 +317,22 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
               </div>
 
               {/* Direct Link to Official Photo for Indexing & Instant Access */}
-              <a
-                href="https://n9.cl/p8dxzb"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => {
+                  const mainPhotoItem = photosList[0] || {
+                    url: photoUrl,
+                    caption: "Alberto Reyes Sandoval - Fundador, Creador y CEO de Fruti Go",
+                    description: "Fotografía oficial de Alberto Reyes Sandoval."
+                  };
+                  setLightboxPhoto(mainPhotoItem);
+                }}
                 className="mt-1 inline-flex items-center justify-center gap-2 px-3.5 py-2 bg-emerald-800 hover:bg-brand-green text-white rounded-xl text-xs font-extrabold transition-all shadow-xs active:scale-95 border border-emerald-700 cursor-pointer"
-                title="Abrir Fotografía Oficial en Alta Resolución (https://n9.cl/p8dxzb)"
+                title="Ver Fotografía Oficial en Alta Resolución"
               >
-                <ExternalLink className="w-3.5 h-3.5 text-brand-yellow shrink-0" />
+                <ZoomIn className="w-3.5 h-3.5 text-brand-yellow shrink-0" />
                 <span>Ver Fotografía Oficial (Alta Resolución)</span>
-              </a>
-            </div>
-
-            {/* Direct Contact & App Download Buttons */}
-            <div className="w-full pt-1 flex flex-col gap-2.5">
-              {/* Google Play Store Download Button */}
-              <a
-                href="https://play.google.com/store/apps/details?id=com.frutigo.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-gradient-to-r from-zinc-950 via-zinc-900 to-emerald-950 hover:from-black hover:to-emerald-900 text-white font-extrabold p-3 sm:p-3.5 rounded-2xl border-2 border-emerald-500/80 shadow-md hover:shadow-xl transition-all active:scale-98 flex items-center justify-between gap-3 group/play cursor-pointer"
-                title="Descargar Fruti Go en Google Play Store"
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  {/* Google Play Multicolor Logo Icon */}
-                  <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center shrink-0 p-2 group-hover/play:border-emerald-400 group-hover/play:scale-105 transition-all shadow-inner">
-                    <svg className="w-full h-full" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M325.8 243.7L88.1 6.1C82.5 0.5 74.3 -1.4 66.8 1.1 59.3 3.6 54.1 10.1 54.1 18.1V493.9c0 8 5.2 14.5 12.7 17 7.5 2.5 15.7 0.6 21.3-5L325.8 268.3c6.8-6.8 6.8-17.8 0-24.6z" fill="#00D2FF" />
-                      <path d="M325.8 243.7L411.4 158.1 120.3 6.1l205.5 237.6z" fill="#00F076" />
-                      <path d="M325.8 268.3L120.3 505.9 411.4 353.9 325.8 268.3z" fill="#FF3A44" />
-                      <path d="M411.4 158.1l43.2 24.9c18.5 10.7 18.5 37.9 0 48.6l-43.2 24.9-38.3-38.3 38.3-40.1z" fill="#FFE000" />
-                    </svg>
-                  </div>
-                  <div className="text-left leading-tight min-w-0">
-                    <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-black block truncate">
-                      DISPONIBLE EN GOOGLE PLAY
-                    </span>
-                    <span className="text-xs sm:text-sm font-black text-white group-hover/play:text-amber-300 transition-colors block truncate">
-                      Descargar App Fruti Go
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1.5 bg-brand-green text-white px-3 py-1.5 rounded-xl text-xs font-black shrink-0 group-hover/play:bg-emerald-500 transition-colors shadow-xs">
-                  <Download className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Obtener</span>
-                  <ExternalLink className="w-3 h-3 opacity-80" />
-                </div>
-              </a>
-
-              {founderData.youtube && (
-                <a
-                  href={founderData.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-[#FF0000] hover:bg-[#CC0000] text-white font-extrabold py-2.5 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98 group/yt"
-                  title="Canal Oficial de YouTube - Alberto Reyes Sandoval y Fruti Go"
-                >
-                  <Youtube className="w-4.5 h-4.5 text-white group-hover/yt:scale-110 transition-transform shrink-0" />
-                  <span>Canal Oficial de YouTube</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-80 ml-auto shrink-0" />
-                </a>
-              )}
-
-              {founderData.linkedin && (
-                <a
-                  href={founderData.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-[#0A66C2] hover:bg-[#084e96] text-white font-bold py-2.5 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98 group/link"
-                  title="Perfil Oficial de LinkedIn - Alberto Reyes Sandoval"
-                >
-                  <Linkedin className="w-4 h-4 text-white group-hover/link:scale-110 transition-transform" />
-                  <span>Perfil LinkedIn</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-80 ml-auto" />
-                </a>
-              )}
-
-              <a
-                href={`mailto:${displayEmail}?subject=Consulta%20B2B%20/%20Plataforma%20Fruti%20Go`}
-                className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-bold py-2.5 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98 group/email"
-              >
-                <Mail className="w-4 h-4 text-amber-300 group-hover/email:scale-110 transition-transform" />
-                <span>{displayEmail}</span>
-              </a>
+              </button>
             </div>
 
           </div>
@@ -390,87 +351,80 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
               </p>
             </div>
 
-            {/* Badges / Skill Tags */}
-            <div className="flex flex-wrap gap-2">
-              <span className="px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-black flex items-center gap-1.5">
-                <Cpu className="w-3.5 h-3.5 text-emerald-700" />
-                Arquitectura Cloud & Web
-              </span>
-              <span className="px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-black flex items-center gap-1.5">
-                <Globe className="w-3.5 h-3.5 text-emerald-700" />
-                Desarrollo Full-Stack
-              </span>
-              <span className="px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-black flex items-center gap-1.5">
-                <Truck className="w-3.5 h-3.5 text-emerald-700" />
-                Paquetería Express & Pet Taxi
-              </span>
-              <span className="px-3 py-1 bg-amber-50 text-amber-900 border border-amber-200 rounded-xl text-xs font-black flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-amber-600" />
-                Modelo B2B & Alianzas
-              </span>
-            </div>
 
-            {/* Play Store Download Callout Banner */}
-            <div className="p-4 bg-gradient-to-r from-emerald-950 via-emerald-900 to-zinc-900 rounded-2xl text-white border border-emerald-500/40 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-zinc-900 border border-zinc-700 p-2 shrink-0 shadow-sm flex items-center justify-center">
-                  <svg className="w-full h-full" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M325.8 243.7L88.1 6.1C82.5 0.5 74.3 -1.4 66.8 1.1 59.3 3.6 54.1 10.1 54.1 18.1V493.9c0 8 5.2 14.5 12.7 17 7.5 2.5 15.7 0.6 21.3-5L325.8 268.3c6.8-6.8 6.8-17.8 0-24.6z" fill="#00D2FF" />
-                    <path d="M325.8 243.7L411.4 158.1 120.3 6.1l205.5 237.6z" fill="#00F076" />
-                    <path d="M325.8 268.3L120.3 505.9 411.4 353.9 325.8 268.3z" fill="#FF3A44" />
-                    <path d="M411.4 158.1l43.2 24.9c18.5 10.7 18.5 37.9 0 48.6l-43.2 24.9-38.3-38.3 38.3-40.1z" fill="#FFE000" />
-                  </svg>
+
+            {/* Bio Narrative with Interspersed Support Photo Thumbnails */}
+            {(() => {
+              const bioParagraphs: string[] = [];
+              if (founderData.bioP1) bioParagraphs.push(founderData.bioP1);
+              if (founderData.bioP2) bioParagraphs.push(founderData.bioP2);
+              if (founderData.bioP3) bioParagraphs.push(founderData.bioP3);
+
+              if (bioParagraphs.length === 0 && founderData.bio) {
+                founderData.bio.split(/\n\s*\n/).forEach((p) => {
+                  const trimmed = p.trim();
+                  if (trimmed) bioParagraphs.push(trimmed);
+                });
+              }
+
+              if (bioParagraphs.length === 0 && founderData.bio1) {
+                bioParagraphs.push(founderData.bio1);
+                if (founderData.bio2) bioParagraphs.push(founderData.bio2);
+              }
+
+              // Support photos (photos at index >= 1 with valid URLs)
+              const supportPhotos = photosList.slice(1).filter((p) => p && typeof p.url === "string" && Boolean(p.url));
+
+              return (
+                <div className="space-y-4 text-zinc-700 text-sm sm:text-base leading-relaxed font-normal" itemProp="description">
+                  {/* Metaetiquetas explícitas de autoría y perfil */}
+                  <meta itemProp="author" content={founderData.name} />
+                  <meta itemProp="creator" content={founderData.name} />
+                  <meta itemProp="jobTitle" content={founderData.role} />
+
+                  {bioParagraphs.map((para, pIdx) => {
+                    const associatedPhoto = supportPhotos[pIdx];
+                    return (
+                      <React.Fragment key={pIdx}>
+                        <p className="whitespace-pre-line leading-relaxed text-zinc-700 text-sm sm:text-base font-normal">
+                          {para}
+                        </p>
+
+                        {/* Embedded Support Photo - SMALL THUMBNAIL ONLY, NON-CLICKABLE, NO TEXT */}
+                        {associatedPhoto && (
+                          <div className="my-3 flex justify-center">
+                            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-zinc-950 border border-emerald-300/70 p-1 shadow-xs pointer-events-none select-none flex items-center justify-center shrink-0">
+                              <img
+                                src={associatedPhoto.url}
+                                alt={`Alberto Reyes Sandoval - Miniatura ${pIdx + 2}`}
+                                className="w-full h-full object-contain rounded-lg"
+                                loading="lazy"
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
+
+                  {/* Remaining support photos if more photos than paragraphs */}
+                  {supportPhotos.length > bioParagraphs.length && (
+                    <div className="flex flex-wrap gap-3 justify-center pt-2">
+                      {supportPhotos.slice(bioParagraphs.length).map((photo, extraIdx) => (
+                        <div key={extraIdx} className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-zinc-950 border border-emerald-300/70 p-1 shadow-xs pointer-events-none select-none flex items-center justify-center shrink-0">
+                          <img
+                            src={photo.url}
+                            alt="Alberto Reyes Sandoval - Miniatura"
+                            className="w-full h-full object-contain rounded-lg"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[9px] font-black uppercase tracking-widest text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded-md border border-emerald-700">
-                      App Android Oficial
-                    </span>
-                    <span className="text-[10px] text-amber-300 font-bold">Google Play Store</span>
-                  </div>
-                  <h5 className="text-sm font-black text-white mt-0.5">
-                    Aplicación Móvil Fruti Go
-                  </h5>
-                  <p className="text-xs text-emerald-100/90 line-clamp-1">
-                    Disponible directamente para dispositivos Android en la tienda oficial.
-                  </p>
-                </div>
-              </div>
-
-              <a
-                href="https://play.google.com/store/apps/details?id=com.frutigo.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-4 py-2.5 bg-brand-yellow hover:bg-amber-400 text-zinc-950 font-black rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 shrink-0"
-              >
-                <Download className="w-4 h-4 text-zinc-900" />
-                <span>Descargar App</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </div>
-
-            {/* Bio Narrative */}
-            <div className="space-y-4 text-zinc-700 text-sm sm:text-base leading-relaxed font-normal" itemProp="description">
-              {/* Metaetiquetas explícitas de autoría y perfil */}
-              <meta itemProp="author" content={founderData.name} />
-              <meta itemProp="creator" content={founderData.name} />
-              <meta itemProp="jobTitle" content={founderData.role} />
-              
-              {founderData.bioP1 ? (
-                <>
-                  <p className="whitespace-pre-line" itemProp="knowsAbout">{founderData.bioP1}</p>
-                  {founderData.bioP2 && <p className="whitespace-pre-line">{founderData.bioP2}</p>}
-                  {founderData.bioP3 && <p className="whitespace-pre-line">{founderData.bioP3}</p>}
-                </>
-              ) : founderData.bio1 ? (
-                <>
-                  <p className="whitespace-pre-line">{founderData.bio1}</p>
-                  {founderData.bio2 && <p className="whitespace-pre-line">{founderData.bio2}</p>}
-                </>
-              ) : founderData.bio ? (
-                <p className="whitespace-pre-line">{founderData.bio}</p>
-              ) : null}
-            </div>
+              );
+            })()}
 
             {/* Founder Quote Card */}
             {founderData.quote && (
@@ -489,52 +443,93 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
 
         </div>
 
-        {/* Galería de Fotos y Trayectoria del Desarrollador (Hasta 5 Fotos) */}
-        {validPhotosList.length > 1 && (
-          <div className="mt-8 pt-6 border-t border-zinc-200/80 relative z-10">
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-4 h-4 text-emerald-600" />
-              <h4 className="text-xs font-black uppercase tracking-wider text-emerald-900">
-                Galería de Fotografías de Trayectoria (Indexadas en Google / Schema.org)
-              </h4>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-              {photosList.map((item, idx) => {
-                if (!item || !item.url) return null;
-                const isSelected = selectedImageIndex === idx;
-                const isMain = idx === 0;
-                return (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setSelectedImageIndex(idx)}
-                    className={`group/thumb text-left p-2 rounded-2xl border transition-all text-xs cursor-pointer ${
-                      isSelected
-                        ? "bg-emerald-50 border-emerald-500 ring-2 ring-emerald-400 shadow-sm"
-                        : "bg-zinc-50 hover:bg-zinc-100 border-zinc-200"
-                    }`}
-                  >
-                    <div className="w-full h-24 rounded-xl overflow-hidden bg-zinc-950 border border-zinc-200 mb-2 relative flex items-center justify-center p-1">
-                      <img
-                        src={item.url}
-                        alt={item.caption || `Foto ${idx + 1}`}
-                        className="w-full h-full object-contain group-hover/thumb:scale-105 transition-transform rounded-lg"
-                      />
-                    </div>
-                    <p className="font-bold text-zinc-900 line-clamp-1 text-[11px]">
-                      {item.caption || (isMain ? "Foto Principal" : `Foto ${idx + 1}`)}
-                    </p>
-                    {item.description && (
-                      <p className="text-[10px] text-zinc-500 line-clamp-2 mt-0.5 font-normal">
-                        {item.description}
-                      </p>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+        {/* Pie de Página: Botones Oficiales y de Contacto Movidos al Pie */}
+        <div className="mt-8 pt-6 border-t-2 border-emerald-100 flex flex-col gap-2.5 relative z-10">
+          <div className="text-[11px] font-black uppercase tracking-wider text-emerald-900 mb-1 flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <span>Enlaces Oficiales y Canales de Contacto</span>
           </div>
-        )}
+
+          {/* Google Play Store Download Button */}
+          <a
+            href="https://play.google.com/store/apps/details?id=com.frutigo.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-gradient-to-r from-zinc-950 via-zinc-900 to-emerald-950 hover:from-black hover:to-emerald-900 text-white font-extrabold p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-500/80 shadow-md hover:shadow-xl transition-all active:scale-98 flex items-center justify-between gap-3 group/play cursor-pointer"
+            title="Descargar Fruti Go en Google Play Store"
+          >
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center shrink-0 p-2 group-hover/play:border-emerald-400 group-hover/play:scale-105 transition-all shadow-inner">
+                <svg className="w-full h-full" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M325.8 243.7L88.1 6.1C82.5 0.5 74.3 -1.4 66.8 1.1 59.3 3.6 54.1 10.1 54.1 18.1V493.9c0 8 5.2 14.5 12.7 17 7.5 2.5 15.7 0.6 21.3-5L325.8 268.3c6.8-6.8 6.8-17.8 0-24.6z" fill="#00D2FF" />
+                  <path d="M325.8 243.7L411.4 158.1 120.3 6.1l205.5 237.6z" fill="#00F076" />
+                  <path d="M325.8 268.3L120.3 505.9 411.4 353.9 325.8 268.3z" fill="#FF3A44" />
+                  <path d="M411.4 158.1l43.2 24.9c18.5 10.7 18.5 37.9 0 48.6l-43.2 24.9-38.3-38.3 38.3-40.1z" fill="#FFE000" />
+                </svg>
+              </div>
+              <div className="text-left leading-tight min-w-0">
+                <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-black block truncate">
+                  DISPONIBLE EN GOOGLE PLAY
+                </span>
+                <span className="text-xs sm:text-sm font-black text-white group-hover/play:text-amber-300 transition-colors block truncate">
+                  Descargar App Fruti Go
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 bg-brand-green text-white px-3.5 py-2 rounded-xl text-xs font-black shrink-0 group-hover/play:bg-emerald-500 transition-colors shadow-xs">
+              <Download className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Obtener</span>
+              <ExternalLink className="w-3 h-3 opacity-80" />
+            </div>
+          </a>
+
+          {/* YouTube Button */}
+          {founderData.youtube && (
+            <a
+              href={founderData.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-[#FF0000] hover:bg-[#CC0000] text-white font-extrabold py-3 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-sm transition-all active:scale-98 group/yt"
+              title="Canal Oficial de YouTube - Alberto Reyes Sandoval y Fruti Go"
+            >
+              <div className="flex items-center gap-3">
+                <Youtube className="w-5 h-5 text-white group-hover/yt:scale-110 transition-transform shrink-0" />
+                <span>Canal Oficial de YouTube</span>
+              </div>
+              <ExternalLink className="w-4 h-4 opacity-80 shrink-0" />
+            </a>
+          )}
+
+          {/* LinkedIn Button */}
+          {founderData.linkedin && (
+            <a
+              href={founderData.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-[#0A66C2] hover:bg-[#084e96] text-white font-bold py-3 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-sm transition-all active:scale-98 group/link"
+              title="Perfil Oficial de LinkedIn - Alberto Reyes Sandoval"
+            >
+              <div className="flex items-center gap-3">
+                <Linkedin className="w-5 h-5 text-white group-hover/link:scale-110 transition-transform shrink-0" />
+                <span>Perfil LinkedIn</span>
+              </div>
+              <ExternalLink className="w-4 h-4 opacity-80 shrink-0" />
+            </a>
+          )}
+
+          {/* Email Contact Button */}
+          <a
+            href={`mailto:${displayEmail}?subject=Consulta%20B2B%20/%20Plataforma%20Fruti%20Go`}
+            className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-bold py-3 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-sm transition-all active:scale-98 group/email"
+            title="Correo de Contacto Oficial"
+          >
+            <div className="flex items-center gap-3">
+              <Mail className="w-5 h-5 text-amber-300 group-hover/email:scale-110 transition-transform shrink-0" />
+              <span>{displayEmail}</span>
+            </div>
+            <ExternalLink className="w-4 h-4 opacity-80 shrink-0 text-amber-300" />
+          </a>
+        </div>
 
         {/* Metadatos Estructurados Schema.org para Indexación de Wikidata, Autoridad de Marca e Imágenes */}
         <script
@@ -730,6 +725,61 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             })
           }}
         />
+
+        {/* Modal / Lightbox para ver cualquier fotografía en Alta Resolución */}
+        {lightboxPhoto && (
+          <div
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+            onClick={() => setLightboxPhoto(null)}
+          >
+            <div
+              className="relative max-w-4xl w-full bg-zinc-900 border border-emerald-500/50 rounded-3xl p-4 sm:p-6 shadow-2xl flex flex-col items-center space-y-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setLightboxPhoto(null)}
+                className="absolute top-3 right-3 p-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white rounded-full transition-all cursor-pointer z-10"
+                title="Cerrar visor"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="w-full max-h-[70vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black p-2 border border-zinc-800">
+                <img
+                  src={lightboxPhoto.url}
+                  alt={lightboxPhoto.caption || "Fotografía de Alberto Reyes Sandoval"}
+                  className="max-h-[65vh] w-auto max-w-full object-contain rounded-xl shadow-lg"
+                />
+              </div>
+
+              <div className="w-full text-center space-y-1.5 px-2">
+                <span className="px-3 py-1 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full text-[10px] font-black uppercase tracking-widest inline-flex items-center gap-1.5">
+                  <Sparkles className="w-3 h-3 text-emerald-400" />
+                  Alberto Reyes Sandoval • Alta Resolución
+                </span>
+                <h4 className="text-base sm:text-lg font-bold text-white">
+                  {lightboxPhoto.caption || "Fotografía de Perfil"}
+                </h4>
+                {lightboxPhoto.description && (
+                  <p className="text-xs text-zinc-400 max-w-2xl mx-auto font-normal">
+                    {lightboxPhoto.description}
+                  </p>
+                )}
+              </div>
+
+              <a
+                href={lightboxPhoto.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-brand-green hover:bg-emerald-600 text-white rounded-xl text-xs font-black transition-all shadow-md active:scale-95 cursor-pointer"
+              >
+                <ExternalLink className="w-4 h-4 text-brand-yellow" />
+                <span>Abrir imagen original</span>
+              </a>
+            </div>
+          </div>
+        )}
 
       </div>
     </section>

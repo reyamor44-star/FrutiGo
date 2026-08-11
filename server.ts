@@ -274,6 +274,35 @@ async function startServer() {
     }
   });
 
+  // Direct Founder Photo extension routes
+  const PHOTO_ROUTES = [
+    "/alberto-reyes-sandoval.jpg",
+    "/alberto-reyes-sandoval",
+    "/foto-alberto-reyes-sandoval.jpg",
+    "/foto-alberto-reyes-sandoval",
+    "/foto-fundador.jpg",
+    "/foto-fundador",
+    "/foto-desarrollador.jpg",
+    "/foto-desarrollador",
+    "/foto-ceo.jpg",
+    "/foto-ceo",
+    "/foto"
+  ];
+
+  const founderPhotoPath = path.join(process.cwd(), "public", "alberto-reyes-sandoval.jpg");
+
+  PHOTO_ROUTES.forEach((route) => {
+    app.get(route, (req, res) => {
+      if (fs.existsSync(founderPhotoPath)) {
+        res.header("Content-Type", "image/jpeg");
+        res.header("Cache-Control", "public, max-age=31536000, immutable");
+        res.sendFile(founderPhotoPath);
+      } else {
+        res.status(404).send("Foto no encontrada");
+      }
+    });
+  });
+
   // Custom Storage Files
   const LOGO_FILE = path.join(process.cwd(), "custom_logo.json");
   const BANNER_FILE = path.join(process.cwd(), "custom_banner.json");
@@ -2760,9 +2789,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           const devPhotos = Array.isArray(profile.photos) && profile.photos.length > 0
             ? profile.photos.filter((p: any) => Boolean(p && p.url)).map((p: any) => p.url.startsWith("http") ? p.url : `https://frutigo.com.mx${p.url}`)
             : [
-                "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
-                "https://frutigo.com.mx/alberto-reyes-sandoval-desarrollador-operaciones.jpg",
-                "https://frutigo.com.mx/alberto-reyes-sandoval-desarrollador-perfil.jpg"
+                "https://frutigo.com.mx/alberto-reyes-sandoval.jpg"
               ];
 
           const developerJsonLdObj = {
@@ -2776,9 +2803,9 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 "description": profile.bioP1 || "Perfil oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx).",
                 "primaryImageOfPage": {
                   "@type": "ImageObject",
-                  "@id": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg#primaryimage",
-                  "url": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
-                  "contentUrl": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                  "@id": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg#primaryimage",
+                  "url": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+                  "contentUrl": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
                   "width": "1200",
                   "height": "1600",
                   "caption": "Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go",
@@ -2789,7 +2816,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                   "@id": "https://frutigo.com.mx/#founder",
                   "name": "Alberto Reyes Sandoval",
                   "jobTitle": "Creador y Desarrollador de Fruti Go",
-                  "image": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                  "image": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
                   "worksFor": {
                     "@type": "Organization",
                     "@id": "https://frutigo.com.mx/#organization",
@@ -2817,7 +2844,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 "url": "https://frutigo.com.mx/sobre-el-desarrollador",
                 "email": profile.email ? `mailto:${profile.email}` : "mailto:frutigo33@gmail.com",
                 "image": [
-                  "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                  "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
                   "https://n9.cl/p8dxzb",
                   ...devPhotos
                 ],

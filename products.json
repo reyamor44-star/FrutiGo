@@ -1,6 +1,6 @@
 [
   {
-    "id": "prod-1",
+    "id": "Jícama Cristal Mayoreo",
     "name": "Jícama Cristal Mayoreo",
     "price": 18,
     "unit": "1 Kg",
@@ -16,7 +16,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-2",
+    "id": "Limón Persa Sin Semilla",
     "name": "Limón Persa Sin Semilla",
     "price": 22,
     "unit": "1 Kg",
@@ -32,7 +32,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-3",
+    "id": "Manzana Fuji Selección",
     "name": "Manzana Fuji Selección",
     "price": 32,
     "unit": "1 Kg",
@@ -48,7 +48,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-4",
+    "id": "Aguacate Hass Extra Uruapan",
     "name": "Aguacate Hass Extra Uruapan",
     "price": 68,
     "unit": "1 Kg",
@@ -64,7 +64,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-5",
+    "id": "Piña Miel Crate Extra",
     "name": "Piña Miel Crate Extra",
     "price": 25,
     "unit": "1 Kg",
@@ -80,7 +80,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-6",
+    "id": "Plátano Tabasco Calibre R1",
     "name": "Plátano Tabasco Calibre R1",
     "price": 16,
     "unit": "1 Kg",
@@ -96,7 +96,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-7",
+    "id": "Jitomate Saladette Invernadero",
     "name": "Jitomate Saladette Invernadero",
     "price": 22,
     "unit": "1 Kg",
@@ -112,7 +112,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-8",
+    "id": "Cebolla Blanca Mayoreo",
     "name": "Cebolla Blanca Mayoreo",
     "price": 14,
     "unit": "1 Kg",
@@ -128,7 +128,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-9",
+    "id": "Papa Blanca Alfa Mayoreo",
     "name": "Papa Blanca Alfa Mayoreo",
     "price": 18,
     "unit": "1 Kg",
@@ -144,7 +144,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-10",
+    "id": "Zanahoria Lavada Mediana",
     "name": "Zanahoria Lavada Mediana",
     "price": 12,
     "unit": "1 Kg",
@@ -160,7 +160,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-11",
+    "id": "Chile Serrano Selección",
     "name": "Chile Serrano Selección",
     "price": 28,
     "unit": "1 Kg",
@@ -176,7 +176,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-12",
+    "id": "Cilantro Fresco Mayoreo",
     "name": "Cilantro Fresco Mayoreo",
     "price": 35,
     "unit": "1 Kg",
@@ -192,7 +192,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-13",
+    "id": "Perejil Liso Gourmet",
     "name": "Perejil Liso Gourmet",
     "price": 38,
     "unit": "1 Kg",
@@ -208,7 +208,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-14",
+    "id": "Albahaca Fresca Hidropónica",
     "name": "Albahaca Fresca Hidropónica",
     "price": 65,
     "unit": "1 Kg",
@@ -224,7 +224,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-15",
+    "id": "Chile Ancho Seco Primera",
     "name": "Chile Ancho Seco Primera",
     "price": 160,
     "unit": "1 Kg",
@@ -240,7 +240,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-16",
+    "id": "Chile Guajillo Seco",
     "name": "Chile Guajillo Seco",
     "price": 145,
     "unit": "1 Kg",
@@ -256,7 +256,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-17",
+    "id": "Ajo Blanco Importado",
     "name": "Ajo Blanco Importado",
     "price": 85,
     "unit": "1 Kg",
@@ -272,7 +272,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-18",
+    "id": "Aceite Vegetal Bidón Industrial",
     "name": "Aceite Vegetal Bidón Industrial",
     "price": 32,
     "unit": "1 L",
@@ -288,7 +288,7 @@
     "precio_incluye_iva": true
   },
   {
-    "id": "prod-19",
+    "id": "Sal de Mar Grano Fino",
     "name": "Sal de Mar Grano Fino",
     "price": 10,
     "unit": "1 Kg",

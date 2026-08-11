@@ -240,12 +240,13 @@ async function startServer() {
   app.use(express.json({ limit: "25mb" }));
   app.use(express.urlencoded({ limit: "25mb", extended: true }));
 
-  // Static files directory for uploads (Profile photo, media files)
+  // Static files directory for uploads and public assets
   const UPLOADS_DIR = path.join(process.cwd(), "uploads");
   if (!fs.existsSync(UPLOADS_DIR)) {
     fs.mkdirSync(UPLOADS_DIR, { recursive: true });
   }
   app.use("/uploads", express.static(UPLOADS_DIR));
+  app.use(express.static(path.join(process.cwd(), "public")));
 
   // Health check
   app.get("/api/health", (req, res) => {
@@ -286,11 +287,11 @@ async function startServer() {
   const DEFAULT_FOUNDER_SERVER_DATA = {
     name: "Alberto Reyes Sandoval",
     role: "Creador, Desarrollador Principal y Fundador de Fruti Go",
-    photo: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
-    photoUrl: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
+    photo: "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+    photoUrl: "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
     photos: [
       {
-        url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786118638635_ixj6r0.jpg?alt=media&token=bbf352c0-e9f8-4f59-bfb1-33a24c27aec9",
+        url: "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
         caption: "Alberto Reyes Sandoval - Fundador y CEO",
         description: "Fotografía oficial de Alberto Reyes Sandoval, Fundador, Creador y CEO de Fruti Go."
       }
@@ -2967,7 +2968,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
           jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(developerJsonLdObj, null, 2)}\n</script>`;
 
-          const primaryDevPhoto = "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg";
+          const primaryDevPhoto = "https://frutigo.com.mx/alberto-reyes-sandoval.jpg";
           const ogImagesMeta = `<meta property="og:image" content="${primaryDevPhoto}" />\n<meta property="og:image:url" content="${primaryDevPhoto}" />\n<meta property="og:image:secure_url" content="${primaryDevPhoto}" />\n<meta property="og:image:type" content="image/jpeg" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="1600" />\n<meta property="og:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
 
           const twitterImagesMeta = `<meta name="twitter:image" content="${primaryDevPhoto}" />\n<meta name="twitter:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;

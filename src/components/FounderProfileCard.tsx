@@ -227,8 +227,8 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
   if (schemaImageObjects.length === 0) {
     schemaImageObjects.push({
       "@type": "ImageObject",
-      "url": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
-      "name": "Alberto Reyes Sandoval - Fundador y CEO en Oficina Fruti Go",
+      "url": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+      "name": "Alberto Reyes Sandoval - Fundador y CEO Fruti Go",
       "caption": "Alberto Reyes Sandoval, Fundador, Creador y CEO de Fruti Go.",
       "description": "Fotografía oficial de Alberto Reyes Sandoval, Creador y CEO de Fruti Go."
     });
@@ -546,9 +546,9 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   "description": "Perfil oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx).",
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "@id": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg#primaryimage",
-                    "url": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
-                    "contentUrl": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                    "@id": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg#primaryimage",
+                    "url": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+                    "contentUrl": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
                     "width": "1200",
                     "height": "1600",
                     "caption": "Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go",
@@ -559,7 +559,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                     "@id": "https://frutigo.com.mx/#founder",
                     "name": "Alberto Reyes Sandoval",
                     "jobTitle": "Creador y Desarrollador de Fruti Go",
-                    "image": "https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg",
+                    "image": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
                     "worksFor": {
                       "@type": "Organization",
                       "@id": "https://frutigo.com.mx/#organization",

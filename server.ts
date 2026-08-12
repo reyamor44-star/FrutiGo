@@ -276,6 +276,8 @@ async function startServer() {
 
   // Direct Founder Photo extension routes
   const PHOTO_ROUTES = [
+    "/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg",
+    "/alberto-reyes-sandoval-frutigo-fundador-desarrollador",
     "/alberto-reyes-sandoval.jpg",
     "/alberto-reyes-sandoval",
     "/foto-alberto-reyes-sandoval.jpg",
@@ -289,7 +291,7 @@ async function startServer() {
     "/foto"
   ];
 
-  const founderPhotoPath = path.join(process.cwd(), "public", "alberto-reyes-sandoval.jpg");
+  const founderPhotoPath = path.join(process.cwd(), "public", "alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg");
 
   PHOTO_ROUTES.forEach((route) => {
     app.get(route, (req, res) => {

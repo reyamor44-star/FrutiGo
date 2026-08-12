@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <!-- Página Principal -->
   <url>
     <loc>https://frutigo.com.mx/</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg</image:loc>
+      <image:title>Alberto Reyes Sandoval - Fundador, Creador y Desarrollador de Fruti Go</image:title>
+
+      <image:caption>Fotografía oficial de Alberto Reyes Sandoval, Fundador y Desarrollador Principal de Fruti Go.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Imagen Oficial del Fundador y Desarrollador -->
+  <url>
+    <loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg</image:loc>
+      <image:title>Alberto Reyes Sandoval - Fundador y Desarrollador de Fruti Go</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg</image:loc>
+      <image:title>Alberto Reyes Sandoval - Fundador y Desarrollador de Fruti Go</image:title>
+    </image:image>
   </url>
 
   <!-- Secciones Institucionales -->

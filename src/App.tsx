@@ -283,47 +283,46 @@ export default function App() {
   });
 
   // Navigation & View Mode State
+  const [isDirectPhotoRoute] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, "");
+      return (
+        path.includes("alberto-reyes-sandoval") ||
+        path.startsWith("/foto") ||
+        path.includes("foto-") ||
+        path.endsWith(".jpg") ||
+        path.endsWith(".jpeg") ||
+        path.endsWith(".png")
+      );
+    }
+    return false;
+  });
+
+  if (isDirectPhotoRoute) {
+    return (
+      <div className="fixed inset-0 bg-black flex flex-col items-center justify-center p-2 z-[999999] overflow-hidden select-none">
+        <img
+          src="/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg"
+          alt="Alberto Reyes Sandoval - Fundador, Creador y Desarrollador Principal de Fruti Go"
+          className="max-w-full max-h-screen object-contain rounded-lg shadow-2xl"
+        />
+      </div>
+    );
+  }
+
   const [activeView, setActiveView] = useState<ActiveView>(() => {
     if (typeof window !== "undefined") {
       const path = window.location.pathname.toLowerCase().replace(/\/$/, "");
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
 
-      // Check if user is navigating directly to photo link
-      if (
-        path.includes("p8dxzb") ||
-        path.includes("foto") ||
-        path.includes("fotografia") ||
-        path.includes("foro") ||
-        path.includes("forum") ||
-        path.includes("n9.cl") ||
-        search.includes("p8dxzb") ||
-        search.includes("foto") ||
-        search.includes("foro") ||
-        search.includes("forum") ||
-        hash.includes("p8dxzb") ||
-        hash.includes("foto")
-      ) {
-        window.location.href = "https://n9.cl/p8dxzb";
-      }
-
       // Check if user is navigating directly to cliente / bodega / tienda route
       if (
         path === "/cliente" ||
-        path.endsWith("/cliente") ||
-        path.includes("cliente") ||
         path === "/bodega" ||
-        path.endsWith("/bodega") ||
-        path.includes("bodega") ||
         path === "/tienda" ||
-        path.endsWith("/tienda") ||
-        path.includes("tienda") ||
         path === "/catalogo" ||
-        path.endsWith("/catalogo") ||
-        path.includes("catalogo") ||
         path === "/store" ||
-        path.endsWith("/store") ||
-        path.includes("store") ||
         search.includes("cliente") ||
         search.includes("bodega") ||
         search.includes("tienda") ||
@@ -340,11 +339,8 @@ export default function App() {
 
       if (
         path === "/fundador" ||
-        path.endsWith("/fundador") ||
         path === "/desarrollador" ||
-        path.endsWith("/desarrollador") ||
-        path === "/sobre-el-desarrollador" ||
-        path.endsWith("/sobre-el-desarrollador")
+        path === "/sobre-el-desarrollador"
       ) {
         return "legal";
       }

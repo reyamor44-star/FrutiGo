@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { 
   Image as ImageIcon, 
   Video as VideoIcon, 
@@ -13,7 +13,9 @@ import {
   ExternalLink,
   Code2,
   Rocket,
-  Filter
+  Filter,
+  Link as LinkIcon,
+  Check
 } from "lucide-react";
 import { mediaService, FounderMediaItem } from "../services/mediaService";
 import { FounderProfileCard } from "./FounderProfileCard";
@@ -23,6 +25,8 @@ export default function FundadorGaleriaPublica() {
   const [items, setItems] = useState<FounderMediaItem[]>([]);
   const [activeFilter, setActiveFilter] = useState<"all" | "image" | "video" | "youtube">("all");
   const [lightboxItem, setLightboxItem] = useState<FounderMediaItem | null>(null);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setItems(mediaService.getFounderMedia());
@@ -31,6 +35,57 @@ export default function FundadorGaleriaPublica() {
     });
     return () => unsubscribe();
   }, []);
+
+  // Auto-scroll into view if navigation targeted media/galeria direct URL
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const pathname = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      
+      const isMediaTarget = (
+        pathname.includes("medios") ||
+        pathname.includes("galeria") ||
+        pathname.includes("multimedia") ||
+        pathname.includes("prensa") ||
+        hash.includes("medios") ||
+        hash.includes("galeria") ||
+        hash.includes("modulo-medios") ||
+        search.includes("medios") ||
+        search.includes("galeria")
+      );
+
+      if (isMediaTarget) {
+        setTimeout(() => {
+          const el = document.getElementById("modulo-medios") || galleryRef.current;
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      }
+    }
+  }, []);
+
+  const handleCopyDirectUrl = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const directUrl = "https://frutigo.com.mx/medios";
+    navigator.clipboard.writeText(directUrl).then(() => {
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    }).catch(() => {
+      // fallback
+      try {
+        const input = document.createElement("input");
+        input.value = directUrl;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+        setCopiedLink(true);
+        setTimeout(() => setCopiedLink(false), 2500);
+      } catch (err) {}
+    });
+  };
 
   const filteredItems = items.filter((item) => {
     if (activeFilter === "all") return true;
@@ -44,12 +99,40 @@ export default function FundadorGaleriaPublica() {
       {/* Top Banner / Founder Official Card */}
       <FounderProfileCard />
 
-      {/* Main Gallery Section */}
-      <section className="bg-white rounded-2xl sm:rounded-3xl p-2 sm:p-8 border border-zinc-200/80 shadow-xs sm:shadow-sm space-y-4 sm:space-y-8">
+      {/* Main Gallery Section with direct ID anchors */}
+      <section 
+        id="modulo-medios"
+        ref={galleryRef}
+        className="bg-white rounded-2xl sm:rounded-3xl p-2 sm:p-8 border border-zinc-200/80 shadow-xs sm:shadow-sm space-y-4 sm:space-y-8 scroll-mt-24"
+      >
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-4 sm:pb-6 border-b border-zinc-100">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-black uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-700" /> Archivo Multimedia Oficial
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-black uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-700" /> Archivo Multimedia Oficial
+              </div>
+              <button
+                type="button"
+                onClick={handleCopyDirectUrl}
+                title="Copiar URL directa al módulo de medios"
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all border cursor-pointer ${
+                  copiedLink
+                    ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
+                    : "bg-zinc-100 text-zinc-700 hover:text-emerald-700 hover:bg-emerald-50 border-zinc-200"
+                }`}
+              >
+                {copiedLink ? (
+                  <>
+                    <Check className="w-3.5 h-3.5" />
+                    <span>¡Enlace copiado!</span>
+                  </>
+                ) : (
+                  <>
+                    <LinkIcon className="w-3.5 h-3.5 text-zinc-500" />
+                    <span>frutigo.com.mx/medios</span>
+                  </>
+                )}
+              </button>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-zinc-900 tracking-tight">
               Galería y Medios / <span className="text-emerald-700">Alberto Reyes Sandoval</span>

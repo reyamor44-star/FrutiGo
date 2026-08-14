@@ -274,37 +274,6 @@ async function startServer() {
     }
   });
 
-  // Direct Founder Photo extension routes
-  const PHOTO_ROUTES = [
-    "/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg",
-    "/alberto-reyes-sandoval-frutigo-fundador-desarrollador",
-    "/alberto-reyes-sandoval.jpg",
-    "/alberto-reyes-sandoval",
-    "/foto-alberto-reyes-sandoval.jpg",
-    "/foto-alberto-reyes-sandoval",
-    "/foto-fundador.jpg",
-    "/foto-fundador",
-    "/foto-desarrollador.jpg",
-    "/foto-desarrollador",
-    "/foto-ceo.jpg",
-    "/foto-ceo",
-    "/foto"
-  ];
-
-  const founderPhotoPath = path.join(process.cwd(), "public", "alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg");
-
-  PHOTO_ROUTES.forEach((route) => {
-    app.get(route, (req, res) => {
-      if (fs.existsSync(founderPhotoPath)) {
-        res.header("Content-Type", "image/jpeg");
-        res.header("Cache-Control", "public, max-age=31536000, immutable");
-        res.sendFile(founderPhotoPath);
-      } else {
-        res.status(404).send("Foto no encontrada");
-      }
-    });
-  });
-
   // Custom Storage Files
   const LOGO_FILE = path.join(process.cwd(), "custom_logo.json");
   const BANNER_FILE = path.join(process.cwd(), "custom_banner.json");
@@ -318,13 +287,13 @@ async function startServer() {
   const DEFAULT_FOUNDER_SERVER_DATA = {
     name: "Alberto Reyes Sandoval",
     role: "Creador, Desarrollador Principal y Fundador de Fruti Go",
-    photo: "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
-    photoUrl: "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+    photo: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd",
+    photoUrl: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd",
     photos: [
       {
-        url: "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
-        caption: "Alberto Reyes Sandoval - Fundador y CEO",
-        description: "Fotografía oficial de Alberto Reyes Sandoval, Fundador, Creador y CEO de Fruti Go."
+        url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd",
+        caption: "Alberto Reyes Sandoval - Creador, Desarrollador Principal y Fundador de Fruti Go",
+        description: "Fotografía oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go."
       }
     ],
     articles: [
@@ -2639,11 +2608,9 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     }
   });
 
-  // Direct redirection route for official photo (https://n9.cl/p8dxzb)
+  // Direct redirection route for external shortlinks
   app.get([
     "/p8dxzb", 
-    "/foto",
-    "/fotografia",
     "/foro", 
     "/forum", 
     "/n9.cl/p8dxzb", 
@@ -2673,16 +2640,38 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     res.status(404).send("Robots.txt no encontrado");
   });
 
-  // Direct SEO HTML server route for articles, institutional and legal pages
+  // Direct SEO HTML server route for home, store, articles, institutional, developer, media and legal pages
   app.get([
+    "/",
+    "/politicas",
+    "/politicas-de-envio",
+    "/tienda",
+    "/catalogo",
+    "/productos",
     "/sobre-nosotros", 
+    "/nosotros",
     "/soporte", 
     "/terminos", 
+    "/terminos-y-condiciones",
     "/privacidad", 
+    "/aviso-de-privacidad",
+    "/cuenta",
+    "/legal",
     "/desarrollador", 
     "/sobre-el-desarrollador", 
+    "/sobre-el-desarrollador/articulos",
+    "/sobre-el-desarrollador/medios",
+    "/sobre-el-desarrollador/galeria",
+    "/desarrollador/medios",
+    "/desarrollador/galeria",
+    "/medios",
+    "/galeria",
+    "/multimedia",
+    "/prensa",
     "/fundador",
+    "/articulos",
     "/articulo/:id",
+    "/articulos/:id",
     "/desarrollador/articulo/:id",
     "/sobre-el-desarrollador/articulo/:id",
     "/blog/:id"
@@ -2697,30 +2686,72 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         const profile = getFounderProfileData();
         const articleId = req.params.id || (req.query.art as string) || (req.query.id as string);
 
-        let customTitle = "Fruti Go | Creado por Alberto Reyes Sandoval";
-        let customDescription = "Fruti Go es la plataforma oficial de delivery exprés, creada, desarrollada y dirigida por Alberto Reyes Sandoval.";
-        let canonicalUrl = `https://frutigo.com.mx${req.path}`;
+        let customTitle = "Fruti Go | Tienda en Línea de Frutas Frescas y Delivery Exprés";
+        let customDescription = "Fruti Go es la tienda oficial en línea de frutas y productos frescos con entrega a domicilio exprés en Guadalajara y México. Calidad premium, precios directos y envíos rápidos.";
+        let canonicalUrl = `https://frutigo.com.mx${req.path === "/" ? "" : req.path}`;
         let ogType = "website";
         let jsonLdScript = "";
 
         const pathTitles: Record<string, string> = {
-          "/sobre-nosotros": "Fruti Go | Sobre Nosotros - Creado y Dirigido por Alberto Reyes Sandoval",
-          "/soporte": "Fruti Go | Centro de Soporte - Dirigido por Alberto Reyes Sandoval",
-          "/terminos": "Fruti Go | Términos y Condiciones - Dirigido por Alberto Reyes Sandoval",
-          "/privacidad": "Fruti Go | Aviso de Privacidad - Dirigido por Alberto Reyes Sandoval",
+          "/": "Fruti Go | Tienda en Línea de Frutas Frescas y Delivery Exprés",
+          "/politicas": "Fruti Go | Políticas de Envío, Entrega y Garantía de Frescura",
+          "/politicas-de-envio": "Fruti Go | Políticas de Envío, Entrega y Garantía de Frescura",
+          "/tienda": "Fruti Go | Catálogo de Frutas y Verduras Frescas con Envío a Domicilio",
+          "/catalogo": "Fruti Go | Catálogo de Frutas y Verduras Frescas con Envío a Domicilio",
+          "/productos": "Fruti Go | Catálogo de Frutas y Verduras Frescas con Envío a Domicilio",
+          "/sobre-nosotros": "Fruti Go | Sobre Nosotros - Frutas Frescas y Delivery Exprés",
+          "/nosotros": "Fruti Go | Sobre Nosotros - Frutas Frescas y Delivery Exprés",
+          "/soporte": "Fruti Go | Centro de Ayuda y Soporte al Cliente",
+          "/terminos": "Fruti Go | Términos y Condiciones de Servicio y Compra",
+          "/terminos-y-condiciones": "Fruti Go | Términos y Condiciones de Servicio y Compra",
+          "/privacidad": "Fruti Go | Aviso de Privacidad y Tratamiento de Datos",
+          "/aviso-de-privacidad": "Fruti Go | Aviso de Privacidad y Tratamiento de Datos",
+          "/cuenta": "Fruti Go | Solicitud de Eliminación de Cuenta y Datos",
+          "/legal": "Fruti Go | Marco Legal, Términos y Políticas Oficiales",
           "/desarrollador": "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go",
           "/sobre-el-desarrollador": "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go",
-          "/fundador": "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go"
+          "/fundador": "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go",
+          "/sobre-el-desarrollador/articulos": "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go",
+          "/sobre-el-desarrollador/medios": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+          "/sobre-el-desarrollador/galeria": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+          "/desarrollador/medios": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+          "/desarrollador/galeria": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+          "/medios": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+          "/galeria": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+          "/multimedia": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+          "/prensa": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+          "/articulos": "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go"
         };
 
         const pathDescriptions: Record<string, string> = {
-          "/sobre-nosotros": "Historia y misión de Fruti Go, la plataforma de delivery exprés concebida, desarrollada y dirigida por Alberto Reyes Sandoval.",
-          "/soporte": "Atención al cliente y soporte técnico oficial de Fruti Go, supervisado directamente por Alberto Reyes Sandoval.",
-          "/terminos": "Términos y Condiciones de la plataforma Fruti Go, fundada, desarrollada y dirigida legalmente por Alberto Reyes Sandoval.",
-          "/privacidad": "Aviso de Privacidad y tratamiento de datos personales de Fruti Go, representada por Alberto Reyes Sandoval.",
-          "/desarrollador": "Perfil oficial de Alberto Reyes Sandoval, creador, desarrollador principal y fundador de la plataforma Fruti Go (https://frutigo.com.mx).",
-          "/sobre-el-desarrollador": "Perfil oficial de Alberto Reyes Sandoval, creador, desarrollador principal y fundador de la plataforma Fruti Go (https://frutigo.com.mx).",
-          "/fundador": "Perfil oficial de Alberto Reyes Sandoval, creador, desarrollador principal y fundador de la plataforma Fruti Go (https://frutigo.com.mx)."
+          "/": "Fruti Go es la tienda oficial en línea de frutas y productos frescos con entrega a domicilio exprés en Guadalajara y México. Calidad premium, precios directos y envíos rápidos.",
+          "/politicas": "Políticas oficiales de operación, cobertura geográfica, tiempos de entrega rápida, estándares de inocuidad y garantías de devolución en Fruti Go México.",
+          "/politicas-de-envio": "Políticas oficiales de operación, cobertura geográfica, tiempos de entrega rápida, estándares de inocuidad y garantías de devolución en Fruti Go México.",
+          "/tienda": "Explora nuestro catálogo en línea de frutas y verduras frescas. Realiza tu pedido con entrega rápida a domicilio en Guadalajara.",
+          "/catalogo": "Explora nuestro catálogo en línea de frutas y verduras frescas. Realiza tu pedido con entrega rápida a domicilio en Guadalajara.",
+          "/productos": "Explora nuestro catálogo en línea de frutas y verduras frescas. Realiza tu pedido con entrega rápida a domicilio en Guadalajara.",
+          "/sobre-nosotros": "Conoce Fruti Go: nuestra misión, frescura garantizada y tecnología de delivery para llevar productos del campo a tu hogar.",
+          "/nosotros": "Conoce Fruti Go: nuestra misión, frescura garantizada y tecnología de delivery para llevar productos del campo a tu hogar.",
+          "/soporte": "Atención al cliente, dudas frecuentes, facturación y soporte para tus pedidos en Fruti Go.",
+          "/terminos": "Términos y condiciones de uso, políticas de compra, envíos y devoluciones en la plataforma Fruti Go.",
+          "/terminos-y-condiciones": "Términos y condiciones de uso, políticas de compra, envíos y devoluciones en la plataforma Fruti Go.",
+          "/privacidad": "Aviso de Privacidad integral y políticas de protección de datos personales de los clientes de Fruti Go.",
+          "/aviso-de-privacidad": "Aviso de Privacidad integral y políticas de protección de datos personales de los clientes de Fruti Go.",
+          "/cuenta": "Formulario oficial y procedimiento transparente para solicitar la eliminación de cuenta y datos personales en Fruti Go.",
+          "/legal": "Información legal institucional, términos de servicio y políticas de privacidad de Fruti Go México.",
+          "/desarrollador": "Alberto Reyes Sandoval nació el 29 de julio de 1973 en Zamora, Michoacán. Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx). Trayectoria en ingeniería de software e ITESO.",
+          "/sobre-el-desarrollador": "Alberto Reyes Sandoval nació el 29 de julio de 1973 en Zamora, Michoacán. Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx). Trayectoria en ingeniería de software e ITESO.",
+          "/fundador": "Alberto Reyes Sandoval nació el 29 de julio de 1973 en Zamora, Michoacán. Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx). Trayectoria en ingeniería de software e ITESO.",
+          "/sobre-el-desarrollador/articulos": "Artículos y ensayos sobre arquitectura de software, desarrollo full-stack y tecnología por Alberto Reyes Sandoval.",
+          "/sobre-el-desarrollador/medios": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
+          "/sobre-el-desarrollador/galeria": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
+          "/desarrollador/medios": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
+          "/desarrollador/galeria": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
+          "/medios": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
+          "/galeria": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
+          "/multimedia": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
+          "/prensa": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
+          "/articulos": "Artículos y ensayos sobre arquitectura de software, desarrollo full-stack y tecnología por Alberto Reyes Sandoval."
         };
 
         // Check if an individual article is requested
@@ -2735,8 +2766,8 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           ogType = "article";
 
           const articleImages = Array.isArray(targetArticle.images) && targetArticle.images.length > 0
-            ? targetArticle.images.map((img: any) => img.url ? (img.url.startsWith("http") ? img.url : `https://frutigo.com.mx${img.url}`) : "https://frutigo.com.mx/logo.svg")
-            : ["https://frutigo.com.mx/alberto-reyes-sandoval-ceo-oficina.jpg"];
+            ? targetArticle.images.map((img: any) => img.url ? (img.url.startsWith("http") ? img.url : `https://frutigo.com.mx${img.url}`) : (profile.photo || "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd"))
+            : [profile.photo || "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd"];
 
           const articleJsonLdObj = {
             "@context": "https://schema.org",
@@ -2784,15 +2815,30 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           const ogImgMeta = `<meta property="og:image" content="${articleImages[0]}" />\n<meta name="twitter:image" content="${articleImages[0]}" />`;
           html = html.replace(/<meta property="og:image" content=".*?" \/>/i, ogImgMeta);
           html = html.replace(/<meta name="twitter:image" content=".*?" \/>/i, "");
-        } else if (req.path === "/desarrollador" || req.path === "/sobre-el-desarrollador" || req.path === "/fundador") {
-          customTitle = pathTitles[req.path] || "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go";
-          customDescription = profile.bioP1 || pathDescriptions[req.path];
+        } else if (
+          req.path === "/desarrollador" || 
+          req.path === "/sobre-el-desarrollador" || 
+          req.path === "/fundador" ||
+          req.path === "/medios" ||
+          req.path === "/galeria" ||
+          req.path === "/multimedia" ||
+          req.path === "/prensa" ||
+          req.path.endsWith("/medios") ||
+          req.path.endsWith("/galeria")
+        ) {
+          customTitle = pathTitles[req.path] || "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go";
+          customDescription = pathDescriptions[req.path] || profile.bioP1;
+          if (req.path.includes("medios") || req.path.includes("galeria") || req.path.includes("multimedia") || req.path.includes("prensa")) {
+            canonicalUrl = "https://frutigo.com.mx/medios";
+          }
 
           const devPhotos = Array.isArray(profile.photos) && profile.photos.length > 0
             ? profile.photos.filter((p: any) => Boolean(p && p.url)).map((p: any) => p.url.startsWith("http") ? p.url : `https://frutigo.com.mx${p.url}`)
             : [
-                "https://frutigo.com.mx/alberto-reyes-sandoval.jpg"
+                "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd"
               ];
+
+          const primaryDevPhoto = profile.photo || "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd";
 
           const developerJsonLdObj = {
             "@context": "https://schema.org",
@@ -2805,9 +2851,9 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 "description": profile.bioP1 || "Perfil oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx).",
                 "primaryImageOfPage": {
                   "@type": "ImageObject",
-                  "@id": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg#primaryimage",
-                  "url": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
-                  "contentUrl": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+                  "@id": `${primaryDevPhoto}#primaryimage`,
+                  "url": primaryDevPhoto,
+                  "contentUrl": primaryDevPhoto,
                   "width": "1200",
                   "height": "1600",
                   "caption": "Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go",
@@ -2818,7 +2864,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                   "@id": "https://frutigo.com.mx/#founder",
                   "name": "Alberto Reyes Sandoval",
                   "jobTitle": "Creador y Desarrollador de Fruti Go",
-                  "image": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+                  "image": primaryDevPhoto,
                   "worksFor": {
                     "@type": "Organization",
                     "@id": "https://frutigo.com.mx/#organization",
@@ -2830,8 +2876,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                     profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
                     "https://www.wikidata.org/wiki/Q140880376",
                     profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
-                    "https://github.com/reyamor44-star",
-                    "https://n9.cl/p8dxzb"
+                    "https://github.com/reyamor44-star"
                   ]
                 }
               },
@@ -2842,12 +2887,24 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 "givenName": "Alberto",
                 "familyName": "Reyes Sandoval",
                 "jobTitle": profile.role || "Creador, Desarrollador Principal y Fundador de Fruti Go",
-                "description": profile.bioP1,
+                "birthDate": "1973-07-29",
+                "birthPlace": {
+                  "@type": "Place",
+                  "name": "Zamora, Michoacán, México"
+                },
+                "homeLocation": {
+                  "@type": "Place",
+                  "name": "Guadalajara, Jalisco, México"
+                },
+                "alumniOf": {
+                  "@type": "EducationalOrganization",
+                  "name": "Instituto Tecnológico y de Estudios Superiores de Occidente (ITESO)"
+                },
+                "description": profile.bioP1 || "Alberto Reyes Sandoval nació el 29 de julio de 1973 en Zamora, Michoacán. Creador, Desarrollador Principal y Fundador de Fruti Go.",
                 "url": "https://frutigo.com.mx/sobre-el-desarrollador",
                 "email": profile.email ? `mailto:${profile.email}` : "mailto:frutigo33@gmail.com",
                 "image": [
-                  "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
-                  "https://n9.cl/p8dxzb",
+                  primaryDevPhoto,
                   ...devPhotos
                 ],
                 "worksFor": {
@@ -2860,8 +2917,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                   "https://www.wikidata.org/wiki/Q140880376",
                   profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
                   profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
-                  "https://github.com/reyamor44-star",
-                  "https://n9.cl/p8dxzb"
+                  "https://github.com/reyamor44-star"
                 ]
               },
               {
@@ -2997,10 +3053,10 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
           jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(developerJsonLdObj, null, 2)}\n</script>`;
 
-          const primaryDevPhoto = "https://frutigo.com.mx/alberto-reyes-sandoval.jpg";
-          const ogImagesMeta = `<meta property="og:image" content="${primaryDevPhoto}" />\n<meta property="og:image:url" content="${primaryDevPhoto}" />\n<meta property="og:image:secure_url" content="${primaryDevPhoto}" />\n<meta property="og:image:type" content="image/jpeg" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="1600" />\n<meta property="og:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
+          const ogDevPhoto = profile.photo || "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd";
+          const ogImagesMeta = `<meta property="og:image" content="${ogDevPhoto}" />\n<meta property="og:image:url" content="${ogDevPhoto}" />\n<meta property="og:image:secure_url" content="${ogDevPhoto}" />\n<meta property="og:image:type" content="image/jpeg" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="1600" />\n<meta property="og:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
 
-          const twitterImagesMeta = `<meta name="twitter:image" content="${primaryDevPhoto}" />\n<meta name="twitter:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
+          const twitterImagesMeta = `<meta name="twitter:image" content="${ogDevPhoto}" />\n<meta name="twitter:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
 
           html = html.replace(/<meta property="og:image" content=".*?" \/>/i, ogImagesMeta);
           html = html.replace(/<meta name="twitter:image" content=".*?" \/>/i, twitterImagesMeta);
@@ -3018,8 +3074,12 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         html = html.replace(/<link rel="canonical" href=".*?" \/>/i, `<link rel="canonical" href="${canonicalUrl}" />`);
 
         if (jsonLdScript) {
-          // Inject JSON-LD script before closing head tag
-          html = html.replace("</head>", `${jsonLdScript}\n</head>`);
+          // Replace base JSON-LD script with the route-specific JSON-LD script
+          if (/<script type="application\/ld\+json">[\s\S]*?<\/script>/i.test(html)) {
+            html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/i, jsonLdScript);
+          } else {
+            html = html.replace("</head>", `${jsonLdScript}\n</head>`);
+          }
         }
 
         return res.setHeader("Content-Type", "text/html").send(html);

@@ -29,6 +29,7 @@ export const UI_TRANSLATIONS: Record<Language, {
     terminos: string;
     privacidad: string;
     desarrollador: string;
+    medios: string;
     nosotros: string;
     soporte: string;
     cuenta: string;
@@ -85,6 +86,7 @@ export const UI_TRANSLATIONS: Record<Language, {
       terminos: "Términos y Condiciones",
       privacidad: "Privacidad",
       desarrollador: "Sobre el Desarrollador",
+      medios: "Medios y Galería",
       nosotros: "Sobre Nosotros",
       soporte: "Soporte",
       cuenta: "Eliminar Cuenta",
@@ -141,6 +143,7 @@ export const UI_TRANSLATIONS: Record<Language, {
       terminos: "Terms & Conditions",
       privacidad: "Privacy Notice",
       desarrollador: "About Developer",
+      medios: "Media & Gallery",
       nosotros: "About Us",
       soporte: "Support",
       cuenta: "Delete Account",
@@ -197,6 +200,7 @@ export const UI_TRANSLATIONS: Record<Language, {
       terminos: "Termos e Condições",
       privacidad: "Privacidade",
       desarrollador: "Sobre o Desenvolvedor",
+      medios: "Mídia e Galeria",
       nosotros: "Sobre Nós",
       soporte: "Suporte",
       cuenta: "Excluir Conta",

@@ -32,7 +32,8 @@ import {
   Copy,
   Check,
   Youtube,
-  ExternalLink
+  ExternalLink,
+  Sparkles
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -45,12 +46,13 @@ import AdminPanel from "./components/AdminPanel";
 import UnignorableTopBanner from "./components/UnignorableTopBanner";
 import { FounderProfileCard } from "./components/FounderProfileCard";
 import FundadorGaleriaPublica from "./components/FundadorGaleriaPublica";
+import { updateDynamicMetadata, SEO_SECTION_DATA } from "./utils/seo";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-type Section = "politicas" | "terminos" | "privacidad" | "desarrollador" | "nosotros" | "soporte" | "cuenta";
+type Section = "politicas" | "terminos" | "privacidad" | "desarrollador" | "medios" | "nosotros" | "soporte" | "cuenta";
 
 interface Policies {
   politicas: string;
@@ -65,6 +67,7 @@ const SECTION_LABELS: Record<Section, string> = {
   terminos: "Términos",
   privacidad: "Privacidad",
   desarrollador: "Sobre el Desarrollador",
+  medios: "Medios y Galería",
   nosotros: "Sobre Nosotros",
   soporte: "Soporte",
   cuenta: "Eliminar Cuenta",
@@ -75,6 +78,7 @@ const SECTION_ICONS: Record<Section, any> = {
   terminos: ShieldCheck,
   privacidad: Lock,
   desarrollador: UserCheck,
+  medios: Sparkles,
   nosotros: Info,
   soporte: LifeBuoy,
   cuenta: UserX,
@@ -282,34 +286,6 @@ export default function App() {
     return false;
   });
 
-  // Navigation & View Mode State
-  const [isDirectPhotoRoute] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      const path = window.location.pathname.toLowerCase().replace(/\/$/, "");
-      return (
-        path.includes("alberto-reyes-sandoval") ||
-        path.startsWith("/foto") ||
-        path.includes("foto-") ||
-        path.endsWith(".jpg") ||
-        path.endsWith(".jpeg") ||
-        path.endsWith(".png")
-      );
-    }
-    return false;
-  });
-
-  if (isDirectPhotoRoute) {
-    return (
-      <div className="fixed inset-0 bg-black flex flex-col items-center justify-center p-2 z-[999999] overflow-hidden select-none">
-        <img
-          src="/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg"
-          alt="Alberto Reyes Sandoval - Fundador, Creador y Desarrollador Principal de Fruti Go"
-          className="max-w-full max-h-screen object-contain rounded-lg shadow-2xl"
-        />
-      </div>
-    );
-  }
-
   const [activeView, setActiveView] = useState<ActiveView>(() => {
     if (typeof window !== "undefined") {
       const path = window.location.pathname.toLowerCase().replace(/\/$/, "");
@@ -340,7 +316,25 @@ export default function App() {
       if (
         path === "/fundador" ||
         path === "/desarrollador" ||
-        path === "/sobre-el-desarrollador"
+        path === "/sobre-el-desarrollador" ||
+        path === "/medios" ||
+        path === "/galeria" ||
+        path === "/multimedia" ||
+        path === "/prensa" ||
+        path.startsWith("/articulo") ||
+        path.startsWith("/articulos") ||
+        path.startsWith("/blog") ||
+        path.includes("medios") ||
+        path.includes("galeria") ||
+        hash.includes("medios") ||
+        hash.includes("galeria") ||
+        hash.includes("modulo-medios") ||
+        hash.includes("articulos") ||
+        hash.includes("articulo") ||
+        search.includes("medios") ||
+        search.includes("galeria") ||
+        search.includes("articulo") ||
+        search.includes("art=")
       ) {
         return "legal";
       }
@@ -440,13 +434,33 @@ export default function App() {
           path.endsWith("/desarrollador") ||
           path === "/sobre-el-desarrollador" ||
           path.endsWith("/sobre-el-desarrollador") ||
+          path === "/medios" ||
+          path.endsWith("/medios") ||
+          path.includes("medios") ||
+          path === "/galeria" ||
+          path.endsWith("/galeria") ||
+          path.includes("galeria") ||
+          path.includes("multimedia") ||
+          path.includes("prensa") ||
+          path.includes("articulo") ||
+          path.includes("articulos") ||
+          path.includes("blog") ||
           search.includes("fundador") ||
           search.includes("desarrollador") ||
+          search.includes("medios") ||
+          search.includes("galeria") ||
+          search.includes("articulo") ||
+          search.includes("art=") ||
           hash.includes("fundador") ||
-          hash.includes("desarrollador")
+          hash.includes("desarrollador") ||
+          hash.includes("medios") ||
+          hash.includes("galeria") ||
+          hash.includes("modulo-medios") ||
+          hash.includes("articulo") ||
+          hash.includes("articulos")
         ) {
           setActiveView("legal");
-          setCurrentSection("fundador");
+          setCurrentSection("desarrollador");
         } else if (
           path === "/cliente" ||
           path.endsWith("/cliente") ||
@@ -478,27 +492,73 @@ export default function App() {
         } else if (hasExplicitRoute) {
           setActiveView("legal");
           if (
-            isFrutgo ||
-            (!path.includes("politicas") &&
-             !path.includes("terminos") &&
-             !path.includes("privacidad") &&
-             !path.includes("nosotros") &&
-             !path.includes("soporte") &&
-             !path.includes("cuenta") &&
-             !hash.includes("politicas") &&
-             !hash.includes("terminos") &&
-             !hash.includes("privacidad") &&
-             !hash.includes("nosotros") &&
-             !hash.includes("soporte") &&
-             !hash.includes("cuenta") &&
-             !search.includes("section=politicas") &&
-             !search.includes("section=terminos") &&
-             !search.includes("section=privacidad") &&
-             !search.includes("section=nosotros") &&
-             !search.includes("section=soporte") &&
-             !search.includes("section=cuenta"))
+            path === "/desarrollador" ||
+            path.endsWith("/desarrollador") ||
+            path === "/sobre-el-desarrollador" ||
+            path.endsWith("/sobre-el-desarrollador") ||
+            path === "/fundador" ||
+            path.includes("articulo") ||
+            path.includes("articulos") ||
+            path.includes("blog") ||
+            hash.includes("desarrollador") ||
+            hash.includes("fundador") ||
+            hash.includes("articulo") ||
+            search.includes("section=desarrollador") ||
+            search.includes("articulo") ||
+            search.includes("art=")
           ) {
             setCurrentSection("desarrollador");
+          } else if (
+            path === "/medios" ||
+            path.endsWith("/medios") ||
+            path === "/galeria" ||
+            path.endsWith("/galeria") ||
+            path.includes("medios") ||
+            path.includes("galeria") ||
+            hash.includes("medios") ||
+            hash.includes("galeria") ||
+            search.includes("section=medios") ||
+            search.includes("medios")
+          ) {
+            setCurrentSection("medios");
+          } else if (
+            path === "/terminos" ||
+            path.endsWith("/terminos") ||
+            hash.includes("terminos") ||
+            search.includes("section=terminos")
+          ) {
+            setCurrentSection("terminos");
+          } else if (
+            path === "/privacidad" ||
+            path.endsWith("/privacidad") ||
+            hash.includes("privacidad") ||
+            search.includes("section=privacidad")
+          ) {
+            setCurrentSection("privacidad");
+          } else if (
+            path === "/sobre-nosotros" ||
+            path === "/nosotros" ||
+            path.endsWith("/nosotros") ||
+            hash.includes("nosotros") ||
+            search.includes("section=nosotros")
+          ) {
+            setCurrentSection("nosotros");
+          } else if (
+            path === "/soporte" ||
+            path.endsWith("/soporte") ||
+            hash.includes("soporte") ||
+            search.includes("section=soporte")
+          ) {
+            setCurrentSection("soporte");
+          } else if (
+            path === "/cuenta" ||
+            path.endsWith("/cuenta") ||
+            hash.includes("cuenta") ||
+            search.includes("section=cuenta")
+          ) {
+            setCurrentSection("cuenta");
+          } else {
+            setCurrentSection("politicas");
           }
         }
 
@@ -617,35 +677,59 @@ export default function App() {
         return "cuenta";
       }
       if (
+        path === "/medios" ||
+        path.endsWith("/medios") ||
+        path === "/galeria" ||
+        path.endsWith("/galeria") ||
+        path === "/multimedia" ||
+        path === "/prensa" ||
+        path.includes("medios") ||
+        path.includes("galeria")
+      ) {
+        return "medios";
+      }
+
+      if (
         path === "/desarrollador" ||
         path.endsWith("/desarrollador") ||
         path === "/sobre-el-desarrollador" ||
-        path.endsWith("/sobre-el-desarrollador")
+        path.endsWith("/sobre-el-desarrollador") ||
+        path === "/fundador" ||
+        path.includes("articulo") ||
+        path.includes("articulos") ||
+        path.includes("blog")
       ) {
         return "desarrollador";
       }
 
       const searchParams = new URLSearchParams(window.location.search);
       const sectionParam = searchParams.get("section") || searchParams.get("tab") || searchParams.get("page");
-      if (sectionParam && ["politicas", "terminos", "privacidad", "nosotros", "soporte", "cuenta", "desarrollador"].includes(sectionParam)) {
+      if (sectionParam && ["politicas", "terminos", "privacidad", "nosotros", "soporte", "cuenta", "desarrollador", "medios"].includes(sectionParam)) {
         return sectionParam as Section;
+      }
+      if (searchParams.has("medios") || searchParams.has("galeria")) {
+        return "medios";
+      }
+      if (searchParams.has("articulo") || searchParams.has("art")) {
+        return "desarrollador";
       }
       
       const hash = window.location.hash.toLowerCase();
       if (hash.includes("politicas")) return "politicas";
       if (hash.includes("terminos")) return "terminos";
       if (hash.includes("privacidad")) return "privacidad";
+      if (hash.includes("medios") || hash.includes("galeria") || hash.includes("modulo-medios")) return "medios";
       if (hash.includes("nosotros")) return "nosotros";
       if (hash.includes("soporte")) return "soporte";
       if (hash.includes("cuenta")) return "cuenta";
-      if (hash.includes("desarrollador")) return "desarrollador";
+      if (hash.includes("desarrollador") || hash.includes("fundador") || hash.includes("articulo") || hash.includes("articulos")) return "desarrollador";
 
       const saved = getSavedAppState();
       if (saved && saved.currentSection) {
         return saved.currentSection;
       }
     }
-    return "desarrollador";
+    return "politicas";
   });
 
   // Auto-save and synchronize navigation state + scroll position across minimize / reload
@@ -735,6 +819,8 @@ export default function App() {
     let sharePath = "";
     if (currentSection === "desarrollador") {
       sharePath = "/desarrollador";
+    } else if (currentSection === "medios") {
+      sharePath = "/medios";
     } else if (currentSection === "cuenta") {
       sharePath = "/cuenta";
     } else {
@@ -1237,6 +1323,17 @@ export default function App() {
       if (path === "/cuenta" || path.endsWith("/cuenta")) {
         targetSection = "cuenta";
       } else if (
+        path === "/medios" ||
+        path.endsWith("/medios") ||
+        path === "/galeria" ||
+        path.endsWith("/galeria") ||
+        path === "/multimedia" ||
+        path === "/prensa" ||
+        path.includes("medios") ||
+        path.includes("galeria")
+      ) {
+        targetSection = "medios";
+      } else if (
         path === "/desarrollador" ||
         path.endsWith("/desarrollador") ||
         path === "/sobre-el-desarrollador" ||
@@ -1247,12 +1344,15 @@ export default function App() {
         const searchParams = new URLSearchParams(window.location.search);
         const sectionParam = searchParams.get("section") || searchParams.get("tab") || searchParams.get("page");
         
-        if (sectionParam && ["politicas", "terminos", "privacidad", "nosotros", "soporte", "cuenta", "desarrollador"].includes(sectionParam)) {
+        if (sectionParam && ["politicas", "terminos", "privacidad", "nosotros", "soporte", "cuenta", "desarrollador", "medios"].includes(sectionParam)) {
           targetSection = sectionParam as Section;
+        } else if (searchParams.has("medios") || searchParams.has("galeria")) {
+          targetSection = "medios";
         } else {
           if (hash.includes("politicas")) targetSection = "politicas";
           else if (hash.includes("terminos")) targetSection = "terminos";
           else if (hash.includes("privacidad")) targetSection = "privacidad";
+          else if (hash.includes("medios") || hash.includes("galeria") || hash.includes("modulo-medios")) targetSection = "medios";
           else if (hash.includes("nosotros")) targetSection = "nosotros";
           else if (hash.includes("soporte")) targetSection = "soporte";
           else if (hash.includes("cuenta")) targetSection = "cuenta";
@@ -1273,15 +1373,33 @@ export default function App() {
     };
   }, []);
 
-  // Update Page Title dynamically for SEO & direct route navigation
+  // Update Metadata & Open Graph dynamically for SEO & direct route navigation
   useEffect(() => {
     if (typeof document !== "undefined") {
+      const pathname = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+
+      const isMediaTarget = (
+        pathname.includes("medios") ||
+        pathname.includes("galeria") ||
+        pathname.includes("multimedia") ||
+        pathname.includes("prensa") ||
+        hash.includes("medios") ||
+        hash.includes("galeria") ||
+        hash.includes("modulo-medios") ||
+        search.includes("medios") ||
+        search.includes("galeria")
+      );
+
       if (activeView === "tienda") {
-        document.title = "Fruti Go | Tienda en Línea y Catálogo";
-      } else if (currentSection === "desarrollador") {
-        document.title = "Fruti Go | Sobre el Desarrollador";
+        updateDynamicMetadata(SEO_SECTION_DATA.tienda);
+      } else if (currentSection === "desarrollador" && isMediaTarget) {
+        updateDynamicMetadata(SEO_SECTION_DATA.medios);
+      } else if (currentSection && SEO_SECTION_DATA[currentSection]) {
+        updateDynamicMetadata(SEO_SECTION_DATA[currentSection]);
       } else {
-        document.title = `Fruti Go Legal | ${SECTION_LABELS[currentSection] || "Políticas"}`;
+        updateDynamicMetadata(SEO_SECTION_DATA.politicas);
       }
     }
   }, [activeView, currentSection]);
@@ -1402,10 +1520,10 @@ export default function App() {
               <FrutiGoLogo customUrl={customLogo} className="w-10 h-10 sm:w-11 sm:h-11" />
               <div>
                 <h1 className="text-lg sm:text-xl font-black italic tracking-tighter text-brand-green select-none">
-                  Fruti Go Legal
+                  Fruti Go
                 </h1>
                 <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-medium">
-                  {UI_TRANSLATIONS[currentLang].headerSubtitle}
+                  {currentSection === "desarrollador" ? "Sobre el Desarrollador" : UI_TRANSLATIONS[currentLang].headerSubtitle}
                 </p>
               </div>
             </div>
@@ -1523,7 +1641,7 @@ export default function App() {
                   {(Object.keys(SECTION_LABELS) as Section[]).map((key) => {
                     const Icon = SECTION_ICONS[key];
                     const active = currentSection === key;
-                    const href = key === "desarrollador" ? "/desarrollador" : key === "cuenta" ? "/cuenta" : `/#${key}`;
+                    const href = key === "desarrollador" ? "/desarrollador" : key === "medios" ? "/medios" : key === "cuenta" ? "/cuenta" : `/#${key}`;
                     return (
                       <a
                         key={key}
@@ -1534,6 +1652,8 @@ export default function App() {
                             window.history.pushState(null, "", "/cuenta");
                           } else if (key === "desarrollador") {
                             window.history.pushState(null, "", "/desarrollador");
+                          } else if (key === "medios") {
+                            window.history.pushState(null, "", "/medios");
                           } else {
                             window.history.pushState(null, "", "/");
                             window.location.hash = key;
@@ -1576,7 +1696,7 @@ export default function App() {
                   {(Object.keys(SECTION_LABELS) as Section[]).map((key) => {
                     const Icon = SECTION_ICONS[key];
                     const active = currentSection === key;
-                    const href = key === "desarrollador" ? "/desarrollador" : key === "cuenta" ? "/cuenta" : `/#${key}`;
+                    const href = key === "desarrollador" ? "/desarrollador" : key === "medios" ? "/medios" : key === "cuenta" ? "/cuenta" : `/#${key}`;
                     return (
                       <a
                         key={key}
@@ -1587,6 +1707,8 @@ export default function App() {
                             window.history.pushState(null, "", "/cuenta");
                           } else if (key === "desarrollador") {
                             window.history.pushState(null, "", "/desarrollador");
+                          } else if (key === "medios") {
+                            window.history.pushState(null, "", "/medios");
                           } else {
                             window.history.pushState(null, "", "/");
                             window.location.hash = key;
@@ -1720,7 +1842,7 @@ export default function App() {
 
                   {currentSection === "cuenta" ? (
                     <AccountDeletionForm lang={currentLang} />
-                  ) : currentSection === "desarrollador" || currentSection === "fundador" ? (
+                  ) : currentSection === "desarrollador" || currentSection === "medios" || currentSection === "fundador" ? (
                     <FundadorGaleriaPublica />
                   ) : (
                     <div 
@@ -1735,7 +1857,7 @@ export default function App() {
                     />
                   )}
                   
-                  {currentSection !== "cuenta" && currentSection !== "desarrollador" && currentSection !== "fundador" && policies?.[currentSection] === "" && (
+                  {currentSection !== "cuenta" && currentSection !== "desarrollador" && currentSection !== "medios" && currentSection !== "fundador" && policies?.[currentSection] === "" && (
                     <div className="flex flex-col items-center justify-center h-full text-zinc-300 space-y-4">
                       <FileText className="w-16 h-16 opacity-20" />
                       <p>Contenido no disponible</p>
@@ -2039,7 +2161,7 @@ export default function App() {
           <div className="flex items-center gap-4 text-center md:text-left">
             <FrutiGoLogo customUrl={customLogo} className="w-14 h-14" />
             <div>
-              <h3 className="text-xl font-black text-brand-green italic tracking-tighter mb-0.5">Fruti Go Legal</h3>
+              <h3 className="text-xl font-black text-brand-green italic tracking-tighter mb-0.5">Fruti Go</h3>
               <p className="text-xs text-zinc-400">San Rafael 2790, Guadalajara, Jal. • México</p>
               <p className="text-[10px] text-zinc-400 mt-1 font-mono uppercase tracking-wider">© 2026 <StyledFrutiGo legal />. Todos los derechos reservados.</p>
             </div>
@@ -2057,7 +2179,23 @@ export default function App() {
               <span>YouTube Oficial</span>
               <ExternalLink className="w-3 h-3 opacity-80 shrink-0" />
             </a>
-            <nav aria-label="Enlaces institucionales y legales" className="grid grid-cols-2 gap-x-8 gap-y-2 text-xs font-bold text-zinc-500">
+            <nav aria-label="Enlaces institucionales y legales" className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-xs font-bold text-zinc-500">
+              <a 
+                href="/desarrollador" 
+                onClick={(e) => { e.preventDefault(); window.location.hash = "desarrollador"; setCurrentSection("desarrollador"); }} 
+                className="hover:text-brand-green transition-colors font-extrabold text-emerald-800"
+                title="Sobre el Desarrollador - Alberto Reyes Sandoval"
+              >
+                Desarrollador
+              </a>
+              <a 
+                href="/medios" 
+                onClick={(e) => { e.preventDefault(); window.location.hash = "medios"; setCurrentSection("medios"); }} 
+                className="hover:text-brand-green transition-colors"
+                title="Galería y Medios Oficiales"
+              >
+                Medios y Galería
+              </a>
               <a 
                 href="/sobre-nosotros" 
                 onClick={(e) => { e.preventDefault(); window.location.hash = "nosotros"; setCurrentSection("nosotros"); }} 

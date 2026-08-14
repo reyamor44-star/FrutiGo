@@ -16,7 +16,12 @@ import {
   Download,
   Smartphone,
   X,
-  ZoomIn
+  ZoomIn,
+  Calendar,
+  MapPin,
+  Home,
+  GraduationCap,
+  Heart
 } from "lucide-react";
 
 export interface FounderPhotoItem {
@@ -31,6 +36,10 @@ export interface FounderData {
   photo: string;
   photoUrl?: string;
   photos?: FounderPhotoItem[];
+  birthDate?: string;
+  birthPlace?: string;
+  residence?: string;
+  education?: string;
   articles?: any[];
   bioP1: string;
   bioP2: string;
@@ -44,38 +53,22 @@ export interface FounderData {
   email: string;
 }
 
-export const DEFAULT_FOUNDER_PHOTO = "/alberto-reyes-sandoval.jpg";
+export const DEFAULT_FOUNDER_PHOTO = "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd";
 
 export const DEFAULT_FOUNDER_DATA: FounderData = {
   name: "Alberto Reyes Sandoval",
   role: "Creador, Desarrollador Principal y Fundador de Fruti Go",
-  photo: "/alberto-reyes-sandoval.jpg",
-  photoUrl: "/alberto-reyes-sandoval.jpg",
+  birthDate: "29 de julio de 1973",
+  birthPlace: "Zamora, Michoacán, México",
+  residence: "Guadalajara, Jalisco, México",
+  education: "Diplomado en Desarrollo de Software (ITESO)",
+  photo: DEFAULT_FOUNDER_PHOTO,
+  photoUrl: DEFAULT_FOUNDER_PHOTO,
   photos: [
     {
-      url: "/alberto-reyes-sandoval.jpg",
-      caption: "Alberto Reyes Sandoval - Fundador y CEO (Foto Principal)",
-      description: "Fotografía oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y CEO de Fruti Go."
-    },
-    {
-      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786036709329_0lv8vs.jpg?alt=media&token=713ae710-4b15-4c75-aa7f-78d207840aaf",
-      caption: "Alberto Reyes Sandoval - Trayectoria y Formación ITESO",
-      description: "Fotografía oficial de respaldo 1 de Alberto Reyes Sandoval."
-    },
-    {
-      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786036709329_0lv8vs.jpg?alt=media&token=713ae710-4b15-4c75-aa7f-78d207840aaf",
-      caption: "Alberto Reyes Sandoval - Entorno Familiar y Valores",
-      description: "Fotografía de respaldo 2 de Alberto Reyes Sandoval."
-    },
-    {
-      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786036687729_lm6dez.jpg?alt=media&token=0ac22ada-54c8-45ba-88d0-3f16d07a9677",
-      caption: "Alberto Reyes Sandoval - Arquitectura Logística y B2B",
-      description: "Fotografía de respaldo 3 de Alberto Reyes Sandoval."
-    },
-    {
-      url: "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786036722557_49cq0x.jpg?alt=media&token=cd5c973f-5bab-4f12-a638-93bda11f82a5",
-      caption: "Alberto Reyes Sandoval - Expansión y Liderazgo Tecnológico",
-      description: "Fotografía de respaldo 4 de Alberto Reyes Sandoval."
+      url: DEFAULT_FOUNDER_PHOTO,
+      caption: "Alberto Reyes Sandoval - Creador, Desarrollador Principal y Fundador de Fruti Go",
+      description: "Fotografía oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go."
     }
   ],
   bioP1: "Alberto Reyes Sandoval nació en Zamora, Michoacán, el 29 de julio de 1973, hijo de María de Jesús Sandoval Mejía y Alberto Reyes Ibarra (q. e. p. d.), y hermano de María de los Ángeles Reyes Sandoval y Alfonso Reyes Sandoval (q. e. p. d.). Formó su familia junto a su esposa María Alejandra García Morales, sus hijas Valeria y Alejandra Reyes García, y su nieto Valentín Chaires Reyes. Actualmente radica en Guadalajara, Jalisco.",
@@ -227,7 +220,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
   if (schemaImageObjects.length === 0) {
     schemaImageObjects.push({
       "@type": "ImageObject",
-      "url": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+      "url": DEFAULT_FOUNDER_PHOTO,
       "name": "Alberto Reyes Sandoval - Fundador y CEO Fruti Go",
       "caption": "Alberto Reyes Sandoval, Fundador, Creador y CEO de Fruti Go.",
       "description": "Fotografía oficial de Alberto Reyes Sandoval, Creador y CEO de Fruti Go."
@@ -349,6 +342,49 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                 <Code2 className="w-4 h-4 text-emerald-600" />
                 {founderData.role}
               </p>
+            </div>
+
+            {/* Ficha Biográfica Estructurada con Fecha de Nacimiento destacada */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-3.5 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl text-xs sm:text-sm">
+              <div className="flex items-center gap-2 text-zinc-800">
+                <div className="w-7 h-7 rounded-lg bg-emerald-100/80 flex items-center justify-center text-emerald-700 shrink-0">
+                  <Calendar className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-black tracking-wider text-emerald-800 block">Fecha de Nacimiento</span>
+                  <span className="font-bold text-zinc-900" itemProp="birthDate">29 de julio de 1973</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-zinc-800">
+                <div className="w-7 h-7 rounded-lg bg-emerald-100/80 flex items-center justify-center text-emerald-700 shrink-0">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-black tracking-wider text-emerald-800 block">Lugar de Nacimiento</span>
+                  <span className="font-bold text-zinc-900" itemProp="birthPlace">Zamora, Michoacán</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-zinc-800">
+                <div className="w-7 h-7 rounded-lg bg-emerald-100/80 flex items-center justify-center text-emerald-700 shrink-0">
+                  <Home className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-black tracking-wider text-emerald-800 block">Residencia Actual</span>
+                  <span className="font-bold text-zinc-900" itemProp="homeLocation">Guadalajara, Jalisco</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-zinc-800">
+                <div className="w-7 h-7 rounded-lg bg-emerald-100/80 flex items-center justify-center text-emerald-700 shrink-0">
+                  <GraduationCap className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-black tracking-wider text-emerald-800 block">Formación Profesional</span>
+                  <span className="font-bold text-zinc-900" itemProp="alumniOf">Diplomado en Desarrollo de Software (ITESO)</span>
+                </div>
+              </div>
             </div>
 
 
@@ -529,6 +565,29 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             </div>
             <ExternalLink className="w-4 h-4 opacity-80 shrink-0 text-amber-300" />
           </a>
+
+          {/* Direct Link to Media & Gallery Module */}
+          <a
+            href="#modulo-medios"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("modulo-medios");
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+                window.history.pushState(null, "", "/medios");
+              }
+            }}
+            className="w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-950 font-bold py-3 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-xs transition-all active:scale-98 border border-emerald-300/80 group/medios cursor-pointer"
+            title="Ver Galería de Fotos, Videos y Archivo Multimedia Oficial"
+          >
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-5 h-5 text-emerald-700 group-hover/medios:scale-110 transition-transform shrink-0" />
+              <span>Galería y Archivo Multimedia Oficial</span>
+            </div>
+            <span className="text-[11px] font-extrabold text-emerald-800 bg-white px-2.5 py-1 rounded-lg border border-emerald-200 shadow-xs">
+              /medios
+            </span>
+          </a>
         </div>
 
         {/* Metadatos Estructurados Schema.org para Indexación de Wikidata, Autoridad de Marca e Imágenes */}
@@ -546,9 +605,9 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   "description": "Perfil oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx).",
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "@id": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg#primaryimage",
-                    "url": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
-                    "contentUrl": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+                    "@id": `${DEFAULT_FOUNDER_PHOTO}#primaryimage`,
+                    "url": DEFAULT_FOUNDER_PHOTO,
+                    "contentUrl": DEFAULT_FOUNDER_PHOTO,
                     "width": "1200",
                     "height": "1600",
                     "caption": "Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go",
@@ -559,7 +618,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                     "@id": "https://frutigo.com.mx/#founder",
                     "name": "Alberto Reyes Sandoval",
                     "jobTitle": "Creador y Desarrollador de Fruti Go",
-                    "image": "https://frutigo.com.mx/alberto-reyes-sandoval.jpg",
+                    "image": DEFAULT_FOUNDER_PHOTO,
                     "worksFor": {
                       "@type": "Organization",
                       "@id": "https://frutigo.com.mx/#organization",

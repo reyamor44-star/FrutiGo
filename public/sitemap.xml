@@ -4,36 +4,13 @@
   <!-- Página Principal -->
   <url>
     <loc>https://frutigo.com.mx/</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg</image:loc>
+      <image:loc>https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&amp;token=e622e4ce-4b10-486d-a296-45690f0f4ccd</image:loc>
       <image:title>Alberto Reyes Sandoval - Fundador, Creador y Desarrollador de Fruti Go</image:title>
-
       <image:caption>Fotografía oficial de Alberto Reyes Sandoval, Fundador y Desarrollador Principal de Fruti Go.</image:caption>
-    </image:image>
-  </url>
-
-  <!-- Imagen Oficial del Fundador y Desarrollador -->
-  <url>
-    <loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg</loc>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg</image:loc>
-      <image:title>Alberto Reyes Sandoval - Fundador y Desarrollador de Fruti Go</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador</loc>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://frutigo.com.mx/alberto-reyes-sandoval-frutigo-fundador-desarrollador.jpg</image:loc>
-      <image:title>Alberto Reyes Sandoval - Fundador y Desarrollador de Fruti Go</image:title>
     </image:image>
   </url>
 
@@ -69,14 +46,103 @@
   <!-- Páginas del Desarrollador y Fundador - Alberto Reyes Sandoval -->
   <url>
     <loc>https://frutigo.com.mx/desarrollador</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Módulo de Medios y Galería Oficial -->
+  <url>
+    <loc>https://frutigo.com.mx/medios</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&amp;token=e622e4ce-4b10-486d-a296-45690f0f4ccd</image:loc>
+      <image:title>Galería y Archivo Multimedia Oficial - Alberto Reyes Sandoval</image:title>
+      <image:caption>Fotografías y videos del Fundador y Desarrollador Principal de Fruti Go.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://frutigo.com.mx/galeria</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador/medios</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Sección de Artículos y Ensayos Técnicos -->
+  <url>
+    <loc>https://frutigo.com.mx/articulos</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador#articulos</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Artículos Individuales para Indexación Directa -->
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador#articulo-art-1786708357832</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&amp;token=e622e4ce-4b10-486d-a296-45690f0f4ccd</image:loc>
+      <image:title>El Manifiesto de Fruti Go: Liderazgo humano, tecnología mexicana y justicia para el motor del delivery</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador#articulo-art-1786687634607</loc>
+    <lastmod>2026-08-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://frutigo.com.mx/sobre-el-desarrollador</loc>
-    <lastmod>2026-08-06</lastmod>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador#articulo-art-1786686273961</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador#articulo-art-1786046009544</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador#articulo-art-1</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador#articulo-art-2</loc>
+    <lastmod>2026-08-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

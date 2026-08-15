@@ -366,6 +366,47 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   let memoryFounderProfile: any = null;
 
+  function getArticleSortTime(art: any): number {
+    if (!art) return 0;
+    if (typeof art.createdAt === "number" && !isNaN(art.createdAt) && art.createdAt > 0) return art.createdAt;
+    if (typeof art.updatedAt === "number" && !isNaN(art.updatedAt) && art.updatedAt > 0) return art.updatedAt;
+    if (typeof art.id === "string") {
+      const match = art.id.match(/\d{10,15}/);
+      if (match) {
+        const parsed = parseInt(match[0], 10);
+        if (!isNaN(parsed) && parsed > 0) return parsed;
+      }
+    }
+    if (typeof art.date === "string" && art.date.trim()) {
+      const raw = art.date.trim().toLowerCase();
+      const months: Record<string, number> = {
+        enero: 0, feb: 1, febrero: 1, mar: 2, marzo: 2, abr: 3, abril: 3,
+        may: 4, mayo: 4, jun: 5, junio: 5, jul: 6, julio: 6, ago: 7, agosto: 7,
+        sep: 8, sept: 8, septiembre: 8, oct: 9, octubre: 9, nov: 10, noviembre: 10,
+        dic: 11, diciembre: 11,
+      };
+      for (const [mName, mIdx] of Object.entries(months)) {
+        if (raw.includes(mName)) {
+          const dayMatch = raw.match(/\b(\d{1,2})\b/);
+          const yearMatch = raw.match(/\b(20\d{2})\b/);
+          const day = dayMatch ? parseInt(dayMatch[1], 10) : 1;
+          const year = yearMatch ? parseInt(yearMatch[1], 10) : 2026;
+          return new Date(year, mIdx, day).getTime();
+        }
+      }
+      const parsedDirect = Date.parse(art.date);
+      if (!isNaN(parsedDirect)) return parsedDirect;
+    }
+    if (art.id === "art-1") return 1785900000000;
+    if (art.id === "art-2") return 1785640000000;
+    return 0;
+  }
+
+  function sortArticlesNewestFirst(articles: any[]): any[] {
+    if (!Array.isArray(articles)) return [];
+    return [...articles].sort((a, b) => getArticleSortTime(b) - getArticleSortTime(a));
+  }
+
   function getFounderProfileData() {
     let data: any = memoryFounderProfile;
 
@@ -419,7 +460,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     
     // Ensure articles array exists and combines default articles if needed
     if (!Array.isArray(merged.articles) || merged.articles.length === 0) {
-      merged.articles = DEFAULT_FOUNDER_SERVER_DATA.articles;
+      merged.articles = sortArticlesNewestFirst(DEFAULT_FOUNDER_SERVER_DATA.articles);
     } else {
       // Guarantee default articles art-1 and art-2 are present if user hasn't deleted them
       const defaultIds = ["art-1", "art-2"];
@@ -429,6 +470,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           if (defArt) merged.articles.push(defArt);
         }
       });
+      merged.articles = sortArticlesNewestFirst(merged.articles);
     }
 
     memoryFounderProfile = merged;
@@ -492,12 +534,12 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
       data.photos = [];
     }
 
-    // Preserve articles
+    // Preserve and sort articles newest first
     if (Array.isArray(data.articles)) {
-      data.articles = data.articles;
+      data.articles = sortArticlesNewestFirst(data.articles);
     }
 
-    memoryFounderProfile = { ...DEFAULT_FOUNDER_SERVER_DATA, ...data };
+    memoryFounderProfile = { ...DEFAULT_FOUNDER_SERVER_DATA, ...data, articles: sortArticlesNewestFirst(data.articles || []) };
 
     try {
       fs.writeFileSync(FOUNDER_PROFILE_FILE, JSON.stringify(memoryFounderProfile, null, 2));
@@ -611,7 +653,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
       // Sobrescribir/Añadir desde Firestore (Firestore manda)
       remoteArticles.forEach((a: any) => { if (a && a.id) articleMap.set(a.id, a); });
 
-      const mergedArticles = Array.from(articleMap.values());
+      const mergedArticles = sortArticlesNewestFirst(Array.from(articleMap.values()));
       memoryFounderProfile.articles = mergedArticles;
       try {
         fs.writeFileSync(FOUNDER_PROFILE_FILE, JSON.stringify(memoryFounderProfile, null, 2));
@@ -642,7 +684,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
   app.get("/api/founder/articles", (req, res) => {
     try {
       const profile = getFounderProfileData();
-      res.json(profile.articles || []);
+      res.json(sortArticlesNewestFirst(profile.articles || []));
     } catch (err) {
       res.status(500).json({ error: "Error al leer artículos del desarrollador" });
     }
@@ -2823,12 +2865,17 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           req.path === "/galeria" ||
           req.path === "/multimedia" ||
           req.path === "/prensa" ||
+          req.path === "/articulos" ||
+          req.path.startsWith("/articulos") ||
+          req.path.endsWith("/articulos") ||
           req.path.endsWith("/medios") ||
           req.path.endsWith("/galeria")
         ) {
-          customTitle = pathTitles[req.path] || "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go";
-          customDescription = pathDescriptions[req.path] || profile.bioP1;
-          if (req.path.includes("medios") || req.path.includes("galeria") || req.path.includes("multimedia") || req.path.includes("prensa")) {
+          customTitle = pathTitles[req.path] || (req.path.includes("articulos") ? "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go" : "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go");
+          customDescription = pathDescriptions[req.path] || (req.path.includes("articulos") ? "Artículos oficiales, publicaciones técnicas y ensayos sobre arquitectura de software, logística B2B y tecnología en Fruti Go por Alberto Reyes Sandoval." : profile.bioP1);
+          if (req.path.includes("articulos")) {
+            canonicalUrl = "https://frutigo.com.mx/articulos";
+          } else if (req.path.includes("medios") || req.path.includes("galeria") || req.path.includes("multimedia") || req.path.includes("prensa")) {
             canonicalUrl = "https://frutigo.com.mx/medios";
           }
 

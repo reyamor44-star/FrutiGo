@@ -14,8 +14,10 @@ import {
   MessageCircle,
   ExternalLink,
   Send,
-  Bookmark
+  Bookmark,
+  Link as LinkIcon
 } from "lucide-react";
+import { sortArticlesNewestFirst } from "../utils/articleUtils";
 
 export interface ArticleImage {
   url: string;
@@ -47,6 +49,15 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("todos");
   const [activeShareModal, setActiveShareModal] = useState<FounderArticle | null>(null);
+  const [copiedSectionLink, setCopiedSectionLink] = useState(false);
+
+  const handleCopySectionLink = () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText("https://frutigo.com.mx/articulos");
+      setCopiedSectionLink(true);
+      setTimeout(() => setCopiedSectionLink(false), 3000);
+    }
+  };
 
   const loadArticles = async () => {
     try {
@@ -112,7 +123,7 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
         }
       });
 
-      const mergedArticles = Array.from(articleMap.values());
+      const mergedArticles = sortArticlesNewestFirst(Array.from(articleMap.values()));
 
       if (mergedArticles.length > 0) {
         setArticles(mergedArticles);
@@ -309,14 +320,17 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
     return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
   };
 
+  // Sort all articles newest first
+  const sortedArticles = sortArticlesNewestFirst(articles);
+
   // Get categories
   const categories = Array.from(
-    new Set(articles.map((a) => a.category).filter(Boolean))
+    new Set(sortedArticles.map((a) => a.category).filter(Boolean))
   ) as string[];
 
   const filteredArticles = activeCategory === "todos" 
-    ? articles 
-    : articles.filter((a) => a.category === activeCategory);
+    ? sortedArticles 
+    : sortedArticles.filter((a) => a.category === activeCategory);
 
   if (loading && articles.length === 0) {
     return (
@@ -338,9 +352,33 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
       <div className="bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-8 border border-zinc-200/80 shadow-xs sm:shadow-sm space-y-4 sm:space-y-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-4 sm:pb-6 border-b border-zinc-100">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-100 text-emerald-950 text-[10px] sm:text-xs font-black uppercase tracking-wider mb-2 sm:mb-3">
-              <BookOpen className="w-3.5 h-3.5 text-emerald-700" />
-              Publicaciones & Artículos Técnicos
+            <div className="flex flex-wrap items-center gap-2 mb-2 sm:mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-100 text-emerald-950 text-[10px] sm:text-xs font-black uppercase tracking-wider">
+                <BookOpen className="w-3.5 h-3.5 text-emerald-700" />
+                Publicaciones & Artículos Técnicos
+              </div>
+              <button
+                type="button"
+                onClick={handleCopySectionLink}
+                title="Copiar enlace directo https://frutigo.com.mx/articulos para indexar en Search Console o compartir"
+                className={`inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold transition-all border cursor-pointer ${
+                  copiedSectionLink
+                    ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
+                    : "bg-zinc-100 text-zinc-700 hover:text-emerald-700 hover:bg-emerald-50 border-zinc-200"
+                }`}
+              >
+                {copiedSectionLink ? (
+                  <>
+                    <Check className="w-3.5 h-3.5" />
+                    <span>¡Enlace copiado!</span>
+                  </>
+                ) : (
+                  <>
+                    <LinkIcon className="w-3.5 h-3.5 text-zinc-500" />
+                    <span>frutigo.com.mx/articulos</span>
+                  </>
+                )}
+              </button>
             </div>
             <h2 className="text-xl sm:text-4xl font-black text-zinc-900 tracking-tight">
               Artículos y Ensayos / <span className="text-emerald-700">Alberto Reyes Sandoval</span>

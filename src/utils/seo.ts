@@ -112,6 +112,17 @@ export const SEO_SECTION_DATA: Record<string, SeoConfig> = {
     image: DEFAULT_FOUNDER_IMAGE,
     imageAlt: "Galería y Medios Oficiales de Alberto Reyes Sandoval - Fruti Go",
   },
+  articulos: {
+    title: "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go",
+    description:
+      "Artículos oficiales, publicaciones técnicas y ensayos sobre arquitectura de software, logística B2B y tecnología en Fruti Go por Alberto Reyes Sandoval.",
+    keywords:
+      "articulos Fruti Go, publicaciones Alberto Reyes Sandoval, blog Alberto Reyes Sandoval, arquitectura software Fruti Go, ensayos tecnologia Alberto Reyes Sandoval, Alberto Reyes Sandoval",
+    canonicalUrl: "https://frutigo.com.mx/articulos",
+    ogType: "website",
+    image: DEFAULT_FOUNDER_IMAGE,
+    imageAlt: "Artículos y Publicaciones Técnicas - Alberto Reyes Sandoval Fruti Go",
+  },
   galeria: {
     title: "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
     description:

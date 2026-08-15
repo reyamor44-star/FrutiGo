@@ -23,6 +23,7 @@ import {
   GraduationCap,
   Heart
 } from "lucide-react";
+import { sortArticlesNewestFirst } from "../utils/articleUtils";
 
 export interface FounderPhotoItem {
   url: string;
@@ -129,7 +130,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
               prev.articles.forEach((art: any) => { if (art && art.id) mergedArticlesMap.set(art.id, art); });
             }
 
-            const mergedArticles = Array.from(mergedArticlesMap.values());
+            const mergedArticles = sortArticlesNewestFirst(Array.from(mergedArticlesMap.values()));
             const mergedPhotos = Array.isArray(data.photos) && data.photos.length > 0 ? data.photos : (Array.isArray(prev.photos) ? prev.photos : []);
 
             const combined = {

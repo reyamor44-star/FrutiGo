@@ -43,6 +43,7 @@ import {
 import { Product, TopBannerData, OpenPayConfig, OrderSummary, PdfConfig, ClientProfile } from "../types";
 import { DEFAULT_PRODUCTS } from "../data/defaultStoreData";
 import { DEFAULT_CLIENTS } from "../data/defaultClients";
+import { sortArticlesNewestFirst } from "../utils/articleUtils";
 import { generateOrderPDF, generateCFDIPDF, downloadCFDIXML, generatePriceListPDF } from "../utils/pdfGenerator";
 import { SAT_PRODUCT_CODES, SAT_UNITS, SAT_TAX_OPTIONS, SAT_OBJETO_IMP_OPTIONS } from "../data/satProductCodes";
 import { getProductWhiteBgImage } from "../utils/productImages";
@@ -143,7 +144,7 @@ export default function AdminPanel({
               prev.articles.forEach((art: any) => { if (art && art.id) mergedArticlesMap.set(art.id, art); });
             }
             
-            const mergedArticles = Array.from(mergedArticlesMap.values());
+            const mergedArticles = sortArticlesNewestFirst(Array.from(mergedArticlesMap.values()));
             const mergedPhotos = Array.isArray(data.photos) && data.photos.length > 0 ? data.photos : (Array.isArray(prev.photos) ? prev.photos : []);
 
             const combined = {
@@ -4854,9 +4855,11 @@ export default function AdminPanel({
                     existingArticles.unshift(articleToSave);
                   }
 
+                  const sortedUpdatedArticles = sortArticlesNewestFirst(existingArticles);
+
                   const updatedForm = {
                     ...founderForm,
-                    articles: existingArticles
+                    articles: sortedUpdatedArticles
                   };
 
                   setFounderForm(updatedForm);

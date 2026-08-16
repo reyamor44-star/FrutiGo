@@ -193,8 +193,12 @@ export default function FundadorGaleriaPublica() {
             {filteredItems.map((item) => (
               <div
                 key={item.id}
-                onClick={() => setLightboxItem(item)}
-                className="group relative bg-white rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-xl transition duration-300 cursor-pointer flex flex-col justify-between"
+                onClick={() => {
+                  if (item.type !== "image") {
+                    setLightboxItem(item);
+                  }
+                }}
+                className="group relative bg-white rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between"
               >
                 {/* Media Container */}
                 <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-transparent flex items-center justify-center p-1 rounded-t-2xl">

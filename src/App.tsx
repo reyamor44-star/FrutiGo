@@ -43,8 +43,6 @@ import { Product, CartItem, TopBannerData, ActiveView, OpenPayConfig, OrderSumma
 import { DEFAULT_PRODUCTS, DEFAULT_BANNER } from "./data/defaultStoreData";
 import OnlineStore from "./components/OnlineStore";
 import AdminPanel from "./components/AdminPanel";
-import UnignorableTopBanner from "./components/UnignorableTopBanner";
-import AppDownloadBanner from "./components/AppDownloadBanner";
 import { FounderProfileCard } from "./components/FounderProfileCard";
 import FundadorGaleriaPublica from "./components/FundadorGaleriaPublica";
 import { updateDynamicMetadata, SEO_SECTION_DATA } from "./utils/seo";
@@ -1620,23 +1618,6 @@ export default function App() {
       </header>
 
       <main className="max-w-7xl mx-auto px-1.5 sm:px-6 py-2.5 sm:py-8">
-        {/* Banner de Descarga Oficial de la App - Paquetería y Taxi Pet */}
-        {!isAdmin && (
-          <AppDownloadBanner />
-        )}
-
-        {/* Unignorable Top Banner (Hidden on frutgo.com.mx) */}
-        {!isAdmin && !isFrutgoDomain && (
-          <UnignorableTopBanner
-            bannerData={topBanner}
-            currentLang={currentLang}
-            onClickBanner={() => {
-              fetchServerProducts();
-              setActiveView("tienda");
-            }}
-          />
-        )}
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-12">
           
           {/* Navigation Rail - Responsive Mobile Horizontal Scroll & Desktop Sticky Sidebar */}

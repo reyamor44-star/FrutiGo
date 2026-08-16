@@ -24,6 +24,7 @@ import {
   Heart
 } from "lucide-react";
 import { sortArticlesNewestFirst } from "../utils/articleUtils";
+import ExpandableImage from "./ExpandableImage";
 
 export interface FounderPhotoItem {
   url: string;
@@ -174,7 +175,6 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
   }, [propData]);
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [lightboxPhoto, setLightboxPhoto] = useState<FounderPhotoItem | null>(null);
 
   useEffect(() => {
     setImageError(false);
@@ -266,32 +266,24 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             
             {/* Dedicated Photo Section */}
             <div className="w-full flex flex-col items-center space-y-3">
-              {/* Photo Frame Container - Linked to Lightbox & Official Photo URL */}
+              {/* Photo Frame Container - Linked to In-Place Expandable Image */}
               <div className="relative group/photo w-full max-w-xs flex flex-col items-center">
                 <div
-                  onClick={() => {
-                    const mainPhotoItem = photosList[0] || {
-                      url: photoUrl,
-                      caption: "Alberto Reyes Sandoval - Fundador, Creador y CEO de Fruti Go",
-                      description: "Fotografía oficial de Alberto Reyes Sandoval."
-                    };
-                    setLightboxPhoto(mainPhotoItem);
-                  }}
-                  className="w-56 sm:w-64 min-h-[260px] max-h-[380px] rounded-2xl sm:rounded-3xl bg-transparent border-2 sm:border-4 border-emerald-200 shadow-md p-1 sm:p-2 relative overflow-hidden flex items-center justify-center cursor-pointer group/link hover:border-emerald-500 transition-all"
-                  title="Haga clic para ampliar la Fotografía Oficial de Alberto Reyes Sandoval"
+                  className="w-56 sm:w-64 min-h-[260px] max-h-[380px] rounded-2xl sm:rounded-3xl bg-transparent border-2 sm:border-4 border-emerald-200 shadow-md p-1 sm:p-2 relative overflow-hidden flex items-center justify-center group/link hover:border-emerald-500 transition-all"
                 >
                   {hasPhoto ? (
-                    <img
+                    <ExpandableImage
                       src={photoUrl}
                       alt="Alberto Reyes Sandoval - Fotografía Oficial"
+                      caption="Alberto Reyes Sandoval - Fundador, Creador y Desarrollador de Fruti Go"
                       width={1200}
                       height={1600}
-                      title="Alberto Reyes Sandoval - Foto oficial de perfil (Haga clic para ampliar)"
+                      title="Toca para ampliar la foto oficial"
                       itemProp="image"
                       loading="eager"
                       decoding="async"
                       onError={() => setImageError(true)}
-                      className="w-full h-full rounded-xl sm:rounded-2xl object-contain transition duration-300 group-hover/photo:scale-105"
+                      className="w-full h-full rounded-xl sm:rounded-2xl object-contain"
                     />
                   ) : (
                     <div className="w-full h-64 rounded-xl sm:rounded-2xl bg-zinc-100 border border-zinc-200 flex flex-col items-center justify-center p-6 text-center space-y-3">
@@ -309,24 +301,6 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   <ShieldCheck className="w-5 h-5 font-black" />
                 </div>
               </div>
-
-              {/* Direct Link to Official Photo for Indexing & Instant Access */}
-              <button
-                type="button"
-                onClick={() => {
-                  const mainPhotoItem = photosList[0] || {
-                    url: photoUrl,
-                    caption: "Alberto Reyes Sandoval - Fundador, Creador y CEO de Fruti Go",
-                    description: "Fotografía oficial de Alberto Reyes Sandoval."
-                  };
-                  setLightboxPhoto(mainPhotoItem);
-                }}
-                className="mt-1 inline-flex items-center justify-center gap-2 px-3.5 py-2 bg-emerald-800 hover:bg-brand-green text-white rounded-xl text-xs font-extrabold transition-all shadow-xs active:scale-95 border border-emerald-700 cursor-pointer"
-                title="Ver Fotografía Oficial en Alta Resolución"
-              >
-                <ZoomIn className="w-3.5 h-3.5 text-brand-yellow shrink-0" />
-                <span>Ver Fotografía Oficial (Alta Resolución)</span>
-              </button>
             </div>
 
           </div>
@@ -427,13 +401,14 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                           {para}
                         </p>
 
-                        {/* Embedded Support Photo - SMALL THUMBNAIL ONLY, NON-CLICKABLE, NO TEXT */}
+                        {/* Embedded Support Photo - Expandable on tap */}
                         {associatedPhoto && (
                           <div className="my-3 flex justify-center">
-                            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-zinc-950 border border-emerald-300/70 p-1 shadow-xs pointer-events-none select-none flex items-center justify-center shrink-0">
-                              <img
+                            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-zinc-950 border border-emerald-300/70 p-1 shadow-xs flex items-center justify-center shrink-0">
+                              <ExpandableImage
                                 src={associatedPhoto.url}
-                                alt={`Alberto Reyes Sandoval - Miniatura ${pIdx + 2}`}
+                                alt={associatedPhoto.caption || `Alberto Reyes Sandoval - Foto ${pIdx + 2}`}
+                                caption={associatedPhoto.caption || "Alberto Reyes Sandoval"}
                                 className="w-full h-full object-contain rounded-lg"
                                 loading="lazy"
                               />
@@ -448,10 +423,11 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   {supportPhotos.length > bioParagraphs.length && (
                     <div className="flex flex-wrap gap-3 justify-center pt-2">
                       {supportPhotos.slice(bioParagraphs.length).map((photo, extraIdx) => (
-                        <div key={extraIdx} className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-zinc-950 border border-emerald-300/70 p-1 shadow-xs pointer-events-none select-none flex items-center justify-center shrink-0">
-                          <img
+                        <div key={extraIdx} className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-zinc-950 border border-emerald-300/70 p-1 shadow-xs flex items-center justify-center shrink-0">
+                          <ExpandableImage
                             src={photo.url}
-                            alt="Alberto Reyes Sandoval - Miniatura"
+                            alt={photo.caption || "Alberto Reyes Sandoval - Foto"}
+                            caption={photo.caption || "Alberto Reyes Sandoval"}
                             className="w-full h-full object-contain rounded-lg"
                             loading="lazy"
                           />
@@ -487,16 +463,17 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             <span>Enlaces Oficiales y Canales de Contacto</span>
           </div>
 
-          {/* Google Play Store Download Button */}
+          {/* Google Play Store Download Button - Paquetería y Taxi Pet */}
           <a
             href="https://play.google.com/store/apps/details?id=com.frutigo.app"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full bg-gradient-to-r from-zinc-950 via-zinc-900 to-emerald-950 hover:from-black hover:to-emerald-900 text-white font-extrabold p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-500/80 shadow-md hover:shadow-xl transition-all active:scale-98 flex items-center justify-between gap-3 group/play cursor-pointer"
-            title="Descargar Fruti Go en Google Play Store"
+            title="Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet en Google Play Store"
+            aria-label="Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet en Google Play Store"
           >
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center shrink-0 p-2 group-hover/play:border-emerald-400 group-hover/play:scale-105 transition-all shadow-inner">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center shrink-0 p-2 group-hover/play:border-emerald-400 group-hover/play:scale-105 transition-all shadow-inner">
                 <svg className="w-full h-full" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M325.8 243.7L88.1 6.1C82.5 0.5 74.3 -1.4 66.8 1.1 59.3 3.6 54.1 10.1 54.1 18.1V493.9c0 8 5.2 14.5 12.7 17 7.5 2.5 15.7 0.6 21.3-5L325.8 268.3c6.8-6.8 6.8-17.8 0-24.6z" fill="#00D2FF" />
                   <path d="M325.8 243.7L411.4 158.1 120.3 6.1l205.5 237.6z" fill="#00F076" />
@@ -505,17 +482,17 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                 </svg>
               </div>
               <div className="text-left leading-tight min-w-0">
-                <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-black block truncate">
-                  DISPONIBLE EN GOOGLE PLAY
+                <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-black block">
+                  DISPONIBLE EN GOOGLE PLAY • FRUTI GO
                 </span>
-                <span className="text-xs sm:text-sm font-black text-white group-hover/play:text-amber-300 transition-colors block truncate">
-                  Descargar App Fruti Go
+                <span className="text-xs sm:text-sm font-black text-white group-hover/play:text-amber-300 transition-colors block">
+                  Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet
                 </span>
               </div>
             </div>
             <div className="flex items-center gap-1.5 bg-brand-green text-white px-3.5 py-2 rounded-xl text-xs font-black shrink-0 group-hover/play:bg-emerald-500 transition-colors shadow-xs">
               <Download className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Obtener</span>
+              <span className="hidden sm:inline">Descargar</span>
               <ExternalLink className="w-3 h-3 opacity-80" />
             </div>
           </a>
@@ -785,61 +762,6 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             })
           }}
         />
-
-        {/* Modal / Lightbox para ver cualquier fotografía en Alta Resolución */}
-        {lightboxPhoto && (
-          <div
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
-            onClick={() => setLightboxPhoto(null)}
-          >
-            <div
-              className="relative max-w-4xl w-full bg-zinc-900 border border-emerald-500/50 rounded-3xl p-4 sm:p-6 shadow-2xl flex flex-col items-center space-y-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                type="button"
-                onClick={() => setLightboxPhoto(null)}
-                className="absolute top-3 right-3 p-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white rounded-full transition-all cursor-pointer z-10"
-                title="Cerrar visor"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="w-full max-h-[70vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black p-2 border border-zinc-800">
-                <img
-                  src={lightboxPhoto.url}
-                  alt={lightboxPhoto.caption || "Fotografía de Alberto Reyes Sandoval"}
-                  className="max-h-[65vh] w-auto max-w-full object-contain rounded-xl shadow-lg"
-                />
-              </div>
-
-              <div className="w-full text-center space-y-1.5 px-2">
-                <span className="px-3 py-1 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded-full text-[10px] font-black uppercase tracking-widest inline-flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-emerald-400" />
-                  Alberto Reyes Sandoval • Alta Resolución
-                </span>
-                <h4 className="text-base sm:text-lg font-bold text-white">
-                  {lightboxPhoto.caption || "Fotografía de Perfil"}
-                </h4>
-                {lightboxPhoto.description && (
-                  <p className="text-xs text-zinc-400 max-w-2xl mx-auto font-normal">
-                    {lightboxPhoto.description}
-                  </p>
-                )}
-              </div>
-
-              <a
-                href={lightboxPhoto.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-brand-green hover:bg-emerald-600 text-white rounded-xl text-xs font-black transition-all shadow-md active:scale-95 cursor-pointer"
-              >
-                <ExternalLink className="w-4 h-4 text-brand-yellow" />
-                <span>Abrir imagen original</span>
-              </a>
-            </div>
-          </div>
-        )}
 
       </div>
     </section>

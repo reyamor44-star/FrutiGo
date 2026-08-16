@@ -20,6 +20,7 @@ import {
 import { mediaService, FounderMediaItem } from "../services/mediaService";
 import { FounderProfileCard } from "./FounderProfileCard";
 import FundadorArticulosPublicos from "./FundadorArticulosPublicos";
+import ExpandableImage from "./ExpandableImage";
 
 export default function FundadorGaleriaPublica() {
   const [items, setItems] = useState<FounderMediaItem[]>([]);
@@ -198,11 +199,13 @@ export default function FundadorGaleriaPublica() {
                 {/* Media Container */}
                 <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-transparent flex items-center justify-center p-1 rounded-t-2xl">
                   {item.type === "image" && (
-                    <img
+                    <ExpandableImage
                       src={item.url}
                       alt={item.altText || "Alberto Reyes Sandoval - Fundador de Fruti Go"}
-                      title={item.title}
-                      className="w-full h-full object-cover transition duration-500 group-hover:scale-105 rounded-xl"
+                      caption={item.title}
+                      title="Toca para expandir imagen aquí mismo"
+                      className="w-full h-full object-cover rounded-xl"
+                      containerClassName="w-full h-full"
                       loading="lazy"
                     />
                   )}

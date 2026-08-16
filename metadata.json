@@ -1,6 +1,6 @@
 {
   "name": "Fruti Go",
-  "description": "Tienda en línea y plataforma oficial de delivery exprés de frutas y verduras frescas en Guadalajara y México, con catálogo interactivo, carrito de compras, facturación y panel de administración.",
+  "description": "Tienda en línea oficial, paquetería exprés y taxi pet en Guadalajara y México. Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

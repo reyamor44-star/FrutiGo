@@ -18,6 +18,7 @@ import {
   Link as LinkIcon
 } from "lucide-react";
 import { sortArticlesNewestFirst } from "../utils/articleUtils";
+import ExpandableImage from "./ExpandableImage";
 
 export interface ArticleImage {
   url: string;
@@ -44,7 +45,6 @@ interface FundadorArticulosPublicosProps {
 export default function FundadorArticulosPublicos({ className = "" }: FundadorArticulosPublicosProps) {
   const [articles, setArticles] = useState<FounderArticle[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<{ url: string; caption?: string; title?: string } | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("todos");
@@ -544,20 +544,17 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                       {validImages.slice(0, 3).map((img, imgIdx) => (
                         <div
                           key={imgIdx}
-                          onClick={() => setSelectedImage({ url: img.url, caption: img.caption, title: article.title })}
-                          className="group/img relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-white cursor-pointer shadow-xs hover:shadow-md transition duration-300 p-2.5 flex flex-col items-center justify-center space-y-2"
+                          className="group/img relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-white shadow-xs hover:shadow-md transition duration-300 p-2.5 flex flex-col items-center justify-center space-y-2"
                         >
                           <div className="w-full h-auto min-h-[140px] flex items-center justify-center relative overflow-hidden rounded-xl bg-zinc-50 border border-zinc-100 p-1.5">
-                            <img
+                            <ExpandableImage
                               src={img.url}
                               alt={img.caption || `Imagen ${imgIdx + 1} de ${article.title}`}
-                              className="w-auto max-w-full h-auto max-h-[580px] object-contain group-hover/img:scale-[1.02] transition duration-300 rounded-lg"
+                              caption={img.caption || article.title}
+                              title="Toca para expandir imagen aquí mismo"
+                              className="w-auto max-w-full h-auto max-h-[580px] object-contain rounded-lg"
                               loading="lazy"
                             />
-                            <div className="absolute inset-0 bg-black/5 group-hover/img:bg-black/0 transition rounded-xl pointer-events-none" />
-                            <div className="absolute bottom-2 right-2 p-1.5 rounded-lg bg-black/70 text-white backdrop-blur-xs opacity-0 group-hover/img:opacity-100 transition">
-                              <Maximize2 className="w-3.5 h-3.5" />
-                            </div>
                           </div>
                           {img.caption && (
                             <div className="p-2 w-full text-center bg-white">
@@ -751,41 +748,6 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                 <span className="text-xs font-bold">X (Twitter)</span>
               </a>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Image Lightbox Modal without excess black frame */}
-      {selectedImage && (
-        <div
-          onClick={() => setSelectedImage(null)}
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xl p-2 sm:p-4 flex flex-col items-center justify-center animate-fadeIn"
-        >
-          {/* Floating Close Button */}
-          <button
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white border border-zinc-700 shadow-2xl transition cursor-pointer active:scale-95"
-            title="Cerrar vista previa"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          {/* Media Container - dynamically adapts strictly to image dimensions without extra black frames or bars */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-[96vw] sm:max-w-[88vw] max-h-[88vh] flex flex-col items-center justify-center animate-in zoom-in-95 duration-200 bg-transparent p-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-          >
-            <img
-              src={selectedImage.url}
-              alt={selectedImage.caption || "Imagen ampliada del artículo"}
-              className="max-h-[82vh] w-auto max-w-full object-contain rounded-2xl bg-transparent border-0 block"
-            />
-
-            {selectedImage.caption && (
-              <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 bg-gradient-to-t from-black/85 via-black/50 to-transparent text-white pointer-events-none">
-                <p className="text-xs sm:text-sm font-extrabold text-white line-clamp-2 drop-shadow-md">{selectedImage.caption}</p>
-              </div>
-            )}
           </div>
         </div>
       )}

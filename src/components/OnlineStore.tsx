@@ -43,6 +43,8 @@ import {
 import { Product, CartItem, OpenPayConfig, OrderSummary, ShippingInfo, ProductCategory, PdfConfig, BillingInfo } from "../types";
 import { generateOrderPDF, generateCFDIPDF, downloadCFDIXML, generatePriceListPDF } from "../utils/pdfGenerator";
 import { getProductWhiteBgImage } from "../utils/productImages";
+import AppDownloadBanner from "./AppDownloadBanner";
+import ExpandableImage from "./ExpandableImage";
 import { 
   Language, 
   LANGUAGES, 
@@ -1585,6 +1587,8 @@ export default function OnlineStore({
 
       {/* Main Catalog Section - B2B List Format */}
       <main className="max-w-7xl mx-auto px-2 sm:px-6 py-3 sm:py-4">
+        {/* Banner de descarga de App Google Play - Paquetería y Taxi Pet */}
+        <AppDownloadBanner className="mb-4" />
         {/* B2B COMPACT LIST / TABLE */}
 
         {/* B2B COMPACT LIST / TABLE */}
@@ -1632,9 +1636,11 @@ export default function OnlineStore({
                   >
                     {/* Item Info (Image + Name + Presentation) */}
                     <div className="col-span-5 flex items-center gap-3">
-                      <img
+                      <ExpandableImage
                         src={product.image || getProductWhiteBgImage(product.name, product.category)}
                         alt={locP.name}
+                        caption={`${locP.name} - ${locP.presentation || locP.unit || "1 Kg"}`}
+                        title="Toca para ampliar imagen del producto"
                         className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-contain bg-white p-1 border border-zinc-200 shadow-xs flex-shrink-0"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = getProductWhiteBgImage(product.name, product.category);
@@ -1846,9 +1852,11 @@ export default function OnlineStore({
                         className="p-3 bg-zinc-50 border border-zinc-200 rounded-xl flex items-center justify-between gap-3"
                       >
                         <div className="flex items-center gap-3 min-w-0">
-                          <img
+                          <ExpandableImage
                             src={item.product.image || getProductWhiteBgImage(item.product.name, item.product.category)}
                             alt={locP.name}
+                            caption={`${locP.name} - ${locP.presentation || locP.unit}`}
+                            title="Toca para ampliar imagen"
                             className="w-12 h-12 rounded-lg object-contain bg-white p-0.5 border border-zinc-200 flex-shrink-0"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = getProductWhiteBgImage(item.product.name, item.product.category);

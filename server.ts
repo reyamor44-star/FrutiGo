@@ -2728,14 +2728,14 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         const profile = getFounderProfileData();
         const articleId = req.params.id || (req.query.art as string) || (req.query.id as string);
 
-        let customTitle = "Fruti Go | Tienda en Línea de Frutas Frescas y Delivery Exprés";
-        let customDescription = "Fruti Go es la tienda oficial en línea de frutas y productos frescos con entrega a domicilio exprés en Guadalajara y México. Calidad premium, precios directos y envíos rápidos.";
+        let customTitle = "Fruti Go | Paquetería Exprés, Taxi Pet y Tienda en Línea";
+        let customDescription = "Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet. Tienda oficial en línea de Fruti Go con delivery exprés de frutas frescas en Guadalajara y México.";
         let canonicalUrl = `https://frutigo.com.mx${req.path === "/" ? "" : req.path}`;
         let ogType = "website";
         let jsonLdScript = "";
 
         const pathTitles: Record<string, string> = {
-          "/": "Fruti Go | Tienda en Línea de Frutas Frescas y Delivery Exprés",
+          "/": "Fruti Go | Paquetería Exprés, Taxi Pet y Tienda en Línea",
           "/politicas": "Fruti Go | Políticas de Envío, Entrega y Garantía de Frescura",
           "/politicas-de-envio": "Fruti Go | Políticas de Envío, Entrega y Garantía de Frescura",
           "/tienda": "Fruti Go | Catálogo de Frutas y Verduras Frescas con Envío a Domicilio",
@@ -2766,7 +2766,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         };
 
         const pathDescriptions: Record<string, string> = {
-          "/": "Fruti Go es la tienda oficial en línea de frutas y productos frescos con entrega a domicilio exprés en Guadalajara y México. Calidad premium, precios directos y envíos rápidos.",
+          "/": "Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet. Tienda oficial en línea de Fruti Go con delivery exprés de frutas frescas en Guadalajara y México.",
           "/politicas": "Políticas oficiales de operación, cobertura geográfica, tiempos de entrega rápida, estándares de inocuidad y garantías de devolución en Fruti Go México.",
           "/politicas-de-envio": "Políticas oficiales de operación, cobertura geográfica, tiempos de entrega rápida, estándares de inocuidad y garantías de devolución en Fruti Go México.",
           "/tienda": "Explora nuestro catálogo en línea de frutas y verduras frescas. Realiza tu pedido con entrega rápida a domicilio en Guadalajara.",

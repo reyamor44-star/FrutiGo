@@ -44,6 +44,7 @@ import { DEFAULT_PRODUCTS, DEFAULT_BANNER } from "./data/defaultStoreData";
 import OnlineStore from "./components/OnlineStore";
 import AdminPanel from "./components/AdminPanel";
 import UnignorableTopBanner from "./components/UnignorableTopBanner";
+import AppDownloadBanner from "./components/AppDownloadBanner";
 import { FounderProfileCard } from "./components/FounderProfileCard";
 import FundadorGaleriaPublica from "./components/FundadorGaleriaPublica";
 import { updateDynamicMetadata, SEO_SECTION_DATA } from "./utils/seo";
@@ -209,7 +210,8 @@ function GooglePlayBadge({ className = "", lang = "es" }: { className?: string; 
         "inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-zinc-900 hover:bg-black text-white rounded-xl shadow-md hover:shadow-lg transition-all active:scale-95 border border-zinc-800 group select-none flex-shrink-0 cursor-pointer",
         className
       )}
-      title="Descargar Fruti Go en Google Play Store"
+      title="Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet en Google Play"
+      aria-label="Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet en Google Play"
     >
       <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M325.8 243.7L88.1 6.1C82.5 0.5 74.3 -1.4 66.8 1.1 59.3 3.6 54.1 10.1 54.1 18.1V493.9c0 8 5.2 14.5 12.7 17 7.5 2.5 15.7 0.6 21.3-5L325.8 268.3c6.8-6.8 6.8-17.8 0-24.6z" fill="#00D2FF" />
@@ -1618,6 +1620,11 @@ export default function App() {
       </header>
 
       <main className="max-w-7xl mx-auto px-1.5 sm:px-6 py-2.5 sm:py-8">
+        {/* Banner de Descarga Oficial de la App - Paquetería y Taxi Pet */}
+        {!isAdmin && (
+          <AppDownloadBanner />
+        )}
+
         {/* Unignorable Top Banner (Hidden on frutgo.com.mx) */}
         {!isAdmin && !isFrutgoDomain && (
           <UnignorableTopBanner

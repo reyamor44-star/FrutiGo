@@ -191,8 +191,18 @@ export function updateDynamicMetadata(config: SeoConfig) {
   setMeta("property", "og:image:url", image);
   setMeta("property", "og:image:secure_url", image);
   setMeta("property", "og:image:alt", imageAlt);
+  setMeta("property", "og:image:type", "image/jpeg");
+  setMeta("property", "og:image:width", "1200");
+  setMeta("property", "og:image:height", "1600");
+
+  // Google Thumbnail & Image Link Indexing
+  setMeta("name", "thumbnail", image);
+  setMeta("name", "image", image);
+  setMeta("name", "googlebot", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
+  setLink("image_src", image);
 
   // Twitter Cards
+  setMeta("name", "twitter:card", "summary_large_image");
   setMeta("name", "twitter:title", config.title);
   setMeta("name", "twitter:description", config.description);
   setMeta("name", "twitter:image", image);

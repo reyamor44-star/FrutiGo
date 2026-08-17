@@ -231,7 +231,15 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
   return (
     <section className={`relative z-10 ${className}`}>
       {/* Clean White Card Container matching the rest of the application */}
-      <div className="bg-white text-zinc-900 rounded-2xl sm:rounded-[32px] p-2.5 sm:p-8 md:p-10 shadow-lg border border-emerald-100/80 relative overflow-hidden group">
+      <div
+        className="bg-white text-zinc-900 rounded-2xl sm:rounded-[32px] p-2.5 sm:p-8 md:p-10 shadow-lg border border-emerald-100/80 relative overflow-hidden group"
+        itemScope
+        itemType="https://schema.org/Person"
+      >
+        <meta itemProp="name" content={founderData.name} />
+        <meta itemProp="jobTitle" content={founderData.role} />
+        <meta itemProp="url" content="https://frutigo.com.mx/sobre-el-desarrollador" />
+        <link itemProp="image" href={photoUrl} />
         
         {/* Subtle Decorative Background Glow */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-50/60 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />

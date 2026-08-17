@@ -3101,12 +3101,14 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(developerJsonLdObj, null, 2)}\n</script>`;
 
           const ogDevPhoto = profile.photo || "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd";
-          const ogImagesMeta = `<meta property="og:image" content="${ogDevPhoto}" />\n<meta property="og:image:url" content="${ogDevPhoto}" />\n<meta property="og:image:secure_url" content="${ogDevPhoto}" />\n<meta property="og:image:type" content="image/jpeg" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="1600" />\n<meta property="og:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
+          const ogImagesMeta = `<meta property="og:image" content="${ogDevPhoto}" />\n<meta property="og:image:url" content="${ogDevPhoto}" />\n<meta property="og:image:secure_url" content="${ogDevPhoto}" />\n<meta property="og:image:type" content="image/jpeg" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="1600" />\n<meta property="og:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />\n<meta name="thumbnail" content="${ogDevPhoto}" />\n<meta name="image" content="${ogDevPhoto}" />\n<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />\n<link rel="image_src" href="${ogDevPhoto}" />`;
 
           const twitterImagesMeta = `<meta name="twitter:image" content="${ogDevPhoto}" />\n<meta name="twitter:image:alt" content="Alberto Reyes Sandoval - Creador y Desarrollador de Fruti Go" />`;
 
           html = html.replace(/<meta property="og:image" content=".*?" \/>/i, ogImagesMeta);
           html = html.replace(/<meta name="twitter:image" content=".*?" \/>/i, twitterImagesMeta);
+          html = html.replace(/<meta name="thumbnail" content=".*?" \/>/i, `<meta name="thumbnail" content="${ogDevPhoto}" />`);
+          html = html.replace(/<link rel="image_src" href=".*?" \/>/i, `<link rel="image_src" href="${ogDevPhoto}" />`);
         } else {
           customTitle = pathTitles[req.path] || customTitle;
           customDescription = pathDescriptions[req.path] || customDescription;

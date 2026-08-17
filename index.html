@@ -29,6 +29,13 @@
     <meta name="google-play-app" content="app-id=com.frutigo.app" />
     <link rel="alternate" href="android-app://com.frutigo.app/https/frutigo.com.mx/" />
 
+    <!-- Googlebot e Indexación de Miniaturas e Imágenes -->
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="thumbnail" content="https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd" />
+    <meta name="image" content="https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd" />
+    <link rel="image_src" href="https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd" />
+
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://frutigo.com.mx/" />
@@ -52,6 +59,7 @@
 
     <!-- Metadatos de Enlace al Creador y Desarrollador -->
     <meta name="founder:profile" content="https://frutigo.com.mx/sobre-el-desarrollador" />
+    <meta name="founder:image" content="https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd" />
     <meta name="creator:name" content="Alberto Reyes Sandoval" />
 
     <!-- Datos Estructurados JSON-LD para la Tienda y Plataforma (Schema.org) -->
@@ -104,8 +112,29 @@
             "@type": "Person",
             "@id": "https://frutigo.com.mx/#founder",
             "name": "Alberto Reyes Sandoval",
+            "givenName": "Alberto",
+            "familyName": "Reyes Sandoval",
             "jobTitle": "Creador, Desarrollador Principal y Fundador",
-            "url": "https://frutigo.com.mx/sobre-el-desarrollador"
+            "url": "https://frutigo.com.mx/sobre-el-desarrollador",
+            "image": {
+              "@type": "ImageObject",
+              "@id": "https://frutigo.com.mx/#founder-photo",
+              "url": "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd",
+              "contentUrl": "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd",
+              "name": "Alberto Reyes Sandoval - Fotografía Oficial",
+              "caption": "Alberto Reyes Sandoval - Creador, Desarrollador Principal y Fundador de Fruti Go",
+              "description": "Fotografía oficial de perfil y retrato en alta resolución de Alberto Reyes Sandoval, Fundador de Fruti Go.",
+              "width": "1200",
+              "height": "1600",
+              "encodingFormat": "image/jpeg",
+              "representativeOfPage": true
+            },
+            "sameAs": [
+              "https://www.wikidata.org/wiki/Q140880376",
+              "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
+              "https://www.linkedin.com/in/alberto-reyes-sandoval",
+              "https://github.com/reyamor44-star"
+            ]
           },
           "address": {
             "@type": "PostalAddress",

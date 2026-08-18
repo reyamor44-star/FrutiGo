@@ -615,3 +615,91 @@ export async function fetchLogoFromFirestore(): Promise<any | null> {
   return null;
 }
 
+export function getDefaultFirestoreDb() {
+  if (!firebaseConfig) return null;
+  try {
+    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+    return getFirestore(app); // (default) database where app users reside
+  } catch (err) {
+    console.error("Error al inicializar Firestore (default):", err);
+    return null;
+  }
+}
+
+export async function saveAppUserToFirestore(userData: any): Promise<boolean> {
+  const db = getDefaultFirestoreDb() || getDb();
+  if (!db || !userData?.id) return false;
+  try {
+    const cleanData = cleanPayloadForFirestore({
+      ...userData,
+      updatedAt: new Date().toISOString()
+    });
+    // Guardar en 'usuarios' y 'app_users' en la base (default)
+    const docRefUsuarios = doc(db, "usuarios", userData.id);
+    await setDoc(docRefUsuarios, cleanData, { merge: true });
+    
+    const docRefAppUsers = doc(db, "app_users", userData.id);
+    await setDoc(docRefAppUsers, cleanData, { merge: true });
+    return true;
+  } catch (err) {
+    console.error("Firestore saveAppUser error:", err);
+    return false;
+  }
+}
+
+export async function fetchAllAppUsersFromFirestore(): Promise<any[]> {
+  const userMap = new Map<string, any>();
+
+  // Lista de bases de datos a consultar
+  const databasesToQuery = [];
+  
+  // 1. Base de datos (default) donde están los registros de la app
+  const defaultDb = getDefaultFirestoreDb();
+  if (defaultDb) databasesToQuery.push({ name: "(default)", db: defaultDb });
+
+  // 2. Base de datos personalizada si existe y es distinta
+  const customDb = getDb();
+  if (customDb && customDb !== defaultDb) {
+    databasesToQuery.push({ name: "custom", db: customDb });
+  }
+
+  // Colecciones posibles donde la app móvil almacena usuarios (con 'users' como prioridad principal)
+  const collectionsToScan = [
+    "users",
+    "usuarios",
+    "clientes",
+    "repartidores",
+    "tiendas",
+    "negocios",
+    "drivers",
+    "customers",
+    "stores",
+    "app_users"
+  ];
+
+  for (const dbEntry of databasesToQuery) {
+    for (const colName of collectionsToScan) {
+      try {
+        const snap = await getDocs(collection(dbEntry.db, colName));
+        if (!snap.empty) {
+          console.log(`[Firestore] Encontrados ${snap.size} documentos en BD '${dbEntry.name}', colección '${colName}'`);
+          snap.forEach((d) => {
+            const data = d.data();
+            const id = d.id;
+            if (!userMap.has(id)) {
+              userMap.set(id, { id, ...data, _collection: colName, _database: dbEntry.name });
+            }
+          });
+        }
+      } catch (e) {
+        // Silently skip if subcollection not used or permission error
+      }
+    }
+  }
+
+  const result = Array.from(userMap.values());
+  console.log(`[Firestore] Total de usuarios únicos recuperados: ${result.length}`);
+  return result;
+}
+
+

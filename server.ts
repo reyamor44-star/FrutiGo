@@ -28,7 +28,9 @@ import {
   fetchMainDataFromFirestore,
   saveLogoToFirestore,
   fetchLogoFromFirestore,
-  uploadImageToFirebaseStorage
+  uploadImageToFirebaseStorage,
+  saveAppUserToFirestore,
+  fetchAllAppUsersFromFirestore
 } from "./src/lib/firebaseService";
 
 async function startServer() {
@@ -2576,6 +2578,117 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   // Solicitudes de Eliminación de Cuenta
   const REQUESTS_FILE = path.join(process.cwd(), "deletion_requests.json");
+  const REGISTRATIONS_FILE = path.join(process.cwd(), "app_registrations.json");
+
+  // Endpoint de Registro de Usuarios para la App Fruti Go (frutigo.com.mx/registrofrutigo)
+  app.post("/api/app-users/register", async (req, res) => {
+    const { name, email, phone, role, password, termsAccepted, source } = req.body;
+    if (!name || !email || !phone) {
+      return res.status(400).json({ error: "Nombre, Correo y Teléfono son requeridos." });
+    }
+    if (!password || password.length < 6) {
+      return res.status(400).json({ error: "La contraseña debe tener al menos 6 caracteres." });
+    }
+    if (!termsAccepted) {
+      return res.status(400).json({ error: "Debes aceptar los Términos y Condiciones." });
+    }
+
+    try {
+      let registrations = [];
+      if (fs.existsSync(REGISTRATIONS_FILE)) {
+        registrations = JSON.parse(fs.readFileSync(REGISTRATIONS_FILE, "utf-8"));
+      }
+
+      const validRoles = ["cliente", "repartidor", "negocio"];
+      const userRole = validRoles.includes(role) ? role : "cliente";
+
+      const newRegistration = {
+        id: "REG-" + Date.now().toString(),
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        phone: phone.trim(),
+        role: userRole,
+        termsAccepted: true,
+        source: source || "web_registrofrutigo",
+        createdAt: new Date().toISOString(),
+        status: "Activo"
+      };
+
+      // Guardar en archivo local
+      registrations.unshift(newRegistration);
+      fs.writeFileSync(REGISTRATIONS_FILE, JSON.stringify(registrations, null, 2));
+
+      // Guardar también en Firestore si está disponible
+      try {
+        await saveAppUserToFirestore(newRegistration);
+      } catch (dbErr) {
+        console.warn("[Firestore] No se pudo guardar en colección app_users:", dbErr);
+      }
+
+      res.status(201).json({
+        success: true,
+        message: "Registro completado con éxito",
+        user: {
+          id: newRegistration.id,
+          name: newRegistration.name,
+          email: newRegistration.email,
+          phone: newRegistration.phone,
+          role: newRegistration.role
+        }
+      });
+    } catch (err) {
+      console.error("Error al registrar usuario de Fruti Go:", err);
+      res.status(500).json({ error: "Error interno al procesar el registro." });
+    }
+  });
+
+  app.get("/api/admin/app-users", (req, res) => {
+    const { password } = req.query;
+    if (password !== "fruti05" && password !== "1234") {
+      return res.status(401).json({ error: "Acceso no autorizado" });
+    }
+
+    try {
+      if (!fs.existsSync(REGISTRATIONS_FILE)) {
+        return res.json([]);
+      }
+      const data = fs.readFileSync(REGISTRATIONS_FILE, "utf-8");
+      res.json(JSON.parse(data));
+    } catch (err) {
+      res.status(500).json({ error: "Error al consultar los registros" });
+    }
+  });
+
+  // Endpoint de lectura para sincronización de usuarios de Firestore
+  app.get("/api/admin/firestore-users", async (req, res) => {
+    try {
+      const firestoreUsers = await fetchAllAppUsersFromFirestore();
+      
+      let localRegistrations: any[] = [];
+      if (fs.existsSync(REGISTRATIONS_FILE)) {
+        try {
+          localRegistrations = JSON.parse(fs.readFileSync(REGISTRATIONS_FILE, "utf-8"));
+        } catch {}
+      }
+
+      // Merge by ID or email
+      const userMap = new Map<string, any>();
+      firestoreUsers.forEach((u) => {
+        if (u.id) userMap.set(u.id, u);
+      });
+      localRegistrations.forEach((r) => {
+        if (r.id && !userMap.has(r.id)) {
+          userMap.set(r.id, r);
+        }
+      });
+
+      const combined = Array.from(userMap.values());
+      return res.json({ success: true, count: combined.length, users: combined });
+    } catch (err: any) {
+      console.error("Error al consultar usuarios en /api/admin/firestore-users:", err);
+      return res.status(500).json({ error: "Error al consultar usuarios", details: err?.message });
+    }
+  });
 
   app.post("/api/deletion-requests", (req, res) => {
     const { name, email, phone, reason, comments } = req.body;
@@ -2711,6 +2824,10 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     "/multimedia",
     "/prensa",
     "/fundador",
+    "/registrofrutigo",
+    "/registro",
+    "/registro-app",
+    "/registro-frutigo",
     "/articulos",
     "/articulo/:id",
     "/articulos/:id",
@@ -2762,7 +2879,11 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           "/galeria": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
           "/multimedia": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
           "/prensa": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
-          "/articulos": "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go"
+          "/articulos": "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go",
+          "/registrofrutigo": "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
+          "/registro": "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
+          "/registro-app": "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
+          "/registro-frutigo": "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go"
         };
 
         const pathDescriptions: Record<string, string> = {
@@ -2793,7 +2914,11 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           "/galeria": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
           "/multimedia": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
           "/prensa": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
-          "/articulos": "Artículos y ensayos sobre arquitectura de software, desarrollo full-stack y tecnología por Alberto Reyes Sandoval."
+          "/articulos": "Artículos y ensayos sobre arquitectura de software, desarrollo full-stack y tecnología por Alberto Reyes Sandoval.",
+          "/registrofrutigo": "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
+          "/registro": "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
+          "/registro-app": "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
+          "/registro-frutigo": "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store."
         };
 
         // Check if an individual article is requested

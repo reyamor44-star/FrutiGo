@@ -3,6 +3,13 @@ User-agent: *
 Allow: /
 
 # Desbloquear todas las rutas clave e imágenes
+Allow: /registrofrutigo
+Allow: /registro
+Allow: /tienda
+Allow: /sobre-el-desarrollador
+Allow: /desarrollador
+Allow: /medios
+Allow: /articulos
 Allow: /sobre-nosotros
 Allow: /soporte
 Allow: /terminos

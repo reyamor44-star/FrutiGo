@@ -4,7 +4,7 @@
   <!-- Página Principal -->
   <url>
     <loc>https://frutigo.com.mx/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -12,6 +12,25 @@
       <image:title>Alberto Reyes Sandoval - Fundador, Creador y Desarrollador de Fruti Go</image:title>
       <image:caption>Fotografía oficial de Alberto Reyes Sandoval, Fundador y Desarrollador Principal de Fruti Go.</image:caption>
     </image:image>
+  </url>
+
+  <!-- Página Oficial de Registro en la App Fruti Go -->
+  <url>
+    <loc>https://frutigo.com.mx/registrofrutigo</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://frutigo.com.mx/frutigo-logo-oficial-amarillo.svg</image:loc>
+      <image:title>Registro Oficial Fruti Go - Crea tu Cuenta en la App</image:title>
+      <image:caption>Formulario de registro para la app Fruti Go de delivery exprés, paquetería urbana y taxi pet.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://frutigo.com.mx/registro</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
   </url>
 
   <!-- Secciones Institucionales -->

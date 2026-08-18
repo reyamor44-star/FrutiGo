@@ -46,6 +46,7 @@ import AdminPanel from "./components/AdminPanel";
 import { FounderProfileCard } from "./components/FounderProfileCard";
 import FundadorGaleriaPublica from "./components/FundadorGaleriaPublica";
 import { updateDynamicMetadata, SEO_SECTION_DATA } from "./utils/seo";
+import RegistroFrutigo from "./components/RegistroFrutigo";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -292,6 +293,20 @@ export default function App() {
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
 
+      // Check if user is navigating to registration page
+      if (
+        path === "/registrofrutigo" ||
+        path === "/registro" ||
+        path === "/registro-app" ||
+        path === "/registro-frutigo" ||
+        search.includes("registrofrutigo") ||
+        search.includes("registro") ||
+        hash.includes("registrofrutigo") ||
+        hash.includes("registro")
+      ) {
+        return "registro";
+      }
+
       // Check if user is navigating directly to cliente / bodega / tienda route
       if (
         path === "/cliente" ||
@@ -367,7 +382,8 @@ export default function App() {
         search.includes("subida-productos") ||
         hash.includes("control") ||
         hash.includes("admin") ||
-        hash.includes("subida-productos")
+        hash.includes("subida-productos") ||
+        localStorage.getItem("frutigo_control_enabled") === "true"
       );
     }
     return false;
@@ -426,7 +442,40 @@ export default function App() {
           path.length > 1 || search.length > 0 || hash.length > 0
         );
 
+        const isControl = (
+          path === "/control" ||
+          path.endsWith("/control") ||
+          path.includes("control") ||
+          path === "/admin" ||
+          path.endsWith("/admin") ||
+          path.includes("admin") ||
+          search.includes("control") ||
+          search.includes("admin") ||
+          hash.includes("control") ||
+          hash.includes("admin")
+        );
+        if (isControl) {
+          setIsControlRoute(true);
+          try {
+            localStorage.setItem("frutigo_control_enabled", "true");
+          } catch (e) {}
+        }
+
         if (
+          path === "/registrofrutigo" ||
+          path.endsWith("/registrofrutigo") ||
+          path === "/registro" ||
+          path.endsWith("/registro") ||
+          path === "/registro-app" ||
+          path === "/registro-frutigo" ||
+          search.includes("registrofrutigo") ||
+          search.includes("registro") ||
+          hash.includes("registrofrutigo") ||
+          hash.includes("registro")
+        ) {
+          setActiveView("registro");
+          updateDynamicMetadata(SEO_SECTION_DATA.registro);
+        } else if (
           path === "/fundador" ||
           path.endsWith("/fundador") ||
           path.includes("fundador") ||
@@ -1468,6 +1517,64 @@ export default function App() {
     );
   }
 
+  if (activeView === "registro") {
+    return (
+      <div className="min-h-screen bg-zinc-50 text-brand-black font-sans selection:bg-brand-yellow selection:text-black bg-mesh">
+        {/* Header */}
+        <header className="border-b-2 border-brand-green/5 bg-white/60 backdrop-blur-xl sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-2.5 sm:px-6 py-2.5 sm:py-0 sm:h-20 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center justify-between gap-3">
+              <div 
+                className="flex items-center gap-3 cursor-pointer"
+                onClick={() => {
+                  setActiveView("legal");
+                  window.history.pushState(null, "", "/");
+                }}
+              >
+                <FrutiGoLogo customUrl={customLogo} className="w-10 h-10 sm:w-11 sm:h-11" />
+                <div>
+                  <h1 className="text-lg sm:text-xl font-black italic tracking-tighter text-brand-green select-none">
+                    Fruti Go
+                  </h1>
+                  <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-medium">
+                    Registro Oficial en la App
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full flex-nowrap">
+              <button
+                onClick={() => {
+                  setActiveView("legal");
+                  window.history.pushState(null, "", "/");
+                }}
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 rounded-2xl border border-emerald-200 text-xs font-black transition active:scale-95 cursor-pointer shadow-xs"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Volver al Inicio</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main className="max-w-7xl mx-auto px-2 sm:px-6 py-4 sm:py-8">
+          <RegistroFrutigo
+            onBackToHome={() => {
+              setActiveView("legal");
+              window.history.pushState(null, "", "/");
+            }}
+            onViewTerms={() => {
+              setActiveView("legal");
+              setCurrentSection("terminos");
+              window.history.pushState(null, "", "/terminos");
+            }}
+          />
+        </main>
+      </div>
+    );
+  }
+
   if (activeView === "tienda") {
     return (
       <>
@@ -1488,6 +1595,10 @@ export default function App() {
           onDismissSuccessOrder={() => setOpenpaySuccessOrder(null)}
           showAdminButton={isControlRoute || isAdmin}
           onRefreshProducts={fetchServerProducts}
+          onGoToRegistro={() => {
+            setActiveView("registro");
+            window.history.pushState(null, "", "/registrofrutigo");
+          }}
         />
         {isAdminPanelOpen && (
           <AdminPanel
@@ -1530,6 +1641,23 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full flex-nowrap scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {/* Global Registration Button with Official Logo */}
+            <button
+              onClick={() => {
+                setActiveView("registro");
+                window.history.pushState(null, "", "/registrofrutigo");
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gradient-to-r from-[#FABF08] to-[#F59E0B] hover:from-[#F59E0B] hover:to-[#D97706] text-[#0F3A1D] rounded-2xl border-2 border-[#0F3A1D]/15 font-black text-xs shadow-md hover:shadow-lg transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+              title="Regístrate en Fruti Go - App Oficial"
+            >
+              <img
+                src="/frutigo-logo-oficial-amarillo.svg"
+                alt="Logo Fruti Go"
+                className="w-4 h-4 object-contain rounded-md shrink-0"
+              />
+              <span className="tracking-tight">Regístrate en Fruti Go</span>
+            </button>
+
             {/* Share Section Button in Header */}
             {!isAdmin && (
               <button
@@ -2216,6 +2344,16 @@ export default function App() {
               >
                 Aviso de Privacidad
               </a>
+              {isControlRoute && (
+                <button 
+                  type="button"
+                  onClick={() => setIsAdminPanelOpen(true)} 
+                  className="text-left hover:text-brand-green transition-colors font-extrabold text-amber-700 flex items-center gap-1 cursor-pointer"
+                  title="Acceso al Panel de Control y Administración"
+                >
+                  <span>⚙️ Panel Admin</span>
+                </button>
+              )}
             </nav>
           </div>
         </div>

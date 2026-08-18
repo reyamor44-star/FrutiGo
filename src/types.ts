@@ -109,7 +109,18 @@ export interface PdfConfig {
   appNoticeText?: string;
 }
 
-export type ActiveView = "legal" | "tienda" | "admin";
+export type ActiveView = "legal" | "tienda" | "admin" | "registro";
+
+export interface AppRegistrationData {
+  id?: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: "cliente" | "repartidor" | "negocio";
+  termsAccepted: boolean;
+  createdAt: string;
+  source?: string;
+}
 
 export interface ClientProfile {
   id?: string;

@@ -72,6 +72,7 @@ interface OnlineStoreProps {
   onDismissSuccessOrder?: () => void;
   showAdminButton?: boolean;
   onRefreshProducts?: () => void;
+  onGoToRegistro?: () => void;
 }
 
 export default function OnlineStore({
@@ -90,7 +91,8 @@ export default function OnlineStore({
   onOpenAdmin,
   onDismissSuccessOrder,
   showAdminButton = false,
-  onRefreshProducts
+  onRefreshProducts,
+  onGoToRegistro
 }: OnlineStoreProps) {
   const lang: Language = currentLang || "es";
   const t = STORE_TRANSLATIONS[lang] || STORE_TRANSLATIONS["es"];
@@ -1315,6 +1317,27 @@ export default function OnlineStore({
                 )}
               </div>
 
+              {/* Botón Global de Registro con Logo Oficial */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (onGoToRegistro) {
+                    onGoToRegistro();
+                  } else {
+                    window.location.href = "/registrofrutigo";
+                  }
+                }}
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 bg-gradient-to-r from-[#FABF08] to-[#F59E0B] hover:from-[#F59E0B] hover:to-[#D97706] text-[#0F3A1D] rounded-xl border border-[#0F3A1D]/15 font-black text-xs shadow-sm hover:shadow-md transition transform active:scale-95 whitespace-nowrap cursor-pointer flex-shrink-0"
+                title="Regístrate en la App Fruti Go"
+              >
+                <img
+                  src="/frutigo-logo-oficial-amarillo.svg"
+                  alt="Logo Fruti Go"
+                  className="w-4 h-4 object-contain rounded-sm shrink-0"
+                />
+                <span>Regístrate</span>
+              </button>
+
               {/* 5. Cart Button */}
               <button
                 type="button"
@@ -1452,6 +1475,26 @@ export default function OnlineStore({
             </div>
 
             <div className="space-y-3 flex-1 overflow-y-auto">
+              {/* Register in App button */}
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  if (onGoToRegistro) {
+                    onGoToRegistro();
+                  } else {
+                    window.location.href = "/registrofrutigo";
+                  }
+                }}
+                className="w-full flex items-center gap-2.5 p-3 bg-gradient-to-r from-[#FABF08] to-[#F59E0B] text-[#0F3A1D] rounded-2xl font-black text-xs border border-[#0F3A1D]/20 shadow-md cursor-pointer active:scale-95"
+              >
+                <img
+                  src="/frutigo-logo-oficial-amarillo.svg"
+                  alt="Logo Fruti Go"
+                  className="w-5 h-5 object-contain rounded-md"
+                />
+                <span>Regístrate en Fruti Go (App)</span>
+              </button>
+
               {/* Language Switcher */}
               <div className="p-3 bg-zinc-50 rounded-2xl border border-zinc-200 space-y-2">
                 <span className="text-[10px] uppercase font-black tracking-wider text-zinc-400 block">

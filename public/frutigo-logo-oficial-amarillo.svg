@@ -1,0 +1,108 @@
+<svg viewBox="0 0 800 800" width="800" height="800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Solid Brand Yellow Background matching the official branding -->
+  <rect width="800" height="800" fill="#FABF08" />
+
+  <!-- Fruti Go Branding Typography (Fruti) -->
+  <text 
+    x="400" 
+    y="280" 
+    text-anchor="middle" 
+    font-family="system-ui, -apple-system, 'Fredoka', 'Quicksand', 'Comfortaa', 'Montserrat', 'Arial Rounded MT Bold', sans-serif" 
+    font-weight="900" 
+    font-size="180" 
+    fill="#0F3A1D" 
+    letter-spacing="-3"
+  >Fruti</text>
+
+  <!-- Fruti Go Branding Typography (Go) -->
+  <text 
+    x="400" 
+    y="440" 
+    text-anchor="middle" 
+    font-family="system-ui, -apple-system, 'Fredoka', 'Quicksand', 'Comfortaa', 'Montserrat', 'Arial Rounded MT Bold', sans-serif" 
+    font-weight="900" 
+    font-size="200" 
+    fill="#0F3A1D" 
+    letter-spacing="-3"
+  >Go</text>
+
+  <!-- Delivery Motorcycle & Driver Graphic with Speed Lines -->
+  <g transform="translate(140, 260) scale(1.05)" fill="#0F3A1D" stroke="#0F3A1D">
+
+    <!-- Insulated Delivery Box (Rear Box) -->
+    <rect x="142" y="272" width="112" height="72" rx="8" ry="8" fill="#FABF08" stroke-width="7" stroke-linejoin="round" />
+    <!-- Vertical Compartment Divider -->
+    <line x1="198" y1="272" x2="198" y2="344" stroke-width="5" />
+
+    <!-- Left Compartment: Hot Meal Cloche (Platillo con Campana) -->
+    <line x1="156" y1="326" x2="184" y2="326" stroke-width="4" stroke-linecap="round" />
+    <path d="M 156 326 C 156 308 184 308 184 326 Z" fill="#0F3A1D" stroke="none" />
+    <circle cx="170" cy="305" r="3" fill="#0F3A1D" stroke="none" />
+    <path d="M 163 298 C 161 293 166 290 164 285" fill="none" stroke-width="3" stroke-linecap="round" />
+    <path d="M 170 298 C 168 293 173 290 171 285" fill="none" stroke-width="3" stroke-linecap="round" />
+    <path d="M 177 298 C 175 293 180 290 178 285" fill="none" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Right Compartment: Fresh Milk Bottle & Apple -->
+    <rect x="218" y="286" width="14" height="22" rx="2" fill="#0F3A1D" stroke="none" />
+    <rect x="221" y="282" width="8" height="4" rx="1" fill="#0F3A1D" stroke="none" />
+    <circle cx="214" cy="326" r="8" fill="#0F3A1D" stroke="none" />
+    <path d="M 214 318 C 216 314 218 314 219 312" fill="none" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Motorcycle Driver / Rider -->
+    <!-- Cap & Head -->
+    <path d="M 252 282 C 248 262 274 252 288 262 C 298 258 310 262 312 268 C 304 270 296 270 292 276 C 290 286 276 292 258 288 Z" fill="#0F3A1D" stroke="none" />
+    <path d="M 288 268 L 314 268 C 318 268 320 271 316 273 L 292 276 Z" fill="#0F3A1D" stroke="none" />
+
+    <!-- Driver Body Leaning Forward -->
+    <path d="M 254 286 L 230 332 L 272 332 C 286 316 292 300 280 286 Z" fill="#0F3A1D" stroke="none" />
+
+    <!-- Arms & Handlebars -->
+    <path d="M 270 300 L 308 316 L 312 328" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Leg & Footrest -->
+    <path d="M 258 332 L 276 368 L 296 368" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Motorcycle Seat & Frame -->
+    <path d="M 226 338 L 290 338" stroke-width="8" stroke-linecap="round" />
+
+    <!-- Motorcycle Front Steering Fork & Mirror -->
+    <line x1="295" y1="300" x2="295" y2="310" stroke-width="4" stroke-linecap="round" />
+    <circle cx="295" cy="297" r="4" fill="#0F3A1D" stroke="none" />
+    <line x1="312" y1="324" x2="352" y2="390" stroke-width="7" stroke-linecap="round" />
+
+    <!-- Front Headlight -->
+    <path d="M 322 332 L 332 336 L 328 346 L 318 342 Z" fill="#0F3A1D" stroke="none" />
+
+    <!-- Motorcycle Engine Block -->
+    <rect x="252" y="348" width="48" height="32" rx="6" fill="#0F3A1D" stroke="none" />
+
+    <!-- Exhaust Pipe -->
+    <path d="M 240 376 L 195 382" stroke-width="6" stroke-linecap="round" />
+
+    <!-- Rear Wheel -->
+    <circle cx="195" cy="390" r="32" fill="#FABF08" stroke-width="9" />
+    <circle cx="195" cy="390" r="14" fill="#0F3A1D" stroke="none" />
+    <line x1="195" y1="358" x2="195" y2="422" stroke-width="3" />
+    <line x1="163" y1="390" x2="227" y2="390" stroke-width="3" />
+    <path d="M 163 385 C 163 358 190 352 220 358" fill="none" stroke-width="7" stroke-linecap="round" />
+
+    <!-- Front Wheel -->
+    <circle cx="352" cy="390" r="32" fill="#FABF08" stroke-width="9" />
+    <circle cx="352" cy="390" r="14" fill="#0F3A1D" stroke="none" />
+    <line x1="352" y1="358" x2="352" y2="422" stroke-width="3" />
+    <line x1="320" y1="390" x2="384" y2="390" stroke-width="3" />
+    <path d="M 320 385 C 320 358 352 352 380 378" fill="none" stroke-width="7" stroke-linecap="round" />
+
+    <!-- Road Center Marker -->
+    <line x1="235" y1="446" x2="305" y2="446" stroke-width="6" stroke-linecap="round" />
+
+    <!-- Speed Rays (Left) -->
+    <polygon points="45,432 165,392 155,402 35,442" fill="#0F3A1D" stroke="none" opacity="0.8" />
+    <polygon points="65,446 145,420 138,428 58,454" fill="#0F3A1D" stroke="none" opacity="0.8" />
+
+    <!-- Speed Rays (Right) -->
+    <polygon points="335,392 455,432 465,442 345,402" fill="#0F3A1D" stroke="none" opacity="0.8" />
+    <polygon points="355,420 435,446 442,454 362,428" fill="#0F3A1D" stroke="none" opacity="0.8" />
+
+  </g>
+</svg>

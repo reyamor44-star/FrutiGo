@@ -134,6 +134,28 @@ export const SEO_SECTION_DATA: Record<string, SeoConfig> = {
     image: DEFAULT_FOUNDER_IMAGE,
     imageAlt: "Galería y Medios Oficiales de Alberto Reyes Sandoval - Fruti Go",
   },
+  registro: {
+    title: "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
+    description:
+      "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
+    keywords:
+      "Registro Fruti Go, crear cuenta Fruti Go, app Fruti Go, registro app delivery, descargar Fruti Go, frutas a domicilio, registrofrutigo, frutigo.com.mx registro",
+    canonicalUrl: "https://frutigo.com.mx/registrofrutigo",
+    ogType: "website",
+    image: "https://frutigo.com.mx/frutigo-logo-oficial-amarillo.svg",
+    imageAlt: "Fruti Go - Formulario de Registro Oficial",
+  },
+  registrofrutigo: {
+    title: "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
+    description:
+      "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
+    keywords:
+      "Registro Fruti Go, crear cuenta Fruti Go, app Fruti Go, registro app delivery, descargar Fruti Go, frutas a domicilio, registrofrutigo, frutigo.com.mx registro",
+    canonicalUrl: "https://frutigo.com.mx/registrofrutigo",
+    ogType: "website",
+    image: "https://frutigo.com.mx/frutigo-logo-oficial-amarillo.svg",
+    imageAlt: "Fruti Go - Formulario de Registro Oficial",
+  },
 };
 
 /**

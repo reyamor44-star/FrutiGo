@@ -49,6 +49,7 @@ import { SAT_PRODUCT_CODES, SAT_UNITS, SAT_TAX_OPTIONS, SAT_OBJETO_IMP_OPTIONS }
 import { getProductWhiteBgImage } from "../utils/productImages";
 import { FounderProfileCard, FounderData, DEFAULT_FOUNDER_DATA } from "./FounderProfileCard";
 import AdminFundadorMedia from "./AdminFundadorMedia";
+import AdminUsuariosFirestore from "./AdminUsuariosFirestore";
 import { compressImageFile } from "../utils/imageCompressor";
 
 interface AdminPanelProps {
@@ -96,7 +97,7 @@ export default function AdminPanel({
   const [loginError, setLoginError] = useState<string | null>(null);
 
   // Navigation Tabs inside Admin
-  const [activeTab, setActiveTab] = useState<"banner" | "products" | "bulk-upload" | "logo" | "openpay" | "pdf" | "orders" | "sat" | "clients" | "desarrollador" | "fundador-media">((): any => {
+  const [activeTab, setActiveTab] = useState<"banner" | "products" | "bulk-upload" | "logo" | "openpay" | "pdf" | "orders" | "sat" | "clients" | "usuarios-firestore" | "desarrollador" | "fundador-media">((): any => {
     if (typeof window !== "undefined") {
       try {
         const saved = localStorage.getItem("fg_admin_tab");
@@ -1404,6 +1405,21 @@ export default function AdminPanel({
           >
             <Users className="w-4 h-4 text-brand-yellow" />
             <span>Clientes & Facturación ({clientList.length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("usuarios-firestore")}
+            className={`flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all whitespace-nowrap ${
+              activeTab === "usuarios-firestore"
+                ? "bg-brand-green text-white shadow-md"
+                : "text-zinc-600 hover:bg-zinc-200/60"
+            }`}
+          >
+            <Users className="w-4 h-4 text-[#FABF08]" />
+            <span className="flex items-center gap-1.5">
+              <span>Usuarios App (users)</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            </span>
           </button>
 
           <button
@@ -4206,6 +4222,11 @@ export default function AdminPanel({
           {/* TAB 11: GALERÍA MULTIMEDIA FUNDADOR */}
           {activeTab === "fundador-media" && (
             <AdminFundadorMedia />
+          )}
+
+          {/* TAB 12: USUARIOS FIRESTORE (DEFAULT) EN TIEMPO REAL */}
+          {activeTab === "usuarios-firestore" && (
+            <AdminUsuariosFirestore onNotify={showToast} />
           )}
         </div>
       </div>

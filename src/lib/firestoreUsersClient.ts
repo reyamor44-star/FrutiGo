@@ -177,7 +177,7 @@ export function formatFechaRegistro(fechaVal: any): string {
   return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
 }
 
-// Normaliza el rol del usuario identificando tienda/negocio, repartidor o cliente
+// Normaliza el rol del usuario identificando repartidor, tienda o cliente según las reglas estrictas
 export function parseUserRole(data: FirestoreUsuarioDoc): {
   normalized: "cliente" | "repartidor" | "negocio";
   display: string;
@@ -186,234 +186,55 @@ export function parseUserRole(data: FirestoreUsuarioDoc): {
     return { normalized: "cliente", display: "Cliente" };
   }
 
-  const checkValue = (raw: any): "cliente" | "repartidor" | "negocio" | null => {
-    if (raw === undefined || raw === null) return null;
-    const s = String(raw).toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    if (!s) return null;
+  // 1. Campos de Rol normalizados a minúsculas
+  const tipo = String((data as any).tipo || "").toLowerCase().trim();
+  const role = String((data as any).role || (data as any).rol || "").toLowerCase().trim();
 
-    // 1. Coincidencia exacta o directa para Cliente
-    if (
-      s === "cliente" ||
-      s === "clientes" ||
-      s === "client" ||
-      s === "clients" ||
-      s === "customer" ||
-      s === "customers" ||
-      s === "usuario" ||
-      s === "usuarios" ||
-      s === "user" ||
-      s === "users" ||
-      s === "comprador" ||
-      s === "compradores" ||
-      s === "consumidor" ||
-      s === "consumidores"
-    ) {
-      return "cliente";
-    }
-
-    // 2. Coincidencia exacta o directa para Repartidor
-    if (
-      s === "repartidor" ||
-      s === "repartidores" ||
-      s === "driver" ||
-      s === "drivers" ||
-      s === "chofer" ||
-      s === "choferes" ||
-      s === "moto" ||
-      s === "motos" ||
-      s === "motociclista" ||
-      s === "motociclistas" ||
-      s === "conductor" ||
-      s === "conductores" ||
-      s === "delivery" ||
-      s === "deliveries" ||
-      s === "rider" ||
-      s === "riders" ||
-      s === "courier" ||
-      s === "mensajero" ||
-      s === "repartidor_moto" ||
-      s === "repartidor_auto" ||
-      s === "socio_repartidor"
-    ) {
-      return "repartidor";
-    }
-
-    // 3. Coincidencia exacta o directa para Tienda / Negocio
-    if (
-      s === "tienda" ||
-      s === "tiendas" ||
-      s === "negocio" ||
-      s === "negocios" ||
-      s === "comercio" ||
-      s === "comercios" ||
-      s === "store" ||
-      s === "stores" ||
-      s === "shop" ||
-      s === "shops" ||
-      s === "restaurante" ||
-      s === "restaurantes" ||
-      s === "vendedor" ||
-      s === "vendedores" ||
-      s === "merchant" ||
-      s === "merchants" ||
-      s === "seller" ||
-      s === "sellers" ||
-      s === "sucursal" ||
-      s === "local" ||
-      s === "empresa" ||
-      s === "business" ||
-      s === "socio_tienda" ||
-      s === "socio_negocio"
-    ) {
-      return "negocio";
-    }
-
-    // 4. Búsqueda por subcadenas si no fue coincidencia exacta
-    if (s.includes("repart") || s.includes("driver") || s.includes("chofer") || s.includes("delivery") || s.includes("conductor") || s.includes("motocicl")) {
-      return "repartidor";
-    }
-    if (s.includes("tiend") || s.includes("negoc") || s.includes("store") || s.includes("comerc") || s.includes("restauran") || s.includes("merchant") || s.includes("vendedor")) {
-      return "negocio";
-    }
-    if (s.includes("client") || s.includes("custom") || s.includes("comprad") || s.includes("consumid")) {
-      return "cliente";
-    }
-
-    return null;
-  };
-
-  // 1. Revisión directa de campos prioritarios 'tipo', 'role', 'rol'
-  const candidateValues = [
-    data.tipo,
-    data.role,
-    data.rol,
-    data.type,
-    data.identificador,
-    data.identifier,
-    data.tipoUsuario,
-    data.tipo_usuario,
-    data.userRole,
-    data.user_role,
-    data.userType,
-    data.user_type,
-    data.tipoCuenta,
-    data.tipo_cuenta,
-    data.accountType,
-    data.account_type,
-    data.perfil,
-    data.profile,
-    data.categoria,
-    data.category,
-    data.roleType,
-    data.role_type,
-    data.tipoRegistro,
-    data.tipo_registro,
-    (data as any).usuarioTipo,
-    (data as any).perfilUsuario
-  ];
-
-  for (const rawVal of candidateValues) {
-    const res = checkValue(rawVal);
-    if (res === "cliente") return { normalized: "cliente", display: "Cliente" };
-    if (res === "repartidor") return { normalized: "repartidor", display: "Repartidor" };
-    if (res === "negocio") return { normalized: "negocio", display: "Tienda / Negocio" };
-  }
-
-  // 2. Objetos anidados comunes en apps móviles (data.datos, data.userData, data.perfil, etc.)
-  const nestedObjects = [
-    (data as any).datos,
-    (data as any).userData,
-    (data as any).user_data,
-    (data as any).perfil,
-    (data as any).info,
-    (data as any).auth,
-    (data as any).account,
-    (data as any).driverData,
-    (data as any).storeData
-  ];
-
-  for (const obj of nestedObjects) {
-    if (obj && typeof obj === "object") {
-      const nestedVals = [obj.tipo, obj.role, obj.rol, obj.identificador, obj.type, obj.tipoUsuario, obj.userType, obj.accountType];
-      for (const rawVal of nestedVals) {
-        const res = checkValue(rawVal);
-        if (res === "cliente") return { normalized: "cliente", display: "Cliente" };
-        if (res === "repartidor") return { normalized: "repartidor", display: "Repartidor" };
-        if (res === "negocio") return { normalized: "negocio", display: "Tienda / Negocio" };
-      }
-    }
-  }
-
-  // 3. Banderas booleanas directas
-  const d = data as any;
-  if (d.isCliente === true || d.esCliente === true || d.is_cliente === true || d.isCustomer === true || d.isUser === true) {
-    return { normalized: "cliente", display: "Cliente" };
-  }
-  if (d.isRepartidor === true || d.is_repartidor === true || d.isDriver === true || d.is_driver === true || d.esRepartidor === true || d.isChofer === true) {
-    return { normalized: "repartidor", display: "Repartidor" };
-  }
-  if (d.isTienda === true || d.is_tienda === true || d.isNegocio === true || d.is_negocio === true || d.isStore === true || d.is_store === true || d.esTienda === true || d.esNegocio === true) {
-    return { normalized: "negocio", display: "Tienda / Negocio" };
-  }
-
-  // 4. Revisión de colección de origen si viene de subcolección dedicada
-  const colSource = String(d._collection || "").toLowerCase();
-  if (colSource.includes("repart") || colSource.includes("driver") || colSource.includes("chofer")) {
-    return { normalized: "repartidor", display: "Repartidor" };
-  }
-  if (colSource.includes("tiend") || colSource.includes("negoc") || colSource.includes("store") || colSource.includes("merchant")) {
-    return { normalized: "negocio", display: "Tienda / Negocio" };
-  }
-  if (colSource.includes("client") || colSource.includes("custom")) {
-    return { normalized: "cliente", display: "Cliente" };
-  }
-
-  // 5. Detección por campos específicos y no ambiguos de Repartidor
+  // 2. REPARTIDORES:
+  // Condición: tipo === 'repartidor' || role === 'repartidor' || Boolean(data.foto_vehiculo_repartidor_url) || Boolean(data.identificacion_repartidor)
   if (
-    d.licenciaConducir ||
-    d.driverLicense ||
-    d.tarjetaCirculacion ||
-    d.datosRepartidor ||
-    d.driverData ||
-    d.foto_perfil_repartidor_url ||
-    d.foto_vehiculo_repartidor_url ||
-    d.identificacion_repartidor ||
-    d.identificacion_repartidor_img_url ||
-    d.vehiculo_tipo ||
-    (d.tipoVehiculo && typeof d.tipoVehiculo === "string" && d.tipoVehiculo.length > 0) ||
-    (d.vehiculo && typeof d.vehiculo === "string" && (d.vehiculo.toLowerCase().includes("moto") || d.vehiculo.toLowerCase().includes("auto")))
+    tipo === "repartidor" ||
+    role === "repartidor" ||
+    tipo === "driver" ||
+    role === "driver" ||
+    Boolean((data as any).foto_vehiculo_repartidor_url) ||
+    Boolean((data as any).foto_vehiculo_url) ||
+    Boolean((data as any).identificacion_repartidor) ||
+    Boolean((data as any).identificacion_repartidor_image_url) ||
+    Boolean((data as any).identificacion_repartidor_img_url)
   ) {
     return { normalized: "repartidor", display: "Repartidor" };
   }
 
-  // 6. Detección por campos específicos y no ambiguos de Tienda / Negocio
+  // 3. TIENDAS / NEGOCIOS / SOCIOS:
+  // Condición: tipo === 'negocio' || role === 'negocio' || role === 'admin'
   if (
-    d.nombreNegocio ||
-    d.nombre_negocio ||
-    d.nombreTienda ||
-    d.nombre_tienda ||
-    d.giroNegocio ||
-    d.datosTienda ||
-    d.datosNegocio ||
-    d.fotoFachada ||
-    d.fachadaLocal
+    tipo === "negocio" ||
+    role === "negocio" ||
+    role === "admin" ||
+    tipo === "tienda" ||
+    role === "tienda" ||
+    tipo === "store" ||
+    role === "store"
   ) {
     return { normalized: "negocio", display: "Tienda / Negocio" };
   }
 
-  // 7. Prefijos en ID de documento si aplica
-  const idStr = String(data.id || "").toLowerCase();
-  if (idStr.startsWith("rep_") || idStr.startsWith("driver_") || idStr.startsWith("chofer_") || idStr.startsWith("repartidor_")) {
-    return { normalized: "repartidor", display: "Repartidor" };
-  }
-  if (idStr.startsWith("store_") || idStr.startsWith("tienda_") || idStr.startsWith("negocio_") || idStr.startsWith("comercio_")) {
-    return { normalized: "negocio", display: "Tienda / Negocio" };
-  }
-  if (idStr.startsWith("cli_") || idStr.startsWith("client_") || idStr.startsWith("usr_") || idStr.startsWith("user_")) {
+  // 4. CLIENTES / COMPRADORES:
+  // Condición: tipo === 'cliente' || role === 'cliente' || (!tipo && !role)
+  if (
+    tipo === "cliente" ||
+    role === "cliente" ||
+    tipo === "customer" ||
+    role === "customer" ||
+    tipo === "comprador" ||
+    role === "comprador" ||
+    (!tipo && !role)
+  ) {
     return { normalized: "cliente", display: "Cliente" };
   }
 
-  // 8. Por defecto: Cliente
+  // Por defecto (si no encaja en otra categoría): Cliente
   return { normalized: "cliente", display: "Cliente" };
 }
 
@@ -455,23 +276,33 @@ export function extractUserDocuments(data: FirestoreUsuarioDoc): Array<{
     }
   };
 
-  // 1. Campos específicos de la app Fruti Go (capturados directamente del documento Firestore)
-  addIfValid("foto_perfil_repartidor", "Foto de Perfil Repartidor", (data as any).foto_perfil_repartidor_url || (data as any).foto_perfil_url);
-  addIfValid("foto_vehiculo_repartidor", "Foto de Vehículo", (data as any).foto_vehiculo_repartidor_url || (data as any).foto_vehiculo_url || (data as any).fotoVehiculo);
-  addIfValid("identificacion_repartidor_img", "Identificación Oficial Repartidor (Imagen)", (data as any).identificacion_repartidor_img_url);
-  addIfValid("identificacion_repartidor", "Identificación Oficial Repartidor", (data as any).identificacion_repartidor);
+  // 1. Campos específicos de Repartidor de la app FrutiGo
+  // Identificación: doc.identificacion_repartidor_image_url || doc.identificacion_repartidor_img_url || doc.identificacion_repartidor
+  const idRepartidor = (data as any).identificacion_repartidor_image_url || 
+                       (data as any).identificacion_repartidor_img_url || 
+                       (data as any).identificacion_repartidor;
+  addIfValid("identificacion_repartidor", "Identificación Oficial Repartidor", idRepartidor);
 
-  // 2. Campos estándar de identificación, licencias y fiscales
-  addIfValid("ine", "INE / Identificación Oficial", data.ine || data.ineUrl || data.ine_url || data.fotoIne || data.identification);
-  addIfValid("ine_frente", "INE Frente", data.ineFrente || data.ine_frente || data.ineFront);
-  addIfValid("ine_reverso", "INE Reverso", data.ineReverso || data.ine_reverso || data.ineBack);
-  addIfValid("licencia", "Licencia de Conducir", data.licencia || data.licenciaUrl || data.licencia_url || data.fotoLicencia || data.driverLicense || data.driver_license);
-  addIfValid("comprobante", "Comprobante de Domicilio", data.comprobante || data.comprobanteDomicilio || data.comprobanteUrl || data.comprobante_url || data.proofOfAddress);
-  addIfValid("foto_local", "Foto del Local / Fachada", data.fotoLocal || data.foto_local || data.fachadaLocal || data.logoNegocio || data.storePhoto);
-  addIfValid("csf", "Constancia Fiscal (CSF)", data.csf || data.comprobanteFiscal || data.constanciaFiscal || data.taxId);
-  addIfValid("tarjeta_circulacion", "Tarjeta de Circulación", data.tarjetaCirculacion || data.tarjeta_circulacion || data.vehicleRegistration);
-  addIfValid("poliza_seguro", "Póliza de Seguro", data.polizaSeguro || data.poliza_seguro || data.seguro || data.insurancePolicy);
-  addIfValid("perfil", "Foto de Perfil / Avatar", data.profilePic || data.profileImage || data.photoUrl || data.avatar || data.photo_url || data.avatarUrl);
+  // Foto Vehículo: doc.foto_vehiculo_repartidor_url || doc.foto_vehiculo
+  const fotoVehiculo = (data as any).foto_vehiculo_repartidor_url || 
+                       (data as any).foto_vehiculo_url || 
+                       (data as any).foto_vehiculo;
+  addIfValid("foto_vehiculo_repartidor", "Foto de Vehículo", fotoVehiculo);
+
+  // Foto Perfil Repartidor / Usuario: doc.foto_perfil_repartidor_url || doc.foto_perfil
+  const fotoPerfil = (data as any).foto_perfil_repartidor_url || 
+                     (data as any).foto_perfil_url || 
+                     (data as any).foto_perfil || 
+                     (data as any).profilePic || 
+                     (data as any).photoUrl || 
+                     (data as any).avatar;
+  addIfValid("foto_perfil_repartidor", "Foto de Perfil", fotoPerfil);
+
+  // 2. Otros campos estándar de documentos (INE, Licencia, Comprobante, etc.)
+  addIfValid("ine", "INE / Identificación", data.ine || data.ineUrl || data.ine_url || data.fotoIne);
+  addIfValid("licencia", "Licencia de Conducir", data.licencia || data.licenciaUrl || data.licencia_url || data.fotoLicencia || (data as any).driverLicense);
+  addIfValid("comprobante", "Comprobante de Domicilio", data.comprobante || data.comprobanteDomicilio || data.comprobanteUrl || (data as any).proofOfAddress);
+  addIfValid("foto_local", "Foto del Local / Fachada", data.fotoLocal || data.foto_local || (data as any).fachadaLocal || (data as any).fotoFachada);
 
   // 3. Mapas anidados de documentos
   const subMaps = [data.documentos, data.documents, data.archivos, data.adjuntos, data.verificationDocs, data.files];
@@ -482,18 +313,15 @@ export function extractUserDocuments(data: FirestoreUsuarioDoc): Array<{
         if (key.toLowerCase().includes("ine")) label = "INE / Identificación";
         else if (key.toLowerCase().includes("licen")) label = "Licencia";
         else if (key.toLowerCase().includes("comprob")) label = "Comprobante";
+        else if (key.toLowerCase().includes("vehiculo")) label = "Foto Vehículo";
         else if (key.toLowerCase().includes("local") || key.toLowerCase().includes("fachada")) label = "Foto Local";
-        else if (key.toLowerCase().includes("tarjeta")) label = "Tarjeta Circulación";
-        else if (key.toLowerCase().includes("seguro")) label = "Póliza Seguro";
-        else if (key.toLowerCase().includes("fiscal") || key.toLowerCase().includes("csf")) label = "Constancia Fiscal";
-        else if (key.toLowerCase().includes("avatar") || key.toLowerCase().includes("photo") || key.toLowerCase().includes("perfil")) label = "Foto Perfil";
         
         addIfValid(key, label, val);
       });
     }
   });
 
-  // 4. Rastreo dinámico de cualquier campo del documento que contenga URLs de fotos o documentos
+  // 4. Rastreo dinámico de cualquier campo adicional con URL válida
   if (data && typeof data === "object") {
     Object.entries(data).forEach(([k, v]) => {
       if (typeof v === "string" && (v.startsWith("http://") || v.startsWith("https://") || v.startsWith("data:image/"))) {
@@ -504,7 +332,6 @@ export function extractUserDocuments(data: FirestoreUsuarioDoc): Array<{
         else if (kLower.includes("identificacion")) label = "Identificación Oficial";
         else if (kLower.includes("licencia")) label = "Licencia";
         else if (kLower.includes("fachada") || kLower.includes("local")) label = "Foto Fachada";
-        else if (kLower.includes("comprobante")) label = "Comprobante";
         
         addIfValid(k, label, v);
       }
@@ -516,65 +343,45 @@ export function extractUserDocuments(data: FirestoreUsuarioDoc): Array<{
 
 // Parsea un documento Firestore bruto al formato unificado
 export function parseFirestoreUsuario(docId: string, data: FirestoreUsuarioDoc): ParsedUsuario {
-  // Extracción exhaustiva de nombre
-  let nombre = "";
-  if (data.name) nombre = String(data.name);
-  else if (data.nombre) nombre = String(data.nombre);
-  else if (data.fullName) nombre = String(data.fullName);
-  else if (data.full_name) nombre = String(data.full_name);
-  else if (data.displayName) nombre = String(data.displayName);
-  else if (data.display_name) nombre = String(data.display_name);
-  else if (data.username) nombre = String(data.username);
-  else if (data.userName) nombre = String(data.userName);
-  else if (data.firstName || data.first_name) {
-    const fn = data.firstName || data.first_name || "";
-    const ln = data.lastName || data.last_name || "";
-    nombre = `${fn} ${ln}`.trim();
-  } else if (data.razonSocial || data.businessName || data.tiendaName) {
-    nombre = String(data.razonSocial || data.businessName || data.tiendaName);
-  }
+  // 1. Estructura Real de Campos por Documento
+  // Nombre: doc.name || doc.nombre || 'Sin Nombre'
+  const nombre = (data.name || data.nombre || data.fullName || data.full_name || data.displayName || "Sin Nombre").toString().trim() || "Sin Nombre";
 
-  if (!nombre.trim()) {
-    if (data.email || data.correo) {
-      nombre = String(data.email || data.correo).split("@")[0];
-    } else if (data.phone || data.telefono) {
-      nombre = `Usuario ${String(data.phone || data.telefono)}`;
-    } else {
-      nombre = `Usuario ${docId ? docId.substring(0, 8) : "Sin ID"}`;
-    }
-  }
+  // Correo: doc.email || doc.correo || 'Sin correo'
+  const correo = (data.email || data.correo || (data as any).userEmail || (data as any).mail || "Sin correo").toString().trim() || "Sin correo";
 
-  const correo = String(data.correo || data.email || data.userEmail || data.mail || "Sin correo").trim();
-  const telefono = String(data.telefono || data.phone || data.phoneNumber || data.phone_number || data.celular || data.mobile || "Sin teléfono").trim();
-  
+  // Teléfono: doc.phone || doc.telefono || 'Sin teléfono'
+  const telefono = (data.phone || data.telefono || (data as any).phoneNumber || (data as any).phone_number || (data as any).celular || (data as any).mobile || "Sin teléfono").toString().trim() || "Sin teléfono";
+
+  // Rol / Tipo: Detectar mediante (doc.tipo || doc.role || '').toLowerCase().trim()
   const roleInfo = parseUserRole(data);
-  const documentos = extractUserDocuments(data);
+
+  // Estatus Documentos: Evaluar doc.documents_submitted === true
   const documentsSubmitted = Boolean((data as any).documents_submitted === true);
+  const documentos = extractUserDocuments(data);
   const tieneDocumentos = documentos.length > 0 || documentsSubmitted;
-  
-  // Determinación del Estatus de Registro
+
+  // 2. Lógica de Clasificación de Roles y Estatus:
+  // REPARTIDORES: Si doc.documents_submitted === true (o tiene documentos subidos), marcar como Completado (OK); de lo contrario, Pendiente.
+  // CLIENTES / COMPRADORES: Marcar como Completado (OK) automáticamente (o mostrar 'N/A').
+  // TIENDAS / NEGOCIOS: Si doc.documents_submitted === true (o tiene documentos), marcar como Completado; de lo contrario, Pendiente.
   let estatusRegistro: "Completado" | "Pendiente de Documentos" = "Completado";
-  
-  const statusField = (data.estatus || data.status || data.estatusRegistro || data.state || "").toString().toLowerCase();
-  if (statusField === "completado" || statusField === "activo" || statusField === "active" || statusField === "aprobado" || statusField === "approved" || statusField === "verificado" || statusField === "verified") {
+
+  if (roleInfo.normalized === "cliente") {
     estatusRegistro = "Completado";
-  } else if (roleInfo.normalized === "cliente") {
-    estatusRegistro = "Completado";
-  } else if (tieneDocumentos || documentsSubmitted) {
-    estatusRegistro = "Completado";
-  } else if (statusField.includes("pend") || statusField.includes("review") || statusField.includes("revision")) {
-    estatusRegistro = "Pendiente de Documentos";
-  } else {
-    estatusRegistro = "Pendiente de Documentos";
+  } else if (roleInfo.normalized === "repartidor") {
+    estatusRegistro = documentsSubmitted || tieneDocumentos ? "Completado" : "Pendiente de Documentos";
+  } else if (roleInfo.normalized === "negocio") {
+    estatusRegistro = documentsSubmitted || tieneDocumentos ? "Completado" : "Pendiente de Documentos";
   }
 
-  // Extracción de fecha de registro
-  let rawDate = data.fechaRegistro || data.createdAt || data.created_at || data.creationTime || data.fecha || data.timestamp || data.registered_at || data.date;
+  // Fecha de registro
+  let rawDate = data.fechaRegistro || data.createdAt || data.created_at || data.creationTime || data.fecha || data.timestamp || data.registered_at;
   if (!rawDate && (data as any).fcm_updated_at_ms) {
     rawDate = new Date((data as any).fcm_updated_at_ms);
   }
 
-  // Datos adicionales extraídos directamente de los documentos de Firestore
+  // Datos adicionales
   const d = data as any;
   const direccion = d.direccion || d.address || d.domicilio || "";
   const lat = typeof d.lat === "number" ? d.lat : undefined;
@@ -597,7 +404,7 @@ export function parseFirestoreUsuario(docId: string, data: FirestoreUsuarioDoc):
   return {
     id: docId,
     raw: data,
-    nombre: nombre.trim(),
+    nombre,
     correo,
     telefono,
     rol: roleInfo.normalized,

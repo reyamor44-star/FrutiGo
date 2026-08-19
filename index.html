@@ -62,7 +62,7 @@
     <meta name="founder:image" content="https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd" />
     <meta name="creator:name" content="Alberto Reyes Sandoval" />
 
-    <!-- Datos Estructurados JSON-LD para la Tienda y Plataforma (Schema.org) -->
+    <!-- Datos Estructurados JSON-LD Unificado Schema.org (LocalBusiness, MobileApplication, FAQPage) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -71,71 +71,48 @@
           "@type": "WebSite",
           "@id": "https://frutigo.com.mx/#website",
           "url": "https://frutigo.com.mx/",
-          "name": "Fruti Go",
-          "alternateName": ["Fruti Go México", "Fruti Go App", "frutigo.co.mx"],
-          "description": "Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet. Tienda oficial de productos frescos con logística urbana exprés en Guadalajara y México.",
+          "name": "FrutiGo",
+          "alternateName": ["Fruti Go", "Fruti Go México", "FrutiGo App", "frutigo.co.mx"],
+          "description": "Plataforma oficial de paquetería exprés local, Taxi Pet (traslado seguro de mascotas) y marketplace de productos locales en Guadalajara, Jalisco.",
           "inLanguage": "es",
           "publisher": {
             "@id": "https://frutigo.com.mx/#organization"
-          },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://frutigo.com.mx/?search={search_term_string}",
-            "query-input": "required name=search_term_string"
           }
         },
         {
-          "@type": ["OnlineStore", "Organization"],
+          "@type": ["LocalBusiness", "Organization"],
           "@id": "https://frutigo.com.mx/#organization",
-          "name": "Fruti Go",
-          "legalName": "Alberto Reyes Sandoval",
+          "name": "FrutiGo",
+          "legalName": "FrutiGo México",
           "alternateName": [
-            "Fruti Go México",
+            "Fruti Go",
             "Fruti Go Delivery",
-            "Fruti Go App",
-            "Fruti Go Paquetería",
-            "Fruti Go Taxi Pet"
+            "FrutiGo App",
+            "FrutiGo Paquetería",
+            "FrutiGo Taxi Pet"
           ],
-          "duns": "951807888",
           "url": "https://frutigo.com.mx",
           "logo": {
             "@type": "ImageObject",
+            "@id": "https://frutigo.com.mx/#logo",
             "url": "https://frutigo.com.mx/logo.png",
             "width": "1200",
             "height": "630",
-            "caption": "Fruti Go - Logotipo Oficial"
+            "caption": "FrutiGo - Logotipo Oficial"
           },
           "image": "https://frutigo.com.mx/logo.png",
-          "slogan": "Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet",
-          "description": "Fruti Go es la plataforma oficial de logística urbana, paquetería exprés, taxi pet para transporte seguro de mascotas y delivery de productos frescos en Guadalajara y México.",
-          "founder": {
-            "@type": "Person",
-            "@id": "https://frutigo.com.mx/#founder",
-            "name": "Alberto Reyes Sandoval",
-            "givenName": "Alberto",
-            "familyName": "Reyes Sandoval",
-            "jobTitle": "Creador, Desarrollador Principal y Fundador",
-            "url": "https://frutigo.com.mx/sobre-el-desarrollador",
-            "image": {
-              "@type": "ImageObject",
-              "@id": "https://frutigo.com.mx/#founder-photo",
-              "url": "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd",
-              "contentUrl": "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd",
-              "name": "Alberto Reyes Sandoval - Fotografía Oficial",
-              "caption": "Alberto Reyes Sandoval - Creador, Desarrollador Principal y Fundador de Fruti Go",
-              "description": "Fotografía oficial de perfil y retrato en alta resolución de Alberto Reyes Sandoval, Fundador de Fruti Go.",
-              "width": "1200",
-              "height": "1600",
-              "encodingFormat": "image/jpeg",
-              "representativeOfPage": true
+          "slogan": "Paquetería exprés local, Taxi Pet seguro y comercio justo en Guadalajara",
+          "description": "FrutiGo es la plataforma líder en la Zona Sur de Guadalajara para paquetería exprés local, transporte seguro de mascotas (Taxi Pet) y marketplace de comercio justo con 0% de comisión para comunidades nativas.",
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Zona Sur de Guadalajara, Jalisco, México"
             },
-            "sameAs": [
-              "https://www.wikidata.org/wiki/Q140880376",
-              "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
-              "https://www.linkedin.com/in/alberto-reyes-sandoval",
-              "https://github.com/reyamor44-star"
-            ]
-          },
+            {
+              "@type": "City",
+              "name": "Guadalajara"
+            }
+          ],
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "San Rafael 2790",
@@ -151,36 +128,76 @@
             "availableLanguage": ["Spanish", "English"]
           },
           "sameAs": [
-            "https://play.google.com/store/apps/details?id=com.frutigo.app",
-            "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
-            "https://www.wikidata.org/wiki/Q140880376",
-            "https://www.linkedin.com/in/alberto-reyes-sandoval",
-            "https://github.com/reyamor44-star"
+            "https://play.google.com/store/apps/details?id=com.tuapp.frutigo"
           ]
         },
         {
-          "@type": "SoftwareApplication",
-          "@id": "https://frutigo.com.mx/#app",
-          "name": "Fruti Go",
+          "@type": "MobileApplication",
+          "@id": "https://frutigo.com.mx/#mobileapp",
+          "name": "FrutiGo",
           "operatingSystem": "Android",
           "applicationCategory": "ShoppingApplication",
-          "description": "Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet en Guadalajara y México.",
-          "downloadUrl": "https://play.google.com/store/apps/details?id=com.frutigo.app",
-          "installUrl": "https://play.google.com/store/apps/details?id=com.frutigo.app",
+          "applicationSubCategory": "Delivery & Transport Application",
+          "url": "https://play.google.com/store/apps/details?id=com.tuapp.frutigo",
+          "downloadUrl": "https://play.google.com/store/apps/details?id=com.tuapp.frutigo",
+          "installUrl": "https://play.google.com/store/apps/details?id=com.tuapp.frutigo",
           "image": "https://frutigo.com.mx/logo.png",
           "publisher": {
             "@id": "https://frutigo.com.mx/#organization"
           },
-          "author": {
-            "@id": "https://frutigo.com.mx/#founder"
-          },
-          "url": "https://play.google.com/store/apps/details?id=com.frutigo.app",
           "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "MXN",
-            "url": "https://play.google.com/store/apps/details?id=com.frutigo.app"
+            "availability": "https://schema.org/InStock",
+            "url": "https://play.google.com/store/apps/details?id=com.tuapp.frutigo"
           }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://frutigo.com.mx/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué servicios ofrece FrutiGo en la Zona Sur de Guadalajara?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "FrutiGo ofrece en su Fase 1 servicios de paquetería exprés local ultrarrápida y Taxi Pet para el traslado seguro y cómodo de mascotas en toda la Zona Sur de Guadalajara, Jalisco. En su Fase 2, se integrará el marketplace de fruta fresca y alimentos locales. Puedes solicitar todos estos servicios descargando la <a href=\"https://play.google.com/store/apps/details?id=com.tuapp.frutigo\">aplicación de FrutiGo en Google Play Store</a> o visitando nuestra web oficial <a href=\"https://frutigo.com.mx\">frutigo.com.mx</a>."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo funciona el servicio de Taxi Pet para el traslado de mascotas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El servicio de Taxi Pet de FrutiGo está diseñado exclusivamente para el traslado seguro, climatizado y con protocolos de cuidado para perros, gatos y otras mascotas en la Zona Sur de Guadalajara. Los viajes se solicitan en tiempo real desde la <a href=\"https://play.google.com/store/apps/details?id=com.tuapp.frutigo\">app móvil de FrutiGo</a>, permitiendo monitorear la ruta por GPS con conductores capacitados y amigables con los animales."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuáles son los requisitos y beneficios para trabajar como repartidor en FrutiGo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "FrutiGo implementa un modelo laboral ético y justo que limita las jornadas a un máximo de 6 horas diarias para evitar el agotamiento y promover el bienestar del repartidor, acompañado de comisiones competitivas y transparentes. Para registrarte como socio repartidor (en moto o auto), solo necesitas subir tu identificación oficial y documentación directamente desde la <a href=\"https://play.google.com/store/apps/details?id=com.tuapp.frutigo\">aplicación oficial de FrutiGo</a>."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dónde y cómo puedo descargar la aplicación móvil de FrutiGo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Puedes descargar la aplicación oficial de FrutiGo para dispositivos Android de forma 100% gratuita directamente desde la <a href=\"https://play.google.com/store/apps/details?id=com.tuapp.frutigo\">tienda oficial de Google Play Store</a> o accediendo desde nuestro portal web <a href=\"https://frutigo.com.mx\">https://frutigo.com.mx</a> para comenzar a enviar paquetes y solicitar Taxi Pet al instante."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo apoya FrutiGo a las comunidades nativas y al comercio local?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En su Fase 2, FrutiGo implementa una política social de 0% de comisión para productores de comunidades nativas y pequeños agricultores locales en su marketplace de frutas y verduras frescas. Esto garantiza un comercio 100% justo, precios directos del campo sin intermediarios y apoyo económico directo a las familias productoras de la región de Jalisco."
+              }
+            }
+          ]
         }
       ]
     }

@@ -47,6 +47,7 @@ import { FounderProfileCard } from "./components/FounderProfileCard";
 import FundadorGaleriaPublica from "./components/FundadorGaleriaPublica";
 import { updateDynamicMetadata, SEO_SECTION_DATA } from "./utils/seo";
 import RegistroFrutigo from "./components/RegistroFrutigo";
+import FaqSection from "./components/FaqSection";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -1961,16 +1962,21 @@ export default function App() {
                   ) : currentSection === "desarrollador" || currentSection === "medios" || currentSection === "fundador" ? (
                     <FundadorGaleriaPublica />
                   ) : (
-                    <div 
-                      className="markdown-body prose prose-zinc prose-brand-yellow max-w-none relative z-10"
-                      dangerouslySetInnerHTML={{ 
-                        __html: highlightBrandName(
-                          currentLang === "es" 
-                            ? ((policies as any)?.[currentSection] || DEFAULT_POLICIES_BY_LANG.es[currentSection as keyof Policies] || "")
-                            : (DEFAULT_POLICIES_BY_LANG[currentLang][currentSection as keyof Policies] || "")
-                        ) 
-                      }}
-                    />
+                    <>
+                      <div 
+                        className="markdown-body prose prose-zinc prose-brand-yellow max-w-none relative z-10"
+                        dangerouslySetInnerHTML={{ 
+                          __html: highlightBrandName(
+                            currentLang === "es" 
+                              ? ((policies as any)?.[currentSection] || DEFAULT_POLICIES_BY_LANG.es[currentSection as keyof Policies] || "")
+                              : (DEFAULT_POLICIES_BY_LANG[currentLang][currentSection as keyof Policies] || "")
+                          ) 
+                        }}
+                      />
+                      {currentSection === "soporte" && (
+                        <FaqSection className="mt-8" />
+                      )}
+                    </>
                   )}
                   
                   {currentSection !== "cuenta" && currentSection !== "desarrollador" && currentSection !== "medios" && currentSection !== "fundador" && policies?.[currentSection] === "" && (

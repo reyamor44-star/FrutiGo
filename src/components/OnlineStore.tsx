@@ -45,6 +45,7 @@ import { generateOrderPDF, generateCFDIPDF, downloadCFDIXML, generatePriceListPD
 import { getProductWhiteBgImage } from "../utils/productImages";
 import AppDownloadBanner from "./AppDownloadBanner";
 import ExpandableImage from "./ExpandableImage";
+import FaqSection from "./FaqSection";
 import { 
   Language, 
   LANGUAGES, 
@@ -1779,6 +1780,9 @@ export default function OnlineStore({
             </div>
           </div>
         )}
+
+        {/* Sección de Preguntas Frecuentes (FAQ Schema & Accesible) */}
+        <FaqSection className="mt-12" />
       </main>
 
       {/* Floating Bottom Bar: Order Summary & Checkout Trigger */}

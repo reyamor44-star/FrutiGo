@@ -47,3 +47,33 @@ html, body {
   @apply list-disc ml-6 mb-4 text-zinc-700;
 }
 
+/* Contenedor responsivo 16:9 para videos incrustados de YouTube y multimedia */
+.video-contenedor {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.video-contenedor iframe,
+.video-contenedor video,
+.video-contenedor embed,
+.video-contenedor object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+  border-radius: 12px;
+  display: block;
+}
+

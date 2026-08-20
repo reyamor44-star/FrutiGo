@@ -25,15 +25,26 @@ export const SEO_SECTION_DATA: Record<string, SeoConfig> = {
     imageAlt: "Fruti Go - Tienda en Línea y Delivery Exprés",
   },
   desarrollador: {
-    title: "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go",
+    title: "Alberto Reyes Sandoval | Fundador y Desarrollador de FrutiGo",
     description:
-      "Alberto Reyes Sandoval nació el 29 de julio de 1973 en Zamora, Michoacán. Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx). Trayectoria en ingeniería de software e ITESO.",
+      "Conoce a Alberto Reyes Sandoval, fundador y desarrollador de FrutiGo en Guadalajara, México. Conoce su historia, visión técnica, arquitectura de software y trayectoria profesional.",
     keywords:
-      "Alberto Reyes Sandoval, Fundador Fruti Go, Creador Fruti Go, Desarrollador Fruti Go, Alberto Reyes Sandoval perfil, Fruti Go México",
-    canonicalUrl: "https://frutigo.com.mx/sobre-el-desarrollador",
+      "Alberto Reyes Sandoval, Alberto Reyes Sandoval FrutiGo, Fundador y Desarrollador de FrutiGo, Creador FrutiGo, Desarrollador FrutiGo, Alberto Reyes Sandoval Guadalajara, Alberto Reyes Sandoval México, FrutiGo",
+    canonicalUrl: "https://frutigo.com.mx/desarrollador",
     ogType: "profile",
     image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Alberto Reyes Sandoval - Creador, Desarrollador Principal y Fundador de Fruti Go",
+    imageAlt: "Alberto Reyes Sandoval desarrollador de FrutiGo",
+  },
+  fundador: {
+    title: "Alberto Reyes Sandoval | Fundador y Desarrollador de FrutiGo",
+    description:
+      "Conoce a Alberto Reyes Sandoval, fundador y desarrollador de FrutiGo en Guadalajara, México. Conoce su historia, visión técnica, arquitectura de software y trayectoria profesional.",
+    keywords:
+      "Alberto Reyes Sandoval, Alberto Reyes Sandoval FrutiGo, Fundador y Desarrollador de FrutiGo, Creador FrutiGo, Desarrollador FrutiGo, Alberto Reyes Sandoval Guadalajara, Alberto Reyes Sandoval México, FrutiGo",
+    canonicalUrl: "https://frutigo.com.mx/desarrollador",
+    ogType: "profile",
+    image: DEFAULT_FOUNDER_IMAGE,
+    imageAlt: "Alberto Reyes Sandoval desarrollador de FrutiGo",
   },
   politicas: {
     title: "Fruti Go | Políticas de Envío, Entrega y Garantía de Frescura",
@@ -102,37 +113,37 @@ export const SEO_SECTION_DATA: Record<string, SeoConfig> = {
     imageAlt: "Fruti Go - Eliminación de Cuenta",
   },
   medios: {
-    title: "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+    title: "Medios y Prensa | Alberto Reyes Sandoval - FrutiGo",
     description:
-      "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go.",
+      "Sala de prensa, archivo multimedia oficial, galería fotográfica y videos de YouTube de Alberto Reyes Sandoval, Fundador y Desarrollador de FrutiGo en México.",
     keywords:
-      "medios Fruti Go, galeria Alberto Reyes Sandoval, fotos Alberto Reyes Sandoval, videos Fruti Go, multimedia Alberto Reyes Sandoval, prensa Fruti Go, Alberto Reyes Sandoval",
+      "Medios y Prensa Alberto Reyes Sandoval, Alberto Reyes Sandoval Medios, Prensa FrutiGo, Galería Alberto Reyes Sandoval, Videos Alberto Reyes Sandoval FrutiGo, FrutiGo México",
     canonicalUrl: "https://frutigo.com.mx/medios",
     ogType: "profile",
     image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Galería y Medios Oficiales de Alberto Reyes Sandoval - Fruti Go",
+    imageAlt: "Medios y Prensa | Alberto Reyes Sandoval - FrutiGo",
   },
   articulos: {
-    title: "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go",
+    title: "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - FrutiGo",
     description:
-      "Artículos oficiales, publicaciones técnicas y ensayos sobre arquitectura de software, logística B2B y tecnología en Fruti Go por Alberto Reyes Sandoval.",
+      "Artículos oficiales, publicaciones técnicas y ensayos sobre arquitectura de software, logística B2B y tecnología en FrutiGo por Alberto Reyes Sandoval.",
     keywords:
-      "articulos Fruti Go, publicaciones Alberto Reyes Sandoval, blog Alberto Reyes Sandoval, arquitectura software Fruti Go, ensayos tecnologia Alberto Reyes Sandoval, Alberto Reyes Sandoval",
+      "articulos FrutiGo, publicaciones Alberto Reyes Sandoval, blog Alberto Reyes Sandoval, arquitectura software FrutiGo, ensayos tecnologia Alberto Reyes Sandoval, Alberto Reyes Sandoval",
     canonicalUrl: "https://frutigo.com.mx/articulos",
     ogType: "website",
     image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Artículos y Publicaciones Técnicas - Alberto Reyes Sandoval Fruti Go",
+    imageAlt: "Artículos y Publicaciones Técnicas - Alberto Reyes Sandoval FrutiGo",
   },
   galeria: {
-    title: "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
+    title: "Medios y Prensa | Alberto Reyes Sandoval - FrutiGo",
     description:
-      "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval, Creador, Desarrollador Principal y Fundador de Fruti Go.",
+      "Sala de prensa, archivo multimedia oficial, galería fotográfica y videos de YouTube de Alberto Reyes Sandoval, Fundador y Desarrollador de FrutiGo en México.",
     keywords:
-      "galeria Fruti Go, fotos Alberto Reyes Sandoval, videos Fruti Go, multimedia Alberto Reyes Sandoval, prensa Fruti Go",
+      "Medios y Prensa Alberto Reyes Sandoval, Alberto Reyes Sandoval Medios, Prensa FrutiGo, Galería Alberto Reyes Sandoval, Videos Alberto Reyes Sandoval FrutiGo, FrutiGo México",
     canonicalUrl: "https://frutigo.com.mx/medios",
     ogType: "profile",
     image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Galería y Medios Oficiales de Alberto Reyes Sandoval - Fruti Go",
+    imageAlt: "Medios y Prensa | Alberto Reyes Sandoval - FrutiGo",
   },
   registro: {
     title: "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
@@ -183,7 +194,7 @@ export function updateDynamicMetadata(config: SeoConfig) {
     let element = document.querySelector(`link[rel="${rel}"]`);
     if (!element) {
       element = document.createElement("link");
-      element.setAttribute("rel", rel);
+      element.setAttribute(rel, rel);
       document.head.appendChild(element);
     }
     element.setAttribute("href", href);

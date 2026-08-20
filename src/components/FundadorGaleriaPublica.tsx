@@ -242,7 +242,7 @@ export default function FundadorGaleriaPublica() {
                     </div>
                   )}
 
-                  {/* Type Overlay Badge (Only for Videos and YouTube, photos display clean without 'Foto' badge) */}
+                  {/* Type Overlay Badge */}
                   {item.type !== "image" && (
                     <div className="absolute top-3 left-3 z-10">
                       <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md text-white shadow-md ${
@@ -288,21 +288,53 @@ export default function FundadorGaleriaPublica() {
             ))}
           </div>
         )}
+
+        {/* Strategic Cross-linking Callout: Connects Medios to Sobre el Desarrollador */}
+        <div className="p-4 sm:p-6 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 border-2 border-emerald-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs mt-6">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-black shrink-0 shadow-sm">
+              <UserCheck className="w-6 h-6" />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase font-black tracking-wider text-emerald-800 block">Liderazgo y Biografía Oficial</span>
+              <h3 className="text-sm sm:text-base font-black text-zinc-900">
+                Sobre el Desarrollador | Alberto Reyes Sandoval - Fundador de FrutiGo
+              </h3>
+              <p className="text-xs text-zinc-600 font-medium mt-0.5">
+                Conoce la visión, trayectoria universitaria en ITESO y el desarrollo tecnológico detrás de FrutiGo.
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://frutigo.com.mx/desarrollador"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              window.history.pushState(null, "", "/desarrollador");
+              window.dispatchEvent(new Event("popstate"));
+            }}
+            className="w-full sm:w-auto px-5 py-3 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-black rounded-xl shadow-sm flex items-center justify-center gap-2 shrink-0 transition-transform active:scale-95 cursor-pointer"
+            title="Conoce la trayectoria completa de Alberto Reyes Sandoval"
+          >
+            <span>Ver Perfil del Desarrollador</span>
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
       </section>
 
       {/* Artículos y Publicaciones del Desarrollador (Aparece justo después de la galería de fotos y videos) */}
       <FundadorArticulosPublicos />
 
-      {/* Lightbox Modal without excess black frame */}
+      {/* Lightbox Modal with responsive .video-contenedor (No black frame / 16:9 ratio) */}
       {lightboxItem && (
         <div
           onClick={() => setLightboxItem(null)}
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xl p-2 sm:p-4 flex flex-col items-center justify-center animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md p-2 sm:p-4 flex flex-col items-center justify-center animate-fadeIn"
         >
           {/* Floating Close Button */}
           <button
             onClick={() => setLightboxItem(null)}
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white border border-zinc-700 shadow-2xl transition cursor-pointer active:scale-95"
+            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-white border border-zinc-700 shadow-2xl transition cursor-pointer active:scale-95"
             title="Cerrar vista previa"
           >
             <X className="w-6 h-6" />
@@ -311,7 +343,7 @@ export default function FundadorGaleriaPublica() {
           {/* Media Container - dynamically adapts strictly to image/video dimensions without extra black frames or bars */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-[96vw] sm:max-w-[88vw] max-h-[88vh] flex flex-col items-center justify-center animate-in zoom-in-95 duration-200 bg-transparent p-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+            className="relative w-full max-w-[96vw] sm:max-w-4xl max-h-[90vh] flex flex-col items-center justify-center animate-in zoom-in-95 duration-200 bg-transparent p-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10"
           >
             {lightboxItem.type === "image" && (
               <img
@@ -323,28 +355,32 @@ export default function FundadorGaleriaPublica() {
             )}
 
             {lightboxItem.type === "video" && (
-              <video
-                src={lightboxItem.url}
-                controls
-                autoPlay
-                className="max-h-[82vh] w-auto max-w-full object-contain rounded-2xl bg-transparent border-0 block"
-              />
-            )}
-
-            {lightboxItem.type === "youtube" && (
-              <div className="w-[94vw] sm:w-[88vw] max-w-4xl aspect-video rounded-2xl overflow-hidden bg-transparent border-0">
-                <iframe
-                  src={`https://www.youtube.com/embed/${lightboxItem.youtubeId}?autoplay=1`}
-                  title={lightboxItem.title}
-                  className="w-full h-full border-0 bg-transparent"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+              <div className="w-full max-h-[82vh] rounded-2xl overflow-hidden bg-black">
+                <video
+                  src={lightboxItem.url}
+                  controls
+                  autoPlay
+                  className="w-full max-h-[82vh] object-contain rounded-2xl bg-transparent border-0 block"
                 />
               </div>
             )}
 
+            {lightboxItem.type === "youtube" && (
+              <div className="w-full rounded-2xl overflow-hidden shadow-2xl bg-black">
+                <div className="video-contenedor">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${lightboxItem.youtubeId}?autoplay=1&rel=0`}
+                    title={lightboxItem.title || "Video de YouTube de Alberto Reyes Sandoval - FrutiGo"}
+                    className="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            )}
+
             {lightboxItem.title && (
-              <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 bg-gradient-to-t from-black/85 via-black/50 to-transparent text-white pointer-events-none">
+              <div className="w-full p-3 sm:p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white mt-1">
                 <p className="text-xs sm:text-sm font-extrabold text-white line-clamp-2 drop-shadow-md">{lightboxItem.title}</p>
                 {lightboxItem.description && (
                   <p className="text-[11px] sm:text-xs text-zinc-200 line-clamp-2 mt-0.5 font-medium drop-shadow-xs">{lightboxItem.description}</p>

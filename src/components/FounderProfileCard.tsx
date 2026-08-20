@@ -229,7 +229,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
   }
 
   return (
-    <section className={`relative z-10 ${className}`}>
+    <article className={`relative z-10 ${className}`}>
       {/* Clean White Card Container matching the rest of the application */}
       <div
         className="bg-white text-zinc-900 rounded-2xl sm:rounded-[32px] p-2.5 sm:p-8 md:p-10 shadow-lg border border-emerald-100/80 relative overflow-hidden group"
@@ -238,15 +238,15 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
       >
         <meta itemProp="name" content={founderData.name} />
         <meta itemProp="jobTitle" content={founderData.role} />
-        <meta itemProp="url" content="https://frutigo.com.mx/sobre-el-desarrollador" />
+        <meta itemProp="url" content="https://frutigo.com.mx/desarrollador" />
         <link itemProp="image" href={photoUrl} />
         
         {/* Subtle Decorative Background Glow */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-50/60 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-amber-50/60 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20" />
 
-        {/* Top Header Tag */}
-        <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-8 pb-3 sm:pb-6 border-b border-zinc-200/80 relative z-10">
+        {/* Top Header Section with exact SEO H1 */}
+        <header className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-8 pb-3 sm:pb-6 border-b border-zinc-200/80 relative z-10">
           <div className="flex items-center gap-2.5 sm:gap-3">
             <span className="p-1.5 sm:p-2.5 bg-emerald-100 text-brand-green rounded-xl sm:rounded-2xl border border-emerald-200 shadow-xs">
               <UserCheck className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -255,22 +255,22 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
               <span className="text-[9px] sm:text-xs font-black uppercase tracking-[0.2em] text-emerald-700">
                 Liderazgo e Ingeniería
               </span>
-              <h3 className="text-base sm:text-2xl font-black tracking-tight text-zinc-900">
-                Sobre el Desarrollador y Fundador
-              </h3>
+              <h1 className="text-base sm:text-2xl font-black tracking-tight text-zinc-900">
+                Alberto Reyes Sandoval | Fundador y Desarrollador de FrutiGo
+              </h1>
             </div>
           </div>
           <span className="px-2.5 py-1 bg-amber-100/80 text-amber-900 border border-amber-300 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-amber-600" />
             Perfil Verificado
           </span>
-        </div>
+        </header>
 
         {/* Main Content Layout: Grid with Photo Section + Developer Information */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 md:gap-10 items-start relative z-10">
+        <main className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 md:gap-10 items-start relative z-10">
           
           {/* Photo & Contact Box (Left Col - 5 cols) */}
-          <div className="lg:col-span-5 flex flex-col items-center text-center space-y-4 sm:space-y-6 bg-zinc-50/80 border border-zinc-200/70 p-2.5 sm:p-6 rounded-2xl sm:rounded-3xl">
+          <section aria-label="Fotografía oficial de Alberto Reyes Sandoval" className="lg:col-span-5 flex flex-col items-center text-center space-y-4 sm:space-y-6 bg-zinc-50/80 border border-zinc-200/70 p-2.5 sm:p-6 rounded-2xl sm:rounded-3xl">
             
             {/* Dedicated Photo Section */}
             <div className="w-full flex flex-col items-center space-y-3">
@@ -282,11 +282,11 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
                   {hasPhoto ? (
                     <ExpandableImage
                       src={photoUrl}
-                      alt="Alberto Reyes Sandoval - Fotografía Oficial"
+                      alt="Alberto Reyes Sandoval desarrollador de FrutiGo"
                       caption="Alberto Reyes Sandoval - Fundador, Creador y Desarrollador de Fruti Go"
                       width={1200}
                       height={1600}
-                      title="Toca para ampliar la foto oficial"
+                      title="Toca para ampliar la foto oficial de Alberto Reyes Sandoval"
                       itemProp="image"
                       loading="eager"
                       decoding="async"
@@ -311,16 +311,16 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
               </div>
             </div>
 
-          </div>
+          </section>
 
           {/* Bio & Vision Content (Right Col - 7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
+          <section aria-label="Biografía y Trayectoria de Alberto Reyes Sandoval" className="lg:col-span-7 space-y-6">
             
             {/* Name & Role Headline */}
             <div>
-              <h4 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-900 flex items-center gap-2">
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-900 flex items-center gap-2">
                 {founderData.name}
-              </h4>
+              </h2>
               <p className="text-brand-green font-bold text-sm sm:text-base mt-1 flex items-center gap-1.5">
                 <Code2 className="w-4 h-4 text-emerald-600" />
                 {founderData.role}
@@ -460,16 +460,43 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
               </div>
             )}
 
-          </div>
+          </section>
 
-        </div>
+        </main>
 
-        {/* Pie de Página: Botones Oficiales y de Contacto Movidos al Pie */}
-        <div className="mt-8 pt-6 border-t-2 border-emerald-100 flex flex-col gap-2.5 relative z-10">
+        {/* Pie de Página: Botones Oficiales y Enlazado Interno Estratégico */}
+        <footer className="mt-8 pt-6 border-t-2 border-emerald-100 flex flex-col gap-2.5 relative z-10">
           <div className="text-[11px] font-black uppercase tracking-wider text-emerald-900 mb-1 flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>Enlaces Oficiales y Canales de Contacto</span>
+            <span>Enlaces Oficiales, Prensa y Canales de Contacto</span>
           </div>
+
+          {/* Direct Strategic Link to Media & Press Module (Transfers topical SEO authority) */}
+          <a
+            href="https://frutigo.com.mx/medios"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("modulo-medios");
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+              window.history.pushState(null, "", "/medios");
+              window.dispatchEvent(new Event("popstate"));
+            }}
+            className="w-full bg-gradient-to-r from-emerald-600 to-emerald-800 hover:from-emerald-700 hover:to-emerald-900 text-white font-extrabold py-3.5 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-md hover:shadow-lg transition-all active:scale-98 group/medios cursor-pointer border border-emerald-500/50"
+            title="Medios y Prensa | Alberto Reyes Sandoval - FrutiGo (Sala de prensa, videos de YouTube y galería multimedia)"
+          >
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-5 h-5 text-amber-300 group-hover/medios:scale-110 transition-transform shrink-0" />
+              <div className="text-left">
+                <span className="block text-[10px] uppercase tracking-wider text-emerald-100 font-bold">Sala de Prensa y Multimedia</span>
+                <span className="block font-black text-white text-xs sm:text-sm">Medios y Prensa | Alberto Reyes Sandoval - FrutiGo</span>
+              </div>
+            </div>
+            <span className="text-[11px] font-extrabold text-emerald-950 bg-amber-300 px-3 py-1 rounded-xl shadow-xs shrink-0 flex items-center gap-1">
+              Ver Medios <ExternalLink className="w-3 h-3" />
+            </span>
+          </a>
 
           {/* Google Play Store Download Button - Paquetería y Taxi Pet */}
           <a
@@ -551,30 +578,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             </div>
             <ExternalLink className="w-4 h-4 opacity-80 shrink-0 text-amber-300" />
           </a>
-
-          {/* Direct Link to Media & Gallery Module */}
-          <a
-            href="#modulo-medios"
-            onClick={(e) => {
-              e.preventDefault();
-              const el = document.getElementById("modulo-medios");
-              if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "start" });
-                window.history.pushState(null, "", "/medios");
-              }
-            }}
-            className="w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-950 font-bold py-3 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-xs transition-all active:scale-98 border border-emerald-300/80 group/medios cursor-pointer"
-            title="Ver Galería de Fotos, Videos y Archivo Multimedia Oficial"
-          >
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-emerald-700 group-hover/medios:scale-110 transition-transform shrink-0" />
-              <span>Galería y Archivo Multimedia Oficial</span>
-            </div>
-            <span className="text-[11px] font-extrabold text-emerald-800 bg-white px-2.5 py-1 rounded-lg border border-emerald-200 shadow-xs">
-              /medios
-            </span>
-          </a>
-        </div>
+        </footer>
 
         {/* Metadatos Estructurados Schema.org para Indexación de Wikidata, Autoridad de Marca e Imágenes */}
         <script
@@ -772,6 +776,6 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
         />
 
       </div>
-    </section>
+    </article>
   );
 };

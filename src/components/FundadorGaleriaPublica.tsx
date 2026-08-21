@@ -25,7 +25,7 @@ import ExpandableImage from "./ExpandableImage";
 export default function FundadorGaleriaPublica() {
   const [items, setItems] = useState<FounderMediaItem[]>([]);
   const [activeFilter, setActiveFilter] = useState<"all" | "image" | "video" | "youtube">("all");
-  const [lightboxItem, setLightboxItem] = useState<FounderMediaItem | null>(null);
+  const [playingItems, setPlayingItems] = useState<Record<string, boolean>>({});
   const [copiedLink, setCopiedLink] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
 
@@ -36,6 +36,14 @@ export default function FundadorGaleriaPublica() {
     });
     return () => unsubscribe();
   }, []);
+
+  const togglePlayItem = (id: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setPlayingItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   // Auto-scroll into view if navigation targeted media/galeria direct URL
   useEffect(() => {
@@ -57,12 +65,16 @@ export default function FundadorGaleriaPublica() {
       );
 
       if (isMediaTarget) {
-        setTimeout(() => {
-          const el = document.getElementById("modulo-medios") || galleryRef.current;
+        const scrollToFilters = () => {
+          const el = document.getElementById("modulo-medios-filtros") || document.getElementById("modulo-medios");
           if (el) {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }
-        }, 150);
+        };
+        // Trigger scroll once content mounts and after image layout settles
+        setTimeout(scrollToFilters, 100);
+        setTimeout(scrollToFilters, 350);
+        setTimeout(scrollToFilters, 600);
       }
     }
   }, []);
@@ -88,12 +100,27 @@ export default function FundadorGaleriaPublica() {
     });
   };
 
-  const filteredItems = items.filter((item) => {
-    if (activeFilter === "all") return true;
-    if (activeFilter === "image") return item.type === "image";
-    if (activeFilter === "video") return item.type === "video" || item.type === "youtube";
-    return item.type === activeFilter;
-  });
+  const filteredItems = items
+    .filter((item) => {
+      if (activeFilter === "all") return true;
+      if (activeFilter === "image") return item.type === "image";
+      if (activeFilter === "video") return item.type === "video" || item.type === "youtube";
+      return item.type === activeFilter;
+    })
+    .sort((a, b) => {
+      if (activeFilter === "all") {
+        // Los videos (YouTube y video nativo) siempre encabezan la lista en 'Todos'
+        const isVideoA = a.type === "video" || a.type === "youtube" ? 1 : 0;
+        const isVideoB = b.type === "video" || b.type === "youtube" ? 1 : 0;
+        if (isVideoA !== isVideoB) {
+          return isVideoB - isVideoA;
+        }
+      }
+      // Orden cronológico (más reciente primero)
+      const timeA = new Date(a.createdAt || 0).getTime();
+      const timeB = new Date(b.createdAt || 0).getTime();
+      return timeB - timeA;
+    });
 
   return (
     <div className="space-y-6 sm:space-y-12 max-w-7xl mx-auto px-0 sm:px-6 lg:px-8 py-2 sm:py-8">
@@ -144,7 +171,10 @@ export default function FundadorGaleriaPublica() {
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex items-center gap-1.5 bg-zinc-100 p-1.5 rounded-2xl border border-zinc-200 self-start md:self-auto shrink-0 overflow-x-auto max-w-full">
+          <div 
+            id="modulo-medios-filtros" 
+            className="flex items-center gap-1.5 bg-zinc-100 p-1.5 rounded-2xl border border-zinc-200 self-start md:self-auto shrink-0 overflow-x-auto max-w-full scroll-mt-3 sm:scroll-mt-6"
+          >
             <button
               onClick={() => setActiveFilter("all")}
               className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap ${
@@ -189,103 +219,139 @@ export default function FundadorGaleriaPublica() {
             <p className="text-xs text-zinc-500 mt-1">Vuelve a consultar pronto para ver más actualizaciones multimedia.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-            {filteredItems.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => {
-                  if (item.type !== "image") {
-                    setLightboxItem(item);
-                  }
-                }}
-                className="group relative bg-white rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between"
-              >
-                {/* Media Container */}
-                <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-transparent flex items-center justify-center p-1 rounded-t-2xl">
-                  {item.type === "image" && (
-                    <ExpandableImage
-                      src={item.url}
-                      alt={item.altText || "Alberto Reyes Sandoval - Fundador de Fruti Go"}
-                      caption={item.title}
-                      title="Toca para expandir imagen aquí mismo"
-                      className="w-full h-full object-cover rounded-xl"
-                      containerClassName="w-full h-full"
-                      loading="lazy"
-                    />
-                  )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {filteredItems.map((item) => {
+              const isPlaying = !!playingItems[item.id];
 
-                  {item.type === "video" && (
-                    <div className="relative w-full h-full flex items-center justify-center rounded-xl overflow-hidden bg-transparent">
-                      <video src={item.url} className="w-full h-full object-cover opacity-90" />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition">
-                        <div className="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition">
-                          <Play className="w-6 h-6 fill-current ml-0.5" />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {item.type === "youtube" && (
-                    <div className="relative w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl overflow-hidden">
-                      <img
-                        src={`https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`}
-                        alt={item.altText || "Alberto Reyes Sandoval - Video de YouTube Fruti Go"}
-                        title={item.title}
-                        className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-500"
+              return (
+                <div
+                  key={item.id}
+                  className="group relative bg-white rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between"
+                >
+                  {/* Media Container */}
+                  <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-zinc-950 flex items-center justify-center rounded-t-2xl">
+                    {item.type === "image" && (
+                      <ExpandableImage
+                        src={item.url}
+                        alt={item.altText || "Alberto Reyes Sandoval - Fundador de Fruti Go"}
+                        caption={item.title}
+                        title="Toca para expandir imagen aquí mismo"
+                        className="w-full h-full object-cover"
+                        containerClassName="w-full h-full"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition flex items-center justify-center">
-                        <div className="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-                          <Youtube className="w-7 h-7 fill-current" />
+                    )}
+
+                    {item.type === "video" && (
+                      isPlaying ? (
+                        <div className="w-full h-full bg-black flex items-center justify-center">
+                          <video
+                            src={item.url}
+                            controls
+                            autoPlay
+                            playsInline
+                            className="w-full h-full object-contain"
+                          />
                         </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={(e) => togglePlayItem(item.id, e)}
+                          className="relative w-full h-full flex items-center justify-center bg-zinc-900 group/btn cursor-pointer"
+                          title="Reproducir video aquí mismo"
+                        >
+                          <video src={item.url} className="w-full h-full object-cover opacity-80" />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover/btn:bg-black/10 transition">
+                            <div className="w-14 h-14 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-xl group-hover/btn:scale-110 transition">
+                              <Play className="w-7 h-7 fill-current ml-0.5" />
+                            </div>
+                          </div>
+                        </button>
+                      )
+                    )}
+
+                    {item.type === "youtube" && (
+                      isPlaying ? (
+                        <div className="w-full h-full bg-black flex items-center justify-center">
+                          <iframe
+                            src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&rel=0`}
+                            title={item.title || "Video de YouTube de Alberto Reyes Sandoval - FrutiGo"}
+                            className="w-full h-full border-0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                          />
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={(e) => togglePlayItem(item.id, e)}
+                          className="relative w-full h-full flex items-center justify-center bg-zinc-950 group/btn cursor-pointer"
+                          title="Reproducir video de YouTube aquí mismo"
+                        >
+                          <img
+                            src={`https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`}
+                            alt={item.altText || "Alberto Reyes Sandoval - Video de YouTube Fruti Go"}
+                            title={item.title}
+                            className="w-full h-full object-cover opacity-90 group-hover/btn:scale-105 transition duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-black/30 group-hover/btn:bg-black/10 transition flex items-center justify-center">
+                            <div className="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-2xl group-hover/btn:scale-110 transition">
+                              <Youtube className="w-8 h-8 fill-current" />
+                            </div>
+                          </div>
+                        </button>
+                      )
+                    )}
+
+                    {/* Type Overlay Badge (Hidden when actively playing video to keep controls 100% visible) */}
+                    {!isPlaying && item.type !== "image" && (
+                      <div className="absolute top-3 left-3 z-10 pointer-events-none">
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md text-white shadow-md ${
+                          item.type === "video" ? "bg-blue-950/80 border border-blue-500/30" :
+                          "bg-red-950/80 border border-red-500/30"
+                        }`}>
+                          {item.type === "video" && <VideoIcon className="w-3 h-3 text-blue-400" />}
+                          {item.type === "youtube" && <Youtube className="w-3 h-3 text-red-400" />}
+                          {item.type === "youtube" ? "YouTube" : "Video"}
+                        </span>
                       </div>
-                    </div>
-                  )}
-
-                  {/* Type Overlay Badge */}
-                  {item.type !== "image" && (
-                    <div className="absolute top-3 left-3 z-10">
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md text-white shadow-md ${
-                        item.type === "video" ? "bg-blue-950/80 border border-blue-500/30" :
-                        "bg-red-950/80 border border-red-500/30"
-                      }`}>
-                        {item.type === "video" && <VideoIcon className="w-3 h-3 text-blue-400" />}
-                        {item.type === "youtube" && <Youtube className="w-3 h-3 text-red-400" />}
-                        {item.type === "youtube" ? "YouTube" : "Video"}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Expand icon on hover */}
-                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300">
-                    <span className="p-2 rounded-xl bg-black/70 text-white backdrop-blur-md flex items-center justify-center">
-                      <Maximize2 className="w-4 h-4" />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Info Footer */}
-                <div className="p-3.5 sm:p-4 bg-white border-t border-zinc-100 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-extrabold text-zinc-900 text-base line-clamp-1 group-hover:text-emerald-700 transition">
-                      {item.title}
-                    </h3>
-                    {item.description && (
-                      <p className="text-zinc-700 text-xs sm:text-xs font-medium mt-1 line-clamp-2 leading-relaxed">
-                        {item.description}
-                      </p>
                     )}
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-500 font-semibold">
-                    <span>Alberto Reyes Sandoval</span>
-                    <span className="text-emerald-700 font-bold group-hover:underline flex items-center gap-1">
-                      Ver detalle <Maximize2 className="w-3 h-3" />
-                    </span>
+                  {/* Info Footer */}
+                  <div className="p-3.5 sm:p-4 bg-white border-t border-zinc-100 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-extrabold text-zinc-900 text-base line-clamp-2 group-hover:text-emerald-700 transition">
+                        {item.title}
+                      </h3>
+                      {item.description && (
+                        <p className="text-zinc-700 text-xs sm:text-xs font-medium mt-1 line-clamp-2 leading-relaxed">
+                          {item.description}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mt-3 pt-2 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-500 font-semibold">
+                      <span>Alberto Reyes Sandoval</span>
+                      {item.type === "image" ? (
+                        <span className="text-emerald-700 font-bold flex items-center gap-1">
+                          Fotografía Oficial
+                        </span>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={(e) => togglePlayItem(item.id, e)}
+                          className="text-emerald-700 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                          {isPlaying ? "Detener" : "Reproducir video"} <Play className="w-3 h-3 fill-current" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
@@ -324,72 +390,6 @@ export default function FundadorGaleriaPublica() {
 
       {/* Artículos y Publicaciones del Desarrollador (Aparece justo después de la galería de fotos y videos) */}
       <FundadorArticulosPublicos />
-
-      {/* Lightbox Modal with responsive .video-contenedor (No black frame / 16:9 ratio) */}
-      {lightboxItem && (
-        <div
-          onClick={() => setLightboxItem(null)}
-          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md p-2 sm:p-4 flex flex-col items-center justify-center animate-fadeIn"
-        >
-          {/* Floating Close Button */}
-          <button
-            onClick={() => setLightboxItem(null)}
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-white border border-zinc-700 shadow-2xl transition cursor-pointer active:scale-95"
-            title="Cerrar vista previa"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          {/* Media Container - dynamically adapts strictly to image/video dimensions without extra black frames or bars */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[96vw] sm:max-w-4xl max-h-[90vh] flex flex-col items-center justify-center animate-in zoom-in-95 duration-200 bg-transparent p-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-          >
-            {lightboxItem.type === "image" && (
-              <img
-                src={lightboxItem.url}
-                alt={lightboxItem.altText || "Alberto Reyes Sandoval - Fundador de Fruti Go"}
-                title={lightboxItem.title}
-                className="max-h-[82vh] w-auto max-w-full object-contain rounded-2xl bg-transparent border-0 block"
-              />
-            )}
-
-            {lightboxItem.type === "video" && (
-              <div className="w-full max-h-[82vh] rounded-2xl overflow-hidden bg-black">
-                <video
-                  src={lightboxItem.url}
-                  controls
-                  autoPlay
-                  className="w-full max-h-[82vh] object-contain rounded-2xl bg-transparent border-0 block"
-                />
-              </div>
-            )}
-
-            {lightboxItem.type === "youtube" && (
-              <div className="w-full rounded-2xl overflow-hidden shadow-2xl bg-black">
-                <div className="video-contenedor">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${lightboxItem.youtubeId}?autoplay=1&rel=0`}
-                    title={lightboxItem.title || "Video de YouTube de Alberto Reyes Sandoval - FrutiGo"}
-                    className="w-full h-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            )}
-
-            {lightboxItem.title && (
-              <div className="w-full p-3 sm:p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white mt-1">
-                <p className="text-xs sm:text-sm font-extrabold text-white line-clamp-2 drop-shadow-md">{lightboxItem.title}</p>
-                {lightboxItem.description && (
-                  <p className="text-[11px] sm:text-xs text-zinc-200 line-clamp-2 mt-0.5 font-medium drop-shadow-xs">{lightboxItem.description}</p>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

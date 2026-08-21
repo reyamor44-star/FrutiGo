@@ -476,7 +476,7 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
             href="https://frutigo.com.mx/medios"
             onClick={(e) => {
               e.preventDefault();
-              const el = document.getElementById("modulo-medios");
+              const el = document.getElementById("modulo-medios-filtros") || document.getElementById("modulo-medios");
               if (el) {
                 el.scrollIntoView({ behavior: "smooth", block: "start" });
               }

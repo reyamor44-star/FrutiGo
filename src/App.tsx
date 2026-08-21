@@ -33,7 +33,8 @@ import {
   Check,
   Youtube,
   ExternalLink,
-  Sparkles
+  Sparkles,
+  Download
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -1545,6 +1546,18 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full flex-nowrap">
+              {/* Botón Descarga la App */}
+              <a
+                href="https://play.google.com/store/apps/details?id=com.frutigo.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gradient-to-r from-emerald-600 to-brand-green hover:from-emerald-500 hover:to-emerald-700 text-white rounded-2xl border border-emerald-400/40 font-black text-xs shadow-sm hover:shadow-md transition transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+                title="Descarga la app oficial de Fruti Go en Google Play Store"
+              >
+                <Download className="w-3.5 h-3.5 text-brand-yellow shrink-0 animate-bounce" />
+                <span className="tracking-tight">Descarga la app</span>
+              </a>
+
               <button
                 onClick={() => {
                   setActiveView("legal");
@@ -1642,6 +1655,18 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full flex-nowrap scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {/* Botón Descarga la App */}
+            <a
+              href="https://play.google.com/store/apps/details?id=com.frutigo.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gradient-to-r from-emerald-600 to-brand-green hover:from-emerald-500 hover:to-emerald-700 text-white rounded-2xl border border-emerald-400/40 font-black text-xs shadow-md hover:shadow-lg transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+              title="Descarga la app oficial de Fruti Go en Google Play Store"
+            >
+              <Download className="w-3.5 h-3.5 text-brand-yellow shrink-0 animate-bounce" />
+              <span className="tracking-tight">Descarga la app</span>
+            </a>
+
             {/* Global Registration Button with Official Logo */}
             <button
               onClick={() => {

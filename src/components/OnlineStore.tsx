@@ -1318,6 +1318,18 @@ export default function OnlineStore({
                 )}
               </div>
 
+              {/* Botón Descarga la App */}
+              <a
+                href="https://play.google.com/store/apps/details?id=com.frutigo.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-gradient-to-r from-emerald-600 to-brand-green hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl border border-emerald-400/40 font-black text-xs shadow-sm hover:shadow-md transition transform active:scale-95 whitespace-nowrap cursor-pointer flex-shrink-0"
+                title="Descarga la app oficial de Fruti Go en Google Play Store"
+              >
+                <Download className="w-3.5 h-3.5 text-brand-yellow shrink-0 animate-bounce" />
+                <span className="tracking-tight">Descarga la app</span>
+              </a>
+
               {/* Botón Global de Registro con Logo Oficial */}
               <button
                 type="button"

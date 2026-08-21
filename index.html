@@ -52,11 +52,30 @@
     <meta name="founder:image" content="https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd" />
     <meta name="creator:name" content="Alberto Reyes Sandoval" />
 
-    <!-- 8. Datos Estructurados JSON-LD Unificado Schema.org (LocalBusiness, MobileApplication, WebSite, FAQPage) -->
+    <!-- 8. Datos Estructurados JSON-LD Unificado Schema.org (Person, Organization, LocalBusiness, MobileApplication, WebSite, FAQPage) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://frutigo.com.mx/#founder",
+          "name": "Alberto Reyes Sandoval",
+          "jobTitle": "Fundador y Desarrollador",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "FrutiGo",
+            "url": "https://frutigo.com.mx"
+          },
+          "url": "https://frutigo.com.mx/sobre-el-desarrollador",
+          "image": "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd",
+          "sameAs": [
+            "https://www.youtube.com/@albertofrutigo",
+            "https://www.youtube.com/@albertoreyesfrutigo",
+            "https://frutigo.com.mx/",
+            "https://play.google.com/store/apps/details?id=com.frutigo.app"
+          ]
+        },
         {
           "@type": "WebSite",
           "@id": "https://frutigo.com.mx/#website",
@@ -94,11 +113,7 @@
           "slogan": "Paquetería express local, Taxi Pet seguro y logística urbana en Guadalajara",
           "description": "Servicio de paquetería local express y transporte seguro Taxi Pet en Zapopan y el sur de Guadalajara. Envíos rápidos, seguros y al mejor precio.",
           "founder": {
-            "@type": "Person",
-            "name": "Alberto Reyes Sandoval",
-            "jobTitle": "Fundador y Desarrollador Principal",
-            "url": "https://frutigo.com.mx/desarrollador",
-            "image": "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd"
+            "@id": "https://frutigo.com.mx/#founder"
           },
           "areaServed": [
             {
@@ -129,7 +144,11 @@
             "availableLanguage": ["Spanish", "English"]
           },
           "sameAs": [
-            "https://play.google.com/store/apps/details?id=com.tuapp.frutigo"
+            "https://www.youtube.com/@albertofrutigo",
+            "https://www.youtube.com/@albertoreyesfrutigo",
+            "https://frutigo.com.mx/",
+            "https://frutigo.com.mx/sobre-el-desarrollador",
+            "https://play.google.com/store/apps/details?id=com.frutigo.app"
           ]
         },
         {
@@ -160,26 +179,66 @@
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "¿Qué servicios ofrece FrutiGo en la Zona Sur de Guadalajara y Zapopan?",
+              "name": "¿Qué servicios ofrece FrutiGo en Zapopan y Guadalajara?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "FrutiGo ofrece servicios de paquetería express local ultrarrápida y Taxi Pet para el traslado seguro y cómodo de mascotas en toda la Zona Sur de Guadalajara y Zapopan, Jalisco. Puedes solicitar todos estos servicios desde la app móvil o visitando nuestra web oficial frutigo.com.mx."
+                "text": "FrutiGo ofrece servicios locales de paquetería express inmediata para documentos y paquetes, y Taxi Pet para el traslado seguro y climatizado de mascotas en Zapopan, Tlajomulco de Zúñiga y la zona metropolitana de Guadalajara, Jalisco. Puedes solicitar y cotizar estos servicios desde la app móvil o en frutigo.com.mx."
               }
             },
             {
               "@type": "Question",
-              "name": "¿Cómo funciona el servicio de Taxi Pet para el traslado de mascotas?",
+              "name": "¿Cómo funciona el servicio de Taxi Pet para mascotas en Guadalajara?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "El servicio de Taxi Pet de FrutiGo está diseñado exclusivamente para el traslado seguro, climatizado y con protocolos de cuidado para perros, gatos y otras mascotas en Zapopan y Guadalajara con conductores capacitados y amigables con los animales."
+                "text": "El servicio Taxi Pet de FrutiGo traslada a tu perro, gato u otra mascota de manera cómoda, higiénica y segura hacia veterinarias, estéticas, guarderías o cualquier destino en Guadalajara y Zapopan. Los vehículos cuentan con equipamiento especial y conductores capacitados en el trato respetuoso de animales de compañía."
               }
             },
             {
               "@type": "Question",
-              "name": "¿Dónde y cómo puedo descargar la aplicación móvil de FrutiGo?",
+              "name": "¿Cuánto tiempo tarda una entrega de paquetería local express con FrutiGo?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Puedes descargar la aplicación oficial de FrutiGo para dispositivos Android de forma 100% gratuita directamente desde la tienda oficial de Google Play Store o accediendo desde nuestro portal web https://frutigo.com.mx."
+                "text": "Las entregas de paquetería local express de FrutiGo son en tiempo real y el mismo día. Un repartidor recolecta el paquete en tu domicilio y lo entrega directamente en el destino en un promedio de 30 a 60 minutos según la distancia en la zona conurbada de Guadalajara."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿En qué zonas y colonias de Guadalajara tiene cobertura FrutiGo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "FrutiGo cubre principalmente Zapopan, la Zona Sur de Guadalajara, Tlajomulco de Zúñiga y áreas metropolitanas colindantes, brindando servicio continuo de envíos express y Taxi Pet."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué formas de pago acepta FrutiGo para envíos y Taxi Pet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "FrutiGo acepta pagos con tarjeta de crédito, tarjeta de débito y métodos digitales seguros mediante pasarelas de pago integradas como Openpay, además de opciones de pago directo al momento de la entrega o servicio."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo enviar paquetes o documentos urgentes el mismo día con FrutiGo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, el servicio de paquetería express de FrutiGo está especializado en envíos urgentes punto a punto el mismo día con seguimiento y confirmación de entrega en tiempo real."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Quién es el fundador y desarrollador de FrutiGo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "FrutiGo fue fundada y desarrollada por Alberto Reyes Sandoval, creador y arquitecto de software de la plataforma con sede en Zapopan, Jalisco, México."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dónde puedo descargar la aplicación oficial de FrutiGo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Puedes descargar la aplicación oficial de FrutiGo de forma gratuita directamente desde la Google Play Store para dispositivos Android o accediendo a través del sitio web oficial https://frutigo.com.mx."
               }
             }
           ]

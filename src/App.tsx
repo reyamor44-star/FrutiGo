@@ -49,6 +49,7 @@ import FundadorGaleriaPublica from "./components/FundadorGaleriaPublica";
 import { updateDynamicMetadata, SEO_SECTION_DATA } from "./utils/seo";
 import RegistroFrutigo from "./components/RegistroFrutigo";
 import FaqSection from "./components/FaqSection";
+import MobileInstallFloatBanner from "./components/MobileInstallFloatBanner";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -2514,6 +2515,9 @@ export default function App() {
           onCloseAdmin={() => setIsAdminPanelOpen(false)}
         />
       )}
+
+      {/* Floating Google Play App Install Banner for Mobile */}
+      <MobileInstallFloatBanner />
     </div>
   );
 }

@@ -1,0 +1,32 @@
+{
+  "name": "FrutiGo",
+  "short_name": "FrutiGo",
+  "description": "FrutiGo es una plataforma logística y aplicación móvil enfocada en el comercio justo, entregas locales y desarrollo tecnológico en México.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.frutigo.app",
+      "url": "https://play.google.com/store/apps/details?id=com.frutigo.app"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

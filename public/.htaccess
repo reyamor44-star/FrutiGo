@@ -12,7 +12,10 @@
   RewriteCond %{HTTP_HOST} ^www\.frutigo\.com\.mx [NC]
   RewriteRule ^(.*)$ https://frutigo.com.mx/$1 [R=301,L]
 
-  # 3. Soporte para enrutamiento de Single Page Application (SPA)
+  # 3. Permitir acceso directo a .well-known (Digital Asset Links)
+  RewriteRule ^\.well-known/ - [L]
+
+  # 4. Soporte para enrutamiento de Single Page Application (SPA)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ index.html [L]

@@ -2795,6 +2795,36 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     res.status(404).send("Robots.txt no encontrado");
   });
 
+  // Google Play Digital Asset Links (App Links)
+  app.get(["/.well-known/assetlinks.json", "/assetlinks.json"], (req, res) => {
+    const assetlinksPath = path.join(process.cwd(), "public", ".well-known", "assetlinks.json");
+    if (fs.existsSync(assetlinksPath)) {
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Cache-Control", "public, max-age=3600");
+      return res.send(fs.readFileSync(assetlinksPath, "utf-8"));
+    }
+    const fallbackAssetLinks = [
+      {
+        "relation": [
+          "delegate_permission/common.handle_all_urls",
+          "delegate_permission/common.get_login_creds"
+        ],
+        "target": {
+          "namespace": "android_app",
+          "package_name": "com.frutigo.app",
+          "sha256_cert_fingerprints": [
+            "13:53:66:24:69:36:67:B0:43:49:8C:F2:98:CA:AC:FB:C4:17:18:22:D6:9A:78:2E:F8:4A:4C:5C:0B:EA:8C:E2"
+          ]
+        }
+      }
+    ];
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    return res.json(fallbackAssetLinks);
+  });
+
   // Direct SEO HTML server route for home, store, articles, institutional, developer, media and legal pages
   app.get([
     "/",

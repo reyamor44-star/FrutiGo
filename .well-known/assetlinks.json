@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.frutigo.app",
+      "sha256_cert_fingerprints": [
+        "13:53:66:24:69:36:67:B0:43:49:8C:F2:98:CA:AC:FB:C4:17:18:22:D6:9A:78:2E:F8:4A:4C:5C:0B:EA:8C:E2"
+      ]
+    }
+  }
+]

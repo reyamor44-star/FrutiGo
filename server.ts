@@ -3117,8 +3117,19 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                 },
                 "sameAs": [
                   "https://www.wikidata.org/wiki/Q140880376",
-                  profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
-                  profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
+                  "https://www.crunchbase.com/person/alberto-reyes-sandoval",
+                  "https://www.dunsguide.com/6864818a-b01d-41b8-b375-4a9608ce5674/admin/profile/preview",
+                  "https://x.com/Albertofruti",
+                  "https://es.quora.com/profile/Alberto-Reyes-Sandoval?ch=10&oid=3224999692&share=8799c97b&srid=5IIx71&target_type=user",
+                  "https://www.f6s.com/albertoreyessandoval",
+                  "https://medium.com/@reyamor44",
+                  "https://www.youtube.com/@albertofrutigo",
+                  "https://www.youtube.com/@albertoreyesfrutigo",
+                  "https://www.threads.net/@frutigo_delivery",
+                  "https://www.facebook.com/share/1EBAhhHCEv/",
+                  "https://www.tiktok.com/@fruti.go",
+                  "https://www.instagram.com/frutigo_delivery?igsi=MTF2bGFtMTQxemhreQ==",
+                  "https://www.linkedin.com/in/alberto-reyes-sandoval?utm_source=share_via&utm_content=profile&utm_medium=member_android",
                   "https://github.com/reyamor44-star"
                 ]
               },
@@ -3154,14 +3165,23 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
                   "@type": "Person",
                   "@id": "https://frutigo.com.mx/#founder",
                   "name": "Alberto Reyes Sandoval",
-                  "jobTitle": "Fundador y Creador"
+                  "jobTitle": "CEO y Fundador"
                 },
                 "sameAs": [
-                  "https://play.google.com/store/apps/details?id=com.frutigo.app",
-                  profile.youtube || "https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt",
-                  "https://www.wikidata.org/wiki/Q140880376",
-                  profile.linkedin || "https://www.linkedin.com/in/alberto-reyes-sandoval",
-                  "https://github.com/reyamor44-star"
+                  "https://www.linkedin.com/in/alberto-reyes-sandoval?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+                  "https://www.youtube.com/@albertofrutigo",
+                  "https://www.youtube.com/@albertoreyesfrutigo",
+                  "https://www.crunchbase.com/person/alberto-reyes-sandoval",
+                  "https://www.dunsguide.com/6864818a-b01d-41b8-b375-4a9608ce5674/admin/profile/preview",
+                  "https://x.com/Albertofruti",
+                  "https://www.instagram.com/frutigo_delivery?igsi=MTF2bGFtMTQxemhreQ==",
+                  "https://www.facebook.com/share/1EBAhhHCEv/",
+                  "https://www.tiktok.com/@fruti.go",
+                  "https://www.threads.net/@frutigo_delivery",
+                  "https://es.quora.com/profile/Alberto-Reyes-Sandoval?ch=10&oid=3224999692&share=8799c97b&srid=5IIx71&target_type=user",
+                  "https://medium.com/@reyamor44",
+                  "https://www.f6s.com/albertoreyessandoval",
+                  "https://play.google.com/store/apps/details?id=com.frutigo.app"
                 ]
               },
               {

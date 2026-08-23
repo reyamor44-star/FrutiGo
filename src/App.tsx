@@ -50,6 +50,7 @@ import { updateDynamicMetadata, SEO_SECTION_DATA } from "./utils/seo";
 import RegistroFrutigo from "./components/RegistroFrutigo";
 import FaqSection from "./components/FaqSection";
 import MobileInstallFloatBanner from "./components/MobileInstallFloatBanner";
+import SocialFooterLinks from "./components/SocialFooterLinks";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -2304,90 +2305,84 @@ export default function App() {
       </main>
 
       {/* Footer Responsivo y Optimizado para SEO */}
-      <footer className="border-t border-zinc-200 py-12 mt-20 bg-white/60 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-4 text-center md:text-left">
-            <FrutiGoLogo customUrl={customLogo} className="w-14 h-14" />
-            <div>
-              <h3 className="text-xl font-black text-brand-green italic tracking-tighter mb-0.5">Fruti Go</h3>
-              <p className="text-xs text-zinc-400">San Rafael 2790, Guadalajara, Jal. • México</p>
-              <p className="text-[10px] text-zinc-400 mt-1 font-mono uppercase tracking-wider">© 2026 <StyledFrutiGo legal />. Todos los derechos reservados.</p>
+      <footer className="border-t border-zinc-200 py-10 mt-20 bg-white/70 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 space-y-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex items-center gap-4 text-center md:text-left">
+              <FrutiGoLogo customUrl={customLogo} className="w-14 h-14" />
+              <div>
+                <h3 className="text-xl font-black text-brand-green italic tracking-tighter mb-0.5">Fruti Go</h3>
+                <p className="text-xs text-zinc-400">San Rafael 2790, Guadalajara, Jal. • México</p>
+                <p className="text-[10px] text-zinc-400 mt-1 font-mono uppercase tracking-wider">© 2026 <StyledFrutiGo legal />. Todos los derechos reservados.</p>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+              <GooglePlayBadge lang={currentLang} />
+              <nav aria-label="Enlaces institucionales y legales" className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-xs font-bold text-zinc-500">
+                <a 
+                  href="/desarrollador" 
+                  onClick={(e) => { e.preventDefault(); window.location.hash = "desarrollador"; setCurrentSection("desarrollador"); }} 
+                  className="hover:text-brand-green transition-colors font-extrabold text-emerald-800"
+                  title="Sobre el Desarrollador - Alberto Reyes Sandoval"
+                >
+                  Desarrollador
+                </a>
+                <a 
+                  href="/medios" 
+                  onClick={(e) => { e.preventDefault(); window.location.hash = "medios"; setCurrentSection("medios"); }} 
+                  className="hover:text-brand-green transition-colors"
+                  title="Galería y Medios Oficiales"
+                >
+                  Medios y Galería
+                </a>
+                <a 
+                  href="/sobre-nosotros" 
+                  onClick={(e) => { e.preventDefault(); window.location.hash = "nosotros"; setCurrentSection("nosotros"); }} 
+                  className="hover:text-brand-green transition-colors"
+                  title="Sobre Nosotros - Fruti Go"
+                >
+                  Sobre Nosotros
+                </a>
+                <a 
+                  href="/soporte" 
+                  onClick={(e) => { e.preventDefault(); window.location.hash = "soporte"; setCurrentSection("soporte"); }} 
+                  className="hover:text-brand-green transition-colors"
+                  title="Soporte y Contacto"
+                >
+                  Soporte
+                </a>
+                <a 
+                  href="/terminos" 
+                  onClick={(e) => { e.preventDefault(); window.location.hash = "terminos"; setCurrentSection("terminos"); }} 
+                  className="hover:text-brand-green transition-colors"
+                  title="Términos y Condiciones de Uso"
+                >
+                  Términos y Cond.
+                </a>
+                <a 
+                  href="/privacidad" 
+                  onClick={(e) => { e.preventDefault(); window.location.hash = "privacidad"; setCurrentSection("privacidad"); }} 
+                  className="hover:text-brand-green transition-colors"
+                  title="Aviso de Privacidad"
+                >
+                  Aviso de Privacidad
+                </a>
+                {isControlRoute && (
+                  <button 
+                    type="button"
+                    onClick={() => setIsAdminPanelOpen(true)} 
+                    className="text-left hover:text-brand-green transition-colors font-extrabold text-amber-700 flex items-center gap-1 cursor-pointer"
+                    title="Acceso al Panel de Control y Administración"
+                  >
+                    <span>⚙️ Panel Admin</span>
+                  </button>
+                )}
+              </nav>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-            <GooglePlayBadge lang={currentLang} />
-            <a
-              href="https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#FF0000] hover:bg-[#CC0000] text-white font-extrabold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-xs hover:shadow-md active:scale-95 group shrink-0"
-              title="Canal Oficial de YouTube - Fruti Go y Alberto Reyes Sandoval"
-            >
-              <Youtube className="w-4 h-4 text-white group-hover:scale-110 transition-transform shrink-0" />
-              <span>YouTube Oficial</span>
-              <ExternalLink className="w-3 h-3 opacity-80 shrink-0" />
-            </a>
-            <nav aria-label="Enlaces institucionales y legales" className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-xs font-bold text-zinc-500">
-              <a 
-                href="/desarrollador" 
-                onClick={(e) => { e.preventDefault(); window.location.hash = "desarrollador"; setCurrentSection("desarrollador"); }} 
-                className="hover:text-brand-green transition-colors font-extrabold text-emerald-800"
-                title="Sobre el Desarrollador - Alberto Reyes Sandoval"
-              >
-                Desarrollador
-              </a>
-              <a 
-                href="/medios" 
-                onClick={(e) => { e.preventDefault(); window.location.hash = "medios"; setCurrentSection("medios"); }} 
-                className="hover:text-brand-green transition-colors"
-                title="Galería y Medios Oficiales"
-              >
-                Medios y Galería
-              </a>
-              <a 
-                href="/sobre-nosotros" 
-                onClick={(e) => { e.preventDefault(); window.location.hash = "nosotros"; setCurrentSection("nosotros"); }} 
-                className="hover:text-brand-green transition-colors"
-                title="Sobre Nosotros - Fruti Go"
-              >
-                Sobre Nosotros
-              </a>
-              <a 
-                href="/soporte" 
-                onClick={(e) => { e.preventDefault(); window.location.hash = "soporte"; setCurrentSection("soporte"); }} 
-                className="hover:text-brand-green transition-colors"
-                title="Soporte y Contacto"
-              >
-                Soporte
-              </a>
-              <a 
-                href="/terminos" 
-                onClick={(e) => { e.preventDefault(); window.location.hash = "terminos"; setCurrentSection("terminos"); }} 
-                className="hover:text-brand-green transition-colors"
-                title="Términos y Condiciones de Uso"
-              >
-                Términos y Cond.
-              </a>
-              <a 
-                href="/privacidad" 
-                onClick={(e) => { e.preventDefault(); window.location.hash = "privacidad"; setCurrentSection("privacidad"); }} 
-                className="hover:text-brand-green transition-colors"
-                title="Aviso de Privacidad"
-              >
-                Aviso de Privacidad
-              </a>
-              {isControlRoute && (
-                <button 
-                  type="button"
-                  onClick={() => setIsAdminPanelOpen(true)} 
-                  className="text-left hover:text-brand-green transition-colors font-extrabold text-amber-700 flex items-center gap-1 cursor-pointer"
-                  title="Acceso al Panel de Control y Administración"
-                >
-                  <span>⚙️ Panel Admin</span>
-                </button>
-              )}
-            </nav>
-          </div>
+
+          {/* Barra de Redes Sociales y Enlaces Oficiales Compactos */}
+          <SocialFooterLinks />
         </div>
       </footer>
 

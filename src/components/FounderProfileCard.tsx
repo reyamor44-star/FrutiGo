@@ -464,11 +464,11 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
 
         </main>
 
-        {/* Pie de Página: Botones Oficiales y Enlazado Interno Estratégico */}
+        {/* Pie de Página: Acceso Directo a Sala de Prensa y Descarga Oficial */}
         <footer className="mt-8 pt-6 border-t-2 border-emerald-100 flex flex-col gap-2.5 relative z-10">
           <div className="text-[11px] font-black uppercase tracking-wider text-emerald-900 mb-1 flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>Enlaces Oficiales, Prensa y Canales de Contacto</span>
+            <span>Prensa y Aplicación Oficial</span>
           </div>
 
           {/* Direct Strategic Link to Media & Press Module (Transfers topical SEO authority) */}
@@ -530,53 +530,6 @@ export const FounderProfileCard: React.FC<FounderProfileCardProps> = ({ classNam
               <span className="hidden sm:inline">Descargar</span>
               <ExternalLink className="w-3 h-3 opacity-80" />
             </div>
-          </a>
-
-          {/* YouTube Button */}
-          {founderData.youtube && (
-            <a
-              href={founderData.youtube}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full bg-[#FF0000] hover:bg-[#CC0000] text-white font-extrabold py-3 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-sm transition-all active:scale-98 group/yt"
-              title="Canal Oficial de YouTube - Alberto Reyes Sandoval y Fruti Go"
-            >
-              <div className="flex items-center gap-3">
-                <Youtube className="w-5 h-5 text-white group-hover/yt:scale-110 transition-transform shrink-0" />
-                <span>Canal Oficial de YouTube</span>
-              </div>
-              <ExternalLink className="w-4 h-4 opacity-80 shrink-0" />
-            </a>
-          )}
-
-          {/* LinkedIn Button */}
-          {founderData.linkedin && (
-            <a
-              href={founderData.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full bg-[#0A66C2] hover:bg-[#084e96] text-white font-bold py-3 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-sm transition-all active:scale-98 group/link"
-              title="Perfil Oficial de LinkedIn - Alberto Reyes Sandoval"
-            >
-              <div className="flex items-center gap-3">
-                <Linkedin className="w-5 h-5 text-white group-hover/link:scale-110 transition-transform shrink-0" />
-                <span>Perfil LinkedIn</span>
-              </div>
-              <ExternalLink className="w-4 h-4 opacity-80 shrink-0" />
-            </a>
-          )}
-
-          {/* Email Contact Button */}
-          <a
-            href={`mailto:${displayEmail}?subject=Consulta%20B2B%20/%20Plataforma%20Fruti%20Go`}
-            className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-bold py-3 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-sm transition-all active:scale-98 group/email"
-            title="Correo de Contacto Oficial"
-          >
-            <div className="flex items-center gap-3">
-              <Mail className="w-5 h-5 text-amber-300 group-hover/email:scale-110 transition-transform shrink-0" />
-              <span>{displayEmail}</span>
-            </div>
-            <ExternalLink className="w-4 h-4 opacity-80 shrink-0 text-amber-300" />
           </a>
         </footer>
 

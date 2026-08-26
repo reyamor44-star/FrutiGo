@@ -136,8 +136,8 @@ export default function FundadorGaleriaPublica() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-4 sm:pb-6 border-b border-zinc-100">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-black uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-700" /> Archivo Multimedia Oficial
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100 text-zinc-900 text-xs font-black uppercase tracking-wider border border-zinc-200">
+                <Sparkles className="w-3.5 h-3.5 text-zinc-700" /> Archivo Multimedia Oficial
               </div>
               <button
                 type="button"
@@ -145,8 +145,8 @@ export default function FundadorGaleriaPublica() {
                 title="Copiar URL directa al módulo de medios"
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all border cursor-pointer ${
                   copiedLink
-                    ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
-                    : "bg-zinc-100 text-zinc-700 hover:text-emerald-700 hover:bg-emerald-50 border-zinc-200"
+                    ? "bg-zinc-900 text-white border-zinc-900 shadow-sm"
+                    : "bg-zinc-100 text-zinc-700 hover:text-zinc-900 hover:bg-zinc-200 border-zinc-200"
                 }`}
               >
                 {copiedLink ? (
@@ -163,10 +163,10 @@ export default function FundadorGaleriaPublica() {
               </button>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-zinc-900 tracking-tight">
-              Galería y Medios / <span className="text-emerald-700">Alberto Reyes Sandoval</span>
+              Galería & Medios / <span className="text-zinc-600">FrutiGo Technologies</span>
             </h2>
             <p className="text-zinc-700 text-base sm:text-base font-semibold sm:font-normal mt-2 max-w-3xl leading-relaxed">
-              Explora las fotos, videos, presentaciones de infraestructura y material gráfico del Fundador, Desarrollador Principal y CEO de Fruti Go.
+              Explora las conferencias, material audiovisual e infraestructura tecnológica institucional de <strong className="text-zinc-900">FrutiGo Technologies & FrutiGo Logistics</strong>.
             </p>
           </div>
 
@@ -177,9 +177,9 @@ export default function FundadorGaleriaPublica() {
           >
             <button
               onClick={() => setActiveFilter("all")}
-              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeFilter === "all"
-                  ? "bg-brand-green text-white shadow-md shadow-brand-green/20"
+                  ? "bg-zinc-900 text-white shadow-sm"
                   : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60"
               }`}
             >
@@ -188,9 +188,9 @@ export default function FundadorGaleriaPublica() {
             </button>
             <button
               onClick={() => setActiveFilter("image")}
-              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeFilter === "image"
-                  ? "bg-brand-green text-white shadow-md shadow-brand-green/20"
+                  ? "bg-zinc-900 text-white shadow-sm"
                   : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60"
               }`}
             >
@@ -199,9 +199,9 @@ export default function FundadorGaleriaPublica() {
             </button>
             <button
               onClick={() => setActiveFilter("video")}
-              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeFilter === "video"
-                  ? "bg-brand-green text-white shadow-md shadow-brand-green/20"
+                  ? "bg-zinc-900 text-white shadow-sm"
                   : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60"
               }`}
             >
@@ -233,7 +233,7 @@ export default function FundadorGaleriaPublica() {
                     {item.type === "image" && (
                       <ExpandableImage
                         src={item.url}
-                        alt={item.altText || "Alberto Reyes Sandoval - Fundador de Fruti Go"}
+                        alt={item.altText || "FrutiGo Technologies — Infraestructura y Sistemas"}
                         caption={item.title}
                         title="Toca para expandir imagen aquí mismo"
                         className="w-full h-full object-cover"
@@ -262,7 +262,7 @@ export default function FundadorGaleriaPublica() {
                         >
                           <video src={item.url} className="w-full h-full object-cover opacity-80" />
                           <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover/btn:bg-black/10 transition">
-                            <div className="w-14 h-14 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-xl group-hover/btn:scale-110 transition">
+                            <div className="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-700 text-white flex items-center justify-center shadow-xl group-hover/btn:scale-110 transition">
                               <Play className="w-7 h-7 fill-current ml-0.5" />
                             </div>
                           </div>
@@ -275,7 +275,7 @@ export default function FundadorGaleriaPublica() {
                         <div className="w-full h-full bg-black flex items-center justify-center">
                           <iframe
                             src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&rel=0`}
-                            title={item.title || "Video de YouTube de Alberto Reyes Sandoval - FrutiGo"}
+                            title={item.title || "Video Oficial de FrutiGo Technologies"}
                             className="w-full h-full border-0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen
@@ -290,14 +290,14 @@ export default function FundadorGaleriaPublica() {
                         >
                           <img
                             src={`https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`}
-                            alt={item.altText || "Alberto Reyes Sandoval - Video de YouTube Fruti Go"}
+                            alt={item.altText || "FrutiGo Technologies - Video Institucional"}
                             title={item.title}
                             className="w-full h-full object-cover opacity-90 group-hover/btn:scale-105 transition duration-500"
                             loading="lazy"
                           />
                           <div className="absolute inset-0 bg-black/30 group-hover/btn:bg-black/10 transition flex items-center justify-center">
-                            <div className="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-2xl group-hover/btn:scale-110 transition">
-                              <Youtube className="w-8 h-8 fill-current" />
+                            <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-700 text-white flex items-center justify-center shadow-2xl group-hover/btn:scale-110 transition">
+                              <Youtube className="w-8 h-8 fill-current text-white" />
                             </div>
                           </div>
                         </button>
@@ -307,12 +307,9 @@ export default function FundadorGaleriaPublica() {
                     {/* Type Overlay Badge (Hidden when actively playing video to keep controls 100% visible) */}
                     {!isPlaying && item.type !== "image" && (
                       <div className="absolute top-3 left-3 z-10 pointer-events-none">
-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md text-white shadow-md ${
-                          item.type === "video" ? "bg-blue-950/80 border border-blue-500/30" :
-                          "bg-red-950/80 border border-red-500/30"
-                        }`}>
-                          {item.type === "video" && <VideoIcon className="w-3 h-3 text-blue-400" />}
-                          {item.type === "youtube" && <Youtube className="w-3 h-3 text-red-400" />}
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md text-white shadow-md bg-zinc-900/90 border border-zinc-700`}>
+                          {item.type === "video" && <VideoIcon className="w-3 h-3 text-zinc-300" />}
+                          {item.type === "youtube" && <Youtube className="w-3 h-3 text-zinc-300" />}
                           {item.type === "youtube" ? "YouTube" : "Video"}
                         </span>
                       </div>
@@ -322,7 +319,7 @@ export default function FundadorGaleriaPublica() {
                   {/* Info Footer */}
                   <div className="p-3.5 sm:p-4 bg-white border-t border-zinc-100 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="font-extrabold text-zinc-900 text-base line-clamp-2 group-hover:text-emerald-700 transition">
+                      <h3 className="font-extrabold text-zinc-900 text-base line-clamp-2 group-hover:text-black transition">
                         {item.title}
                       </h3>
                       {item.description && (
@@ -333,16 +330,16 @@ export default function FundadorGaleriaPublica() {
                     </div>
 
                     <div className="mt-3 pt-2 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-500 font-semibold">
-                      <span>Alberto Reyes Sandoval</span>
+                      <span>FrutiGo Technologies</span>
                       {item.type === "image" ? (
-                        <span className="text-emerald-700 font-bold flex items-center gap-1">
+                        <span className="text-zinc-800 font-bold flex items-center gap-1">
                           Fotografía Oficial
                         </span>
                       ) : (
                         <button
                           type="button"
                           onClick={(e) => togglePlayItem(item.id, e)}
-                          className="text-emerald-700 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                          className="text-zinc-800 hover:text-black font-bold hover:underline flex items-center gap-1 cursor-pointer"
                         >
                           {isPlaying ? "Detener" : "Reproducir video"} <Play className="w-3 h-3 fill-current" />
                         </button>
@@ -356,18 +353,18 @@ export default function FundadorGaleriaPublica() {
         )}
 
         {/* Strategic Cross-linking Callout: Connects Medios to Sobre el Desarrollador */}
-        <div className="p-4 sm:p-6 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 border-2 border-emerald-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs mt-6">
+        <div className="p-4 sm:p-6 bg-zinc-100 border border-zinc-300 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs mt-6">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-black shrink-0 shadow-sm">
+            <div className="w-11 h-11 rounded-2xl bg-zinc-900 text-white flex items-center justify-center font-black shrink-0 shadow-sm">
               <UserCheck className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-black tracking-wider text-emerald-800 block">Liderazgo y Biografía Oficial</span>
+              <span className="text-[10px] uppercase font-black tracking-wider text-zinc-600 block">Infraestructura y Visión</span>
               <h3 className="text-sm sm:text-base font-black text-zinc-900">
-                Sobre el Desarrollador | Alberto Reyes Sandoval - Fundador de FrutiGo
+                Acerca de FrutiGo Technologies — Infraestructura de Sistemas
               </h3>
               <p className="text-xs text-zinc-600 font-medium mt-0.5">
-                Conoce la visión, trayectoria universitaria en ITESO y el desarrollo tecnológico detrás de FrutiGo.
+                Conoce la visión tecnológica, arquitectura y logística de distribución detrás de FrutiGo.
               </p>
             </div>
           </div>
@@ -379,10 +376,10 @@ export default function FundadorGaleriaPublica() {
               window.history.pushState(null, "", "/desarrollador");
               window.dispatchEvent(new Event("popstate"));
             }}
-            className="w-full sm:w-auto px-5 py-3 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-black rounded-xl shadow-sm flex items-center justify-center gap-2 shrink-0 transition-transform active:scale-95 cursor-pointer"
-            title="Conoce la trayectoria completa de Alberto Reyes Sandoval"
+            className="w-full sm:w-auto px-5 py-3 bg-zinc-900 hover:bg-black text-white text-xs font-black rounded-xl shadow-sm flex items-center justify-center gap-2 shrink-0 transition-transform active:scale-95 cursor-pointer border border-zinc-800"
+            title="Conoce la plataforma y visión tecnológica de FrutiGo"
           >
-            <span>Ver Perfil del Desarrollador</span>
+            <span>Ver Infraestructura y Visión</span>
             <ExternalLink className="w-4 h-4" />
           </a>
         </div>

@@ -1,176 +1,310 @@
 export interface SeoConfig {
   title: string;
+  ogTitle?: string;
+  twitterTitle?: string;
   description: string;
+  ogDescription?: string;
+  twitterDescription?: string;
   keywords?: string;
   canonicalUrl: string;
   ogType?: "website" | "profile" | "article";
   image?: string;
   imageAlt?: string;
+  schemaJsonLd?: Record<string, any> | Array<Record<string, any>>;
 }
 
-const DEFAULT_FOUNDER_IMAGE =
-  "https://firebasestorage.googleapis.com/v0/b/frutigo3.firebasestorage.app/o/founder-photos%2F1786483956397_vlk1om.jpg?alt=media&token=e622e4ce-4b10-486d-a296-45690f0f4ccd";
 const DEFAULT_BRAND_IMAGE = "https://frutigo.com.mx/logo.png";
 
+// Standard brand keywords and service coverage across all canonical sections
+const CORE_BRAND_KEYWORDS =
+  "FrutiGo, Fruti Go, frutigo, fruti go, FrutiGo Technologies, FrutiGo Logistics, FrutiGo App, reparto a domicilio, envíos última milla, delivery Los Cabos, repartidores San José del Cabo, Cabo San Lucas, frutas y verduras mayoreo Zapopan, abastecimiento restaurantes, logística local";
+
 export const SEO_SECTION_DATA: Record<string, SeoConfig> = {
-  tienda: {
-    title: "Fruti Go | Tienda en Línea de Frutas Frescas y Delivery Exprés",
+  inicio: {
+    title: "FrutiGo Technologies & Logistics | Envíos Última Milla y Comercio B2B/B2C",
+    ogTitle: "FrutiGo Technologies & Logistics | Envíos Última Milla y Comercio B2B/B2C",
+    twitterTitle: "FrutiGo Technologies & Logistics | Envíos Última Milla y Comercio B2B/B2C",
     description:
-      "Fruti Go es la tienda oficial en línea de frutas y productos frescos con entrega a domicilio exprés en Guadalajara y México. Descubre nuestro catálogo, precios directos y calidad garantizada.",
-    keywords:
-      "Fruti Go, frutas a domicilio, verduras frescas Guadalajara, tienda en linea Fruti Go, delivery de frutas exprés, comprar fruta online, frutas frescas México, pedidos frutigo, frutigo delivery",
+      "Plataforma de infraestructura logística, envíos de última milla y comercio B2B/B2C. Reparto a domicilio, frutas y verduras al mayoreo en Zapopan, abastecimiento a restaurantes y delivery en Los Cabos, San José del Cabo y Cabo San Lucas.",
+    ogDescription:
+      "Plataforma de infraestructura logística, envíos de última milla y comercio B2B/B2C. Reparto a domicilio, frutas y verduras al mayoreo en Zapopan y delivery en Los Cabos.",
+    keywords: `${CORE_BRAND_KEYWORDS}, delivery México, paquetería express Guadalajara, taxi pet Zapopan`,
+    canonicalUrl: "https://frutigo.com.mx/",
+    ogType: "website",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "FrutiGo Technologies & Logistics - Envíos Última Milla y Comercio B2B/B2C",
+    schemaJsonLd: {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FrutiGo",
+      "alternateName": ["Fruti Go", "frutigo", "FrutiGo Technologies", "FrutiGo Logistics"],
+      "url": "https://frutigo.com.mx",
+      "logo": "https://frutigo.com.mx/logo.png",
+      "sameAs": [
+        "https://play.google.com/store/apps/details?id=com.frutigo.app"
+      ],
+      "description": "Plataforma de infraestructura logística, envíos de última milla y comercio B2B/B2C."
+    }
+  },
+  tienda: {
+    title: "Tienda y Catálogo Mayorista | FrutiGo Logistics & Technologies",
+    ogTitle: "Tienda y Catálogo Mayorista | FrutiGo Logistics",
+    twitterTitle: "Tienda y Catálogo Mayorista | FrutiGo Logistics",
+    description:
+      "Catálogo oficial y tienda en línea de FrutiGo. Frutas y verduras al mayoreo en Zapopan, Guadalajara y Los Cabos, abastecimiento de restaurantes, reparto a domicilio y comercio B2B/B2C.",
+    ogDescription:
+      "Catálogo mayorista y tienda oficial de FrutiGo. Distribución agroalimentaria, abastecimiento a restaurantes y entregas express de frutas y verduras frescas.",
+    keywords: `${CORE_BRAND_KEYWORDS}, tienda FrutiGo, frutas a domicilio, verduras frescas Guadalajara, frutas por caja Zapopan, catálogo mayorista`,
     canonicalUrl: "https://frutigo.com.mx/tienda",
     ogType: "website",
     image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "Fruti Go - Tienda en Línea y Delivery Exprés",
+    imageAlt: "Tienda y Catálogo Mayorista FrutiGo",
+    schemaJsonLd: {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "FrutiGo Tienda y Mayoreo",
+      "alternateName": ["FrutiGo Store", "Fruti Go Tienda", "FrutiGo Mayoreo"],
+      "url": "https://frutigo.com.mx/tienda",
+      "image": "https://frutigo.com.mx/logo.png",
+      "description": "Tienda en línea y catálogo de frutas, verduras y abarrotes con distribución mayorista y reparto a domicilio en Zapopan, Guadalajara y Los Cabos.",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "FrutiGo",
+        "url": "https://frutigo.com.mx"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Zapopan" },
+        { "@type": "City", "name": "Guadalajara" },
+        { "@type": "City", "name": "San José del Cabo" },
+        { "@type": "City", "name": "Cabo San Lucas" }
+      ],
+      "paymentAccepted": "Cash, Credit Card, Debit Card, Openpay",
+      "priceRange": "$$"
+    }
+  },
+  cliente: {
+    title: "Portal de Acceso Mayorista B2B | FrutiGo Logistics",
+    ogTitle: "Portal de Acceso Mayorista B2B | FrutiGo Logistics",
+    twitterTitle: "Portal de Acceso Mayorista B2B | FrutiGo Logistics",
+    description:
+      "Acceso mayorista B2B de FrutiGo Logistics. Abastecimiento agroalimentario institucional directo del campo para empresas, restaurantes y comercios con precios preferenciales en Zapopan y Los Cabos.",
+    keywords: `${CORE_BRAND_KEYWORDS}, FrutiGo B2B, FrutiGo Mayorista, distribución agroalimentaria B2B, abastecimiento restaurantes Zapopan, compras mayoreo FrutiGo`,
+    canonicalUrl: "https://frutigo.com.mx/cliente",
+    ogType: "website",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "FrutiGo Logistics - Portal Mayorista B2B",
   },
   desarrollador: {
-    title: "Alberto Reyes Sandoval | Fundador y Desarrollador de FrutiGo",
+    title: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
+    ogTitle: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
+    twitterTitle: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
     description:
-      "Conoce a Alberto Reyes Sandoval, fundador y desarrollador de FrutiGo en Guadalajara, México. Conoce su historia, visión técnica, arquitectura de software y trayectoria profesional.",
-    keywords:
-      "Alberto Reyes Sandoval, Alberto Reyes Sandoval FrutiGo, Fundador y Desarrollador de FrutiGo, Creador FrutiGo, Desarrollador FrutiGo, Alberto Reyes Sandoval Guadalajara, Alberto Reyes Sandoval México, FrutiGo",
-    canonicalUrl: "https://frutigo.com.mx/desarrollador",
-    ogType: "profile",
-    image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Alberto Reyes Sandoval desarrollador de FrutiGo",
+      "Conoce la plataforma tecnológica detrás de FrutiGo: logística de última milla, envíos express, despacho inteligente y abastecimiento B2B/B2C en México.",
+    ogDescription:
+      "Conoce la plataforma tecnológica detrás de FrutiGo: logística de última milla, abastecimiento B2B y despacho inteligente.",
+    keywords: `${CORE_BRAND_KEYWORDS}, sobre el desarrollador FrutiGo, arquitectura logística, ruteo inteligente, ingeniería de software FrutiGo`,
+    canonicalUrl: "https://frutigo.com.mx/nosotros",
+    ogType: "website",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "Acerca de FrutiGo Technologies",
+    schemaJsonLd: {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "Acerca de FrutiGo Technologies",
+      "url": "https://frutigo.com.mx/nosotros",
+      "description": "Infraestructura tecnológica, logística de última milla y visión corporativa de FrutiGo Technologies en México.",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "FrutiGo",
+        "alternateName": ["Fruti Go", "frutigo", "FrutiGo Technologies", "FrutiGo Logistics"],
+        "url": "https://frutigo.com.mx",
+        "logo": "https://frutigo.com.mx/logo.png"
+      }
+    }
+  },
+  nosotros: {
+    title: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
+    ogTitle: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
+    twitterTitle: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
+    description:
+      "Conoce la plataforma tecnológica detrás de FrutiGo: logística de última milla, envíos express, despacho inteligente y abastecimiento B2B/B2C en México.",
+    ogDescription:
+      "Conoce la plataforma tecnológica detrás de FrutiGo: logística de última milla, abastecimiento B2B y despacho inteligente.",
+    keywords: `${CORE_BRAND_KEYWORDS}, sobre nosotros FrutiGo, infraestructura logística, comercio digital, ruteo inteligente, despacho inteligente`,
+    canonicalUrl: "https://frutigo.com.mx/nosotros",
+    ogType: "website",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "Acerca de FrutiGo Technologies",
+    schemaJsonLd: {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "Acerca de FrutiGo Technologies",
+      "url": "https://frutigo.com.mx/nosotros",
+      "description": "Infraestructura tecnológica, logística de última milla y visión corporativa de FrutiGo Technologies en México.",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "FrutiGo",
+        "alternateName": ["Fruti Go", "frutigo", "FrutiGo Technologies", "FrutiGo Logistics"],
+        "url": "https://frutigo.com.mx",
+        "logo": "https://frutigo.com.mx/logo.png"
+      }
+    }
   },
   fundador: {
-    title: "Alberto Reyes Sandoval | Fundador y Desarrollador de FrutiGo",
+    title: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
+    ogTitle: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
+    twitterTitle: "Acerca de Nosotros e Infraestructura Tecnológica | FrutiGo Technologies",
     description:
-      "Conoce a Alberto Reyes Sandoval, fundador y desarrollador de FrutiGo en Guadalajara, México. Conoce su historia, visión técnica, arquitectura de software y trayectoria profesional.",
-    keywords:
-      "Alberto Reyes Sandoval, Alberto Reyes Sandoval FrutiGo, Fundador y Desarrollador de FrutiGo, Creador FrutiGo, Desarrollador FrutiGo, Alberto Reyes Sandoval Guadalajara, Alberto Reyes Sandoval México, FrutiGo",
-    canonicalUrl: "https://frutigo.com.mx/desarrollador",
-    ogType: "profile",
-    image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Alberto Reyes Sandoval desarrollador de FrutiGo",
+      "Conoce la plataforma tecnológica detrás de FrutiGo: logística de última milla, envíos express, despacho inteligente y abastecimiento B2B/B2C en México.",
+    ogDescription:
+      "Conoce la plataforma tecnológica detrás de FrutiGo: logística de última milla, abastecimiento B2B y despacho inteligente.",
+    keywords: `${CORE_BRAND_KEYWORDS}, FrutiGo Technologies, infraestructura logística, comercio digital`,
+    canonicalUrl: "https://frutigo.com.mx/nosotros",
+    ogType: "website",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "Acerca de FrutiGo Technologies",
+  },
+  medios: {
+    title: "Sala de Prensa y Medios Oficiales | FrutiGo Technologies",
+    ogTitle: "Sala de Prensa Oficial | FrutiGo Technologies",
+    twitterTitle: "Sala de Prensa Oficial | FrutiGo Technologies",
+    description:
+      "Sala de prensa y comunicación institucional, publicaciones corporativas, comunicados oficiales y galería de medios de FrutiGo Technologies y FrutiGo Logistics.",
+    ogDescription:
+      "Sala de prensa y comunicación institucional, publicaciones corporativas y comunicados oficiales de FrutiGo Technologies.",
+    keywords: `${CORE_BRAND_KEYWORDS}, medios FrutiGo, sala de prensa FrutiGo, comunicados oficiales FrutiGo, galería multimedia FrutiGo Technologies`,
+    canonicalUrl: "https://frutigo.com.mx/medios",
+    ogType: "website",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "Sala de Prensa Oficial | FrutiGo Technologies",
+    schemaJsonLd: {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Sala de Prensa y Medios Oficiales FrutiGo",
+      "url": "https://frutigo.com.mx/medios",
+      "description": "Sala de prensa institucional y archivo multimedia de comunicados de FrutiGo Technologies.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FrutiGo",
+        "url": "https://frutigo.com.mx",
+        "logo": "https://frutigo.com.mx/logo.png"
+      }
+    }
+  },
+  galeria: {
+    title: "Sala de Prensa y Medios Oficiales | FrutiGo Technologies",
+    ogTitle: "Sala de Prensa Oficial | FrutiGo Technologies",
+    twitterTitle: "Sala de Prensa Oficial | FrutiGo Technologies",
+    description:
+      "Sala de prensa y comunicación institucional, publicaciones corporativas, comunicados oficiales y galería de medios de FrutiGo Technologies y FrutiGo Logistics.",
+    ogDescription:
+      "Sala de prensa y comunicación institucional, publicaciones corporativas y comunicados oficiales de FrutiGo Technologies.",
+    keywords: `${CORE_BRAND_KEYWORDS}, medios FrutiGo, sala de prensa FrutiGo, comunicados oficiales FrutiGo`,
+    canonicalUrl: "https://frutigo.com.mx/medios",
+    ogType: "website",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "Sala de Prensa Oficial | FrutiGo Technologies",
   },
   politicas: {
-    title: "Fruti Go | Políticas de Envío, Entrega y Garantía de Frescura",
+    title: "FrutiGo Technologies & Logistics | Políticas de Operación y Calidad",
+    ogTitle: "FrutiGo Technologies & Logistics | Políticas de Operación y Calidad",
+    twitterTitle: "FrutiGo Technologies & Logistics | Políticas de Operación y Calidad",
     description:
-      "Políticas oficiales de operación, cobertura geográfica, tiempos de entrega rápida, estándares de inocuidad y garantías de devolución en Fruti Go México.",
-    keywords:
-      "Políticas Fruti Go, envíos Fruti Go, cobertura delivery frutas, entregas a domicilio, devoluciones Fruti Go, garantía de frescura",
+      "Políticas institucionales de operación logística, cobertura de distribución, estándares de calidad e inocuidad y garantías de servicio en FrutiGo Logistics.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Políticas FrutiGo, cobertura logística, estándares de calidad, garantías FrutiGo Technologies`,
     canonicalUrl: "https://frutigo.com.mx/politicas",
     ogType: "website",
     image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "Fruti Go - Políticas Operativas y de Envío",
+    imageAlt: "FrutiGo Logistics - Políticas Operativas",
   },
   terminos: {
-    title: "Fruti Go | Términos y Condiciones de Servicio y Compra",
+    title: "FrutiGo Technologies | Términos y Condiciones de Servicio",
+    ogTitle: "FrutiGo Technologies | Términos y Condiciones de Servicio",
+    twitterTitle: "FrutiGo Technologies | Términos y Condiciones de Servicio",
     description:
-      "Consulta los Términos y Condiciones oficiales de la plataforma y tienda en línea Fruti Go. Información sobre pedidos, pagos electrónicos y uso de la plataforma.",
-    keywords:
-      "Términos y condiciones Fruti Go, contrato de servicio delivery, términos de compra frutas frescas, legal Fruti Go",
+      "Términos y condiciones contractuales y de uso de la plataforma digital, pasarelas de pago y servicios ofrecidos por FrutiGo Technologies.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Términos y condiciones FrutiGo, contrato de servicio, términos de plataforma, legal FrutiGo Technologies`,
     canonicalUrl: "https://frutigo.com.mx/terminos",
     ogType: "website",
     image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "Fruti Go - Términos y Condiciones",
+    imageAlt: "FrutiGo Technologies - Términos y Condiciones",
   },
   privacidad: {
-    title: "Fruti Go | Aviso de Privacidad y Protección de Datos Personales",
+    title: "FrutiGo Technologies | Aviso de Privacidad y Protección de Datos",
+    ogTitle: "FrutiGo Technologies | Aviso de Privacidad y Protección de Datos",
+    twitterTitle: "FrutiGo Technologies | Aviso de Privacidad y Protección de Datos",
     description:
-      "Aviso de Privacidad integral de Fruti Go. Conoce cómo protegemos, tratamos y salvaguardamos tus datos personales y transacciones según la legislación mexicana.",
-    keywords:
-      "Aviso de privacidad Fruti Go, protección de datos personales, privacidad compras online, derechos ARCO Fruti Go",
+      "Aviso de Privacidad integral de FrutiGo Technologies y FrutiGo Logistics conforme a la legislación de protección de datos personales en posesión de particulares.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Aviso de privacidad FrutiGo, protección de datos personales, seguridad informática FrutiGo Technologies, derechos ARCO`,
     canonicalUrl: "https://frutigo.com.mx/privacidad",
     ogType: "website",
     image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "Fruti Go - Aviso de Privacidad",
-  },
-  nosotros: {
-    title: "Fruti Go | Sobre Nosotros - Misión, Frescura y Tecnología",
-    description:
-      "Descubre la historia y misión de Fruti Go: conectamos a productores del campo con hogares y negocios mediante tecnología mexicana y logística de entrega rápida.",
-    keywords:
-      "Sobre nosotros Fruti Go, historia Fruti Go, empresa frutas Guadalajara, tecnología delivery México, misión Fruti Go",
-    canonicalUrl: "https://frutigo.com.mx/sobre-nosotros",
-    ogType: "website",
-    image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "Fruti Go - Sobre Nosotros",
+    imageAlt: "FrutiGo Technologies - Aviso de Privacidad",
   },
   soporte: {
-    title: "Fruti Go | Centro de Ayuda, Soporte al Cliente y Facturación",
+    title: "FrutiGo Technologies | Centro de Asistencia y Soporte Institucional",
+    ogTitle: "FrutiGo Technologies | Centro de Asistencia y Soporte Institucional",
+    twitterTitle: "FrutiGo Technologies | Centro de Asistencia y Soporte Institucional",
     description:
-      "Atención al cliente y centro de soporte oficial de Fruti Go. Resuelve dudas sobre tus pedidos, estatus de envío, facturación CFDI o asistencia técnica.",
-    keywords:
-      "Soporte Fruti Go, ayuda pedidos frutas, facturación Fruti Go, contacto Fruti Go, atención a clientes Guadalajara",
+      "Centro de soporte técnico, facturación electrónica CFDI y atención a clientes y empresas afiliadas en FrutiGo Technologies.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Soporte FrutiGo, facturación CFDI FrutiGo, atención institucional FrutiGo Technologies`,
     canonicalUrl: "https://frutigo.com.mx/soporte",
     ogType: "website",
     image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "Fruti Go - Centro de Ayuda y Soporte",
+    imageAlt: "FrutiGo Technologies - Centro de Soporte",
   },
   cuenta: {
-    title: "Fruti Go | Solicitud de Eliminación de Cuenta y Datos",
+    title: "FrutiGo Technologies | Gestión y Eliminación de Cuentas",
+    ogTitle: "FrutiGo Technologies | Gestión y Eliminación de Cuentas",
+    twitterTitle: "FrutiGo Technologies | Gestión y Eliminación de Cuentas",
     description:
-      "Formulario oficial y procedimiento transparente para solicitar la eliminación de tu cuenta de usuario y borrado definitivo de datos personales en Fruti Go.",
-    keywords:
-      "Eliminar cuenta Fruti Go, borrar datos personales, baja de usuario Fruti Go, desregistro",
+      "Portal institucional de gestión de derechos de privacidad y solicitud formal de revocación o eliminación de cuenta de usuario en FrutiGo Technologies.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Eliminar cuenta FrutiGo, baja de usuario FrutiGo Technologies, derechos de datos`,
     canonicalUrl: "https://frutigo.com.mx/cuenta",
     ogType: "website",
     image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "Fruti Go - Eliminación de Cuenta",
-  },
-  medios: {
-    title: "Medios y Prensa | Alberto Reyes Sandoval - FrutiGo",
-    description:
-      "Sala de prensa, archivo multimedia oficial, galería fotográfica y videos de YouTube de Alberto Reyes Sandoval, Fundador y Desarrollador de FrutiGo en México.",
-    keywords:
-      "Medios y Prensa Alberto Reyes Sandoval, Alberto Reyes Sandoval Medios, Prensa FrutiGo, Galería Alberto Reyes Sandoval, Videos Alberto Reyes Sandoval FrutiGo, FrutiGo México",
-    canonicalUrl: "https://frutigo.com.mx/medios",
-    ogType: "profile",
-    image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Medios y Prensa | Alberto Reyes Sandoval - FrutiGo",
+    imageAlt: "FrutiGo Technologies - Gestión de Cuenta",
   },
   articulos: {
-    title: "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - FrutiGo",
+    title: "FrutiGo Technologies | Artículos Técnicos e Infraestructura de Sistemas",
+    ogTitle: "FrutiGo Technologies | Artículos Técnicos e Infraestructura de Sistemas",
+    twitterTitle: "FrutiGo Technologies | Artículos Técnicos e Infraestructura de Sistemas",
     description:
-      "Artículos oficiales, publicaciones técnicas y ensayos sobre arquitectura de software, logística B2B y tecnología en FrutiGo por Alberto Reyes Sandoval.",
-    keywords:
-      "articulos FrutiGo, publicaciones Alberto Reyes Sandoval, blog Alberto Reyes Sandoval, arquitectura software FrutiGo, ensayos tecnologia Alberto Reyes Sandoval, Alberto Reyes Sandoval",
+      "Publicaciones técnicas, análisis de arquitectura de software y logística urbana desarrollados por FrutiGo Technologies.",
+    keywords: `${CORE_BRAND_KEYWORDS}, artículos FrutiGo Technologies, arquitectura software FrutiGo, ingeniería logística FrutiGo Technologies`,
     canonicalUrl: "https://frutigo.com.mx/articulos",
     ogType: "website",
-    image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Artículos y Publicaciones Técnicas - Alberto Reyes Sandoval FrutiGo",
-  },
-  galeria: {
-    title: "Medios y Prensa | Alberto Reyes Sandoval - FrutiGo",
-    description:
-      "Sala de prensa, archivo multimedia oficial, galería fotográfica y videos de YouTube de Alberto Reyes Sandoval, Fundador y Desarrollador de FrutiGo en México.",
-    keywords:
-      "Medios y Prensa Alberto Reyes Sandoval, Alberto Reyes Sandoval Medios, Prensa FrutiGo, Galería Alberto Reyes Sandoval, Videos Alberto Reyes Sandoval FrutiGo, FrutiGo México",
-    canonicalUrl: "https://frutigo.com.mx/medios",
-    ogType: "profile",
-    image: DEFAULT_FOUNDER_IMAGE,
-    imageAlt: "Medios y Prensa | Alberto Reyes Sandoval - FrutiGo",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "FrutiGo Technologies - Publicaciones Técnicas",
   },
   registro: {
-    title: "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
+    title: "FrutiGo Technologies | Registro Institucional en la Plataforma",
+    ogTitle: "FrutiGo Technologies | Registro Institucional en la Plataforma",
+    twitterTitle: "FrutiGo Technologies | Registro Institucional en la Plataforma",
     description:
-      "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
-    keywords:
-      "Registro Fruti Go, crear cuenta Fruti Go, app Fruti Go, registro app delivery, descargar Fruti Go, frutas a domicilio, registrofrutigo, frutigo.com.mx registro",
+      "Acceso y registro a la infraestructura digital de FrutiGo Technologies y FrutiGo Logistics. Descarga nuestra aplicación oficial en Google Play Store.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Registro FrutiGo, app FrutiGo Technologies, FrutiGo Logistics, descargar app FrutiGo`,
     canonicalUrl: "https://frutigo.com.mx/registrofrutigo",
     ogType: "website",
     image: "https://frutigo.com.mx/frutigo-logo-oficial-amarillo.svg",
-    imageAlt: "Fruti Go - Formulario de Registro Oficial",
+    imageAlt: "FrutiGo Technologies - Registro Oficial",
   },
   registrofrutigo: {
-    title: "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
+    title: "FrutiGo Technologies | Registro Institucional en la Plataforma",
+    ogTitle: "FrutiGo Technologies | Registro Institucional en la Plataforma",
+    twitterTitle: "FrutiGo Technologies | Registro Institucional en la Plataforma",
     description:
-      "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
-    keywords:
-      "Registro Fruti Go, crear cuenta Fruti Go, app Fruti Go, registro app delivery, descargar Fruti Go, frutas a domicilio, registrofrutigo, frutigo.com.mx registro",
+      "Acceso y registro a la infraestructura digital de FrutiGo Technologies y FrutiGo Logistics. Descarga nuestra aplicación oficial en Google Play Store.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Registro FrutiGo, app FrutiGo Technologies, FrutiGo Logistics, descargar app FrutiGo`,
     canonicalUrl: "https://frutigo.com.mx/registrofrutigo",
     ogType: "website",
     image: "https://frutigo.com.mx/frutigo-logo-oficial-amarillo.svg",
-    imageAlt: "Fruti Go - Formulario de Registro Oficial",
+    imageAlt: "FrutiGo Technologies - Registro Oficial",
   },
 };
 
 /**
- * Updates DOM head meta tags dynamically for SEO and Social Sharing
+ * Updates DOM head meta tags and Schema.org JSON-LD dynamically for SEO and Social Sharing
  */
 export function updateDynamicMetadata(config: SeoConfig) {
   if (typeof document === "undefined") return;
@@ -203,9 +337,15 @@ export function updateDynamicMetadata(config: SeoConfig) {
   const image = config.image || DEFAULT_BRAND_IMAGE;
   const imageAlt = config.imageAlt || config.title;
   const ogType = config.ogType || "website";
+  const ogTitle = config.ogTitle || config.title;
+  const twitterTitle = config.twitterTitle || config.title;
+  const ogDesc = config.ogDescription || config.description;
+  const twitterDesc = config.twitterDescription || config.description;
 
   // Standard Meta Tags
   setMeta("name", "description", config.description);
+  setMeta("name", "author", "FrutiGo Technologies");
+  setMeta("name", "publisher", "FrutiGo Technologies");
   if (config.keywords) {
     setMeta("name", "keywords", config.keywords);
   }
@@ -216,17 +356,17 @@ export function updateDynamicMetadata(config: SeoConfig) {
   setMeta("name", "DC.description", config.description);
 
   // Open Graph
-  setMeta("property", "og:title", config.title);
-  setMeta("property", "og:description", config.description);
+  setMeta("property", "og:title", ogTitle);
+  setMeta("property", "og:description", ogDesc);
   setMeta("property", "og:url", config.canonicalUrl);
   setMeta("property", "og:type", ogType);
   setMeta("property", "og:image", image);
   setMeta("property", "og:image:url", image);
   setMeta("property", "og:image:secure_url", image);
   setMeta("property", "og:image:alt", imageAlt);
-  setMeta("property", "og:image:type", "image/jpeg");
+  setMeta("property", "og:image:type", "image/png");
   setMeta("property", "og:image:width", "1200");
-  setMeta("property", "og:image:height", "1600");
+  setMeta("property", "og:image:height", "630");
 
   // Google Thumbnail & Image Link Indexing
   setMeta("name", "thumbnail", image);
@@ -236,8 +376,22 @@ export function updateDynamicMetadata(config: SeoConfig) {
 
   // Twitter Cards
   setMeta("name", "twitter:card", "summary_large_image");
-  setMeta("name", "twitter:title", config.title);
-  setMeta("name", "twitter:description", config.description);
+  setMeta("name", "twitter:title", twitterTitle);
+  setMeta("name", "twitter:description", twitterDesc);
   setMeta("name", "twitter:image", image);
   setMeta("name", "twitter:image:alt", imageAlt);
+
+  // Dynamic Schema.org JSON-LD injection for the specific page
+  let schemaScript = document.getElementById("dynamic-route-schema-jsonld") as HTMLScriptElement | null;
+  if (config.schemaJsonLd) {
+    if (!schemaScript) {
+      schemaScript = document.createElement("script");
+      schemaScript.id = "dynamic-route-schema-jsonld";
+      schemaScript.type = "application/ld+json";
+      document.head.appendChild(schemaScript);
+    }
+    schemaScript.textContent = JSON.stringify(config.schemaJsonLd, null, 2);
+  } else if (schemaScript) {
+    schemaScript.remove();
+  }
 }

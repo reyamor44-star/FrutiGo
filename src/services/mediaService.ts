@@ -22,25 +22,25 @@ export function extractYouTubeId(url: string): string | null {
   return null;
 }
 
-// Initial seed data for Alberto Reyes Sandoval
+// Initial seed data for FrutiGo Technologies media
 const DEFAULT_MEDIA_ITEMS: FounderMediaItem[] = [
   {
     id: "seed-1",
-    title: "Alberto Reyes Sandoval - Fundador y CEO de Fruti Go",
-    description: "Fotografía oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y CEO de Fruti Go en Guadalajara, Jalisco.",
+    title: "FrutiGo Technologies — Infraestructura y Dirección Tecnológica",
+    description: "Dirección de Arquitectura y Sistemas en FrutiGo Technologies y FrutiGo Logistics.",
     type: "image",
     url: "/logo.svg",
-    altText: "Alberto Reyes Sandoval - Creador, Desarrollador Principal y Fundador de Fruti Go",
+    altText: "FrutiGo Technologies — Infraestructura Tecnológica",
     createdAt: new Date().toISOString()
   },
   {
     id: "seed-2",
-    title: "Presentación de la Plataforma Fruti Go",
-    description: "Video explicativo sobre la arquitectura tecnológica y el modelo de distribución directa del campo a tu hogar ideado por Alberto Reyes Sandoval.",
+    title: "Presentación de Infraestructura FrutiGo Technologies",
+    description: "Conferencia y análisis de arquitectura de software y logística de distribución de FrutiGo Technologies & FrutiGo Logistics.",
     type: "youtube",
     url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     youtubeId: "dQw4w9WgXcQ",
-    altText: "Alberto Reyes Sandoval - Presentación de Tecnología y Visión Fruti Go",
+    altText: "FrutiGo Technologies — Infraestructura Tecnológica",
     createdAt: new Date().toISOString()
   }
 ];
@@ -109,7 +109,7 @@ export const mediaService = {
       ...itemData,
       id: "media-" + Date.now() + "-" + Math.random().toString(36).substring(2, 7),
       youtubeId,
-      altText: itemData.altText.trim() || "Alberto Reyes Sandoval - Fundador de Fruti Go",
+      altText: itemData.altText.trim() || "FrutiGo Technologies — Infraestructura de Sistemas y Logística",
       createdAt: new Date().toISOString()
     };
 

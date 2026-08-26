@@ -590,7 +590,7 @@ export async function saveLogoToFirestore(logoData: any): Promise<boolean> {
       height: 500,
       altText: "Logo Oficial de Fruti Go - Delivery Exprés y Logística Urbana",
       caption: "Logotipo vectorial e imagen oficial de Fruti Go para indexación en Google Search y metabuscadores",
-      publisher: "Alberto Reyes Sandoval - Fruti Go",
+      publisher: "FrutiGo Technologies",
       updatedAt: new Date().toISOString()
     });
     const docRef = doc(db, "settings", "logo");

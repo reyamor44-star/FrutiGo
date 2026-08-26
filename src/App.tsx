@@ -34,7 +34,9 @@ import {
   Youtube,
   ExternalLink,
   Sparkles,
-  Download
+  Download,
+  Building2,
+  Cpu
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -45,6 +47,7 @@ import { DEFAULT_PRODUCTS, DEFAULT_BANNER } from "./data/defaultStoreData";
 import OnlineStore from "./components/OnlineStore";
 import AdminPanel from "./components/AdminPanel";
 import { FounderProfileCard } from "./components/FounderProfileCard";
+import CorporateAboutUs from "./components/CorporateAboutUs";
 import FundadorGaleriaPublica from "./components/FundadorGaleriaPublica";
 import { updateDynamicMetadata, SEO_SECTION_DATA } from "./utils/seo";
 import RegistroFrutigo from "./components/RegistroFrutigo";
@@ -70,9 +73,9 @@ const SECTION_LABELS: Record<Section, string> = {
   politicas: "Políticas",
   terminos: "Términos",
   privacidad: "Privacidad",
-  desarrollador: "Sobre el Desarrollador",
+  desarrollador: "Acerca de Nosotros",
   medios: "Medios y Galería",
-  nosotros: "Sobre Nosotros",
+  nosotros: "Acerca de Nosotros",
   soporte: "Soporte",
   cuenta: "Eliminar Cuenta",
 };
@@ -81,9 +84,9 @@ const SECTION_ICONS: Record<Section, any> = {
   politicas: FileText,
   terminos: ShieldCheck,
   privacidad: Lock,
-  desarrollador: UserCheck,
+  desarrollador: Building2,
   medios: Sparkles,
-  nosotros: Info,
+  nosotros: Building2,
   soporte: LifeBuoy,
   cuenta: UserX,
 };
@@ -93,7 +96,7 @@ function FrutiGoLogo({ className = "w-12 h-12", customUrl }: { className?: strin
     return (
       <img 
         src={customUrl} 
-        alt="Fruti Go - Plataforma oficial desarrollada por Alberto Reyes Sandoval" 
+        alt="FrutiGo Technologies - Plataforma de Comercio y Logística Digital" 
         className={cn("select-none flex-shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.06)] rounded-[22%] border border-zinc-100 bg-white object-contain", className)} 
       />
     );
@@ -236,7 +239,7 @@ function GooglePlayBadge({ className = "", lang = "es" }: { className?: string; 
 
 function StyledFrutiGo({ legal = false }: { legal?: boolean }) {
   return (
-    <span className="font-black italic text-brand-green tracking-tighter select-none inline-block whitespace-nowrap normal-case">
+    <span className="font-black italic text-zinc-900 tracking-tighter select-none inline-block whitespace-nowrap normal-case">
       Fruti Go{legal && " Legal"}
     </span>
   );
@@ -251,8 +254,8 @@ function highlightBrandName(html: string) {
   // Also catch any occasional alternative capitalization or with dot inside the text formatting
   res = res.replace(/Fruti Go\./g, "##FRUTIGO##.");
   
-  res = res.replace(/##FRUTIGOLEGAL##/g, '<span class="font-black italic text-brand-green tracking-tighter inline-block whitespace-nowrap normal-case">Fruti Go Legal</span>');
-  res = res.replace(/##FRUTIGO##/g, '<span class="font-black italic text-brand-green tracking-tighter inline-block whitespace-nowrap normal-case">Fruti Go</span>');
+  res = res.replace(/##FRUTIGOLEGAL##/g, '<span class="font-black italic text-zinc-900 tracking-tighter inline-block whitespace-nowrap normal-case">Fruti Go Legal</span>');
+  res = res.replace(/##FRUTIGO##/g, '<span class="font-black italic text-zinc-900 tracking-tighter inline-block whitespace-nowrap normal-case">Fruti Go</span>');
   return res;
 }
 
@@ -1445,14 +1448,26 @@ export default function App() {
         search.includes("galeria")
       );
 
+      const isAboutTarget = (
+        pathname.includes("nosotros") ||
+        pathname.includes("desarrollador") ||
+        pathname.includes("sobre-el-desarrollador") ||
+        hash.includes("nosotros") ||
+        hash.includes("desarrollador") ||
+        search.includes("nosotros") ||
+        search.includes("desarrollador")
+      );
+
       if (activeView === "tienda") {
         updateDynamicMetadata(SEO_SECTION_DATA.tienda);
-      } else if (currentSection === "desarrollador" && isMediaTarget) {
+      } else if (isMediaTarget || currentSection === "medios") {
         updateDynamicMetadata(SEO_SECTION_DATA.medios);
+      } else if (isAboutTarget || currentSection === "nosotros" || currentSection === "desarrollador") {
+        updateDynamicMetadata(SEO_SECTION_DATA.nosotros);
       } else if (currentSection && SEO_SECTION_DATA[currentSection]) {
         updateDynamicMetadata(SEO_SECTION_DATA[currentSection]);
       } else {
-        updateDynamicMetadata(SEO_SECTION_DATA.politicas);
+        updateDynamicMetadata(SEO_SECTION_DATA.inicio);
       }
     }
   }, [activeView, currentSection]);
@@ -1523,9 +1538,9 @@ export default function App() {
 
   if (activeView === "registro") {
     return (
-      <div className="min-h-screen bg-zinc-50 text-brand-black font-sans selection:bg-brand-yellow selection:text-black bg-mesh">
+      <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white bg-mesh">
         {/* Header */}
-        <header className="border-b-2 border-brand-green/5 bg-white/60 backdrop-blur-xl sticky top-0 z-50">
+        <header className="border-b border-zinc-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-2.5 sm:px-6 py-2.5 sm:py-0 sm:h-20 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div className="flex items-center justify-between gap-3">
               <div 
@@ -1537,7 +1552,7 @@ export default function App() {
               >
                 <FrutiGoLogo customUrl={customLogo} className="w-10 h-10 sm:w-11 sm:h-11" />
                 <div>
-                  <h1 className="text-lg sm:text-xl font-black italic tracking-tighter text-brand-green select-none">
+                  <h1 className="text-lg sm:text-xl font-black italic tracking-tighter text-zinc-900 select-none">
                     Fruti Go
                   </h1>
                   <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-medium">
@@ -1553,19 +1568,32 @@ export default function App() {
                 href="https://play.google.com/store/apps/details?id=com.frutigo.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gradient-to-r from-emerald-600 to-brand-green hover:from-emerald-500 hover:to-emerald-700 text-white rounded-2xl border border-emerald-400/40 font-black text-xs shadow-sm hover:shadow-md transition transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-zinc-900 hover:bg-black text-white rounded-2xl border border-zinc-800 font-bold text-xs shadow-xs hover:shadow-sm transition transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
                 title="Descarga la app oficial de Fruti Go en Google Play Store"
               >
-                <Download className="w-3.5 h-3.5 text-brand-yellow shrink-0 animate-bounce" />
+                <Download className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
                 <span className="tracking-tight">Descarga la app</span>
               </a>
+
+              {/* Botón Ir a la Tienda */}
+              <button
+                onClick={() => {
+                  setActiveView("tienda");
+                  window.history.pushState(null, "", "/tienda");
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-zinc-800 hover:bg-zinc-900 text-white rounded-2xl border border-zinc-700 font-bold text-xs shadow-xs hover:shadow-sm transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+                title="Ir a la Tienda Online de Fruti Go"
+              >
+                <Store className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
+                <span className="tracking-tight">Ir a la Tienda</span>
+              </button>
 
               <button
                 onClick={() => {
                   setActiveView("legal");
                   window.history.pushState(null, "", "/");
                 }}
-                className="flex items-center gap-1.5 px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 rounded-2xl border border-emerald-200 text-xs font-black transition active:scale-95 cursor-pointer shadow-xs"
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 rounded-2xl border border-zinc-300 text-xs font-bold transition active:scale-95 cursor-pointer shadow-xs"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Volver al Inicio</span>
@@ -1579,6 +1607,10 @@ export default function App() {
             onBackToHome={() => {
               setActiveView("legal");
               window.history.pushState(null, "", "/");
+            }}
+            onGoToStore={() => {
+              setActiveView("tienda");
+              window.history.pushState(null, "", "/tienda");
             }}
             onViewTerms={() => {
               setActiveView("legal");
@@ -1638,34 +1670,67 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-brand-black font-sans selection:bg-brand-yellow selection:text-black bg-mesh">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white bg-mesh">
       {/* Header */}
-      <header className="border-b-2 border-brand-green/5 bg-white/60 backdrop-blur-xl sticky top-0 z-50">
+      <header className="border-b border-zinc-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-2.5 sm:px-6 py-2.5 sm:py-0 sm:h-20 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <FrutiGoLogo customUrl={customLogo} className="w-10 h-10 sm:w-11 sm:h-11" />
               <div>
-                <h1 className="text-lg sm:text-xl font-black italic tracking-tighter text-brand-green select-none">
+                <h1 className="text-lg sm:text-xl font-black italic tracking-tighter text-zinc-900 select-none">
                   Fruti Go
                 </h1>
                 <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-medium">
-                  {currentSection === "desarrollador" ? "Sobre el Desarrollador" : UI_TRANSLATIONS[currentLang].headerSubtitle}
+                  {currentSection === "desarrollador" || currentSection === "nosotros" ? "Infraestructura & Plataforma Tecnológica" : UI_TRANSLATIONS[currentLang].headerSubtitle}
                 </p>
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full flex-nowrap scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {/* Botón Tienda Mayorista B2B (/cliente) */}
+            <a
+              href="/cliente"
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveView("tienda");
+                window.history.pushState(null, "", "/cliente");
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-zinc-900 hover:bg-black text-white rounded-2xl border border-zinc-800 font-bold text-xs shadow-xs hover:shadow-sm transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+              title="Acceso a Tienda Mayorista y Clientes B2B"
+            >
+              <ShoppingBag className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
+              <span className="tracking-tight">Tienda Mayorista (B2B)</span>
+            </a>
+
+            {/* Botón Ir a la Tienda en Línea */}
+            <button
+              onClick={() => {
+                setActiveView("tienda");
+                window.history.pushState(null, "", "/tienda");
+              }}
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-2xl border font-bold text-xs shadow-xs hover:shadow-sm transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0",
+                activeView === "tienda"
+                  ? "bg-zinc-800 text-white border-zinc-700"
+                  : "bg-zinc-900 hover:bg-black text-white border-zinc-800"
+              )}
+              title="Ir a la Tienda Online de Fruti Go"
+            >
+              <Store className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
+              <span className="tracking-tight">Ir a la Tienda</span>
+            </button>
+
             {/* Botón Descarga la App */}
             <a
               href="https://play.google.com/store/apps/details?id=com.frutigo.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gradient-to-r from-emerald-600 to-brand-green hover:from-emerald-500 hover:to-emerald-700 text-white rounded-2xl border border-emerald-400/40 font-black text-xs shadow-md hover:shadow-lg transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-zinc-900 hover:bg-black text-white rounded-2xl border border-zinc-800 font-bold text-xs shadow-xs hover:shadow-sm transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
               title="Descarga la app oficial de Fruti Go en Google Play Store"
             >
-              <Download className="w-3.5 h-3.5 text-brand-yellow shrink-0 animate-bounce" />
+              <Download className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
               <span className="tracking-tight">Descarga la app</span>
             </a>
 
@@ -1675,7 +1740,7 @@ export default function App() {
                 setActiveView("registro");
                 window.history.pushState(null, "", "/registrofrutigo");
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gradient-to-r from-[#FABF08] to-[#F59E0B] hover:from-[#F59E0B] hover:to-[#D97706] text-[#0F3A1D] rounded-2xl border-2 border-[#0F3A1D]/15 font-black text-xs shadow-md hover:shadow-lg transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 rounded-2xl border border-zinc-300 font-bold text-xs shadow-xs hover:shadow-sm transition-all transform active:scale-95 whitespace-nowrap cursor-pointer shrink-0"
               title="Regístrate en Fruti Go - App Oficial"
             >
               <img
@@ -1693,8 +1758,8 @@ export default function App() {
                 className={cn(
                   "flex items-center gap-1.5 px-3 py-2 rounded-2xl border transition text-xs font-bold shadow-2xs whitespace-nowrap cursor-pointer active:scale-95 shrink-0",
                   copiedLink 
-                    ? "bg-emerald-600 text-white border-emerald-600 shadow-sm" 
-                    : "bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-200"
+                    ? "bg-zinc-900 text-white border-zinc-800 shadow-sm" 
+                    : "bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border-zinc-300"
                 )}
                 title="Copiar enlace directo de esta sección"
               >
@@ -1705,7 +1770,7 @@ export default function App() {
                   </>
                 ) : (
                   <>
-                    <Share2 className="w-3.5 h-3.5 text-brand-green" />
+                    <Share2 className="w-3.5 h-3.5 text-zinc-700" />
                     <span className="font-extrabold">{UI_TRANSLATIONS[currentLang].shareSection}</span>
                   </>
                 )}
@@ -1746,12 +1811,12 @@ export default function App() {
                           }}
                           className={cn(
                             "w-full flex items-center gap-3 px-3.5 py-2 text-xs font-extrabold transition text-left hover:bg-zinc-50",
-                            currentLang === lang.code ? "text-brand-green bg-brand-green/5 font-black" : "text-zinc-600"
+                            currentLang === lang.code ? "text-zinc-900 bg-zinc-100 font-black" : "text-zinc-600"
                           )}
                         >
                           <span className="text-xl leading-none">{lang.flag}</span>
                           <span>{lang.name}</span>
-                          {currentLang === lang.code && <CheckCircle2 className="w-4 h-4 ml-auto text-brand-green" />}
+                          {currentLang === lang.code && <CheckCircle2 className="w-4 h-4 ml-auto text-zinc-900" />}
                         </button>
                       ))}
                     </div>
@@ -1766,7 +1831,7 @@ export default function App() {
                 className="flex-shrink-0 p-2 hover:bg-zinc-100 rounded-full group transition cursor-pointer"
                 title={UI_TRANSLATIONS[currentLang].adminTooltip}
               >
-                {isAdmin ? <ArrowLeft className="w-5 h-5" /> : <Settings className="w-5 h-5 text-zinc-400 group-hover:text-brand-green" />}
+                {isAdmin ? <ArrowLeft className="w-5 h-5" /> : <Settings className="w-5 h-5 text-zinc-400 group-hover:text-zinc-900" />}
               </button>
             )}
           </div>
@@ -1782,6 +1847,34 @@ export default function App() {
               {/* Mobile Horizontal Navigation Bar */}
               <aside className="lg:hidden col-span-1 mb-1">
                 <nav className="flex items-center gap-2 overflow-x-auto pb-1.5 pt-0.5 px-0.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                  {/* Tienda Mayorista Mobile Pill */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveView("tienda");
+                      window.history.pushState(null, "", "/cliente");
+                    }}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl font-bold text-xs whitespace-nowrap shrink-0 transition-all cursor-pointer border shadow-2xs bg-zinc-900 text-white border-zinc-800 active:scale-95"
+                    title="Tienda Mayorista y Clientes B2B"
+                  >
+                    <ShoppingBag className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
+                    <span>Tienda Mayorista (B2B)</span>
+                  </button>
+
+                  {/* Ir a la Tienda Mobile Pill */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveView("tienda");
+                      window.history.pushState(null, "", "/tienda");
+                    }}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl font-bold text-xs whitespace-nowrap shrink-0 transition-all cursor-pointer border shadow-2xs bg-zinc-800 text-white border-zinc-700 active:scale-95"
+                    title="Ir a la Tienda Online de Fruti Go"
+                  >
+                    <Store className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
+                    <span>Ir a la Tienda</span>
+                  </button>
+
                   {(Object.keys(SECTION_LABELS) as Section[]).map((key) => {
                     const Icon = SECTION_ICONS[key];
                     const active = currentSection === key;
@@ -1807,7 +1900,7 @@ export default function App() {
                         className={cn(
                           "flex items-center gap-2 px-3 py-2 rounded-xl font-extrabold text-xs whitespace-nowrap shrink-0 transition-all cursor-pointer border shadow-2xs",
                           active 
-                            ? "bg-brand-green text-brand-yellow border-brand-green shadow-sm" 
+                            ? "bg-zinc-900 text-white border-zinc-800 shadow-sm" 
                             : "bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-50"
                         )}
                       >
@@ -1823,12 +1916,12 @@ export default function App() {
                     className={cn(
                       "flex items-center gap-1.5 px-3 py-2 rounded-xl font-extrabold text-xs whitespace-nowrap shrink-0 transition-all cursor-pointer border shadow-2xs ml-1 active:scale-95",
                       copiedLink
-                        ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
-                        : "bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100"
+                        ? "bg-zinc-900 text-white border-zinc-800 shadow-sm"
+                        : "bg-zinc-100 text-zinc-800 border-zinc-200 hover:bg-zinc-200"
                     )}
                     title="Copiar enlace directo"
                   >
-                    {copiedLink ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4 text-amber-600" />}
+                    {copiedLink ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4 text-zinc-700" />}
                     <span>{copiedLink ? UI_TRANSLATIONS[currentLang].linkCopied : UI_TRANSLATIONS[currentLang].shareSection}</span>
                   </button>
                 </nav>
@@ -1837,6 +1930,58 @@ export default function App() {
               {/* Desktop Vertical Sidebar */}
               <aside className="hidden lg:block lg:col-span-3">
                 <nav className="space-y-3 sticky top-32">
+                  {/* Tienda Mayorista Direct Sidebar Button */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveView("tienda");
+                      window.history.pushState(null, "", "/cliente");
+                    }}
+                    className="w-full flex items-center justify-between p-4 rounded-2xl group relative overflow-hidden transition-all cursor-pointer bg-zinc-900 hover:bg-black text-white shadow-xs hover:shadow-sm border border-zinc-800 active:scale-98"
+                    title="Acceso a Tienda Mayorista y Clientes B2B"
+                  >
+                    <div className="flex items-center gap-4 relative z-10">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/10 text-white">
+                        <ShoppingBag className="w-5 h-5" />
+                      </div>
+                      <div className="text-left">
+                        <span className="font-bold text-sm tracking-tight text-white block">
+                          Tienda Mayorista (B2B)
+                        </span>
+                        <span className="text-[10px] text-zinc-400 font-medium block">
+                          Precios Mayoreo & Pedidos
+                        </span>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-4 h-4 z-10 text-zinc-400 group-hover:translate-x-1 transition-transform" />
+                  </button>
+
+                  {/* Ir a la Tienda Direct Sidebar Button */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveView("tienda");
+                      window.history.pushState(null, "", "/tienda");
+                    }}
+                    className="w-full flex items-center justify-between p-4 rounded-2xl group relative overflow-hidden transition-all cursor-pointer bg-zinc-800 hover:bg-zinc-900 text-white shadow-xs hover:shadow-sm border border-zinc-700 active:scale-98"
+                    title="Ir a la Tienda Online de Fruti Go"
+                  >
+                    <div className="flex items-center gap-4 relative z-10">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/10 text-white">
+                        <Store className="w-5 h-5" />
+                      </div>
+                      <div className="text-left">
+                        <span className="font-bold text-sm tracking-tight text-white block">
+                          Ir a la Tienda
+                        </span>
+                        <span className="text-[10px] text-zinc-400 font-medium block">
+                          Catálogo de Frutas y Abarrotes
+                        </span>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-4 h-4 z-10 text-zinc-400 group-hover:translate-x-1 transition-transform" />
+                  </button>
+
                   {(Object.keys(SECTION_LABELS) as Section[]).map((key) => {
                     const Icon = SECTION_ICONS[key];
                     const active = currentSection === key;
@@ -1862,14 +2007,14 @@ export default function App() {
                         className={cn(
                           "w-full flex items-center justify-between p-4 rounded-2xl group relative overflow-hidden transition-all cursor-pointer",
                           active 
-                            ? "bg-brand-green text-brand-yellow shadow-md shadow-brand-green/10" 
-                            : "glass-card text-zinc-500 hover:text-brand-green hover:bg-white"
+                            ? "bg-zinc-900 text-white shadow-sm border border-zinc-800" 
+                            : "glass-card text-zinc-600 hover:text-zinc-900 hover:bg-white border border-zinc-200/80"
                         )}
                       >
                         <div className="flex items-center gap-4 relative z-10">
                           <div className={cn(
                             "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
-                            active ? "bg-white/10" : "bg-zinc-100 group-hover:bg-brand-yellow/10"
+                            active ? "bg-white/10 text-white" : "bg-zinc-100 text-zinc-600 group-hover:bg-zinc-200"
                           )}>
                             <Icon className="w-5 h-5" />
                           </div>
@@ -1877,10 +2022,10 @@ export default function App() {
                             {UI_TRANSLATIONS[currentLang].sections[key]}
                           </span>
                         </div>
-                        <ChevronRight className={cn("w-4 h-4 z-10 transition-opacity", active ? "opacity-100" : "opacity-0 group-hover:opacity-100")} />
+                        <ChevronRight className={cn("w-4 h-4 z-10 transition-opacity", active ? "opacity-100 text-white" : "opacity-0 group-hover:opacity-100 text-zinc-400")} />
                         
                         {active && (
-                          <div className="absolute inset-0 bg-brand-green z-0" />
+                          <div className="absolute inset-0 bg-zinc-900 z-0" />
                         )}
                       </a>
                     );
@@ -1893,14 +2038,14 @@ export default function App() {
                       className={cn(
                         "w-full flex items-center justify-between p-3.5 rounded-2xl transition-all cursor-pointer border shadow-2xs active:scale-[0.98]",
                         copiedLink
-                          ? "bg-emerald-600 text-white border-emerald-600 shadow-md"
-                          : "bg-white hover:bg-emerald-50 text-zinc-700 hover:text-brand-green border-zinc-200 hover:border-emerald-200"
+                          ? "bg-zinc-900 text-white border-zinc-800 shadow-md"
+                          : "bg-white hover:bg-zinc-50 text-zinc-700 hover:text-zinc-900 border-zinc-200 hover:border-zinc-300"
                       )}
                     >
                       <div className="flex items-center gap-3">
                         <div className={cn(
                           "w-9 h-9 rounded-xl flex items-center justify-center transition-colors",
-                          copiedLink ? "bg-white/20" : "bg-emerald-100 text-brand-green"
+                          copiedLink ? "bg-white/20" : "bg-zinc-100 text-zinc-700"
                         )}>
                           {copiedLink ? <Check className="w-4 h-4 text-white" /> : <Share2 className="w-4 h-4" />}
                         </div>
@@ -1936,19 +2081,19 @@ export default function App() {
                   <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl -ml-32 -mb-32" />
                   
                   {/* Watermark Background */}
-                  <div className="absolute top-[-50px] right-[-50px] opacity-[0.03] pointer-events-none text-brand-green">
+                  <div className="absolute top-[-50px] right-[-50px] opacity-[0.02] pointer-events-none text-zinc-900">
                     <span className="text-[400px] font-black italic select-none">FG</span>
                   </div>
 
                   {/* Document Header Brand Block */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 mb-4 sm:mb-8 border-b border-zinc-200/60 relative z-10">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 mb-4 sm:mb-8 border-b border-zinc-200/80 relative z-10">
                     <div className="flex items-center gap-3">
                       <FrutiGoLogo customUrl={customLogo} className="w-10 h-10 sm:w-14 sm:h-14" />
                       <div>
                         <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
                           {UI_TRANSLATIONS[currentLang].officialDocTag}
                         </div>
-                        <h2 className="text-base sm:text-lg font-black italic tracking-tighter text-brand-green">
+                        <h2 className="text-base sm:text-lg font-black italic tracking-tighter text-zinc-900">
                           FRUTI GO
                         </h2>
                       </div>
@@ -1964,8 +2109,8 @@ export default function App() {
                         className={cn(
                           "flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-extrabold transition cursor-pointer active:scale-95 shadow-2xs",
                           copiedLink 
-                            ? "bg-emerald-600 text-white border-emerald-600 shadow-sm" 
-                            : "bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-50 hover:text-brand-green"
+                            ? "bg-zinc-900 text-white border-zinc-800 shadow-sm" 
+                            : "bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-50 hover:text-zinc-900"
                         )}
                         title="Copiar enlace directo de esta sección"
                       >
@@ -1976,7 +2121,7 @@ export default function App() {
                           </>
                         ) : (
                           <>
-                            <Share2 className="w-3.5 h-3.5 text-brand-green" />
+                            <Share2 className="w-3.5 h-3.5 text-zinc-700" />
                             <span>{UI_TRANSLATIONS[currentLang].shareSection}</span>
                           </>
                         )}
@@ -1986,7 +2131,9 @@ export default function App() {
 
                   {currentSection === "cuenta" ? (
                     <AccountDeletionForm lang={currentLang} />
-                  ) : currentSection === "desarrollador" || currentSection === "medios" || currentSection === "fundador" ? (
+                  ) : currentSection === "desarrollador" || currentSection === "nosotros" || currentSection === "fundador" ? (
+                    <CorporateAboutUs />
+                  ) : currentSection === "medios" ? (
                     <FundadorGaleriaPublica />
                   ) : (
                     <>
@@ -2320,33 +2467,49 @@ export default function App() {
               <GooglePlayBadge lang={currentLang} />
               <nav aria-label="Enlaces institucionales y legales" className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-xs font-bold text-zinc-500">
                 <a 
-                  href="/desarrollador" 
-                  onClick={(e) => { e.preventDefault(); window.location.hash = "desarrollador"; setCurrentSection("desarrollador"); }} 
-                  className="hover:text-brand-green transition-colors font-extrabold text-emerald-800"
-                  title="Sobre el Desarrollador - Alberto Reyes Sandoval"
+                  href="/cliente" 
+                  onClick={(e) => { 
+                    e.preventDefault(); 
+                    setActiveView("tienda"); 
+                    window.history.pushState(null, "", "/cliente"); 
+                  }} 
+                  className="hover:text-amber-700 transition-colors font-black text-amber-600 flex items-center gap-1"
+                  title="Acceso a Tienda Mayorista y Clientes B2B"
                 >
-                  Desarrollador
+                  <span>💼 Tienda Mayorista</span>
+                </a>
+                <a 
+                  href="/tienda" 
+                  onClick={(e) => { 
+                    e.preventDefault(); 
+                    setActiveView("tienda"); 
+                    window.history.pushState(null, "", "/tienda"); 
+                  }} 
+                  className="hover:text-zinc-900 transition-colors font-bold text-zinc-800 flex items-center gap-1"
+                  title="Ir a la Tienda Online de Fruti Go"
+                >
+                  <span>Ir a la Tienda</span>
+                </a>
+                <a 
+                  href="/nosotros" 
+                  onClick={(e) => { e.preventDefault(); window.location.hash = "nosotros"; setCurrentSection("nosotros"); }} 
+                  className="hover:text-zinc-900 transition-colors font-bold text-zinc-800"
+                  title="Acerca de Nosotros e Infraestructura Tecnológica - FrutiGo Technologies"
+                >
+                  Acerca de Nosotros
                 </a>
                 <a 
                   href="/medios" 
                   onClick={(e) => { e.preventDefault(); window.location.hash = "medios"; setCurrentSection("medios"); }} 
-                  className="hover:text-brand-green transition-colors"
+                  className="hover:text-zinc-900 transition-colors text-zinc-600"
                   title="Galería y Medios Oficiales"
                 >
                   Medios y Galería
                 </a>
                 <a 
-                  href="/sobre-nosotros" 
-                  onClick={(e) => { e.preventDefault(); window.location.hash = "nosotros"; setCurrentSection("nosotros"); }} 
-                  className="hover:text-brand-green transition-colors"
-                  title="Sobre Nosotros - Fruti Go"
-                >
-                  Sobre Nosotros
-                </a>
-                <a 
                   href="/soporte" 
                   onClick={(e) => { e.preventDefault(); window.location.hash = "soporte"; setCurrentSection("soporte"); }} 
-                  className="hover:text-brand-green transition-colors"
+                  className="hover:text-zinc-900 transition-colors text-zinc-600"
                   title="Soporte y Contacto"
                 >
                   Soporte
@@ -2354,7 +2517,7 @@ export default function App() {
                 <a 
                   href="/terminos" 
                   onClick={(e) => { e.preventDefault(); window.location.hash = "terminos"; setCurrentSection("terminos"); }} 
-                  className="hover:text-brand-green transition-colors"
+                  className="hover:text-zinc-900 transition-colors text-zinc-600"
                   title="Términos y Condiciones de Uso"
                 >
                   Términos y Cond.
@@ -2362,7 +2525,7 @@ export default function App() {
                 <a 
                   href="/privacidad" 
                   onClick={(e) => { e.preventDefault(); window.location.hash = "privacidad"; setCurrentSection("privacidad"); }} 
-                  className="hover:text-brand-green transition-colors"
+                  className="hover:text-zinc-900 transition-colors text-zinc-600"
                   title="Aviso de Privacidad"
                 >
                   Aviso de Privacidad
@@ -2371,7 +2534,7 @@ export default function App() {
                   <button 
                     type="button"
                     onClick={() => setIsAdminPanelOpen(true)} 
-                    className="text-left hover:text-brand-green transition-colors font-extrabold text-amber-700 flex items-center gap-1 cursor-pointer"
+                    className="text-left hover:text-zinc-900 transition-colors font-bold text-zinc-800 flex items-center gap-1 cursor-pointer"
                     title="Acceso al Panel de Control y Administración"
                   >
                     <span>⚙️ Panel Admin</span>
@@ -2406,15 +2569,15 @@ export default function App() {
             >
               <button 
                 onClick={() => setShowLogin(false)}
-                className="absolute top-6 right-6 text-zinc-400 hover:text-brand-black"
+                className="absolute top-6 right-6 text-zinc-400 hover:text-zinc-900"
               >
                 <X className="w-6 h-6" />
               </button>
               <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-brand-green rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Lock className="text-brand-yellow w-8 h-8" />
+                <div className="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Lock className="text-white w-8 h-8" />
                 </div>
-                <h2 className="text-2xl font-black text-brand-green">Control de Acceso</h2>
+                <h2 className="text-2xl font-black text-zinc-900">Control de Acceso</h2>
                 <p className="text-zinc-500">Introduce la contraseña de <StyledFrutiGo legal /></p>
               </div>
               
@@ -2435,7 +2598,7 @@ export default function App() {
                       }
                     }
                   }}
-                  className="w-full bg-zinc-50 border-2 border-zinc-100 rounded-2xl p-4 text-center text-xl font-bold focus:border-brand-green outline-none transition-all placeholder:text-zinc-200"
+                  className="w-full bg-zinc-50 border-2 border-zinc-100 rounded-2xl p-4 text-center text-xl font-bold focus:border-zinc-900 outline-none transition-all placeholder:text-zinc-200"
                   placeholder="••••••"
                 />
                 <button
@@ -2448,7 +2611,7 @@ export default function App() {
                       alert("Contraseña Incorrecta");
                     }
                   }}
-                  className="w-full bg-brand-green text-brand-yellow py-4 rounded-2xl font-black text-lg transition-colors hover:bg-brand-black shadow-lg shadow-brand-green/10"
+                  className="w-full bg-zinc-900 text-white py-4 rounded-2xl font-bold text-base transition-colors hover:bg-black shadow-lg shadow-zinc-900/10 cursor-pointer"
                 >
                   ACCEDER AL PANEL
                 </button>
@@ -2470,13 +2633,13 @@ export default function App() {
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-zinc-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <ShieldCheck className="text-brand-green w-6 h-6" />
+                <ShieldCheck className="text-zinc-900 w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-bold text-brand-black">Cookies</h4>
+                <h4 className="font-bold text-zinc-900">Cookies</h4>
                 <p className="text-sm text-zinc-500">
                   {UI_TRANSLATIONS[currentLang].cookieMessage}{" "}
-                  <button onClick={() => { window.location.hash = "privacidad"; setCurrentSection("privacidad"); setShowCookieBanner(false); }} className="text-brand-green font-bold hover:underline decoration-brand-yellow decoration-2 underline-offset-4">
+                  <button onClick={() => { window.location.hash = "privacidad"; setCurrentSection("privacidad"); setShowCookieBanner(false); }} className="text-zinc-900 font-bold hover:underline underline-offset-4">
                     {UI_TRANSLATIONS[currentLang].sections.privacidad}
                   </button>
                 </p>
@@ -2485,7 +2648,7 @@ export default function App() {
             <div className="flex gap-3 w-full md:w-auto">
               <button 
                 onClick={acceptCookies}
-                className="bg-brand-green text-brand-yellow px-8 py-3 rounded-xl font-black text-xs uppercase tracking-wider hover:bg-brand-black w-full md:w-auto transition"
+                className="bg-zinc-900 text-white px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-black w-full md:w-auto transition cursor-pointer"
               >
                 {UI_TRANSLATIONS[currentLang].acceptCookies}
               </button>

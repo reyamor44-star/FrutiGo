@@ -37,6 +37,7 @@ import {
   FileSpreadsheet,
   UploadCloud,
   UserCheck,
+  Building2,
   BookOpen,
   Tag
 } from "lucide-react";
@@ -1430,8 +1431,8 @@ export default function AdminPanel({
                 : "text-zinc-600 hover:bg-zinc-200/60"
             }`}
           >
-            <UserCheck className="w-4 h-4 text-brand-yellow" />
-            <span>Sobre el Desarrollador</span>
+            <Building2 className="w-4 h-4 text-brand-yellow" />
+            <span>Acerca de Nosotros / Dirección Tecnológica</span>
           </button>
 
           <button
@@ -1443,7 +1444,7 @@ export default function AdminPanel({
             }`}
           >
             <ImageIcon className="w-4 h-4 text-brand-yellow" />
-            <span>Galería Media Fundador (/admin/fundador-media)</span>
+            <span>Galería Institucional (/medios)</span>
           </button>
         </div>
 
@@ -3669,12 +3670,12 @@ export default function AdminPanel({
               <div className="border-b border-zinc-200 pb-4">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="px-2.5 py-0.5 bg-emerald-100 text-brand-green font-black text-[10px] rounded-full uppercase border border-emerald-300">
-                    PERFIL VERIFICADO B2B & INGENIERÍA
+                    DIRECCIÓN DE TECNOLOGÍA & INFRAESTRUCTURA B2B
                   </span>
                 </div>
-                <h3 className="text-xl font-black text-zinc-900">Configuración del Perfil del Desarrollador y Fundador</h3>
+                <h3 className="text-xl font-black text-zinc-900">Configuración Institucional / Dirección Tecnológica</h3>
                 <p className="text-xs text-zinc-500 mt-1 max-w-3xl">
-                  Administra la información oficial del Desarrollador Principal y Creador de Fruti Go. Todos los cambios guardados aquí se actualizarán instantáneamente en la sección pública "Sobre el Desarrollador".
+                  Administra la información oficial y de infraestructura de FrutiGo Technologies. Todos los cambios guardados aquí se reflejarán instantáneamente en la sección pública "Acerca de Nosotros / Infraestructura Tecnológica".
                 </p>
               </div>
 
@@ -3686,7 +3687,7 @@ export default function AdminPanel({
                   <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
                     <h4 className="text-sm font-black text-zinc-900 flex items-center gap-2">
                       <Edit3 className="w-4 h-4 text-brand-green" />
-                      <span>Editar Datos del Perfil</span>
+                      <span>Editar Información Institucional</span>
                     </h4>
                     <span className="text-[10px] text-zinc-400 font-bold">Campos Oficiales</span>
                   </div>
@@ -3698,11 +3699,11 @@ export default function AdminPanel({
                         <div className="flex items-center gap-2">
                           <UploadCloud className="w-5 h-5 text-brand-green" />
                           <h4 className="text-sm font-black text-zinc-900">
-                            Galería de Fotos del Desarrollador / CEO (Hasta 5 Fotos para SEO e Indexación)
+                            Galería de Fotografías Institucionales y Dirección Tecnológica (SEO e Indexación)
                           </h4>
                         </div>
                         <p className="text-xs text-zinc-500 mt-1">
-                          La <strong className="text-brand-green">Foto #1</strong> se utilizará siempre como la fotografía principal de "Sobre el Desarrollador". Las fotos <strong className="text-emerald-700">#2 a #5</strong> actuarán como respaldo y fotos complementarias. Todas las fotos con sus descripciones personalizadas serán automáticamente indexadas por Google (Schema.org / JSON-LD).
+                          La <strong className="text-brand-green">Foto #1</strong> se utilizará como la fotografía representativa de la Dirección Tecnológica. Las fotos <strong className="text-emerald-700">#2 a #5</strong> actuarán como respaldo y fotos complementarias de infraestructura. Todas las fotos con sus descripciones serán automáticamente indexadas por Google (Schema.org / JSON-LD).
                         </p>
                       </div>
 
@@ -3711,8 +3712,8 @@ export default function AdminPanel({
                           const photosArr = Array.isArray(founderForm.photos) ? founderForm.photos : [];
                           const item = photosArr[slotIdx] || {
                             url: slotIdx === 0 ? (founderForm.photo || "") : "",
-                            caption: slotIdx === 0 ? "Alberto Reyes Sandoval - Foto Principal de Perfil" : `Alberto Reyes Sandoval - Foto Complementaria ${slotIdx + 1}`,
-                            description: slotIdx === 0 ? "Fotografía oficial de Alberto Reyes Sandoval, Creador, Desarrollador Principal y CEO de Fruti Go." : `Fotografía de respaldo y complemento ${slotIdx + 1} de Alberto Reyes Sandoval.`
+                            caption: slotIdx === 0 ? "FrutiGo Technologies — Infraestructura de Sistemas" : `Fotografía Complementaria ${slotIdx + 1}`,
+                            description: slotIdx === 0 ? "Fotografía oficial de infraestructura de FrutiGo Technologies." : `Fotografía de infraestructura ${slotIdx + 1} de FrutiGo Technologies.`
                           };
 
                           const isMain = slotIdx === 0;
@@ -3723,8 +3724,8 @@ export default function AdminPanel({
                               while (newPhotos.length <= slotIdx) {
                                 newPhotos.push({
                                   url: "",
-                                  caption: `Alberto Reyes Sandoval - Foto ${newPhotos.length + 1}`,
-                                  description: `Fotografía oficial de Alberto Reyes Sandoval.`
+                                  caption: `FrutiGo Technologies - Foto ${newPhotos.length + 1}`,
+                                  description: `Fotografía oficial de FrutiGo Technologies.`
                                 });
                               }
                               newPhotos[slotIdx] = {
@@ -3767,7 +3768,7 @@ export default function AdminPanel({
                                 <span className="text-xs font-black uppercase tracking-wider flex items-center gap-1.5 text-zinc-900">
                                   {isMain ? (
                                     <span className="px-2.5 py-0.5 bg-brand-green text-white rounded-md text-[10px] font-black">
-                                      Foto #1 - Principal (Sobre el Desarrollador)
+                                      Foto #1 - Principal (Institucional / Dirección)
                                     </span>
                                   ) : (
                                     <span className="px-2.5 py-0.5 bg-zinc-800 text-amber-300 rounded-md text-[10px] font-black">
@@ -3860,7 +3861,7 @@ export default function AdminPanel({
                                       type="text"
                                       value={item.caption || ""}
                                       onChange={(e) => updateSlot("caption", e.target.value)}
-                                      placeholder={`Título / Pie de foto #${slotIdx + 1} (ej. Alberto Reyes Sandoval - CEO en Oficina)`}
+                                      placeholder={`Título / Pie de foto #${slotIdx + 1} (ej. FrutiGo Technologies - Infraestructura)`}
                                       className="w-full px-3 py-1.5 bg-white border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-800 focus:outline-none focus:ring-1 focus:ring-brand-green"
                                     />
                                   </div>
@@ -3883,35 +3884,35 @@ export default function AdminPanel({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-black text-zinc-700 mb-1">Nombre Completo del Desarrollador</label>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Nombre Institucional / Representante de Dirección</label>
                       <input
                         type="text"
                         value={founderForm.name}
                         onChange={(e) => setFounderForm({ ...founderForm, name: e.target.value })}
-                        placeholder="Ej. Alberto Reyes Sandoval"
+                        placeholder="Ej. FrutiGo Technologies"
                         className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-bold text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-black text-zinc-700 mb-1">Rol / Cargo Oficial</label>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Cargo / Título Institucional</label>
                       <input
                         type="text"
                         value={founderForm.role}
                         onChange={(e) => setFounderForm({ ...founderForm, role: e.target.value })}
-                        placeholder="Ej. Creador, Desarrollador Principal y Fundador"
+                        placeholder="Ej. Founder & Chief Technology Officer (CTO) | FrutiGo Technologies"
                         className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-bold text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green"
                       />
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-black text-zinc-700 mb-1">Correo Electrónico Directo</label>
+                        <label className="block text-xs font-black text-zinc-700 mb-1">Correo Electrónico Institucional</label>
                         <input
                           type="email"
                           value={founderForm.email}
                           onChange={(e) => setFounderForm({ ...founderForm, email: e.target.value })}
-                          placeholder="contacto@ejemplo.com"
+                          placeholder="contacto@frutigo.com.mx"
                           className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-bold text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green"
                         />
                       </div>
@@ -3933,68 +3934,68 @@ export default function AdminPanel({
                           type="url"
                           value={founderForm.youtube || ""}
                           onChange={(e) => setFounderForm({ ...founderForm, youtube: e.target.value })}
-                          placeholder="https://youtube.com/@albertoreyesfrutigo?si=T2Ba5HGKGn_3DYYt"
+                          placeholder="https://youtube.com/@frutigomx"
                           className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-bold text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-black text-zinc-700 mb-1">Cita / Declaración de Visión (Quote)</label>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Declaración de Visión y Misión Corporativa</label>
                       <textarea
                         rows={2}
                         value={founderForm.quote}
                         onChange={(e) => setFounderForm({ ...founderForm, quote: e.target.value })}
-                        placeholder="Declaración o frase destacada..."
+                        placeholder="Declaración corporativa..."
                         className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-medium text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green resize-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-black text-zinc-700 mb-1">Biografía - Párrafo 1 (Orígenes, Familia & Zamora)</label>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Reseña Institucional - Párrafo 1 (Misión y Enfoque Productivo)</label>
                       <textarea
                         rows={3}
                         value={founderForm.bioP1 || ""}
                         onChange={(e) => setFounderForm({ ...founderForm, bioP1: e.target.value })}
-                        placeholder="Biografía Párrafo 1..."
+                        placeholder="Reseña institucional Párrafo 1..."
                         className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-medium text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green resize-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-black text-zinc-700 mb-1">Biografía - Párrafo 2 (Arquitectura & Trayectoria Fruti Go)</label>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Reseña Institucional - Párrafo 2 (Arquitectura & Cadena de Suministro)</label>
                       <textarea
                         rows={3}
                         value={founderForm.bioP2 || ""}
                         onChange={(e) => setFounderForm({ ...founderForm, bioP2: e.target.value })}
-                        placeholder="Biografía Párrafo 2..."
+                        placeholder="Reseña institucional Párrafo 2..."
                         className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-medium text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green resize-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-black text-zinc-700 mb-1">Biografía - Párrafo 3 (Problemáticas del Mercado, ITESO & Visión)</label>
+                      <label className="block text-xs font-black text-zinc-700 mb-1">Reseña Institucional - Párrafo 3 (Impacto B2B, Logística & Escalabilidad)</label>
                       <textarea
                         rows={3}
                         value={founderForm.bioP3 || ""}
                         onChange={(e) => setFounderForm({ ...founderForm, bioP3: e.target.value })}
-                        placeholder="Biografía Párrafo 3..."
+                        placeholder="Reseña institucional Párrafo 3..."
                         className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl font-medium text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green resize-none"
                       />
                     </div>
 
-                    {/* Sección de Publicación de Artículos del Desarrollador */}
+                    {/* Sección de Publicación de Artículos y Ensayos Técnicos */}
                     <div className="p-4 bg-zinc-50 border border-zinc-200 rounded-2xl space-y-3">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-200/80 pb-2.5">
                         <div>
                           <div className="flex items-center gap-1.5">
                             <BookOpen className="w-4 h-4 text-brand-green" />
                             <h4 className="text-xs font-black text-zinc-900 uppercase tracking-wider">
-                              Artículos y Publicaciones del Desarrollador
+                              Publicaciones y Ensayos Técnicos de FrutiGo Technologies
                             </h4>
                           </div>
                           <p className="text-[11px] text-zinc-500 mt-0.5">
-                            Publica artículos explicativos. Aparecerán en la pantalla "Sobre el Desarrollador" después de la galería de fotos y videos.
+                            Publica artículos y comunicados de infraestructura logística e ingeniería de software.
                           </p>
                         </div>
                         <button
@@ -4008,8 +4009,8 @@ export default function AdminPanel({
                               category: "Ingeniería & Software",
                               summary: "",
                               content: "",
-                              authorName: founderForm.name || "Alberto Reyes Sandoval",
-                              signedBy: `${founderForm.name || "Alberto Reyes Sandoval"} (${founderForm.role || "Desarrollador Principal & Fundador"})`,
+                              authorName: founderForm.name || "FrutiGo Technologies",
+                              signedBy: `${founderForm.name || "FrutiGo Technologies"} (${founderForm.role || "Dirección de Infraestructura"})`,
                               images: [
                                 { url: "", caption: "" },
                                 { url: "", caption: "" },
@@ -4048,10 +4049,10 @@ export default function AdminPanel({
                                     </span>
                                     <span className="text-[10px] font-bold text-zinc-400">{art.date}</span>
                                     <span className="text-[9px] font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded-md border border-emerald-200">
-                                      👤 Autor: {art.authorName || founderForm.name || "Alberto Reyes Sandoval"}
+                                      👤 Autor: {art.authorName || founderForm.name || "FrutiGo Technologies"}
                                     </span>
                                     <span className="text-[9px] font-bold text-zinc-700 bg-zinc-100 px-1.5 py-0.5 rounded-md border border-zinc-200">
-                                      ✍️ Firmado por: {art.signedBy || art.authorName || "Alberto Reyes Sandoval"}
+                                      ✍️ Firmado por: {art.signedBy || art.authorName || "FrutiGo Technologies"}
                                     </span>
                                     {imgCount > 0 && (
                                       <span className="text-[9px] font-bold text-zinc-600 bg-zinc-100 px-1.5 py-0.5 rounded-full">
@@ -4079,8 +4080,8 @@ export default function AdminPanel({
                                         category: art.category || "Ingeniería & Software",
                                         summary: art.summary || "",
                                         content: art.content || "",
-                                        authorName: art.authorName || founderForm.name || "Alberto Reyes Sandoval",
-                                        signedBy: art.signedBy || `${art.authorName || founderForm.name || "Alberto Reyes Sandoval"} (${founderForm.role || "Desarrollador Principal"})`,
+                                        authorName: art.authorName || founderForm.name || "FrutiGo Technologies",
+                                        signedBy: art.signedBy || `${art.authorName || founderForm.name || "FrutiGo Technologies"} (${founderForm.role || "Dirección de Sistemas"})`,
                                         images: imgs.slice(0, 3)
                                       });
                                       setShowArticleModal(true);
@@ -4174,10 +4175,10 @@ export default function AdminPanel({
                               console.warn("Client Firestore direct save notice:", e);
                             }
 
-                            showToast("¡Perfil del Desarrollador guardado exitosamente en el servidor y Firebase Firestore!");
+                            showToast("¡Información institucional guardada exitosamente en el servidor y Firebase Firestore!");
                           } catch (err) {
-                            console.error("Error al guardar perfil en servidor:", err);
-                            showToast("¡Perfil del Desarrollador guardado en la memoria local!");
+                            console.error("Error al guardar información institucional:", err);
+                            showToast("¡Información institucional guardada en la memoria local!");
                           } finally {
                             setSavingFounder(false);
                           }
@@ -4187,12 +4188,12 @@ export default function AdminPanel({
                         {savingFounder ? (
                           <>
                             <RefreshCw className="w-5 h-5 text-brand-yellow animate-spin" />
-                            <span>Guardando Perfil del Desarrollador...</span>
+                            <span>Guardando Información Institucional...</span>
                           </>
                         ) : (
                           <>
                             <Save className="w-5 h-5 text-brand-yellow" />
-                            <span>💾 Guardar Perfil del Desarrollador</span>
+                            <span>💾 Guardar Información Institucional</span>
                           </>
                         )}
                       </button>
@@ -4618,7 +4619,7 @@ export default function AdminPanel({
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-brand-yellow" />
                 <h3 className="text-sm font-black uppercase tracking-wider">
-                  {editingArticle.id ? "Editar Artículo del Desarrollador" : "Publicar Nuevo Artículo del Desarrollador"}
+                  {editingArticle.id ? "Editar Artículo / Comunicado Técnico" : "Publicar Nuevo Artículo / Comunicado Técnico"}
                 </h3>
               </div>
               <button
@@ -4638,7 +4639,7 @@ export default function AdminPanel({
                   type="text"
                   value={editingArticle.title}
                   onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
-                  placeholder="Ej. Arquitectura Técnica y Escalabilidad en Tiempo Real de Fruti Go"
+                  placeholder="Ej. Arquitectura Técnica y Escalabilidad en Tiempo Real de FrutiGo Technologies"
                   className="w-full px-3.5 py-2 bg-zinc-50 border border-zinc-200 rounded-xl font-bold text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green"
                 />
               </div>
@@ -4678,7 +4679,7 @@ export default function AdminPanel({
                     type="text"
                     value={editingArticle.authorName || ""}
                     onChange={(e) => setEditingArticle({ ...editingArticle, authorName: e.target.value })}
-                    placeholder="Ej. Alberto Reyes Sandoval"
+                    placeholder="Ej. FrutiGo Technologies"
                     className="w-full px-3.5 py-2 bg-white border border-emerald-200 rounded-xl font-bold text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green"
                   />
                 </div>
@@ -4692,7 +4693,7 @@ export default function AdminPanel({
                     type="text"
                     value={editingArticle.signedBy || ""}
                     onChange={(e) => setEditingArticle({ ...editingArticle, signedBy: e.target.value })}
-                    placeholder="Ej. Alberto Reyes Sandoval (Desarrollador Principal)"
+                    placeholder="Ej. FrutiGo Technologies (Dirección de Infraestructura)"
                     className="w-full px-3.5 py-2 bg-white border border-emerald-200 rounded-xl font-bold text-xs text-zinc-900 focus:outline-none focus:ring-2 focus:ring-brand-green"
                   />
                 </div>
@@ -4861,8 +4862,8 @@ export default function AdminPanel({
                     ...editingArticle,
                     id: artId,
                     images: cleanImages,
-                    authorName: editingArticle.authorName?.trim() || founderForm.name || "Alberto Reyes Sandoval",
-                    signedBy: editingArticle.signedBy?.trim() || editingArticle.authorName?.trim() || founderForm.name || "Alberto Reyes Sandoval",
+                    authorName: editingArticle.authorName?.trim() || founderForm.name || "FrutiGo Technologies",
+                    signedBy: editingArticle.signedBy?.trim() || editingArticle.authorName?.trim() || founderForm.name || "FrutiGo Technologies",
                     createdAt: editingArticle.createdAt || Date.now(),
                     date: editingArticle.date || new Date().toLocaleDateString("es-MX", { year: "numeric", month: "long", day: "numeric" })
                   };

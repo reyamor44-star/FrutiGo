@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { mediaService, FounderMediaItem, extractYouTubeId } from "../services/mediaService";
 
-const DEFAULT_ALT_TEXT = "Alberto Reyes Sandoval - Fundador de Fruti Go";
+const DEFAULT_ALT_TEXT = "FrutiGo Technologies — Infraestructura de Sistemas y Logística";
 
 export default function AdminFundadorMedia() {
   const [items, setItems] = useState<FounderMediaItem[]>([]);
@@ -171,11 +171,11 @@ export default function AdminFundadorMedia() {
   };
 
   const handleDelete = (id: string, itemTitle: string) => {
-    if (window.confirm(`¿Estás seguro de eliminar "${itemTitle}" de la galería oficial del fundador?`)) {
+    if (window.confirm(`¿Estás seguro de eliminar "${itemTitle}" del archivo multimedia institucional?`)) {
       mediaService.deleteFounderMedia(id);
       setFeedback({
         type: "success",
-        message: "Elemento eliminado de la galería."
+        message: "Elemento eliminado de la galería institucional."
       });
       setTimeout(() => setFeedback(null), 3000);
     }
@@ -198,21 +198,21 @@ export default function AdminFundadorMedia() {
             <ShieldCheck className="w-3.5 h-3.5" /> Panel Privado de Contenido SEO
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 tracking-tight">
-            Gestión de Galería Multimedia / <span className="text-emerald-700">Fundador</span>
+            Gestión de Galería Multimedia / <span className="text-emerald-700">FrutiGo Technologies</span>
           </h2>
           <p className="text-sm text-zinc-600 mt-1">
-            Administra las fotos, videos y recursos indexables de <strong className="text-zinc-800">Alberto Reyes Sandoval</strong> (Creador, Desarrollador Principal y Fundador de Fruti Go).
+            Administra las fotos, videos y recursos indexables de <strong className="text-zinc-800">FrutiGo Technologies & FrutiGo Logistics</strong> y su Dirección de Sistemas.
           </p>
         </div>
 
         <a
-          href="/fundador"
+          href="/medios"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm shadow-md transition duration-200 shrink-0"
         >
           <Eye className="w-4 h-4" />
-          Ver Vista Pública (/fundador)
+          Ver Vista Pública (/medios)
           <ExternalLink className="w-3.5 h-3.5 opacity-80" />
         </a>
       </div>
@@ -299,7 +299,7 @@ export default function AdminFundadorMedia() {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Ej. Alberto Reyes Sandoval liderando la innovación en Fruti Go"
+                placeholder="Ej. FrutiGo Technologies innovando en infraestructura logística"
                 className="w-full px-4 py-2.5 rounded-xl border border-zinc-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm font-medium"
                 required
               />
@@ -378,7 +378,7 @@ export default function AdminFundadorMedia() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              placeholder="Detalles adicionales sobre esta foto o video del fundador Alberto Reyes Sandoval..."
+              placeholder="Detalles institucionales sobre esta fotografía, conferencia o video de FrutiGo Technologies..."
               className="w-full px-4 py-2.5 rounded-xl border border-zinc-300 focus:ring-2 focus:ring-emerald-500 text-sm font-medium"
             />
           </div>
@@ -411,7 +411,7 @@ export default function AdminFundadorMedia() {
             className="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-sm shadow-md transition duration-200 flex items-center justify-center gap-2"
           >
             <Plus className="w-4 h-4" />
-            Publicar en Galería del Fundador
+            Publicar en Galería Institucional
           </button>
         </form>
       </div>

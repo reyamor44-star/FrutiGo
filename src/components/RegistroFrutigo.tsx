@@ -23,11 +23,13 @@ import { AppRegistrationData } from "../types";
 
 interface RegistroFrutigoProps {
   onBackToHome?: () => void;
+  onGoToStore?: () => void;
   onViewTerms?: () => void;
 }
 
 export default function RegistroFrutigo({
   onBackToHome,
+  onGoToStore,
   onViewTerms
 }: RegistroFrutigoProps) {
   const [formData, setFormData] = useState({
@@ -163,16 +165,29 @@ export default function RegistroFrutigo({
       <div className="w-full max-w-xl mx-auto">
         
         {/* Navigation back */}
-        <div className="mb-4 sm:mb-6 flex items-center justify-between">
-          {onBackToHome && (
-            <button
-              onClick={onBackToHome}
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-3.5 py-2 rounded-2xl transition cursor-pointer active:scale-95 shadow-xs"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Volver a Fruti Go</span>
-            </button>
-          )}
+        <div className="mb-4 sm:mb-6 flex items-center justify-between gap-2 flex-wrap">
+          <div className="flex items-center gap-2">
+            {onBackToHome && (
+              <button
+                onClick={onBackToHome}
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-3.5 py-2 rounded-2xl transition cursor-pointer active:scale-95 shadow-xs"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Volver a Fruti Go</span>
+              </button>
+            )}
+
+            {onGoToStore && (
+              <button
+                onClick={onGoToStore}
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black text-white bg-gradient-to-r from-emerald-600 to-brand-green hover:from-emerald-500 hover:to-emerald-700 border border-emerald-400/40 px-3.5 py-2 rounded-2xl transition cursor-pointer active:scale-95 shadow-md"
+                title="Ir a la Tienda Online"
+              >
+                <Store className="w-4 h-4 text-brand-yellow shrink-0" />
+                <span>Ir a la Tienda</span>
+              </button>
+            )}
+          </div>
 
           <button
             onClick={handleCopyLink}

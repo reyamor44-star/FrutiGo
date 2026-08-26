@@ -85,9 +85,9 @@ export const UI_TRANSLATIONS: Record<Language, {
       politicas: "Políticas",
       terminos: "Términos y Condiciones",
       privacidad: "Privacidad",
-      desarrollador: "Sobre el Desarrollador",
-      medios: "Medios y Galería",
-      nosotros: "Sobre Nosotros",
+      desarrollador: "Acerca de Nosotros / Infraestructura Tecnológica",
+      medios: "Medios y Sala de Prensa",
+      nosotros: "Acerca de Nosotros / Infraestructura Tecnológica",
       soporte: "Soporte",
       cuenta: "Eliminar Cuenta",
     },
@@ -142,9 +142,9 @@ export const UI_TRANSLATIONS: Record<Language, {
       politicas: "Policies",
       terminos: "Terms & Conditions",
       privacidad: "Privacy Notice",
-      desarrollador: "About Developer",
-      medios: "Media & Gallery",
-      nosotros: "About Us",
+      desarrollador: "About Us / Technological Infrastructure",
+      medios: "Media & Press Room",
+      nosotros: "About Us / Technological Infrastructure",
       soporte: "Support",
       cuenta: "Delete Account",
     },
@@ -199,9 +199,9 @@ export const UI_TRANSLATIONS: Record<Language, {
       politicas: "Políticas",
       terminos: "Termos e Condições",
       privacidad: "Privacidade",
-      desarrollador: "Sobre o Desenvolvedor",
-      medios: "Mídia e Galeria",
-      nosotros: "Sobre Nós",
+      desarrollador: "Sobre Nós / Infraestrutura Tecnológica",
+      medios: "Mídia e Sala de Imprensa",
+      nosotros: "Sobre Nós / Infraestrutura Tecnológica",
       soporte: "Suporte",
       cuenta: "Excluir Conta",
     },
@@ -251,182 +251,149 @@ export const DEFAULT_POLICIES_BY_LANG: Record<Language, {
 }> = {
   es: {
     politicas: `
-      <h1>Políticas de Servicio y Calidad Fruti Go</h1>
-      <p>En Fruti Go, bajo la dirección general de nuestro <b>Fundador y CEO, Alberto Reyes Sandoval</b>, nuestra misión es garantizar que recibas los productos más frescos del campo directamente en tu hogar y negocio. Estas políticas rigen nuestra operación y compromiso contigo.</p>
+      <h1>Políticas de Operación, Logística y Calidad | FrutiGo Technologies & Logistics</h1>
+      <p>En <b>FrutiGo Logistics</b> y <b>FrutiGo Technologies</b>, bajo la supervisión de nuestra <b>Dirección de Arquitectura e Infraestructura Tecnológica</b>, nuestra infraestructura tecnológica y operativa está diseñada para garantizar la máxima eficiencia en la cadena de distribución, conectando productores directos con hogares y empresas.</p>
       
-      <h2>1. Estándares de Calidad</h2>
-      <p>Cada fruta y verdura es seleccionada a mano por expertos. Si algún producto no cumple con tus expectativas de frescura al momento de la entrega, cuentas con nuestra <b>Garantía de Satisfacción Total</b> respaldada por nuestro Fundador y CEO <b>Alberto Reyes Sandoval</b> para un reemplazo inmediato.</p>
+      <h2>1. Estándares de Calidad y Cadena de Suministro</h2>
+      <p>Implementamos rigurosos protocolos de selección y trazabilidad en cada etapa logística. Si algún lote o producto no cumple con nuestros estándares de inocuidad y frescura al momento de la entrega, nuestros clientes cuentan con la <b>Garantía de Calidad Institucional de FrutiGo</b>, respaldada por nuestro Equipo de Ingeniería para un reemplazo o ajuste inmediato.</p>
       
-      <h2>2. Pagos Seguros con Openpay</h2>
-      <p>Tu seguridad financiera es primordial. Todas las transacciones con tarjeta de crédito, débito y transferencias dentro de nuestra plataforma son procesadas de manera segura a través de <b>Openpay by BBVA</b>. Esto garantiza que tus datos bancarios nunca sean almacenados en nuestros servidores y estén protegidos por los estándares de seguridad más altos de la industria (PCI DSS).</p>
+      <h2>2. Infraestructura Transaccional Segura con Openpay by BBVA</h2>
+      <p>La seguridad en las transacciones digitales es un pilar central de nuestra arquitectura de pagos. Todos los cobros con tarjeta bancaria y transferencias electrónicas se procesan a través de la pasarela certificada <b>Openpay by BBVA</b>, bajo estándares internacionales de encriptación bancaria PCI-DSS Nivel 1. FrutiGo Technologies no almacena números de tarjeta ni datos financieros sensibles en sus servidores de aplicación.</p>
       
-      <h2>3. Política de Entregas</h2>
-      <p>Operamos en la zona metropolitana de Guadalajara e inmediaciones. Los pedidos se programan con total transparencia de ruta para asegurar que arriben en condiciones óptimas.</p>
+      <h2>3. Red Logística y Cobertura de Distribución</h2>
+      <p>Operamos mediante modelos de optimización de rutas y geocercas inteligentes en la Zona Metropolitana de Guadalajara y corredores logísticos estratégicos, asegurando entregas puntuales y monitoreo en tiempo real.</p>
       
-      <h2>4. Cancelaciones</h2>
-      <p>Debido a que manejamos productos perecederos, las cancelaciones deben realizarse con al menos 2 horas de anticipación a la ventana de entrega programada de forma gratuita.</p>
+      <h2>4. Gestión de Cancelaciones y Modificaciones</h2>
+      <p>Para preservar la eficiencia de nuestra red de despacho y la naturaleza perecedera de las mercancías, las cancelaciones o reprogramaciones de pedidos deben realizarse con un mínimo de 2 horas de anticipación a la ventana operativa asignada.</p>
 
       <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
-        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Dirección y Responsabilidad Operativa:</strong></p>
-        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
-        <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO de Fruti Go</p>
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Dirección de Arquitectura y Sistemas:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">FrutiGo Technologies — Dirección de Arquitectura e Infraestructura</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">FrutiGo Technologies & FrutiGo Logistics</p>
       </div>
     `,
     terminos: `
-      <h1>Términos y Condiciones de Uso</h1>
+      <h1>Términos y Condiciones de Uso y Servicios</h1>
       <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Julio de 2026</p>
       
-      <p>Bienvenido a Fruti Go. Estos Términos y Condiciones regulan el acceso y uso de la aplicación móvil Fruti Go (en adelante, "la Aplicación"), propiedad de <b>Fruti Go</b> y fundada y dirigida legalmente por su <b>Fundador y CEO, Alberto Reyes Sandoval</b>. Al descargar y utilizar la Aplicación, usted acepta cumplir con estos términos. Si no está de acuerdo, le solicitamos abstenerse de utilizarla.</p>
+      <p>Bienvenido a <b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b>. Los presentes Términos y Condiciones regulan el acceso, registro y uso de nuestras plataformas tecnológicas, aplicaciones móviles, interfaces API y servicios logísticos (en adelante, "la Plataforma"). Nuestra infraestructura es propiedad de <b>FrutiGo Technologies</b> y operada por <b>FrutiGo Logistics</b>. El uso de nuestros servicios implica la aceptación vinculante de estos términos.</p>
       
-      <h2>1. Uso de la Aplicación</h2>
+      <h2>1. Uso de la Plataforma e Infraestructura Digital</h2>
       <ul>
-        <li><b>Requisitos:</b> El usuario debe tener al menos 18 años para utilizar esta aplicación.</li>
-        <li><b>Licencia de Uso:</b> Se otorga una licencia limitada, no exclusiva, no transferible y revocable para usar la app con fines de compra de productos frescos, envíos y transporte de mascotas.</li>
-        <li><b>Restricciones:</b> Queda prohibido modificar, descompilar, realizar ingeniería inversa o usar la app para fines ilícitos o fraudulentos.</li>
+        <li><b>Requisitos de Acceso:</b> El usuario debe contar con plena capacidad jurídica para contratar según la legislación aplicable.</li>
+        <li><b>Licencia de Uso:</b> Se otorga una licencia de software limitada, no transferible, no exclusiva y revocable para utilizar nuestras aplicaciones con fines comerciales y logísticos autorizados.</li>
+        <li><b>Restricciones Operativas:</b> Queda prohibido vulnerar, descompilar, realizar ingeniería inversa, extraer datos de forma no autorizada o utilizar la plataforma para actividades ilícitas.</li>
       </ul>
       
-      <h2>2. Cuentas de Usuario</h2>
-      <p>Para acceder a ciertas funciones (como pedidos, envíos o historial), el usuario deberá registrarse. Es responsabilidad del usuario mantener la confidencialidad de sus credenciales de acceso. La Empresa no se hace responsable por pérdidas derivadas del uso no autorizado de su cuenta.</p>
+      <h2>2. Cuentas Corporativas e Individuales</h2>
+      <p>El usuario o entidad registrada es responsable exclusivo de la custodia de sus credenciales y de la veracidad de los datos suministrados. FrutiGo Technologies implementa protocolos de autenticación robustos y cifrado de extremo a extremo para salvaguardar la integridad de cada cuenta.</p>
       
-      <h2>3. Propiedad Intelectual</h2>
-      <p>Todos los derechos de propiedad intelectual sobre el diseño, código, logos, marcas y contenidos de Fruti Go pertenecen a <b>Fruti Go</b>, bajo la titularidad intelectual y desarrollo de su <b>Fundador y CEO, Alberto Reyes Sandoval</b>. Queda prohibida su reproducción total o parcial sin autorización expresa de conformidad con las leyes vigentes.</p>
+      <h2>3. Propiedad Intelectual y Arquitectura Tecnológica</h2>
+      <p>La totalidad de las marcas registradas, logotipos, arquitecturas de software, modelos de datos, algoritmos de enrutamiento y contenidos pertenecen de forma exclusiva a <b>FrutiGo Technologies</b>. Toda reproducción, distribución o ingeniería no autorizada queda estrictamente prohibida bajo la legislación de propiedad industrial y derechos de autor.</p>
       
-      <h2>4. Limitación de Responsabilidad</h2>
-      <p>La Aplicación se proporciona "tal cual" y "según disponibilidad". La Empresa no garantiza que el servicio sea ininterrumpido o libre de errores. No nos hacemos responsables de daños directos o indirectos derivados del uso o imposibilidad de uso de la app.</p>
+      <h2>4. Nivel de Servicio y Limitación de Responsabilidad</h2>
+      <p>FrutiGo Technologies despliega infraestructura en la nube con altos índices de disponibilidad (uptime). Los servicios se suministran bajo estándares profesionales de disponibilidad tecnológica y logística.</p>
       
-      <h2>5. Modificaciones</h2>
-      <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Las modificaciones se notificarán a través de la app y el uso continuado de la misma constituirá la aceptación de los nuevos términos.</p>
-
-      <h2>6. Condiciones del Módulo de Paquetería y Mensajería</h2>
-      <p>Fruti Go actúa exclusivamente como intermediario tecnológico que facilita la conexión entre usuarios y repartidores independientes para el traslado de mercancías. Al utilizar el módulo de paquetería, el usuario acepta:</p>
+      <h2>5. Módulo de Servicios Logísticos, Mensajería y Envíos Urbanos</h2>
+      <p>A través de nuestra plataforma tecnológica <b>FrutiGo Logistics</b>, facilitamos la asignación, trazabilidad y control de despacho de paquetería urbana:</p>
       <ul>
-        <li><b>Declaración de Contenido:</b> El usuario es el único responsable de la veracidad sobre el contenido de los paquetes. Queda estrictamente prohibido el envío de mercancías ilegales, sustancias peligrosas, materiales inflamables, dinero en efectivo, títulos de crédito o cualquier objeto ilícito.</li>
-        <li><b>Límites de Responsabilidad:</b> La responsabilidad de Fruti Go se limita a la gestión de la plataforma. No asumimos responsabilidad por daños derivados de un embalaje inadecuado, artículos perecederos no declarados o por la pérdida de artículos no permitidos por estos términos.</li>
-        <li><b>Derecho de Inspección:</b> Por razones de seguridad pública, el repartidor independiente se reserva el derecho de solicitar la apertura del paquete para verificar que el contenido no contravenga las leyes vigentes o nuestras políticas de seguridad.</li>
+        <li><b>Declaración de Contenido:</b> El remitente es responsable de la legalidad de los artículos transportados. Se prohíbe el envío de mercancías ilícitas, sustancias peligrosas o valores no declarados.</li>
+        <li><b>Protocolos de Seguridad e Inspección:</b> Por seguridad y normatividad, los operadores asignados pueden verificar el embalaje antes de iniciar el trayecto logístico.</li>
       </ul>
 
-      <h2>7. Políticas de Transporte de Mascotas (Pets)</h2>
-      <p>Fruti Go ofrece un servicio de traslado de animales de compañía bajo las siguientes condiciones de seguridad y responsabilidad:</p>
+      <h2>6. Módulo Especializado de Transporte de Mascotas (Pet Mobility)</h2>
+      <p>Nuestra división de movilidad asistida establece protocolos específicos de seguridad para el transporte de animales de compañía:</p>
       <ul>
-        <li><b>Seguridad y Contención:</b> Es obligatorio que toda mascota sea transportada en una transportadora (kennel) rígida, limpia y segura proporcionada por el usuario. En caso de perros medianos o grandes, es indispensable el uso de correa, pechera de seguridad para vehículo y bozal si el animal muestra signos de nerviosismo o reactividad. El repartidor tiene la facultad de cancelar el servicio si el usuario no cuenta con estos elementos de seguridad.</li>
-        <li><b>Higiene y Daños Materiales:</b> El usuario es económicamente responsable por cualquier daño causado por la mascota al interior del vehículo (arañazos, mordeduras, suciedad por excrementos, orina o vómito). En caso de incidentes, el usuario se compromete a cubrir los gastos de limpieza profunda o reparación que el conductor independiente acredite.</li>
-        <li><b>Salud y Emergencias:</b> El usuario garantiza que la mascota se encuentra libre de enfermedades infectocontagiosas. Fruti Go no es un servicio de ambulancia veterinaria; ante cualquier emergencia médica preexistente durante el trayecto, el conductor limitará su acción a completar el traslado al destino veterinario indicado por el usuario, deslindando a Fruti Go de cualquier complicación en la salud o deceso del animal derivado del estrés del traslado o condiciones médicas previas.</li>
+        <li><b>Condiciones de Sujeción y Traslado:</b> Es obligatorio el uso de transportadora homologada o arnés de seguridad para vehículos.</li>
+        <li><b>Responsabilidad y Bienestar:</b> El usuario garantiza que la mascota cumple con los esquemas de vacunación correspondientes y asume la responsabilidad del cumplimiento de las normas de higiene.</li>
       </ul>
 
-      <h2>8. Políticas de Garantía, Devolución y Reembolso</h2>
+      <h2>7. Garantías, Devoluciones y Conciliación Financiera</h2>
       <ul>
-        <li><b>Garantía de Frescura:</b> Dado que comercializamos alimentos altamente perecederos, el usuario cuenta con un límite de <b>24 horas naturales</b> tras recibir su pedido para notificar mercancía errónea o dañada, adjuntando evidencia visual vía WhatsApp al número 3317093598 o al correo de soporte.</li>
-        <li><b>Reemplazos y Devoluciones Financieras:</b> Si la reclamación procede, se enviará el reemplazo en un lapso de 24 horas, o bien, se tramitará el reembolso mediante la plataforma segura <b>Openpay</b> de forma automática. El saldo reflejado en la cuenta bancaria del usuario suele tomar un periodo de 3 a 10 días hábiles para tarjetas de crédito y hasta 30 días hábiles para tarjetas de débito, dependiendo por completo de las políticas del banco emisor.</li>
-        <li><b>Cancelación de Pedidos:</b> Las cancelaciones de pedidos de la tienda serán sin costo alguno siempre y cuando se soliciten con al menos <b>2 horas de anticipación</b> a la ventana de entrega pactada.</li>
+        <li><b>Garantía de Inocuidad y Calidad:</b> Los reportes de inconformidad en productos perecederos deben notificarse en un lapso de 24 horas naturales con el soporte correspondiente.</li>
+        <li><b>Procesamiento de Reembolsos:</b> Las devoluciones autorizadas se tramitan automáticamente a través de la pasarela <b>Openpay</b> conforme a los tiempos bancarios interbancarios establecidos.</li>
       </ul>
 
       <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
-        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Representación y Firma Legal:</strong></p>
-        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
-        <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO de Fruti Go</p>
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Dirección Jurídica y de Sistemas:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">FrutiGo Technologies — Dirección Jurídica y de Cumplimiento</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">FrutiGo Technologies & FrutiGo Logistics</p>
       </div>
     `,
     privacidad: `
-      <h1>Aviso de Privacidad Integral</h1>
+      <h1>Aviso de Privacidad Integral Corporativo</h1>
       <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Julio de 2026</p>
       
-      <h2>1. Responsable de los Datos Personales</h2>
-      <p><b>Fruti Go</b>, representada legalmente por su <b>Fundador y CEO, Alberto Reyes Sandoval</b>, con correo de contacto <b>frutigo33@gmail.com</b> y teléfono <b>3317093598</b>, con domicilio físico en <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, es la responsable del tratamiento, uso y protección de sus datos personales, de conformidad con las leyes de protección de datos aplicables en los Estados Unidos Mexicanos (LFPDPPP) y las políticas obligatorias de revisión de Google Play Store.</p>
+      <h2>1. Identidad y Domicilio de las Entidades Responsables</h2>
+      <p><b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b>, con domicilio operativo en <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, y bajo la supervisión de nuestra Dirección de Arquitectura y Sistemas, somos responsables del tratamiento, resguardo y protección de sus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y los estándares de seguridad internacional.</p>
       
-      <p>Nuestra plataforma opera con un modelo de tres perfiles de usuario diferenciados: <b>Clientes (Consumidores)</b>, <b>Repartidores (Socios de Entrega)</b> y <b>Negocios (Establecimientos)</b>.</p>
+      <p>Nuestra infraestructura da soporte a tres perfiles operativos: <b>Clientes y Empresas (B2B/B2C)</b>, <b>Conductores y Repartidores Logísticos</b> y <b>Comercios y Proveedores Aliados</b>.</p>
       
-      <h2>2. Datos que Recopilamos</h2>
-      <p>Dependiendo de cómo uses Fruti Go, podemos recolectar:</p>
+      <h2>2. Categorías de Datos Personales Tratados</h2>
       <ul>
-        <li><b>Datos de identificación:</b> Nombre completo.</li>
-        <li><b>Datos de contacto:</b> Correo electrónico, número de teléfono y dirección de entrega exacta.</li>
-        <li><b>Datos de ubicación (Geolocalización):</b>
+        <li><b>Datos de Identificación y Registro:</b> Nombre, razón social, correo corporativo o personal y número telefónico.</li>
+        <li><b>Datos de Enrutamiento y Geolocalización:</b>
           <ul>
-            <li><b>Clientes:</b> Ubicación en tiempo real en primer plano (solo mediante autorización expresa en el dispositivo) para fijar el origen/destino del envío o entrega.</li>
-            <li><b>Repartidores:</b> Ubicación en <b>SEGUNDO PLANO (Background Location)</b>. Recopilamos datos de localización aun cuando la aplicación está cerrada o no está activa en tu pantalla, únicamente mientras estás en turno de servicio. Esto es indispensable para asignar los pedidos más cercanos a tu ubicación, estimar el tiempo de llegada (ETA) y rastrear entregas en tiempo real. Esta función se apaga inmediatamente al colocarse Fuera de Servicio.</li>
+            <li><b>Usuarios y Clientes:</b> Ubicación en primer plano para fijar puntos de entrega y calcular tarifas de distribución.</li>
+            <li><b>Operadores y Repartidores:</b> Ubicación en <b>SEGUNDO PLANO (Background Location)</b> durante el turno activo para la asignación algorítmica de despachos, telemetría y seguridad en ruta.</li>
           </ul>
         </li>
-        <li><b>Datos de navegación:</b> Información sobre el dispositivo, sistema operativo e historial de uso de la app.</li>
+        <li><b>Datos de Auditoría y Navegación:</b> Registros de acceso, identificadores de dispositivo y telemetría de rendimiento de la plataforma.</li>
       </ul>
 
-      <h2>3. Datos Bancarios y Transacciones Seguras</h2>
-      <p>Los pagos e información de tarjetas se realizan directamente a través de nuestro proveedor de servicios certificado <b>Openpay (by BBVA)</b> mediante protocolos HTTPS, cifrado de alta seguridad AES-256 y cumplimiento PCI-DSS. Fruti Go no guarda, recopila ni procesa tus números o datos bancarios en servidores propios.</p>
+      <h2>3. Seguridad de Pagos y Cifrado Bancario</h2>
+      <p>Todas las transacciones se realizan mediante conexión cifrada con <b>Openpay (by BBVA)</b> con certificación PCI-DSS. FrutiGo Technologies no recopila ni almacena información de tarjetas de crédito o débito en sus bases de datos.</p>
 
-      <h2>4. Finalidad del Tratamiento de Datos</h2>
-      <p>Sus datos serán utilizados para las siguientes finalidades necesarias:</p>
+      <h2>4. Finalidades Primarias y Secundarias del Tratamiento</h2>
       <ul>
-        <li>Crear y gestionar su cuenta de usuario.</li>
-        <li>Procesar, preparar y entregar pedidos realizados a través de la app de forma segura.</li>
-        <li>Brindar soporte técnico eficiente y atención al cliente.</li>
-        <li>Enviar notificaciones importantes sobre el estado de la app o sus pedidos.</li>
-        <li><b>Finalidad secundaria:</b> Enviar promociones, ofertas y cupones universales (puedes cancelar la suscripción en cualquier momento que lo desees).</li>
+        <li>Gestión, autenticación y administración de cuentas corporativas e individuales.</li>
+        <li>Procesamiento algorítmico, asignación y entrega de órdenes logísticas.</li>
+        <li>Soporte técnico, monitoreo de incidentes y aseguramiento de calidad del servicio.</li>
+        <li>Cumplimiento con obligaciones legales, fiscales y regulatorias aplicables.</li>
       </ul>
 
-      <h2>5. Transferencia de Datos</h2>
-      <p>No vendemos ni compartimos sus datos personales con terceros, excepto cuando sea estrictamente necesario para la operación de la app (por ejemplo, con servicios seguros de pasarela de pagos, o para asignar la ruta logística a los repartidores) o por requerimiento legal de las autoridades competentes.</p>
-
-      <h2>6. Tratamiento de Datos en el Módulo de Paquetería y Mascotas</h2>
-      <p>Con la integración de los servicios de paquetería y traslado de mascotas, Fruti Go tratará los siguientes datos adicionales de forma segura:</p>
-      <ul>
-        <li><b>Datos de Geolocalización Física:</b> Recolectamos la ubicación exacta y en tiempo real del dispositivo del Cliente en primer plano, y del Repartidor en segundo plano durante la vigencia del servicio. Esto tiene la finalidad de asignar al conductor más cercano, calcular tarifas dinámicas precisas, trazar la ruta de entrega óptima y permitir al usuario el monitoreo del trayecto por motivos de seguridad.</li>
-        <li><b>Datos de Contacto de Terceros (Destinatarios):</b> Cuando utilices el servicio de paquetería, nos proporcionarás el nombre completo, número telefónico y dirección física del tercero que recibirá el envío. Al ingresar estos datos, el usuario manifiesta bajo protesta de decir verdad que cuenta con el consentimiento expreso de dicho tercero para compartir su información con Fruti Go para la exclusiva ejecución del servicio.</li>
-        <li><b>Finalidad del Tratamiento:</b> Estos datos se procesan con el único fin de completar la logística de recolección y entrega, brindar soporte en tiempo real ante incidentes viales, gestionar el cobro seguro mediante OpenPay y aplicar cupones o promociones universales en la transacción. Fruti Go no comercializa, transfiere ni vende tus rutas ni datos de localización a entidades terceras con fines publicitarios.</li>
-      </ul>
-
-      <h2>7. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h2>
-      <p>Usted tiene derecho a conocer qué datos tenemos de usted, corregirlos, solicitar su eliminación o negarse a su uso. Para ejercer estos derechos de protección, así como para solicitar la <b>eliminación de su cuenta</b>, puede enviar una solicitud por escrito adjuntando su identificación oficial de titularidad a nuestro correo de soporte: <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>, o bien utilizar directamente nuestro portal web de baja automática ingresando a: <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> o <a href="/legal" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/legal</a>.</p>
+      <h2>5. Ejercicio de Derechos ARCO y Eliminación de Cuentas</h2>
+      <p>Usted puede ejercer en cualquier momento sus derechos de Acceso, Rectificación, Cancelación y Oposición (ARCO) o solicitar la eliminación total de sus datos y cuenta a través de nuestro portal automatizado en <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> o escribiendo a nuestro oficial de cumplimiento en <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>.</p>
 
       <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
-        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Oficial de Privacidad y Titular Legal:</strong></p>
-        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
-        <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO de Fruti Go</p>
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Oficialía de Privacidad y Cumplimiento Normativo:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">FrutiGo Technologies — Dirección de Privacidad y Cumplimiento</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">FrutiGo Technologies & FrutiGo Logistics</p>
       </div>
     `,
     nosotros: `
-      <h1>Sobre Nosotros</h1>
-      <p>¡Bienvenidos a Fruti Go!</p>
+      <h1>FrutiGo Technologies — Infraestructura Logística y Comercio Digital</h1>
+      <p>En <b>FrutiGo Technologies</b> conectamos comercios locales, restaurantes y clientes finales mediante tecnología de ruteo eficiente y una cadena de suministro digitalizada. Nuestra infraestructura elimina intermediarios innecesarios, optimiza la logística de última milla y asegura la máxima frescura y trazabilidad de productos agroalimentarios.</p>
       
-      <p>En Fruti Go, somos apasionados por la frescura, la tecnología y la comodidad. Esta aplicación fue creada y desarrollada bajo la visión de <b>Alberto Reyes Sandoval</b>, Fundador y CEO de Fruti Go, con el objetivo de simplificar la forma en que interactúas con la compra y distribución de frutas, verduras y productos frescos, llevando frescura directo a la palma de tu mano.</p>
-      
-      <h2>Nuestra Misión</h2>
-      <p>Conectar a las personas con soluciones prácticas, eficientes y confiables a través de tecnología intuitiva, garantizando siempre la máxima calidad en el servicio y una atención cercana con el liderazgo directo de nuestro fundador.</p>
-      
-      <h2>¿Por qué elegir Fruti Go?</h2>
+      <h2>Pilares Corporativos</h2>
       <ul>
-        <li><b>Liderazgo Directo:</b> Fundada y dirigida por <b>Alberto Reyes Sandoval</b> (CEO), impulsando innovación tecnológica constante.</li>
-        <li><b>Desarrollo local:</b> Creada con dedicación y enfocada en resolver necesidades reales de nuestros usuarios locales.</li>
-        <li><b>Facilidad de uso:</b> Una interfaz limpia y rápida para que hagas lo que necesitas sin complicaciones.</li>
-        <li><b>Compromiso:</b> Respaldada por un equipo humano listo para escucharte y mejorar día con día.</li>
+        <li><b>Logística Inteligente:</b> Ruteo optimizado en tiempo real y despacho de última milla con asignación dinámica de flota.</li>
+        <li><b>Comercio B2B Integrado:</b> Abastecimiento directo para negocios, restaurantes y mayoristas con catálogos corporativos y facturación formal.</li>
+        <li><b>Escalabilidad y Seguridad:</b> Pagos procesados de forma segura, alta disponibilidad y soporte operativo continuo.</li>
       </ul>
 
       <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
-        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Fundador y CEO:</strong></p>
-        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
-        <p style="font-size: 12px; color: #71717a; margin: 0;">Creador, Desarrollador Principal y CEO de Fruti Go</p>
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Liderazgo Institucional:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">FrutiGo Technologies — Dirección General y Equipo de Ingeniería</p>
       </div>
     `,
     soporte: `
-      <h1>Soporte y Atención al Cliente</h1>
-      <p>¿Tienes alguna duda, problema técnico o sugerencia con Fruti Go? Bajo la supervisión de nuestro <b>Fundador y CEO, Alberto Reyes Sandoval</b>, estamos aquí para ayudarte a que tu experiencia sea la mejor.</p>
+      <h1>Centro Corporativo de Soporte y Operaciones | FrutiGo</h1>
+      <p>En <b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b> nuestro equipo de soporte técnico y operaciones está disponible para atender cualquier consulta corporativa, incidencia de entrega, facturación electrónica (CFDI) o asistencia técnica.</p>
       
       <div style="background: #f9f9f9; border-left: 5px solid #0D7A3F; padding: 25px; border-radius: 12px; margin: 24px 0; color: #333;">
-        <p style="margin-bottom: 12px;"><strong>📧 Correo Electrónico:</strong> <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a></p>
-        <p style="margin-bottom: 12px;"><strong>📞 Teléfono / WhatsApp:</strong> <a href="https://wa.me/523317093598" target="_blank" rel="noopener noreferrer" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">3317093598</a></p>
-        <p style="margin-bottom: 0;"><strong>⏰ Horario de atención:</strong> Lunes a Viernes de 09:00 a 18:00 hrs.</p>
+        <p style="margin-bottom: 12px;"><strong>📧 Mesa de Ayuda y Soporte Técnico:</strong> <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a></p>
+        <p style="margin-bottom: 12px;"><strong>📞 Central de Operaciones y WhatsApp:</strong> <a href="https://wa.me/523317093598" target="_blank" rel="noopener noreferrer" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">3317093598</a></p>
+        <p style="margin-bottom: 0;"><strong>⏰ Horario Operativo:</strong> Lunes a Viernes de 09:00 a 18:00 hrs. (Hora del Centro de México)</p>
       </div>
       
-      <h2>Consejo para un soporte más rápido:</h2>
-      <p>Al enviarnos un correo, por favor incluye:</p>
-      <ol>
-        <li>Tu nombre de usuario registrado en la app.</li>
-        <li>Una breve descripción del problema y, si es posible, una captura de pantalla.</li>
-      </ol>
-      Te responderemos en un plazo máximo de <b>24 a 48 horas hábiles</b>.
+      <h2>Protocolo de Atención Ágil:</h2>
+      <p>Para canalizar eficientemente su solicitud, le sugerimos indicar su ID de usuario o número de orden junto con el detalle de su consulta.</p>
 
       <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
-        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Supervisión General de Atención:</strong></p>
-        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
-        <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO de Fruti Go</p>
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Dirección de Operaciones y Sistemas:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">FrutiGo Technologies — Mesa Central de Operaciones y Soporte</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">FrutiGo Technologies & FrutiGo Logistics</p>
       </div>
     `,
   },

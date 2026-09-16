@@ -51,7 +51,7 @@ export default function RegistroFrutigo({
 
   const PLAY_STORE_URL =
     "https://play.google.com/store/apps/details?id=com.frutigo.app";
-  const OFFICIAL_LOGO = "/frutigo-logo-oficial-amarillo.svg";
+  const OFFICIAL_LOGO = "/logo.svg";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -470,13 +470,13 @@ export default function RegistroFrutigo({
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-black text-sm sm:text-base rounded-2xl shadow-lg hover:shadow-xl transition transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                  className="w-full py-4 bg-brand-green hover:bg-emerald-800 text-brand-yellow font-black text-sm sm:text-base rounded-2xl shadow-lg hover:shadow-xl transition transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 border border-brand-yellow/30"
                 >
                   {isLoading ? (
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-brand-yellow border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <>
-                      <CheckCircle2 className="w-5 h-5" />
+                      <CheckCircle2 className="w-5 h-5 text-brand-yellow" />
                       <span>
                         {formData.role === "cliente" && "Registrarme como Cliente"}
                         {formData.role === "repartidor" && "Registrarme como Repartidor"}

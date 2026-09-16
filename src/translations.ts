@@ -33,6 +33,7 @@ export const UI_TRANSLATIONS: Record<Language, {
     nosotros: string;
     soporte: string;
     cuenta: string;
+    articulos: string;
   };
   deletionForm: {
     title: string;
@@ -73,7 +74,7 @@ export const UI_TRANSLATIONS: Record<Language, {
     headerSubtitle: "Cumplimiento Normativo",
     adminTooltip: "Panel de Administración",
     officialDocTag: "Documento Legal Oficial",
-    lastUpdated: "Última actualización: Julio de 2026",
+    lastUpdated: "Última actualización: Septiembre de 2026",
     cookieMessage: "Utilizamos cookies para garantizar la mejor experiencia legal y de navegación en Fruti Go.",
     acceptCookies: "Aceptar y Continuar",
     selectLanguageTitle: "Selecciona tu idioma",
@@ -90,6 +91,7 @@ export const UI_TRANSLATIONS: Record<Language, {
       nosotros: "Acerca de Nosotros / Infraestructura Tecnológica",
       soporte: "Soporte",
       cuenta: "Eliminar Cuenta",
+      articulos: "Artículos y Blog",
     },
     deletionForm: {
       title: "Eliminación de Cuenta y Datos",
@@ -130,7 +132,7 @@ export const UI_TRANSLATIONS: Record<Language, {
     headerSubtitle: "Regulatory Compliance",
     adminTooltip: "Admin Panel",
     officialDocTag: "Official Legal Document",
-    lastUpdated: "Last updated: July 2026",
+    lastUpdated: "Last updated: September 2026",
     cookieMessage: "We use cookies to ensure the best legal and browsing experience on Fruti Go.",
     acceptCookies: "Accept & Continue",
     selectLanguageTitle: "Select your language",
@@ -147,6 +149,7 @@ export const UI_TRANSLATIONS: Record<Language, {
       nosotros: "About Us / Technological Infrastructure",
       soporte: "Support",
       cuenta: "Delete Account",
+      articulos: "Articles & Blog",
     },
     deletionForm: {
       title: "Account and Data Deletion",
@@ -187,7 +190,7 @@ export const UI_TRANSLATIONS: Record<Language, {
     headerSubtitle: "Conformidade Regulatória",
     adminTooltip: "Painel de Administração",
     officialDocTag: "Documento Legal Oficial",
-    lastUpdated: "Última atualização: Julho de 2026",
+    lastUpdated: "Última atualização: Setembro de 2026",
     cookieMessage: "Utilizamos cookies para garantir a melhor experiência legal e de navegação no Fruti Go.",
     acceptCookies: "Aceitar e Continuar",
     selectLanguageTitle: "Selecione o seu idioma",
@@ -204,6 +207,7 @@ export const UI_TRANSLATIONS: Record<Language, {
       nosotros: "Sobre Nós / Infraestrutura Tecnológica",
       soporte: "Suporte",
       cuenta: "Excluir Conta",
+      articulos: "Artigos e Blog",
     },
     deletionForm: {
       title: "Exclusão de Conta e Dados",
@@ -274,91 +278,142 @@ export const DEFAULT_POLICIES_BY_LANG: Record<Language, {
     `,
     terminos: `
       <h1>Términos y Condiciones de Uso y Servicios</h1>
-      <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Julio de 2026</p>
+      <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Septiembre de 2026</p>
       
-      <p>Bienvenido a <b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b>. Los presentes Términos y Condiciones regulan el acceso, registro y uso de nuestras plataformas tecnológicas, aplicaciones móviles, interfaces API y servicios logísticos (en adelante, "la Plataforma"). Nuestra infraestructura es propiedad de <b>FrutiGo Technologies</b> y operada por <b>FrutiGo Logistics</b>. El uso de nuestros servicios implica la aceptación vinculante de estos términos.</p>
+      <p>Bienvenido a <b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b>, representadas legalmente por su <b>Fundador y CEO, Alberto Reyes Sandoval</b>. Los presentes Términos y Condiciones regulan el acceso, registro y uso de nuestras plataformas tecnológicas, aplicaciones móviles, interfaces API, servicios de movilidad urbana y soluciones logísticas (en adelante, "la Plataforma"). Nuestra infraestructura es propiedad de <b>FrutiGo Technologies</b> y operada por <b>FrutiGo Logistics</b>, con domicilio operativo en <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, correo de contacto <b>frutigo33@gmail.com</b> y teléfono <b>3317093598</b>. El uso de nuestros servicios implica la aceptación vinculante e irrestricta de estos términos.</p>
       
       <h2>1. Uso de la Plataforma e Infraestructura Digital</h2>
       <ul>
-        <li><b>Requisitos de Acceso:</b> El usuario debe contar con plena capacidad jurídica para contratar según la legislación aplicable.</li>
-        <li><b>Licencia de Uso:</b> Se otorga una licencia de software limitada, no transferible, no exclusiva y revocable para utilizar nuestras aplicaciones con fines comerciales y logísticos autorizados.</li>
-        <li><b>Restricciones Operativas:</b> Queda prohibido vulnerar, descompilar, realizar ingeniería inversa, extraer datos de forma no autorizada o utilizar la plataforma para actividades ilícitas.</li>
+        <li><b>Requisitos de Acceso:</b> El usuario debe contar con al menos 18 años de edad y plena capacidad jurídica para contratar según la legislación aplicable en los Estados Unidos Mexicanos.</li>
+        <li><b>Licencia de Uso:</b> Se otorga una licencia de software limitada, no transferible, no exclusiva y revocable para utilizar nuestras aplicaciones con fines personales, comerciales, logísticos y de movilidad privada autorizados.</li>
+        <li><b>Restricciones Operativas:</b> Queda prohibido vulnerar, descompilar, realizar ingeniería inversa, extraer datos de forma no autorizada o utilizar la plataforma para actividades fraudulentas o ilícitas.</li>
       </ul>
       
       <h2>2. Cuentas Corporativas e Individuales</h2>
       <p>El usuario o entidad registrada es responsable exclusivo de la custodia de sus credenciales y de la veracidad de los datos suministrados. FrutiGo Technologies implementa protocolos de autenticación robustos y cifrado de extremo a extremo para salvaguardar la integridad de cada cuenta.</p>
       
       <h2>3. Propiedad Intelectual y Arquitectura Tecnológica</h2>
-      <p>La totalidad de las marcas registradas, logotipos, arquitecturas de software, modelos de datos, algoritmos de enrutamiento y contenidos pertenecen de forma exclusiva a <b>FrutiGo Technologies</b>. Toda reproducción, distribución o ingeniería no autorizada queda estrictamente prohibida bajo la legislación de propiedad industrial y derechos de autor.</p>
+      <p>La totalidad de las marcas registradas, logotipos, arquitecturas de software, modelos de datos, algoritmos de enrutamiento y contenidos pertenecen de forma exclusiva a <b>FrutiGo Technologies</b> bajo la titularidad de su Fundador y CEO <b>Alberto Reyes Sandoval</b>. Toda reproducción, distribución o ingeniería no autorizada queda estrictamente prohibida bajo la legislación de propiedad industrial y derechos de autor.</p>
       
       <h2>4. Nivel de Servicio y Limitación de Responsabilidad</h2>
-      <p>FrutiGo Technologies despliega infraestructura en la nube con altos índices de disponibilidad (uptime). Los servicios se suministran bajo estándares profesionales de disponibilidad tecnológica y logística.</p>
+      <p>FrutiGo Technologies despliega infraestructura en la nube con altos índices de disponibilidad (uptime). Los servicios se suministran "tal cual" y "según disponibilidad" bajo estándares profesionales de disponibilidad tecnológica y logística.</p>
+
+      <h2>5. Modalidad de Movilidad y Transporte Privado de Pasajeros (Punto A a Punto B)</h2>
+      <p>Nuestra plataforma incorpora la modalidad tecnológica de enlace y coordinación digital para la movilidad urbana de pasajeros de punto a punto bajo las siguientes cláusulas obligatorias y regulatorias:</p>
+      <ul>
+        <li><b>Naturaleza del Servicio (Intermediación Tecnológica):</b> Se deja expresa, categórica e inequívocamente establecido que la Plataforma es exclusivamente una herramienta informática y tecnológica de intermediación digital entre usuarios pasajeros y conductores independientes. <b>FrutiGo Technologies y FrutiGo Logistics NO son una empresa de transporte público ni privado de personas, NO son concesionarios de taxis ni de radiotaxis, NO son propietarios ni administradores de los vehículos utilizados, y NO ostentan relación laboral, de subordinación, patrón-empleado ni agencia con los conductores independientes</b>. Cada conductor opera como un prestador de servicios autónomo, independiente y por cuenta propia.</li>
+        <li><b>Conductores y Vehículos (Requisitos y Responsabilidad Exclusiva):</b> Todo conductor independiente que se registre u opere en la Plataforma debe acreditar, presentar y mantener permanentemente vigentes:
+          <ol style="margin-top: 6px; padding-left: 20px;">
+            <li>Licencia de conducir oficial y vigente expedida por la autoridad de transporte competente, idónea para la modalidad de transporte de personas.</li>
+            <li>Tarjeta de circulación vehicular oficial y vigente.</li>
+            <li>Póliza de seguro automotriz vigente con cobertura de responsabilidad civil para pasajeros o seguro especial para transporte privado de personas / ERyT / comercial emitido por una institución debidamente autorizada por la Comisión Nacional de Seguros y Fianzas (CNSF), que ampare daños a terceros y cobertura médica integral para ocupantes y pasajeros.</li>
+          </ol>
+          <b>El conductor independiente es el único y exclusivo responsable del estado mecánico, técnico, físico, de seguridad, higiene y legal del vehículo utilizado</b>, así como de portar toda la documentación reglamentaria y acatar en todo momento las leyes, reglamentos de tránsito y disposiciones de movilidad aplicables.
+        </li>
+        <li><b>Suspensión Automática por Vencimiento de Documentación:</b> La Plataforma cuenta con un sistema automatizado de control de vigencia documental. El sistema notificará de manera preventiva al conductor con <b>treinta (30) días naturales de anticipación</b> al vencimiento de su licencia de conducir o póliza de seguro vehicular. Si el conductor no renueva, carga y valida la documentación actualizada antes o en la fecha límite de vencimiento, <b>el sistema suspenderá y bloqueará automáticamente su cuenta de conductor</b>, inhabilitándolo de inmediato para recibir o aceptar cualquier solicitud de viaje hasta que los documentos renovados sean formalmente aprobados por el equipo de cumplimiento.</li>
+        <li><b>Negociación Directa, Moneda Contractual y Pago en Efectivo:</b> La determinación de las tarifas de cada viaje de punto a punto (Punto A a Punto B) se realiza bajo un modelo de <b>negociación directa y consentimiento mutuo</b> entre el usuario pasajero y el conductor independiente a través de la aplicación. <b>El pago del servicio se efectúa directamente en efectivo al conductor independiente al término del trayecto</b> (o a través de los medios directos previamente acordados entre las partes). <b>La plataforma Fruti Go NO procesa, NO cobra, NO retiene ni intermedia las tarifas pactadas de los viajes entre particulares en esta modalidad</b>, salvo las cuotas fijas de suscripción, recarga o membresía por el uso del software por parte de los conductores. La moneda legal, base y obligatoria para fines contractuales y de referencia es el <b>Peso Mexicano (MXN)</b>; cualquier valor en divisas extranjeras es puramente estimativo e informativo.</li>
+        <li><b>Seguridad y Exención de Responsabilidad de la Plataforma:</b> FrutiGo Technologies y FrutiGo Logistics quedan formalmente exentas de cualquier responsabilidad civil, extracontractual, penal, laboral o patrimonial derivada de:
+          <ol style="margin-top: 4px; padding-left: 20px;">
+            <li>Siniestros viales, colisiones, choques, volcaduras, infracciones o accidentes de tránsito ocurridos durante o en relación con el viaje.</li>
+            <li>Pérdidas, olvido, extravío, robo o deterioro de bultos, equipaje o cualquier objeto personal dentro de la unidad vehicular.</li>
+            <li>Conductas, agresiones, actos u omisiones de terceros, conductores independientes o pasajeros.</li>
+            <li>Disputas, diferencias o controversias tarifarias suscitadas antes, durante o con posterioridad a la prestación del servicio.</li>
+          </ol>
+          Ante cualquier hecho o siniestro vial, <b>la atención médica primaria, peritajes, asistencias legales y cobertura de indemnizaciones recaen exclusiva y prioritariamente sobre la póliza de seguro automotriz vigente y obligatoria del vehículo del conductor independiente</b>.
+        </li>
+      </ul>
       
-      <h2>5. Módulo de Servicios Logísticos, Mensajería y Envíos Urbanos</h2>
+      <h2>6. Módulo de Servicios Logísticos, Mensajería y Envíos Urbanos</h2>
       <p>A través de nuestra plataforma tecnológica <b>FrutiGo Logistics</b>, facilitamos la asignación, trazabilidad y control de despacho de paquetería urbana:</p>
       <ul>
-        <li><b>Declaración de Contenido:</b> El remitente es responsable de la legalidad de los artículos transportados. Se prohíbe el envío de mercancías ilícitas, sustancias peligrosas o valores no declarados.</li>
+        <li><b>Declaración de Contenido:</b> El remitente es responsable de la legalidad de los artículos transportados. Se prohíbe el envío de mercancías ilícitas, sustancias peligrosas, dinero en efectivo o valores no declarados.</li>
         <li><b>Protocolos de Seguridad e Inspección:</b> Por seguridad y normatividad, los operadores asignados pueden verificar el embalaje antes de iniciar el trayecto logístico.</li>
       </ul>
 
-      <h2>6. Módulo Especializado de Transporte de Mascotas (Pet Mobility)</h2>
+      <h2>7. Módulo Especializado de Transporte de Mascotas (Pet Mobility)</h2>
       <p>Nuestra división de movilidad asistida establece protocolos específicos de seguridad para el transporte de animales de compañía:</p>
       <ul>
         <li><b>Condiciones de Sujeción y Traslado:</b> Es obligatorio el uso de transportadora homologada o arnés de seguridad para vehículos.</li>
-        <li><b>Responsabilidad y Bienestar:</b> El usuario garantiza que la mascota cumple con los esquemas de vacunación correspondientes y asume la responsabilidad del cumplimiento de las normas de higiene.</li>
+        <li><b>Responsabilidad y Bienestar:</b> El usuario garantiza que la mascota cumple con los esquemas de vacunación correspondientes y asume la responsabilidad de cubrir gastos de limpieza o daños materiales al vehículo si correspondiera.</li>
       </ul>
 
-      <h2>7. Garantías, Devoluciones y Conciliación Financiera</h2>
+      <h2>8. Garantías, Devoluciones y Conciliación Financiera con Openpay</h2>
       <ul>
-        <li><b>Garantía de Inocuidad y Calidad:</b> Los reportes de inconformidad en productos perecederos deben notificarse en un lapso de 24 horas naturales con el soporte correspondiente.</li>
-        <li><b>Procesamiento de Reembolsos:</b> Las devoluciones autorizadas se tramitan automáticamente a través de la pasarela <b>Openpay</b> conforme a los tiempos bancarios interbancarios establecidos.</li>
+        <li><b>Garantía de Inocuidad y Calidad:</b> Los reportes de inconformidad en productos perecederos de la tienda deben notificarse en un lapso de 24 horas naturales con evidencia fotográfica al WhatsApp 3317093598 o correo de soporte.</li>
+        <li><b>Procesamiento de Reembolsos:</b> Las devoluciones autorizadas se tramitan automáticamente a través de la pasarela segura <b>Openpay by BBVA</b> conforme a los tiempos bancarios interbancarios establecidos.</li>
       </ul>
 
       <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
-        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Dirección Jurídica y de Sistemas:</strong></p>
-        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">FrutiGo Technologies — Dirección Jurídica y de Cumplimiento</p>
-        <p style="font-size: 12px; color: #71717a; margin: 0;">FrutiGo Technologies & FrutiGo Logistics</p>
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Dirección Jurídica, Cumplimiento y Liderazgo Institucional:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO — FrutiGo Technologies & FrutiGo Logistics</p>
       </div>
     `,
     privacidad: `
       <h1>Aviso de Privacidad Integral Corporativo</h1>
-      <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Julio de 2026</p>
+      <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Septiembre de 2026</p>
       
       <h2>1. Identidad y Domicilio de las Entidades Responsables</h2>
-      <p><b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b>, con domicilio operativo en <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, y bajo la supervisión de nuestra Dirección de Arquitectura y Sistemas, somos responsables del tratamiento, resguardo y protección de sus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y los estándares de seguridad internacional.</p>
+      <p><b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b>, legalmente representadas por su <b>Fundador y CEO, Alberto Reyes Sandoval</b>, con domicilio operativo y fiscal en <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, correo de contacto <b>frutigo33@gmail.com</b> y teléfono <b>3317093598</b>, somos los responsables del tratamiento, resguardo y protección de sus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y los estándares obligatorios de cumplimiento y transparencia de Google Play Store.</p>
       
-      <p>Nuestra infraestructura da soporte a tres perfiles operativos: <b>Clientes y Empresas (B2B/B2C)</b>, <b>Conductores y Repartidores Logísticos</b> y <b>Comercios y Proveedores Aliados</b>.</p>
+      <p>Nuestra infraestructura da soporte a tres perfiles operativos: <b>Usuarios y Pasajeros (Clientes)</b>, <b>Conductores y Repartidores Logísticos Independientes</b> y <b>Comercios y Proveedores Aliados</b>.</p>
       
       <h2>2. Categorías de Datos Personales Tratados</h2>
       <ul>
-        <li><b>Datos de Identificación y Registro:</b> Nombre, razón social, correo corporativo o personal y número telefónico.</li>
-        <li><b>Datos de Enrutamiento y Geolocalización:</b>
-          <ul>
-            <li><b>Usuarios y Clientes:</b> Ubicación en primer plano para fijar puntos de entrega y calcular tarifas de distribución.</li>
-            <li><b>Operadores y Repartidores:</b> Ubicación en <b>SEGUNDO PLANO (Background Location)</b> durante el turno activo para la asignación algorítmica de despachos, telemetría y seguridad en ruta.</li>
-          </ul>
-        </li>
-        <li><b>Datos de Auditoría y Navegación:</b> Registros de acceso, identificadores de dispositivo y telemetría de rendimiento de la plataforma.</li>
+        <li><b>Datos de Identificación y Registro:</b> Nombre completo, razón social, correo electrónico, número telefónico y credenciales de acceso autenticadas.</li>
+        <li><b>Datos de Conductores:</b> Licencia de conducir, póliza de seguro automotriz vigente, tarjeta de circulación y datos de identificación vehicular.</li>
+        <li><b>Datos de Auditoría y Telemetría:</b> Identificadores únicos de dispositivo, versión de sistema operativo, registros de acceso e historial de órdenes o viajes.</li>
       </ul>
 
-      <h2>3. Seguridad de Pagos y Cifrado Bancario</h2>
-      <p>Todas las transacciones se realizan mediante conexión cifrada con <b>Openpay (by BBVA)</b> con certificación PCI-DSS. FrutiGo Technologies no recopila ni almacena información de tarjetas de crédito o débito en sus bases de datos.</p>
-
-      <h2>4. Finalidades Primarias y Secundarias del Tratamiento</h2>
+      <h2>3. Tratamiento Crítico de Ubicación Geográfica (Conforme a Requisitos y Políticas de Google Play)</h2>
+      <p>La recopilación y procesamiento de datos de geolocalización es fundamental para la operatividad y seguridad de la plataforma y se rige bajo los siguientes lineamientos transparentes:</p>
       <ul>
-        <li>Gestión, autenticación y administración de cuentas corporativas e individuales.</li>
-        <li>Procesamiento algorítmico, asignación y entrega de órdenes logísticas.</li>
-        <li>Soporte técnico, monitoreo de incidentes y aseguramiento de calidad del servicio.</li>
+        <li><b>A. Datos de Geolocalización en Tiempo Real (GPS):</b>
+          La aplicación recopila la ubicación exacta (en primer plano y en segundo plano) del dispositivo móvil con las siguientes finalidades esenciales:
+          <ol style="margin-top: 4px; padding-left: 20px;">
+            <li><b>Emparejamiento de Viajes:</b> Conectar en tiempo real a usuarios pasajeros con los conductores independientes más cercanos de forma eficiente.</li>
+            <li><b>Seguimiento en Vivo de la Ruta:</b> Trazar, proyectar y visualizar el trayecto exacto del viaje en curso sobre mapas interactivos.</li>
+            <li><b>Seguridad Integral y Asistencia:</b> Garantizar la certidumbre y resguardo de ambas partes (pasajero y conductor) durante todo el servicio de movilidad, alertar ante desvíos y coordinar auxilio ante emergencias viales.</li>
+          </ol>
+        </li>
+        <li><b>B. Permisos de la App y Directivas de Google Play (Foreground y Background Location):</b>
+          En estricto apego a las directivas y lineamientos para desarrolladores de Google Play sobre aplicaciones de transporte, logística y movilidad privada:
+          <div style="background: #f0fdf4; border-left: 4px solid #0D7A3F; padding: 14px 18px; border-radius: 8px; margin: 10px 0;">
+            <p style="margin: 0; font-weight: bold; color: #0D7A3F;">Declaración de Divulgación Prominente (Google Play Prominent Disclosure):</p>
+            <p style="margin: 6px 0 0 0; font-size: 13px; color: #166534;">
+              <b>Fruti Go solicita permisos de ubicación precisa (FOREGROUND LOCATION) y en segundo plano (BACKGROUND LOCATION). Recopilamos datos de ubicación exacta incluso cuando la app está cerrada o no está en pantalla, exclusivamente para permitir la asignación de viajes cercanos y el monitoreo de seguridad en ruta de los conductores en servicio.</b>
+            </p>
+          </div>
+          Esta recopilación en segundo plano se activa <b>única y exclusivamente cuando el conductor independiente se encuentra activamente en estado "En Línea / Conectado / En Servicio"</b> (por ejemplo, navegando en Google Maps o Waze con la app en segundo plano), y <b>se interrumpe y cancela de manera inmediata y automática</b> en el momento en que el conductor cambie su estado a "Desconectado" o cierre la sesión de la aplicación.
+        </li>
+        <li><b>C. Compartición Mutua de Datos para el Viaje:</b>
+          Durante la coordinación y ejecución de un viaje de movilidad urbana, la plataforma comparte mutuamente entre el usuario pasajero y el conductor independiente asignado los siguientes datos con fines de reconocimiento visual, coordinación logística y seguridad:
+          <ol style="margin-top: 4px; padding-left: 20px;">
+            <li><b>Datos compartidos con el pasajero:</b> Nombre completo y fotografía de perfil del conductor independiente; marca, submarca, modelo, color y número de placas del vehículo automotor; y geolocalización en tiempo real de la unidad desde su aproximación hasta el destino.</li>
+            <li><b>Datos compartidos con el conductor:</b> Nombre de pila y fotografía de perfil del pasajero, punto exacto de abordaje (Punto A), punto de destino (Punto B) y geolocalización en tiempo real durante el trayecto.</li>
+          </ol>
+          Dichos datos se utilizan única y exclusivamente para la ejecución del viaje solicitado y no son transferidos ni comercializados a terceras partes bajo ninguna circunstancia.
+        </li>
+      </ul>
+
+      <h2>4. Seguridad de Pagos y Cifrado Bancario (Openpay by BBVA)</h2>
+      <p>Todas las transacciones se realizan mediante conexión cifrada con <b>Openpay (by BBVA)</b> con certificación bancaria PCI-DSS Nivel 1. FrutiGo Technologies no recopila ni almacena información de tarjetas de crédito o débito en sus bases de datos.</p>
+
+      <h2>5. Finalidades Primarias y Secundarias del Tratamiento</h2>
+      <ul>
+        <li>Gestión, autenticación y administración de cuentas operativas de usuarios y conductores.</li>
+        <li>Procesamiento algorítmico, asignación y coordinación de viajes de pasajeros y órdenes logísticas.</li>
+        <li>Soporte técnico, monitoreo de incidentes viales y aseguramiento de calidad y seguridad.</li>
         <li>Cumplimiento con obligaciones legales, fiscales y regulatorias aplicables.</li>
       </ul>
 
-      <h2>5. Ejercicio de Derechos ARCO y Eliminación de Cuentas</h2>
+      <h2>6. Ejercicio de Derechos ARCO y Eliminación de Cuentas</h2>
       <p>Usted puede ejercer en cualquier momento sus derechos de Acceso, Rectificación, Cancelación y Oposición (ARCO) o solicitar la eliminación total de sus datos y cuenta a través de nuestro portal automatizado en <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> o escribiendo a nuestro oficial de cumplimiento en <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>.</p>
 
       <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
         <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Oficialía de Privacidad y Cumplimiento Normativo:</strong></p>
-        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">FrutiGo Technologies — Dirección de Privacidad y Cumplimiento</p>
-        <p style="font-size: 12px; color: #71717a; margin: 0;">FrutiGo Technologies & FrutiGo Logistics</p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO — FrutiGo Technologies & FrutiGo Logistics</p>
       </div>
     `,
     nosotros: `
@@ -415,102 +470,138 @@ export const DEFAULT_POLICIES_BY_LANG: Record<Language, {
       <p>Because we handle perishable products, cancellations must be made free of charge at least 2 hours prior to the scheduled delivery window.</p>
     `,
     terminos: `
-      <h1>Terms and Conditions of Use</h1>
-      <p class="text-xs text-zinc-400 -mt-2 mb-6">Last updated: July 2026</p>
+      <h1>Terms and Conditions of Use and Services</h1>
+      <p class="text-xs text-zinc-400 -mt-2 mb-6">Last updated: September 2026</p>
       
-      <p>Welcome to Fruti Go. These Terms and Conditions govern the access and use of the Fruti Go mobile application (hereinafter, "the Application"), owned by <b>Fruti Go</b> (hereinafter, "the Company"). By downloading and using the Application, you agree to comply with these terms. If you do not agree, please refrain from using it.</p>
+      <p>Welcome to <b>FrutiGo Technologies</b> and <b>FrutiGo Logistics</b>, legally represented by its <b>Founder and CEO, Alberto Reyes Sandoval</b>. These Terms and Conditions govern access, registration, and use of our technological platforms, mobile applications, API interfaces, urban mobility services, and logistics solutions (hereinafter, "the Platform"). Our digital infrastructure is owned by <b>FrutiGo Technologies</b> and operated by <b>FrutiGo Logistics</b>, located at <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, Mexico</b>, email <b>frutigo33@gmail.com</b> and phone <b>+52 3317093598</b>. Using our services constitutes full and binding acceptance of these terms.</p>
       
-      <h2>1. Application Use</h2>
+      <h2>1. Digital Infrastructure and Platform Use</h2>
       <ul>
-        <li><b>Requirements:</b> Users must be at least 18 years old to use this application.</li>
-        <li><b>License of Use:</b> A limited, non-exclusive, non-transferable, and revocable license is granted to use the app for purchasing fresh products, shipping, and pet transportation.</li>
-        <li><b>Restrictions:</b> Modifying, decompiling, reverse engineering, or using the app for unlawful or fraudulent purposes is strictly prohibited.</li>
+        <li><b>Access Requirements:</b> Users must be at least 18 years old and possess full legal capacity to enter into binding agreements under applicable laws.</li>
+        <li><b>License:</b> A limited, non-transferable, non-exclusive, and revocable software license is granted to use our applications for authorized personal, commercial, logistics, and private mobility purposes.</li>
+        <li><b>Operational Restrictions:</b> Reverse engineering, decompiling, unauthorized scraping, or using the platform for fraudulent or unlawful activities is strictly prohibited.</li>
       </ul>
       
-      <h2>2. User Accounts</h2>
-      <p>To access certain functions (such as orders, shipping, or order history), users must register. Users are responsible for maintaining the confidentiality of their login credentials. The Company is not responsible for losses resulting from unauthorized use of your account.</p>
+      <h2>2. Corporate and Individual Accounts</h2>
+      <p>Users and registered entities are exclusively responsible for safeguarding their login credentials and the veracity of supplied data. FrutiGo Technologies employs robust authentication protocols and encryption to protect account integrity.</p>
       
-      <h2>3. Intellectual Property</h2>
-      <p>All intellectual property rights regarding the design, code, logos, trademarks, and content of Fruti Go belong to <b>Fruti Go</b>. Total or partial reproduction without express authorization in accordance with applicable laws is prohibited.</p>
+      <h2>3. Intellectual Property and Technology Architecture</h2>
+      <p>All trademarks, logos, software architectures, algorithms, routing systems, and content belong exclusively to <b>FrutiGo Technologies</b> under the ownership of Founder and CEO <b>Alberto Reyes Sandoval</b>. Unauthorized reproduction or exploitation is prohibited under intellectual property laws.</p>
       
-      <h2>4. Limitation of Liability</h2>
-      <p>The Application is provided "as is" and "as available". The Company does not guarantee that the service will be uninterrupted or error-free. We are not liable for direct or indirect damages arising from the use or inability to use the app.</p>
-      
-      <h2>5. Modifications</h2>
-      <p>We reserve the right to modify these terms at any time. Modifications will be notified through the app and continued use will constitute acceptance of the new terms.</p>
+      <h2>4. Service Level and General Limitation of Liability</h2>
+      <p>FrutiGo Technologies provides cloud infrastructure with high availability. Services are delivered on an "as is" and "as available" basis under professional industry standards.</p>
 
-      <h2>6. Courier and Messenger Module Conditions</h2>
-      <p>Fruti Go acts exclusively as a technology intermediary connecting users with independent couriers for goods transportation. By using the courier module, the user agrees to:</p>
+      <h2>5. Private Passenger Mobility and Transportation (Point A to Point B)</h2>
+      <p>Our digital platform incorporates a passenger mobility intermediation module under the following mandatory regulatory and contractual terms:</p>
       <ul>
-        <li><b>Content Declaration:</b> The user is solely responsible for the truthfulness of the package content. Shipping illegal goods, hazardous substances, flammable materials, cash, credit instruments, or any illicit objects is strictly prohibited.</li>
-        <li><b>Limits of Liability:</b> Fruti Go's liability is limited to platform management. We assume no liability for damage caused by improper packaging, undeclared perishable items, or loss of items prohibited by these terms.</li>
-        <li><b>Right of Inspection:</b> For public safety reasons, the independent courier reserves the right to request package opening to verify that contents do not violate applicable laws or our safety policies.</li>
-      </ul>
-
-      <h2>7. Pet Transportation Policies (Pets)</h2>
-      <p>Fruti Go offers a pet transportation service under the following safety and liability conditions:</p>
-      <ul>
-        <li><b>Safety and Containment:</b> All pets must be transported in a rigid, clean, and safe carrier (kennel) provided by the user. Medium or large dogs require a leash, vehicle safety harness, and muzzle if nervous or reactive. Couriers reserve the right to cancel service if these safety elements are absent.</li>
-        <li><b>Hygiene and Property Damage:</b> The user is financially responsible for any damage caused by the pet inside the vehicle (scratches, bites, dirt from feces, urine, or vomit). In case of incidents, the user agrees to cover deep cleaning or repair expenses certified by the driver.</li>
-        <li><b>Health and Emergencies:</b> The user guarantees that the pet is free from contagious diseases. Fruti Go is not a veterinary ambulance service; in the event of a pre-existing medical emergency during transit, the driver will complete transit to the user's specified veterinary destination, relieving Fruti Go of any liability for health complications or death resulting from stress or pre-existing conditions.</li>
+        <li><b>Platform Nature (Technological Intermediation):</b> The platform operates exclusively as a digital technological tool connecting passenger users with independent private drivers. It is explicitly declared that <b>FrutiGo Technologies and FrutiGo Logistics are NOT a public or private transportation enterprise, NOT a taxi concessionaire or taxi dispatch service, do NOT own or lease vehicles, and maintain NO employer-employee, subordinate, or agency relationship with independent drivers</b>. Each driver operates as an autonomous independent contractor.</li>
+        <li><b>Mandatory Driver and Vehicle Documentation:</b> Every registered independent driver must hold and maintain valid and up-to-date documentation at all times:
+          <ol style="margin-top: 6px; padding-left: 20px;">
+            <li>Official valid driver's license issued by competent transportation authorities for passenger transport.</li>
+            <li>Official valid vehicle circulation card (tarjeta de circulación).</li>
+            <li>Active commercial auto insurance policy covering passenger transportation / multi-platform ridesharing issued by an authorized insurance company (CNSF regulated), guaranteeing civil liability to third parties and medical expenses for vehicle occupants and passengers.</li>
+          </ol>
+        </li>
+        <li><b>Automatic Account Suspension for Expired Documents:</b> The platform monitors document validity automatically. The system sends preventive notices to the driver <b>30 calendar days prior</b> to the expiration of their driver's license or insurance policy. If the driver fails to renew and submit verified documents before or on the expiration date, <b>the system automatically suspends and locks the driver's account</b>, immediately preventing them from receiving or accepting ride requests until approved by compliance staff.</li>
+        <li><b>Fares, Direct Negotiation, and Base Currency (MXN / USD):</b> Fares for point-to-point trips (Point A to Point B) are established via <b>direct negotiation and mutual consent</b> between passenger and driver through the application interface. <b>The base, official, and legally binding currency is the Mexican Peso (MXN)</b>. Any price display, estimate, or conversion in US Dollars (USD) or other currencies is strictly <b>referential, informative, and estimated</b> for international tourists or visitors. All charges are settled in Mexican Pesos (MXN) and are subject to exchange rates and international transaction fees applied by the user's card-issuing bank.</li>
+        <li><b>Accidents, Collisions, and Liability Delimitation:</b> In the event of any traffic accident or collision during a trip arranged through the platform, <b>emergency medical coverage, appraisals, and civil liabilities are primarily and directly covered by the driver's compulsory vehicle insurance policy</b>. FrutiGo Technologies assumes no direct civil or tort liability for vehicular accidents, driving conduct, or traffic infractions.</li>
       </ul>
 
-      <h2>8. Warranty, Return, and Refund Policies</h2>
+      <h2>6. Courier and Urban Logistics Module</h2>
+      <p>Through <b>FrutiGo Logistics</b>, we facilitate urban parcel dispatch, tracking, and delivery:</p>
       <ul>
-        <li><b>Freshness Warranty:</b> As we market highly perishable food, the user has a limit of <b>24 natural hours</b> after receiving their order to report wrong or damaged goods, attaching visual evidence via WhatsApp to 3317093598 or to support email.</li>
-        <li><b>Replacements and Financial Refunds:</b> If the claim is valid, a replacement will be sent within 24 hours, or a refund will be processed automatically via the secure <b>Openpay</b> platform. Balances reflected in user bank accounts usually take 3 to 10 business days for credit cards and up to 30 business days for debit cards, depending on the issuing bank.</li>
-        <li><b>Order Cancellations:</b> Store order cancellations are free of charge as long as requested at least <b>2 hours prior</b> to the agreed delivery window.</li>
+        <li><b>Content Declaration:</b> The sender warrants the lawful nature of items shipped. Prohibited items include hazardous materials, illicit substances, cash, or undeclared valuables.</li>
+        <li><b>Inspection and Safety Protocols:</b> Operators reserve the right to inspect packaging prior to transit for safety compliance.</li>
       </ul>
+
+      <h2>7. Specialized Pet Transportation (Pet Mobility)</h2>
+      <p>Our pet mobility service enforces safety guidelines:</p>
+      <ul>
+        <li><b>Restraint and Carrier:</b> Pets must be secured in an approved carrier or vehicle harness. Leashes and muzzles are required for medium/large dogs if reactive.</li>
+        <li><b>Hygiene and Damages:</b> The user assumes responsibility for pet vaccinations, hygiene, and any vehicle cleaning costs caused by the pet.</li>
+      </ul>
+
+      <h2>8. Warranties, Returns, and Refunds with Openpay</h2>
+      <ul>
+        <li><b>Freshness Guarantee:</b> Fresh produce claims must be submitted within 24 hours of delivery with photographic evidence via WhatsApp +52 3317093598 or support email.</li>
+        <li><b>Refund Processing:</b> Authorized refunds are processed automatically through <b>Openpay by BBVA</b> adhering to interbank processing timelines.</li>
+      </ul>
+
+      <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Legal, Regulatory Compliance & Executive Leadership:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">Founder & CEO — FrutiGo Technologies & FrutiGo Logistics</p>
+      </div>
     `,
     privacidad: `
-      <h1>Comprehensive Privacy Notice</h1>
-      <p class="text-xs text-zinc-400 -mt-2 mb-6">Last updated: July 2026</p>
+      <h1>Comprehensive Corporate Privacy Notice</h1>
+      <p class="text-xs text-zinc-400 -mt-2 mb-6">Last updated: September 2026</p>
       
       <h2>1. Personal Data Controller</h2>
-      <p><b>Fruti Go</b> (the Company), contact email <b>frutigo33@gmail.com</b> and phone <b>3317093598</b>, address at <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, Mexico</b>, is responsible for processing, using, and protecting your personal data in accordance with Mexican data protection laws (LFPDPPP) and Google Play Store mandatory review policies.</p>
+      <p><b>FrutiGo Technologies</b> and <b>FrutiGo Logistics</b>, legally represented by <b>Founder & CEO Alberto Reyes Sandoval</b>, located at <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, Mexico</b>, email <b>frutigo33@gmail.com</b> and phone <b>+52 3317093598</b>, are responsible for collecting, safeguarding, and processing your personal data in full compliance with the Mexican Data Protection Law (LFPDPPP) and Google Play Store mandatory privacy policies.</p>
       
-      <p>Our platform operates with three distinct user profiles: <b>Clients (Consumers)</b>, <b>Drivers (Delivery Partners)</b>, and <b>Businesses (Establishments)</b>.</p>
+      <p>Our infrastructure supports three distinct operational profiles: <b>Passenger Users & Clients</b>, <b>Independent Drivers & Couriers</b>, and <b>Allied Merchants</b>.</p>
       
-      <h2>2. Data We Collect</h2>
-      <p>Depending on how you use Fruti Go, we may collect:</p>
+      <h2>2. Categories of Personal Data Collected</h2>
       <ul>
-        <li><b>Identification data:</b> Full name.</li>
-        <li><b>Contact data:</b> Email address, phone number, and exact delivery address.</li>
-        <li><b>Location data (Geolocation):</b>
-          <ul>
-            <li><b>Clients:</b> Real-time foreground location (only via explicit authorization on the device) to set delivery origin/destination.</li>
-            <li><b>Drivers:</b> <b>BACKGROUND LOCATION</b>. We collect location data even when the app is closed or inactive on screen, only while on active service duty. This is essential to assign nearest orders, estimate arrival times (ETA), and track deliveries in real time. Turns off immediately when going off duty.</li>
-          </ul>
+        <li><b>Identification & Contact Data:</b> Full name, email address, phone number, and authenticated login credentials.</li>
+        <li><b>Driver Documentation:</b> Driver's license, active vehicle insurance policy, registration card, and vehicle specifications.</li>
+        <li><b>Telemetry & Device Data:</b> Unique device identifiers, operating system version, access logs, and trip history.</li>
+      </ul>
+
+      <h2>3. Critical Geolocation Data Processing (Google Play Compliance)</h2>
+      <p>Location data processing is essential to platform operation and is governed by strict technical guidelines:</p>
+      <ul>
+        <li><b>A. Passenger Location (Foreground Location):</b>
+          We collect precise location data from passenger devices <b>strictly in the foreground</b> (only while the application is open and visible on screen) and exclusively upon explicit device authorization. This data is used to:
+          <ol style="margin-top: 4px; padding-left: 20px;">
+            <li>Detect and pinpoint the exact pick-up point (Point A) and suggest drop-off destinations (Point B).</li>
+            <li>Calculate optimal routes and transparent estimated fares.</li>
+            <li>Provide real-time ride tracking during an active trip for navigation and personal safety.</li>
+          </ol>
         </li>
-        <li><b>Browsing data:</b> Device info, operating system, and app usage history.</li>
+        <li><b>B. Independent Driver Location (Background Location — Google Play Prominent Disclosure):</b>
+          <div style="background: #f0fdf4; border-left: 4px solid #0D7A3F; padding: 14px 18px; border-radius: 8px; margin: 10px 0;">
+            <p style="margin: 0; font-weight: bold; color: #0D7A3F;">Google Play Prominent Disclosure:</p>
+            <p style="margin: 6px 0 0 0; font-size: 13px; color: #166534;">
+              <b>FrutiGo collects precise real-time location data from independent drivers even when the app is closed or running in the background (Background Location).</b>
+            </p>
+          </div>
+          Background location collection is subject to the following strict conditions:
+          <ol style="margin-top: 6px; padding-left: 20px;">
+            <li><b>Conditional Activation:</b> Background location operates <b>ONLY while the driver has explicitly set their status to "Online / Connected / On Duty"</b> in the application.</li>
+            <li><b>Legitimate Purposes:</b>
+              <ul style="margin-top: 4px; padding-left: 16px;">
+                <li>Assign nearby ride and delivery requests in real time while the driver is using external navigation apps (such as Google Maps or Waze) or while the device screen is locked.</li>
+                <li>Calculate accurate Estimated Time of Arrival (ETA) for passengers.</li>
+                <li>Ensure in-transit safety monitoring, route tracing, and rapid emergency assistance dispatch.</li>
+              </ul>
+            </li>
+            <li><b>Immediate Deactivation:</b> Background location collection <b>stops immediately and automatically</b> the moment the driver toggles their status to "Offline / Off Duty" or signs out.</li>
+          </ol>
+          <p style="margin-top: 6px; font-size: 12px; color: #52525b;"><i>FrutiGo NEVER sells, rents, or shares location data with third parties for advertising or tracking purposes.</i></p>
+        </li>
       </ul>
 
-      <h2>3. Banking Data and Secure Transactions</h2>
-      <p>Payments and card details are handled directly through our certified service provider <b>Openpay (by BBVA)</b> using HTTPS protocols, AES-256 encryption, and PCI-DSS compliance. Fruti Go does not store, collect, or process bank card numbers on its own servers.</p>
+      <h2>4. Secure Financial Transactions (Openpay by BBVA)</h2>
+      <p>Card payments and financial data are handled directly through <b>Openpay by BBVA</b> using SSL encryption and certified PCI-DSS Level 1 compliance. FrutiGo never stores card numbers on its servers.</p>
 
-      <h2>4. Purpose of Data Processing</h2>
-      <p>Your data will be used for the following necessary purposes:</p>
+      <h2>5. Purposes of Data Processing</h2>
       <ul>
-        <li>Create and manage your user account.</li>
-        <li>Process, prepare, and deliver orders securely through the app.</li>
-        <li>Provide efficient technical support and customer care.</li>
-        <li>Send important notifications regarding app status or your orders.</li>
-        <li><b>Secondary purpose:</b> Send promotions, offers, and universal coupons (you can unsubscribe anytime).</li>
+        <li>Account creation, authentication, and management for users and drivers.</li>
+        <li>Algorithmic dispatch, coordination, and fulfillment of passenger rides and deliveries.</li>
+        <li>Technical customer support, route safety monitoring, and incident management.</li>
+        <li>Legal, tax, and regulatory compliance.</li>
       </ul>
 
-      <h2>5. Data Transfer</h2>
-      <p>We do not sell or share your personal data with third parties, except when strictly necessary for app operation (e.g., secure payment gateways or logistics route assignment) or legal requirements from competent authorities.</p>
+      <h2>6. ARCO Rights and Automated Account Deletion</h2>
+      <p>You may exercise your Access, Rectification, Cancellation, and Opposition (ARCO) rights or request complete <b>account deletion</b> at any time via our automated portal at <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> or by contacting our compliance officer at <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>.</p>
 
-      <h2>6. Data Processing in Courier and Pet Module</h2>
-      <p>With package delivery and pet transport integration, Fruti Go securely processes these additional data:</p>
-      <ul>
-        <li><b>Physical Geolocation Data:</b> Exact real-time location of Client device in foreground, and Driver in background during service. Purpose: assign nearest driver, calculate dynamic rates, plot optimal route, and allow safety tracking.</li>
-        <li><b>Third-Party Contact Data (Recipients):</b> When using courier service, you provide full name, phone number, and address of recipient. User warrants express consent from recipient.</li>
-        <li><b>Purpose of Processing:</b> Solely to complete collection and delivery logistics, provide real-time support, manage secure billing via OpenPay, and apply coupons. Fruti Go does not sell routes or location data for advertising.</li>
-      </ul>
-
-      <h2>7. ARCO Rights (Access, Rectification, Cancellation, Objection)</h2>
-      <p>You have the right to know what data we hold, correct it, request deletion, or refuse its use. To exercise these rights or request <b>account deletion</b>, send a written request with official ID to support email: <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>, or use our automatic deletion portal at: <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> or <a href="/legal" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/legal</a>.</p>
+      <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Privacy, Compliance & Institutional Governance:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">Founder & CEO — FrutiGo Technologies & FrutiGo Logistics</p>
+      </div>
     `,
     nosotros: `
       <h1>About Us</h1>
@@ -565,102 +656,113 @@ export const DEFAULT_POLICIES_BY_LANG: Record<Language, {
       <p>Por trabalharmos com produtos perecíveis, os cancelamentos devem ser feitos com no mínimo 2 horas de antecedência da janela de entrega agendada sem qualquer custo.</p>
     `,
     terminos: `
-      <h1>Termos e Condições de Uso</h1>
-      <p class="text-xs text-zinc-400 -mt-2 mb-6">Última atualização: Julho de 2026</p>
+      <h1>Termos e Condições de Uso e Serviços</h1>
+      <p class="text-xs text-zinc-400 -mt-2 mb-6">Última atualização: Setembro de 2026</p>
       
-      <p>Bem-vindo ao Fruti Go. Estes Termos e Condições regulam o acesso e uso do aplicativo móvel Fruti Go (adiante "o Aplicativo"), de propriedade da <b>Fruti Go</b> (adiante "a Empresa"). Ao baixar e utilizar o Aplicativo, você concorda com estes termos. Se não concordar, solicitamos que se abstenha de utilizá-lo.</p>
+      <p>Bem-vindo à <b>FrutiGo Technologies</b> e <b>FrutiGo Logistics</b>, fundadas e representadas legalmente pelo seu <b>Fundador e CEO, Alberto Reyes Sandoval</b>. Estes Termos e Condições regulam o acesso, registro e uso das nossas plataformas tecnológicas, aplicativos móveis, APIs, serviços de mobilidade urbana e soluções logísticas (adiante, "a Plataforma"). Nossa infraestrutura é propriedade da <b>FrutiGo Technologies</b> e operada pela <b>FrutiGo Logistics</b>, com domicílio na <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, e-mail <b>frutigo33@gmail.com</b> e telefone <b>3317093598</b>. O uso de nossos serviços implica a aceitação integral destes termos.</p>
       
-      <h2>1. Uso do Aplicativo</h2>
+      <h2>1. Uso da Plataforma e Infraestrutura Digital</h2>
       <ul>
-        <li><b>Requisitos:</b> O usuário deve ter pelo menos 18 anos para utilizar este aplicativo.</li>
-        <li><b>Licença de Uso:</b> Concede-se uma licença limitada, não exclusiva, não transferível e revogável para usar o app para compra de produtos frescos, entregas e transporte de animais de estimação.</li>
-        <li><b>Restrições:</b> É proibido modificar, descompilar, fazer engenharia reversa ou utilizar o app para fins ilícitos ou fraudulentos.</li>
+        <li><b>Requisitos de Acesso:</b> O usuário deve ter pelo menos 18 anos de idade e capacidade jurídica para contratar segundo as leis aplicáveis no México.</li>
+        <li><b>Licença de Uso:</b> Concede-se uma licença limitada, não exclusiva, não transferível e revogável para usar nossos aplicativos para compras, logística e mobilidade privada autorizados.</li>
+        <li><b>Restrições Operativas:</b> É estritamente proibido modificar, descompilar, fazer engenharia reversa ou utilizar o app para fins ilícitos ou fraudulentos.</li>
       </ul>
       
-      <h2>2. Contas de Usuário</h2>
-      <p>Para acessar determinadas funções (como pedidos, entregas ou histórico), o usuário deverá se cadastrar. É responsabilidade do usuário manter o sigilo de suas credenciais de acesso. A Empresa não se responsabiliza por perdas decorrentes do uso não autorizado de sua conta.</p>
+      <h2>2. Contas de Usuário e Segurança</h2>
+      <p>Para acessar determinadas funções (como pedidos, viagens ou histórico), o usuário deverá se cadastrar. É responsabilidade do usuário manter o sigilo de suas credenciais de acesso. A Plataforma implementa protocolos robustos de autenticação e criptografia.</p>
       
-      <h2>3. Propriedade Intelectual</h2>
-      <p>Todos os direitos de propriedade intelectual sobre o design, código, logotipos, marcas e conteúdos do Fruti Go pertencem ao <b>Fruti Go</b>. É proibida sua reprodução total ou parcial sem autorização expressa em conformidade com as leis vigentes.</p>
+      <h2>3. Propriedade Intelectual e Arquitetura Tecnológica</h2>
+      <p>Todos os direitos de propriedade intelectual, código-fonte, algoritmos, logotipos e conteúdos da Plataforma pertencem exclusivamente à <b>FrutiGo Technologies</b> sob titularidade do seu <b>Fundador e CEO, Alberto Reyes Sandoval</b>.</p>
       
-      <h2>4. Limitação de Responsabilidade</h2>
-      <p>O Aplicativo é fornecido "como está" e "conforme disponível". A Empresa não garante que o serviço seja ininterrupto ou livre de erros. Não nos responsabilizamos por danos diretos ou indiretos decorrentes do uso ou da impossibilidade de uso do aplicativo.</p>
-      
-      <h2>5. Modificações</h2>
-      <p>Reservamo-nos o direito de modificar estes termos a qualquer momento. As modificações serão notificadas através do app e o uso continuado constituirá aceitação dos novos termos.</p>
+      <h2>4. Nível de Serviço e Limitação de Responsabilidade</h2>
+      <p>A Plataforma é fornecida "como está" e "conforme disponível". A Empresa não garante que o serviço seja ininterrupto ou livre de erros. Não nos responsabilizamos por danos indiretos decorrentes do uso do aplicativo.</p>
 
-      <h2>6. Condições do Módulo de Encomendas e Entregas</h2>
-      <p>O Fruti Go atua exclusivamente como intermediário tecnológico que facilita a conexão entre usuários e entregadores independentes para o transporte de mercadorias. Ao utilizar o módulo de encomendas, o usuário aceita:</p>
+      <h2>5. Modalidade de Mobilidade e Transporte Privado de Passageiros (Ponto A a Ponto B)</h2>
+      <p>Nossa plataforma incorpora a modalidade tecnológica de intermediação digital para mobilidade urbana de passageiros de ponto a ponto sob as seguintes cláusulas obrigatórias:</p>
       <ul>
-        <li><b>Declaração de Conteúdo:</b> O usuário é o único responsável pela veracidade do conteúdo dos pacotes. É estritamente proibido o envio de mercadorias ilegais, substâncias perigosas, materiais inflamáveis, dinheiro em espécie, títulos de crédito ou qualquer objeto ilícito.</li>
-        <li><b>Limites de Responsabilidade:</b> A responsabilidade do Fruti Go limita-se à gestão da plataforma. Não assumimos responsabilidade por danos decorrentes de embalagem inadequada, itens perecíveis não declarados ou perda de itens proibidos por estes termos.</li>
-        <li><b>Direito de Inspeção:</b> Por razões de segurança pública, o entregador independente reserva-se o direito de solicitar a abertura do pacote para verificar se o conteúdo não contraria as leis vigentes ou nossas políticas de segurança.</li>
+        <li><b>Natureza do Serviço (Intermediação Tecnológica):</b> Fica expressamente declarado que a Plataforma é uma ferramenta tecnológica de intermediação digital entre passageiros e motoristas independentes. <b>A FrutiGo Technologies e a FrutiGo Logistics NÃO são empresas de transporte público ou privado, NÃO são concessionárias de táxi, NÃO são proprietárias dos veículos e NÃO possuem vínculo empregatício ou de subordinação com os motoristas parceiros</b>. Cada motorista atua de forma autônoma e independente.</li>
+        <li><b>Requisitos Obrigatórios para Motoristas e Veículos:</b> Todo motorista independente deve apresentar e manter válidos:
+          <ol style="margin-top: 6px; padding-left: 20px;">
+            <li>Carteira de habilitação oficial vigente, adequada para transporte de passageiros.</li>
+            <li>Documento de licenciamento do veículo vigente.</li>
+            <li>Apólice de seguro veicular com cobertura ampla específica para transporte de passageiros / comercial, com cobertura para danos a terceiros e despesas médicas para ocupantes.</li>
+          </ol>
+        </li>
+        <li><b>Suspensão Automática por Vencimento de Documentos:</b> O sistema notificará preventivamente o motorista com <b>trinta (30) dias de antecedência</b> ao vencimento de sua habilitação ou seguro. Caso os documentos não sejam renovados e validados até a data de vencimento, <b>a conta do motorista será suspensa e bloqueada automaticamente</b> para novas corridas.</li>
+        <li><b>Tarifas, Negociação Direta e Moeda Contratual (Multimoeda):</b> As tarifas de cada viagem (Ponto A a Ponto B) são determinadas por <b>negociação direta e acordo mútuo</b> entre passageiro e motorista independente. <b>A moeda contratual base oficial é o Peso Mexicano (MXN)</b>. Qualquer valor exibido em Dólares Americanos (USD) é puramente <b>referencial e informativo</b>.</li>
+        <li><b>Sinistros, Acidentes e Limitação de Responsabilidade:</b> Em caso de colisão ou acidente de trânsito durante uma viagem, a cobertura médica e indenizações recaem primária e diretamente sobre a apólice de seguro automotriz vigente do motorista independente.</li>
       </ul>
 
-      <h2>7. Políticas de Transporte de Animais de Estimação (Pets)</h2>
-      <p>O Fruti Go oferece um serviço de transporte de animais de companhia sob as seguintes condições de segurança e responsabilidade:</p>
+      <h2>6. Condições do Módulo de Encomendas e Logística</h2>
+      <p>O FrutiGo Logistics atua como intermediário tecnológico que conecta usuários e entregadores para fretes e transporte de mercadorias:</p>
       <ul>
-        <li><b>Segurança e Contenção:</b> É obrigatório que todo animal seja transportado em uma caixa de transporte (kennel) rígida, limpa e segura fornecida pelo usuário. Para cães de médio ou grande porte, é indispensável o uso de guia, cinto de segurança veicular e focinheira se o animal demonstrar nervosismo ou reatividade. O entregador pode cancelar o serviço caso o usuário não possua estes itens de segurança.</li>
-        <li><b>Higiene e Danos Materiais:</b> O usuário é financeiramente responsável por qualquer dano causado pelo animal no interior do veículo (arranhões, mordidas, sujeira por fezes, urina ou vômito). Em caso de incidentes, o usuário concorda em cobrir as despesas de limpeza profunda ou reparo comprovadas pelo motorista.</li>
-        <li><b>Saúde e Emergências:</b> O usuário garante que o animal está livre de doenças infectocontagiosas. O Fruti Go não é um serviço de ambulância veterinária; diante de qualquer emergência médica pré-existente durante o trajeto, o motorista limitará sua ação a concluir o trajeto até o destino veterinário indicado pelo usuário, isentando o Fruti Go de qualquer complicação na saúde ou óbito do animal decorrente do estresse do transporte ou condições prévias.</li>
+        <li><b>Declaração de Conteúdo:</b> O usuário é o único responsável pela veracidade do conteúdo dos pacotes. É proibido o envio de mercadorias ilegais, substâncias perigosas ou dinheiro em espécie.</li>
+        <li><b>Limites de Responsabilidade:</b> Não assumimos responsabilidade por embalagem inadequada ou perda de itens proibidos por estes termos.</li>
+      </ul>
+
+      <h2>7. Políticas de Transporte de Animais de Estimação (Pet Mobility)</h2>
+      <ul>
+        <li><b>Segurança e Contenção:</b> Obrigatório o uso de caixa de transporte (kennel) ou cinto de segurança veicular adequado para animais. Focinheira obrigatória para animais reativos.</li>
+        <li><b>Higiene e Danos:</b> O usuário é responsável por qualquer dano ou sujeira no veículo causada pelo animal.</li>
+        <li><b>Saúde:</b> O FrutiGo não presta serviço de resgate ou ambulância veterinária de emergência.</li>
       </ul>
 
       <h2>8. Políticas de Garantia, Devolução e Reembolso</h2>
       <ul>
-        <li><b>Garantia de Frescor:</b> Por comercializarmos alimentos altamente perecíveis, o usuário tem o prazo limite de <b>24 horas naturais</b> após receber seu pedido para notificar mercadoria incorreta ou danificada, anexando evidência visual via WhatsApp para 3317093598 ou e-mail de suporte.</li>
-        <li><b>Substituições e Reembolsos Financeiros:</b> Se a reclamação for procedente, o reenvio da substituição ocorrerá em até 24 horas, ou o reembolso será processado automaticamente através da plataforma segura <b>Openpay</b>. O saldo refletido na conta bancária do usuário costuma levar de 3 a 10 dias úteis para cartões de crédito e até 30 dias úteis para cartões de débito, dependendo do banco emissor.</li>
-        <li><b>Cancelamento de Pedidos:</b> Cancelamentos de pedidos da loja serão isentos de taxas desde que solicitados com pelo menos <b>2 horas de antecedência</b> da janela de entrega combinada.</li>
+        <li><b>Garantia de Frescor:</b> Prazo de <b>24 horas naturais</b> após o recebimento do pedido para relatar inconformidades via WhatsApp no 3317093598 ou e-mail de suporte.</li>
+        <li><b>Reembolsos com Openpay:</b> Reembolsos aprovados são processados via <b>Openpay by BBVA</b> conforme os prazos bancários regulares.</li>
+        <li><b>Cancelamentos:</b> Cancelamento sem custo com pelo menos 2 horas de antecedência da janela de entrega.</li>
       </ul>
+
+      <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Representação e Assinatura Legal:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador e CEO — FrutiGo Technologies & FrutiGo Logistics</p>
+      </div>
     `,
     privacidad: `
-      <h1>Aviso de Privacidade Integral</h1>
-      <p class="text-xs text-zinc-400 -mt-2 mb-6">Última atualização: Julho de 2026</p>
+      <h1>Aviso de Privacidade Integral Corporativo</h1>
+      <p class="text-xs text-zinc-400 -mt-2 mb-6">Última atualização: Setembro de 2026</p>
       
       <h2>1. Responsável pelos Dados Pessoais</h2>
-      <p><b>Fruti Go</b> (a Empresa), e-mail de contato <b>frutigo33@gmail.com</b> e telefone <b>3317093598</b>, com endereço físico na <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, é a responsável pelo tratamento, uso e proteção dos seus dados pessoais, em conformidade com as leis de proteção de dados (LFPDPPP) e políticas obrigatórias da Google Play Store.</p>
-      
-      <p>Nossa plataforma opera com três perfis de usuário diferenciados: <b>Clientes (Consumidores)</b>, <b>Entregadores (Parceiros de Entrega)</b> e <b>Negócios (Estabelecimentos)</b>.</p>
+      <p><b>FrutiGo Technologies</b> e <b>FrutiGo Logistics</b>, representadas pelo <b>Fundador e CEO, Alberto Reyes Sandoval</b>, e-mail <b>frutigo33@gmail.com</b>, telefone <b>3317093598</b>, com endereço na <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, são responsáveis pela proteção dos seus dados pessoais em conformidade com as leis aplicáveis e requisitos da Google Play Store.</p>
       
       <h2>2. Dados que Coletamos</h2>
-      <p>Dependendo de como você usa o Fruti Go, podemos coletar:</p>
       <ul>
-        <li><b>Dados de identificação:</b> Nome completo.</li>
-        <li><b>Dados de contato:</b> E-mail, número de telefone e endereço exato de entrega.</li>
-        <li><b>Dados de localização (Geolocalização):</b>
-          <ul>
-            <li><b>Clientes:</b> Localização em tempo real em primeiro plano (apenas mediante autorização expressa no dispositivo) para definir origem/destino.</li>
-            <li><b>Entregadores:</b> Localização em <b>SEGUNDO PLANO (Background Location)</b>. Coletamos dados de localização mesmo quando o aplicativo está fechado ou inativo na tela, unicamente durante o turno de serviço. Isso é indispensável para atribuir pedidos mais próximos, estimar tempo de chegada (ETA) e rastrear entregas em tempo real. Desliga-se imediatamente ao ficar fora de serviço.</li>
-          </ul>
+        <li><b>Identificação e Contato:</b> Nome completo, e-mail, telefone e credenciais.</li>
+        <li><b>Documentos de Motoristas:</b> Habilitação, seguro automotivo, documento do veículo.</li>
+        <li><b>Telemetria e Dados Técnicos:</b> IP, modelo do aparelho, registros de viagem e pedidos.</li>
+      </ul>
+
+      <h2>3. Tratamento de Localização Geográfica (Requisitos Google Play)</h2>
+      <ul>
+        <li><b>A. Localização de Passageiros (Primeiro Plano / Foreground Location):</b> Coletamos localização precisa em tempo real unicamente em primeiro plano (quando o app está aberto na tela) com autorização do usuário, exclusivamente para definir ponto de embarque (Ponto A), traçar rota até o destino (Ponto B) e exibir trajeto em tempo real por segurança.</li>
+        <li><b>B. Localização de Motoristas em Segundo Plano (Background Location Prominent Disclosure — Google Play):</b>
+          <div style="background: #f0fdf4; border-left: 4px solid #0D7A3F; padding: 14px 18px; border-radius: 8px; margin: 10px 0;">
+            <p style="margin: 0; font-weight: bold; color: #0D7A3F;">Declaração Prominente de Divulgação (Google Play):</p>
+            <p style="margin: 6px 0 0 0; font-size: 13px; color: #166534;">
+              <b>A FrutiGo coleta dados de localização precisa em segundo plano (Background Location) dos motoristas parceiros mesmo quando o aplicativo está fechado ou inativo.</b>
+            </p>
+          </div>
+          <ol style="margin-top: 6px; padding-left: 20px;">
+            <li><b>Condição:</b> Opera exclusivamente quando o motorista está com status <b>"Conectado / Em Serviço"</b>.</li>
+            <li><b>Finalidade:</b> Atribuir corridas próximas em tempo real mesmo usando outros apps como Google Maps/Waze, calcular ETA com precisão e fornecer rastreamento de segurança.</li>
+            <li><b>Desativação:</b> Interrompe-se imediatamente ao ficar <b>"Desconectado / Fora de Serviço"</b>.</li>
+          </ol>
         </li>
-        <li><b>Dados de navegação:</b> Informações do dispositivo, sistema operacional e histórico de uso do app.</li>
       </ul>
 
-      <h2>3. Dados Bancários e Transações Seguras</h2>
-      <p>Os pagamentos e dados de cartão são realizados diretamente através do nosso provedor certificado <b>Openpay (by BBVA)</b> mediante protocolos HTTPS, criptografia AES-256 e conformidade PCI-DSS. O Fruti Go não armazena nem processa números de cartão em servidores próprios.</p>
+      <h2>4. Pagamentos Seguros com Openpay</h2>
+      <p>Todas as transações financeiras são processadas através da <b>Openpay (by BBVA)</b> com certificação PCI-DSS. A FrutiGo não armazena dados bancários ou números de cartão.</p>
 
-      <h2>4. Finalidade do Tratamento de Dados</h2>
-      <p>Seus dados serão utilizados para as seguintes finalidades necessárias:</p>
-      <ul>
-        <li>Criar e gerenciar sua conta de usuário.</li>
-        <li>Processar, preparar e entregar pedidos com segurança através do aplicativo.</li>
-        <li>Oferecer suporte técnico eficiente e atendimento ao cliente.</li>
-        <li>Enviar notificações importantes sobre o status do aplicativo ou seus pedidos.</li>
-        <li><b>Finalidade secundária:</b> Enviar promoções, ofertas e cupons universais (você pode cancelar a inscrição a qualquer momento).</li>
-      </ul>
+      <h2>5. Direitos ARCO e Exclusão de Conta</h2>
+      <p>Você pode solicitar a exclusão de seus dados ou conta a qualquer momento em <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> ou enviando e-mail para <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>.</p>
 
-      <h2>5. Transferência de Dados</h2>
-      <p>Não vendemos nem compartilhamos seus dados pessoais com terceiros, exceto quando estritamente necessário para a operação do app (por exemplo, com gateways seguros de pagamento ou atribuição de rotas de logística) ou por exigência legal das autoridades competentes.</p>
-
-      <h2>6. Tratamento de Dados no Módulo de Encomendas e Pets</h2>
-      <p>Com a integração dos serviços de entrega de encomendas e transporte de pets, o Fruti Go tratará os seguintes dados adicionais de forma segura:</p>
-      <ul>
-        <li><b>Dados de Geolocalización Física:</b> Localização exata em tempo real do dispositivo do Cliente em primeiro plano e do Entregador em segundo plano durante o serviço. Finalidade: atribuir o motorista mais próximo, calcular tarifas dinâmicas, traçar rotas e permitir rastreamento de segurança.</li>
-        <li><b>Dados de Contato de Terceiros (Destinatários):</b> Ao utilizar o serviço de encomendas, você fornecerá nome completo, telefone e endereço do destinatário. O usuário declara ter autorização prévia do destinatário.</li>
-        <li><b>Finalidad do Tratamento:</b> Exclusivamente para concluir a logística de coleta e entrega, oferecer suporte em tempo real, gerenciar cobranças via OpenPay e aplicar cupons. O Fruti Go não comercializa nem vende dados de localização para publicidade.</li>
-      </ul>
-
-      <h2>7. Direitos ARCO (Acesso, Retificação, Cancelamento e Oposição)</h2>
-      <p>Você tem o direito de saber quais dados temos, corrigi-los, solicitar sua exclusão ou recusar seu uso. Para exercer estes direitos ou solicitar a <b>exclusão da sua conta</b>, envie uma solicitação por escrito com documento oficial para nosso e-mail de suporte: <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>, or utilize nosso portal de exclusão automática em: <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> ou <a href="/legal" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/legal</a>.</p>
+      <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
+        <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Oficial de Privacidade e Titular Legal:</strong></p>
+        <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
+        <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador e CEO — FrutiGo Technologies & FrutiGo Logistics</p>
+      </div>
     `,
     nosotros: `
       <h1>Sobre Nós</h1>

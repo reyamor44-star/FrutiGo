@@ -68,7 +68,7 @@ export default function MobileInstallFloatBanner() {
       aria-label="Banner de instalación de la aplicación FrutiGo"
       className="fixed bottom-3 inset-x-3 sm:left-auto sm:right-5 sm:bottom-5 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300 pointer-events-auto"
     >
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-zinc-950 via-emerald-950 to-zinc-900 text-white p-3.5 border-2 border-emerald-400/80 shadow-2xl shadow-emerald-950/80 backdrop-blur-md">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-green via-emerald-900 to-brand-green text-white p-3.5 border-2 border-brand-yellow/60 shadow-2xl shadow-brand-green/50 backdrop-blur-md">
         {/* Ambient glow */}
         <div className="absolute -right-8 -top-8 w-24 h-24 bg-emerald-500/20 rounded-full blur-xl pointer-events-none" />
         <div className="absolute -left-8 -bottom-8 w-24 h-24 bg-brand-yellow/20 rounded-full blur-xl pointer-events-none" />

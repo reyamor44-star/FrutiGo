@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-primary: #18181b;
-  --color-brand-dark: #09090b;
-  --color-brand-gray: #71717a;
-  --color-brand-green: #18181b;
-  --color-brand-yellow: #f4f4f5;
-  --color-brand-black: #09090b;
+  --color-brand-primary: #FFD200;
+  --color-brand-dark: #E6BD00;
+  --color-brand-gray: #8E959E;
+  --color-brand-green: #166534;
+  --color-brand-yellow: #FFD200;
+  --color-brand-black: #0D0F12;
+  --color-brand-surface: #1A1D24;
+  --color-brand-border: #2A2E39;
   
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
@@ -19,35 +21,69 @@ html, body {
 
 @layer base {
   body {
-    @apply bg-zinc-50 text-zinc-900 antialiased text-base md:text-sm font-medium md:font-normal;
+    background-color: #0D0F12;
+    color: #F8FAFC;
+    @apply antialiased text-base md:text-sm font-medium md:font-normal;
   }
 }
 
 @layer utilities {
   .bg-mesh {
-    background-color: #fcfcfd;
+    background-color: #0D0F12;
     background-image: 
-      radial-gradient(at 0% 0%, hsla(240, 5%, 50%, 0.04) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(240, 5%, 30%, 0.03) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, hsla(240, 5%, 40%, 0.03) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsla(240, 5%, 60%, 0.03) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(255, 210, 0, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(142, 149, 158, 0.06) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(255, 210, 0, 0.04) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(22, 101, 52, 0.08) 0px, transparent 50%);
   }
 
   .glass-card {
-    @apply bg-white/80 backdrop-blur-xl border border-zinc-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)];
+    background-color: rgba(26, 29, 36, 0.9);
+    border: 1px solid rgba(142, 149, 158, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    @apply backdrop-blur-xl;
   }
 }
 
 .markdown-body h1 {
-  @apply text-3xl font-bold mb-4 text-zinc-900;
+  @apply text-2xl sm:text-3xl font-black mb-4 text-[#FFD200];
+}
+
+.markdown-body h2 {
+  @apply text-lg sm:text-xl font-black mt-6 mb-3 text-[#FFD200] border-b border-[#2A2E39] pb-2;
+}
+
+.markdown-body h3 {
+  @apply text-base sm:text-lg font-black mt-4 mb-2 text-[#FFD200];
 }
 
 .markdown-body p {
-  @apply mb-4 leading-relaxed text-zinc-700;
+  @apply mb-4 leading-relaxed text-[#CBD5E1];
+}
+
+.markdown-body ul, .markdown-body ol {
+  @apply ml-6 mb-4 text-[#CBD5E1] space-y-1.5;
 }
 
 .markdown-body ul {
-  @apply list-disc ml-6 mb-4 text-zinc-700;
+  @apply list-disc;
+}
+
+.markdown-body ol {
+  @apply list-decimal;
+}
+
+.markdown-body a {
+  color: #FFD200;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #FFD200;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.markdown-body a:hover {
+  color: #FFE033;
 }
 
 /* Contenedor responsivo 16:9 para videos incrustados de YouTube y multimedia */

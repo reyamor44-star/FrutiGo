@@ -32,14 +32,16 @@ import {
   saveAppUserToFirestore,
   fetchAllAppUsersFromFirestore
 } from "./src/lib/firebaseService";
+import { DEFAULT_LANDING_PAGES } from "./src/data/defaultLandingPages";
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
   const DATA_FILE = path.join(process.cwd(), "policies.json");
+  const LANDING_PAGES_FILE = path.join(process.cwd(), "landingPagesConfig.json");
 
   // Versión única para forzar actualización de datos legales
-  const CURRENT_VERSION = "3.0";
+  const CURRENT_VERSION = "5.0";
   const VERSION_FILE = path.join(process.cwd(), "version.txt");
 
   let shouldUpdate = !fs.existsSync(DATA_FILE);
@@ -75,113 +77,150 @@ async function startServer() {
         </div>
       `,
       terminos: `
-        <h1>Términos y Condiciones de Uso</h1>
-        <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Julio de 2026</p>
+        <h1>Términos y Condiciones de Uso y Servicios</h1>
+        <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Septiembre de 2026</p>
         
-        <p>Bienvenido a Fruti Go. Estos Términos y Condiciones regulan el acceso y uso de la aplicación móvil Fruti Go (en adelante, "la Aplicación"), propiedad de <b>Fruti Go</b> y fundada y dirigida legalmente por su <b>Fundador y CEO, Alberto Reyes Sandoval</b>. Al descargar y utilizar la Aplicación, usted acepta cumplir con estos términos. Si no está de acuerdo, le solicitamos abstenerse de utilizarla.</p>
+        <p>Bienvenido a <b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b>, fundadas y representadas legalmente por su <b>Fundador y CEO, Alberto Reyes Sandoval</b>. Los presentes Términos y Condiciones regulan el acceso, registro y uso de nuestras plataformas tecnológicas, aplicaciones móviles, interfaces API, servicios de movilidad urbana y soluciones logísticas (en adelante, "la Plataforma"). Nuestra infraestructura es propiedad de <b>FrutiGo Technologies</b> y operada por <b>FrutiGo Logistics</b>, con domicilio físico y operativo en <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, correo de contacto <b>frutigo33@gmail.com</b> y teléfono <b>3317093598</b>. El uso de nuestros servicios implica la aceptación expresa, vinculante e irrestricta de estos términos.</p>
         
-        <h2>1. Uso de la Aplicación</h2>
+        <h2>1. Uso de la Plataforma e Infraestructura Digital</h2>
         <ul>
-          <li><b>Requisitos:</b> El usuario debe tener al menos 18 años para utilizar esta aplicación.</li>
-          <li><b>Licencia de Uso:</b> Se otorga una licencia limitada, no exclusiva, no transferible y revocable para usar la app con fines de compra de productos frescos, envíos y transporte de mascotas.</li>
-          <li><b>Restricciones:</b> Queda prohibido modificar, descompilar, realizar ingeniería inversa o usar la app para fines ilícitos o fraudulentos.</li>
+          <li><b>Requisitos de Acceso:</b> El usuario debe tener al menos 18 años de edad y contar con plena capacidad jurídica para contratar según la legislación aplicable en los Estados Unidos Mexicanos.</li>
+          <li><b>Licencia de Uso:</b> Se otorga una licencia limitada, no exclusiva, no transferible y revocable para utilizar nuestras aplicaciones con fines personales, comerciales, logísticos y de movilidad privada autorizados.</li>
+          <li><b>Restricciones Operativas:</b> Queda estrictamente prohibido modificar, descompilar, realizar ingeniería inversa, extraer datos de forma no autorizada o usar la plataforma para fines ilícitos o fraudulentos.</li>
         </ul>
         
-        <h2>2. Cuentas de Usuario</h2>
-        <p>Para acceder a ciertas funciones (como pedidos, envíos o historial), el usuario deberá registrarse. Es responsabilidad del usuario mantener la confidencialidad de sus credenciales de acceso. La Empresa no se hace responsable por pérdidas derivadas del uso no autorizado de su cuenta.</p>
+        <h2>2. Cuentas de Usuario y Seguridad</h2>
+        <p>Para acceder a ciertas funciones (como órdenes de compra, envíos, viajes de pasajeros o historial transaccional), el usuario deberá registrarse. Es responsabilidad exclusiva del usuario mantener la confidencialidad de sus credenciales de acceso. La Empresa implementa protocolos de autenticación robustos y cifrado para proteger la integridad de cada cuenta.</p>
         
-        <h2>3. Propiedad Intelectual</h2>
-        <p>Todos los derechos de propiedad intelectual sobre el diseño, código, logos, marcas y contenidos de Fruti Go pertenecen a <b>Fruti Go</b>, bajo la titularidad intelectual y desarrollo de su <b>Fundador y CEO, Alberto Reyes Sandoval</b>. Queda prohibida su reproducción total o parcial sin autorización expresa de conformidad con las leyes vigentes.</p>
+        <h2>3. Propiedad Intelectual y Arquitectura Tecnológica</h2>
+        <p>Todos los derechos de propiedad industrial, código fuente, algoritmos de enrutamiento, logotipos, marcas comerciales y contenidos de la Plataforma pertenecen en exclusiva a <b>FrutiGo Technologies</b> bajo la titularidad de su <b>Fundador y CEO, Alberto Reyes Sandoval</b>. Queda prohibida su reproducción total o parcial sin autorización expresa por escrito.</p>
         
-        <h2>4. Limitación de Responsabilidad</h2>
-        <p>La Aplicación se proporciona "tal cual" y "según disponibilidad". La Empresa no garantiza que el servicio sea ininterrumpido o libre de errores. No nos hacemos responsables de daños directos o indirectos derivados del uso o imposibilidad de uso de la app.</p>
-        
-        <h2>5. Modificaciones</h2>
-        <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Las modificaciones se notificarán a través de la app y el uso continuado de la misma constituirá la aceptación de los nuevos términos.</p>
+        <h2>4. Nivel de Servicio y Limitación General de Responsabilidad</h2>
+        <p>La Plataforma se proporciona "tal cual" y "según disponibilidad". La Empresa no garantiza que el servicio sea ininterrumpido o libre de errores. FrutiGo no se hace responsable de daños indirectos derivados del uso o imposibilidad de uso de la aplicación.</p>
 
-        <h2>6. Condiciones del Módulo de Paquetería y Mensajería</h2>
-        <p>Fruti Go actúa exclusivamente como intermediario tecnológico que facilita la conexión entre usuarios y repartidores independientes para el traslado de mercancías. Al utilizar el módulo de paquetería, el usuario acepta:</p>
+        <h2>5. Modalidad de Movilidad y Transporte Privado de Pasajeros (Punto A a Punto B)</h2>
+        <p>Nuestra plataforma incorpora la modalidad tecnológica de enlace y coordinación digital para la movilidad urbana de pasajeros de punto a punto bajo las siguientes cláusulas obligatorias y regulatorias:</p>
         <ul>
-          <li><b>Declaración de Contenido:</b> El usuario es el único responsable de la veracidad sobre el contenido de los paquetes. Queda estrictamente prohibido el envío de mercancías ilegales, sustancias peligrosas, materiales inflamables, dinero en efectivo, títulos de crédito o cualquier objeto ilícito.</li>
-          <li><b>Límites de Responsabilidad:</b> La responsabilidad de Fruti Go se limita a la gestión de la plataforma. No asumimos responsabilidad por daños derivados de un embalaje inadecuado, artículos perecederos no declarados o por la pérdida de artículos no permitidos por estos términos.</li>
-          <li><b>Derecho de Inspección:</b> Por razones de seguridad pública, el repartidor independiente se reserva el derecho de solicitar la apertura del paquete para verificar que el contenido no contravenga las leyes vigentes o nuestras políticas de seguridad.</li>
+          <li><b>Naturaleza del Servicio (Intermediación Tecnológica):</b> Se deja expresa, categórica e inequívocamente establecido que la Plataforma es exclusivamente una herramienta informática y tecnológica de intermediación digital entre usuarios pasajeros y conductores independientes. <b>FrutiGo Technologies y FrutiGo Logistics NO son una empresa de transporte público ni privado de personas, NO son concesionarios de taxis ni de radiotaxis, NO son propietarios ni administradores de los vehículos utilizados, y NO ostentan relación laboral, de subordinación, patrón-empleado ni agencia con los conductores independientes</b>. Cada conductor opera como un prestador de servicios autónomo, independiente y por cuenta propia.</li>
+          <li><b>Conductores y Vehículos (Requisitos y Responsabilidad Exclusiva):</b> Todo conductor independiente que se registre u opere en la Plataforma debe acreditar, presentar y mantener permanentemente vigentes:
+            <ol style="margin-top: 6px; padding-left: 20px;">
+              <li>Licencia de conducir oficial y vigente expedida por la autoridad de transporte competente, idónea para la modalidad de transporte de personas.</li>
+              <li>Tarjeta de circulación vehicular oficial y vigente.</li>
+              <li>Póliza de seguro automotriz vigente con cobertura de responsabilidad civil para pasajeros o seguro especial para transporte privado de personas / ERyT / comercial emitido por una institución debidamente autorizada por la Comisión Nacional de Seguros y Fianzas (CNSF), que ampare daños a terceros y cobertura médica integral para ocupantes y pasajeros.</li>
+            </ol>
+            <b>El conductor independiente es el único y exclusivo responsable del estado mecánico, técnico, físico, de seguridad, higiene y legal del vehículo utilizado</b>, así como de portar toda la documentación reglamentaria y acatar en todo momento las leyes, reglamentos de tránsito y disposiciones de movilidad aplicables.
+          </li>
+          <li><b>Suspensión Automática por Vencimiento de Documentación:</b> La Plataforma cuenta con un sistema automatizado de control de vigencia documental. El sistema notificará de manera preventiva al conductor con <b>treinta (30) días naturales de anticipación</b> al vencimiento de su licencia de conducir o póliza de seguro vehicular. Si el conductor no renueva, carga y valida la documentación actualizada antes o en la fecha límite de vencimiento, <b>el sistema suspenderá y bloqueará automáticamente su cuenta de conductor</b>, inhabilitándolo de inmediato para recibir o aceptar cualquier solicitud de viaje hasta que los documentos renovados sean formalmente aprobados por el equipo de cumplimiento.</li>
+          <li><b>Negociación Directa, Moneda Contractual y Pago en Efectivo:</b> La determinación de las tarifas de cada viaje de punto a punto (Punto A a Punto B) se realiza bajo un modelo de <b>negociación directa y consentimiento mutuo</b> entre el usuario pasajero y el conductor independiente a través de la aplicación. <b>El pago del servicio se efectúa directamente en efectivo al conductor independiente al término del trayecto</b> (o a través de los medios directos previamente acordados entre las partes). <b>La plataforma Fruti Go NO procesa, NO cobra, NO retiene ni intermedia las tarifas pactadas de los viajes entre particulares en esta modalidad</b>, salvo las cuotas fijas de suscripción, recarga o membresía por el uso del software por parte de los conductores. La moneda legal, base y obligatoria para fines contractuales y de referencia es el <b>Peso Mexicano (MXN)</b>; cualquier valor en divisas extranjeras es puramente estimativo e informativo.</li>
+          <li><b>Seguridad y Exención de Responsabilidad de la Plataforma:</b> FrutiGo Technologies y FrutiGo Logistics quedan formalmente exentas de cualquier responsabilidad civil, extracontractual, penal, laboral o patrimonial derivada de:
+            <ol style="margin-top: 4px; padding-left: 20px;">
+              <li>Siniestros viales, colisiones, choques, volcaduras, infracciones o accidentes de tránsito ocurridos durante o en relación con el viaje.</li>
+              <li>Pérdidas, olvido, extravío, robo o deterioro de bultos, equipaje o cualquier objeto personal dentro de la unidad vehicular.</li>
+              <li>Conductas, agresiones, actos u omisiones de terceros, conductores independientes o pasajeros.</li>
+              <li>Disputas, diferencias o controversias tarifarias suscitadas antes, durante o con posterioridad a la prestación del servicio.</li>
+            </ol>
+            Ante cualquier hecho o siniestro vial, <b>la atención médica primaria, peritajes, asistencias legales y cobertura de indemnizaciones recaen exclusiva y prioritariamente sobre la póliza de seguro automotriz vigente y obligatoria del vehículo del conductor independiente</b>.
+          </li>
         </ul>
 
-        <h2>7. Políticas de Transporte de Mascotas (Pets)</h2>
-        <p>Fruti Go ofrece un servicio de traslado de animales de compañía bajo las siguientes condiciones de seguridad y responsabilidad:</p>
+        <h2>6. Módulo de Servicios Logísticos, Mensajería y Envíos Urbanos</h2>
+        <p>A través de nuestra plataforma tecnológica <b>FrutiGo Logistics</b>, facilitamos la asignación, trazabilidad y control de despacho de paquetería urbana:</p>
         <ul>
-          <li><b>Seguridad y Contención:</b> Es obligatorio que toda mascota sea transportada en una transportadora (kennel) rígida, limpia y segura proporcionada por el usuario. En caso de perros medianos o grandes, es indispensable el uso de correa, pechera de seguridad para vehículo y bozal si el animal muestra signos de nerviosismo o reactividad. El repartidor tiene la facultad de cancelar el servicio si el usuario no cuenta con estos elementos de seguridad.</li>
-          <li><b>Higiene y Daños Materiales:</b> El usuario es económicamente responsable por cualquier daño causado por la mascota al interior del vehículo (arañazos, mordeduras, suciedad por excrementos, orina o vómito). En caso de incidentes, el usuario se compromete a cubrir los gastos de limpieza profunda o reparación que el conductor independiente acredite.</li>
-          <li><b>Salud y Emergencias:</b> El usuario garantiza que la mascota se encuentra libre de enfermedades infectocontagiosas. Fruti Go no es un servicio de ambulancia veterinaria; ante cualquier emergencia médica preexistente durante el trayecto, el conductor limitará su acción a completar el traslado al destino veterinario indicado por el usuario, deslindando a Fruti Go de cualquier complicación en la salud o deceso del animal derivado del estrés del traslado o condiciones médicas previas.</li>
+          <li><b>Declaración de Contenido:</b> El usuario remitente es el único responsable de la legalidad del contenido de los paquetes. Queda estrictamente prohibido el envío de mercancías ilícitas, sustancias peligrosas, materiales inflamables, dinero en efectivo o valores no declarados.</li>
+          <li><b>Límites de Responsabilidad:</b> La responsabilidad de FrutiGo se limita a la gestión de la plataforma. No asumimos responsabilidad por daños derivados de un embalaje deficiente o artículos prohibidos.</li>
+          <li><b>Derecho de Inspección:</b> Por razones de seguridad pública, el repartidor independiente se reserva el derecho de verificar el embalaje antes de iniciar el trayecto.</li>
         </ul>
 
-        <h2>8. Políticas de Garantía, Devolución y Reembolso</h2>
+        <h2>7. Módulo Especializado de Transporte de Mascotas (Pet Mobility)</h2>
+        <p>FrutiGo ofrece un servicio de traslado de animales de compañía bajo las siguientes condiciones de seguridad y responsabilidad:</p>
         <ul>
-          <li><b>Garantía de Frescura:</b> Dado que comercializamos alimentos altamente perecederos, el usuario cuenta con un límite de <b>24 horas naturales</b> tras recibir su pedido para notificar mercancía errónea o dañada, adjuntando evidencia visual vía WhatsApp al número 3317093598 o al correo de soporte.</li>
-          <li><b>Reemplazos y Devoluciones Financieras:</b> Si la reclamación procede, se enviará el reemplazo en un lapso de 24 horas, o bien, se tramitará el reembolso mediante la plataforma segura <b>Openpay</b> de forma automática. El saldo reflejado en la cuenta bancaria del usuario suele tomar un periodo de 3 a 10 días hábiles para tarjetas de crédito y hasta 30 días hábiles para tarjetas de débito, dependiendo por completo de las políticas del banco emisor.</li>
-          <li><b>Cancelación de Pedidos:</b> Las cancelaciones de pedidos de la tienda serán sin costo alguno siempre y cuando se soliciten con al menos <b>2 horas de anticipación</b> a la ventana de entrega pactada.</li>
+          <li><b>Seguridad y Contención:</b> Toda mascota debe ser transportada en transportadora rígida (kennel) o con arnés de seguridad vehicular homologado. En perros reactivos o nerviosos, es obligatorio el bozal.</li>
+          <li><b>Higiene y Daños Materiales:</b> El usuario es económicamente responsable por cualquier daño o suciedad provocada en el vehículo por la mascota, cubriendo los gastos de limpieza o reparación certificados por el conductor.</li>
+          <li><b>Salud y Emergencias:</b> El usuario garantiza que la mascota está al día con sus vacunas y en condiciones de viajar. FrutiGo no presta servicios de ambulancia veterinaria de emergencia.</li>
+        </ul>
+
+        <h2>8. Garantías, Devoluciones y Conciliación Financiera con Openpay</h2>
+        <ul>
+          <li><b>Garantía de Frescura:</b> En productos perecederos, el usuario dispone de <b>24 horas naturales</b> tras recibir su pedido para reportar inconformidades vía WhatsApp al 3317093598 o correo de soporte con soporte fotográfico.</li>
+          <li><b>Reembolsos Automatizados:</b> Los reembolsos procedentes se tramitan de forma directa a través de la pasarela segura <b>Openpay by BBVA</b> conforme a los periodos y normativas de compensación interbancaria.</li>
+          <li><b>Cancelación de Pedidos:</b> Las órdenes comerciales pueden cancelarse sin penalización con al menos 2 horas de anticipación a la ventana de entrega pactada.</li>
         </ul>
 
         <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
           <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Representación y Firma Legal:</strong></p>
           <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
-          <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO de Fruti Go</p>
+          <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO — FrutiGo Technologies & FrutiGo Logistics</p>
         </div>
       `,
       privacidad: `
-        <h1>Aviso de Privacidad Integral</h1>
-        <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Julio de 2026</p>
+        <h1>Aviso de Privacidad Integral Corporativo</h1>
+        <p class="text-xs text-zinc-400 -mt-2 mb-6">Última actualización: Septiembre de 2026</p>
         
         <h2>1. Responsable de los Datos Personales</h2>
-        <p><b>Fruti Go</b>, representada legalmente por su <b>Fundador y CEO, Alberto Reyes Sandoval</b>, con correo de contacto <b>frutigo33@gmail.com</b> y teléfono <b>3317093598</b>, con domicilio físico en <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, es la responsable del tratamiento, uso y protección de sus datos personales, de conformidad con las leyes de protección de datos aplicables en los Estados Unidos Mexicanos (LFPDPPP) y las políticas obligatorias de revisión de Google Play Store.</p>
+        <p><b>FrutiGo Technologies</b> y <b>FrutiGo Logistics</b>, representadas legalmente por su <b>Fundador y CEO, Alberto Reyes Sandoval</b>, con correo de contacto <b>frutigo33@gmail.com</b>, teléfono <b>3317093598</b> y domicilio operativo en <b>San Rafael 2790, Col. El Campanario, CP 45234, Guadalajara, Jalisco, México</b>, son responsables del tratamiento, uso y salvaguarda de sus datos personales, de conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y los estándares obligatorios de revisión y privacidad de Google Play Store.</p>
         
-        <p>Nuestra plataforma opera con un modelo de tres perfiles de usuario diferenciados: <b>Clientes (Consumidores)</b>, <b>Repartidores (Socios de Entrega)</b> y <b>Negocios (Establecimientos)</b>.</p>
+        <p>Nuestra plataforma opera con tres perfiles de usuario diferenciados: <b>Usuarios y Pasajeros (Clientes)</b>, <b>Conductores y Repartidores Independientes</b> y <b>Comercios Aliados</b>.</p>
         
-        <h2>2. Datos que Recopilamos</h2>
-        <p>Dependiendo de cómo uses Fruti Go, podemos recolectar:</p>
+        <h2>2. Categorías de Datos que Recopilamos</h2>
         <ul>
-          <li><b>Datos de identificación:</b> Nombre completo.</li>
-          <li><b>Datos de contacto:</b> Correo electrónico, número de teléfono y dirección de entrega exacta.</li>
-          <li><b>Datos de ubicación (Geolocalización):</b>
-            <ul>
-              <li><b>Clientes:</b> Ubicación en tiempo real en primer plano (solo mediante autorización expresa en el dispositivo) para fijar el origen/destino del envío o entrega.</li>
-              <li><b>Repartidores:</b> Ubicación en <b>SEGUNDO PLANO (Background Location)</b>. Recopilamos datos de localización aun cuando la aplicación está cerrada o no está activa en tu pantalla, únicamente mientras estás en turno de servicio. Esto es indispensable para asignar los pedidos más cercanos a tu ubicación, estimar el tiempo de llegada (ETA) y rastrear entregas en tiempo real. Esta función se apaga inmediatamente al colocarse Fuera de Servicio.</li>
-            </ul>
+          <li><b>Datos de Identificación y Contacto:</b> Nombre completo, razón social, correo electrónico, número telefónico y credenciales seguras de acceso.</li>
+          <li><b>Documentación Oficial de Conductores:</b> Licencia de conducir, póliza de seguro automotriz vigente, tarjeta de circulación y especificaciones del vehículo.</li>
+          <li><b>Datos Técnicos y Telemetría:</b> Dirección IP, modelo de dispositivo, sistema operativo, registros de acceso e historial de viajes y órdenes.</li>
+        </ul>
+
+        <h2>3. Tratamiento Crítico de Ubicación Geográfica (Conforme a Requisitos y Políticas de Google Play)</h2>
+        <p>La recopilación y procesamiento de datos de geolocalización es fundamental para la operatividad y seguridad de la plataforma y se rige bajo los siguientes lineamientos transparentes:</p>
+        <ul>
+          <li><b>A. Datos de Geolocalización en Tiempo Real (GPS):</b>
+            La aplicación recopila la ubicación exacta (en primer plano y en segundo plano) del dispositivo móvil con las siguientes finalidades esenciales:
+            <ol style="margin-top: 4px; padding-left: 20px;">
+              <li><b>Emparejamiento de Viajes:</b> Conectar en tiempo real a usuarios pasajeros con los conductores independientes más cercanos de forma eficiente.</li>
+              <li><b>Seguimiento en Vivo de la Ruta:</b> Trazar, proyectar y visualizar el trayecto exacto del viaje en curso sobre mapas interactivos.</li>
+              <li><b>Seguridad Integral y Asistencia:</b> Garantizar la certidumbre y resguardo de ambas partes (pasajero y conductor) durante todo el servicio de movilidad, alertar ante desvíos y coordinar auxilio ante emergencias viales.</li>
+            </ol>
           </li>
-          <li><b>Datos de navegación:</b> Información sobre el dispositivo, sistema operativo e historial de uso de la app.</li>
+          <li><b>B. Permisos de la App y Directivas de Google Play (Foreground y Background Location):</b>
+            En estricto apego a las directivas y lineamientos para desarrolladores de Google Play sobre aplicaciones de transporte, logística y movilidad privada:
+            <div style="background: #f0fdf4; border-left: 4px solid #0D7A3F; padding: 14px 18px; border-radius: 8px; margin: 10px 0;">
+              <p style="margin: 0; font-weight: bold; color: #0D7A3F;">Declaración de Divulgación Prominente (Google Play Prominent Disclosure):</p>
+              <p style="margin: 6px 0 0 0; font-size: 13px; color: #166534;">
+                <b>Fruti Go solicita permisos de ubicación precisa (FOREGROUND LOCATION) y en segundo plano (BACKGROUND LOCATION). Recopilamos datos de ubicación exacta incluso cuando la app está cerrada o no está en pantalla, exclusivamente para permitir la asignación de viajes cercanos y el monitoreo de seguridad en ruta de los conductores en servicio.</b>
+              </p>
+            </div>
+            Esta recopilación en segundo plano se activa <b>única y exclusivamente cuando el conductor independiente se encuentra activamente en estado "En Línea / Conectado / En Servicio"</b> (por ejemplo, navegando en Google Maps o Waze con la app en segundo plano), y <b>se interrumpe y cancela de manera inmediata y automática</b> en el momento en que el conductor cambie su estado a "Desconectado" o cierre la sesión de la aplicación.
+          </li>
+          <li><b>C. Compartición Mutua de Datos para el Viaje:</b>
+            Durante la coordinación y ejecución de un viaje de movilidad urbana, la plataforma comparte mutuamente entre el usuario pasajero y el conductor independiente asignado los siguientes datos con fines de reconocimiento visual, coordinación logística y seguridad:
+            <ol style="margin-top: 4px; padding-left: 20px;">
+              <li><b>Datos compartidos con el pasajero:</b> Nombre completo y fotografía de perfil del conductor independiente; marca, submarca, modelo, color y número de placas del vehículo automotor; y geolocalización en tiempo real de la unidad desde su aproximación hasta el destino.</li>
+              <li><b>Datos compartidos con el conductor:</b> Nombre de pila y fotografía de perfil del pasajero, punto exacto de abordaje (Punto A), punto de destino (Punto B) y geolocalización en tiempo real durante el trayecto.</li>
+            </ol>
+            Dichos datos se utilizan única y exclusivamente para la ejecución del viaje solicitado y no son transferidos ni comercializados a terceras partes bajo ninguna circunstancia.
+          </li>
         </ul>
 
-        <h2>3. Datos Bancarios y Transacciones Seguras</h2>
-        <p>Los pagos e información de tarjetas se realizan directamente a través de nuestro proveedor de servicios certificado <b>Openpay (by BBVA)</b> mediante protocolos HTTPS, cifrado de alta seguridad AES-256 y cumplimiento PCI-DSS. Fruti Go no guarda, recopila ni procesa tus números o datos bancarios en servidores propios.</p>
+        <h2>4. Datos Bancarios y Transacciones Seguras con Openpay</h2>
+        <p>Los pagos e información de tarjetas se realizan directamente a través de nuestro proveedor de servicios certificado <b>Openpay (by BBVA)</b> mediante protocolos HTTPS, cifrado de alta seguridad AES-256 y certificación bancaria PCI-DSS Nivel 1. FrutiGo no guarda, recopila ni procesa sus números de tarjeta en servidores propios.</p>
 
-        <h2>4. Finalidad del Tratamiento de Datos</h2>
-        <p>Sus datos serán utilizados para las siguientes finalidades necesarias:</p>
+        <h2>5. Finalidades del Tratamiento de Datos</h2>
         <ul>
-          <li>Crear y gestionar su cuenta de usuario.</li>
-          <li>Procesar, preparar y entregar pedidos realizados a través de la app de forma segura.</li>
-          <li>Brindar soporte técnico eficiente y atención al cliente.</li>
-          <li>Enviar notificaciones importantes sobre el estado de la app o sus pedidos.</li>
-          <li><b>Finalidad secundaria:</b> Enviar promociones, ofertas y cupones universales (puedes cancelar la suscripción en cualquier momento que lo desees).</li>
+          <li>Crear, autenticar y gestionar su cuenta operativa de usuario, conductor o comercio.</li>
+          <li>Asignar, despachar, coordinar y liquidar viajes de movilidad y entregas logísticas en tiempo real.</li>
+          <li>Brindar soporte técnico y atención inmediata ante incidencias viales.</li>
+          <li>Cumplir con las obligaciones fiscales, mercantiles y legales vigentes en México.</li>
+          <li><b>Finalidad secundaria:</b> Envío de comunicaciones informativas sobre mejoras de la plataforma (las cuales pueden desactivarse en cualquier momento).</li>
         </ul>
 
-        <h2>5. Transferencia de Datos</h2>
-        <p>No vendemos ni compartimos sus datos personales con terceros, excepto cuando sea estrictamente necesario para la operación de la app (por ejemplo, con servicios seguros de pasarela de pagos, o para asignar la ruta logística a los repartidores) o por requerimiento legal de las autoridades competentes.</p>
+        <h2>6. Transferencia de Datos</h2>
+        <p>No vendemos ni compartimos sus datos personales con terceros, excepto cuando sea estrictamente necesario para la operación del servicio (ej. pasarelas de pago Openpay o geolocalización de ruta) o ante requerimientos fundados y motivados de autoridades judiciales competentes.</p>
 
-        <h2>6. Tratamiento de Datos en el Módulo de Paquetería y Mascotas</h2>
-        <p>Con la integración de los servicios de paquetería y traslado de mascotas, Fruti Go tratará los siguientes datos adicionales de forma segura:</p>
-        <ul>
-          <li><b>Datos de Geolocalización Física:</b> Recolectamos la ubicación exacta y en tiempo real del dispositivo del Cliente en primer plano, y del Repartidor en segundo plano durante la vigencia del servicio. Esto tiene la finalidad de asignar al conductor más cercano, calcular tarifas dinámicas precisas, trazar la ruta de entrega óptima y permitir al usuario el monitoreo del trayecto por motivos de seguridad.</li>
-          <li><b>Datos de Contacto de Terceros (Destinatarios):</b> Cuando utilices el servicio de paquetería, nos proporcionarás el nombre completo, número telefónico y dirección física del tercero que recibirá el envío. Al ingresar estos datos, el usuario manifiesta bajo protesta de decir verdad que cuenta con el consentimiento expreso de dicho tercero para compartir su información con Fruti Go para la exclusiva ejecución del servicio.</li>
-          <li><b>Finalidad del Tratamiento:</b> Estos datos se procesan con el único fin de completar la logística de recolección y entrega, brindar soporte en tiempo real ante incidentes viales, gestionar el cobro seguro mediante OpenPay y aplicar cupones o promociones universales en la transacción. Fruti Go no comercializa, transfiere ni vende tus rutas ni datos de localización a entidades terceras con fines publicitarios.</li>
-        </ul>
-
-        <h2>7. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h2>
-        <p>Usted tiene derecho a conocer qué datos tenemos de usted, corregirlos, solicitar su eliminación o negarse a su uso. Para ejercer estos derechos de protección, así como para solicitar la <b>eliminación de su cuenta</b>, puede enviar una solicitud por escrito adjuntando su identificación oficial de titularidad a nuestro correo de soporte: <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>, o bien utilizar directamente nuestro portal web de baja automática ingresando a: <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> o <a href="/legal" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/legal</a>.</p>
+        <h2>7. Ejercicio de Derechos ARCO y Mecanismo Automatizado de Eliminación de Cuenta</h2>
+        <p>Usted tiene derecho a ejercer sus derechos de Acceso, Rectificación, Cancelación y Oposición (ARCO), así como a solicitar la <b>eliminación definitiva de su cuenta y datos personales</b> en cualquier momento. Puede tramitarlo inmediatamente a través de nuestro portal automatizado de baja en: <a href="/cuenta" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/cuenta</a> o <a href="/legal" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo.com.mx/legal</a>, o enviando un correo a nuestro oficial de cumplimiento a: <a href="mailto:frutigo33@gmail.com" style="color: #0D7A3F; font-weight: bold; text-decoration: underline;">frutigo33@gmail.com</a>.</p>
 
         <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7;">
           <p style="font-size: 13px; color: #52525b; margin: 0;"><strong>Oficial de Privacidad y Titular Legal:</strong></p>
           <p style="font-size: 14px; font-weight: bold; color: #0D7A3F; margin: 2px 0 0 0;">Alberto Reyes Sandoval</p>
-          <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO de Fruti Go</p>
+          <p style="font-size: 12px; color: #71717a; margin: 0;">Fundador y CEO — FrutiGo Technologies & FrutiGo Logistics</p>
         </div>
       `,
       nosotros: `
@@ -617,26 +656,27 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   // Sincronización del Logo de Fruti Go en Firebase Firestore para Indexación en Buscadores
   fetchLogoFromFirestore().then((remoteLogo) => {
-    let localLogoUrl = "https://frutigo.com.mx/logo.svg";
-    if (fs.existsSync(LOGO_FILE)) {
-      try {
-        const d = JSON.parse(fs.readFileSync(LOGO_FILE, "utf-8"));
-        if (d.logoUrl) localLogoUrl = d.logoUrl;
-      } catch (e) {}
-    }
+    const OFFICIAL_LOGO_URL = "https://frutigo.com.mx/logo.svg";
+    const isLegacyOrBase64 = remoteLogo && remoteLogo.logoUrl && (
+      remoteLogo.logoUrl.startsWith("data:image") ||
+      remoteLogo.logoUrl.includes("frutigo-logo-oficial-amarillo")
+    );
 
-    if (remoteLogo && remoteLogo.logoUrl) {
+    if (!remoteLogo || !remoteLogo.logoUrl || isLegacyOrBase64) {
+      console.log("Servidor: Actualizando e indexando el nuevo logo hexagonal 3D de Fruti Go en Firebase Firestore...");
+      saveLogoToFirestore(OFFICIAL_LOGO_URL).then((ok) => {
+        if (ok) console.log("¡Metadata del nuevo logo 3D guardada e indexada en Firestore con éxito!");
+      }).catch((e) => {
+        console.error("Error al sembrar logo en Firestore:", e);
+      });
+      try {
+        fs.writeFileSync(LOGO_FILE, JSON.stringify({ logoUrl: OFFICIAL_LOGO_URL, updatedAt: new Date().toISOString() }, null, 2));
+      } catch (e) {}
+    } else {
       console.log("¡Logo de Fruti Go sincronizado exitosamente desde Firebase Firestore!");
       try {
         fs.writeFileSync(LOGO_FILE, JSON.stringify({ logoUrl: remoteLogo.logoUrl, updatedAt: new Date().toISOString() }, null, 2));
       } catch (e) {}
-    } else {
-      console.log("Servidor: Guardando metadata e imagen oficial del logo Fruti Go en Firebase Firestore para indexación en Google Search...");
-      saveLogoToFirestore(localLogoUrl).then((ok) => {
-        if (ok) console.log("¡Metadata del logo de Fruti Go guardada e indexada en Firestore con éxito!");
-      }).catch((e) => {
-        console.error("Error al sembrar logo en Firestore:", e);
-      });
     }
   }).catch((e) => {
     console.error("Error al consultar logo en Firestore:", e);
@@ -1846,12 +1886,14 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     try {
       if (fs.existsSync(LOGO_FILE)) {
         const data = JSON.parse(fs.readFileSync(LOGO_FILE, "utf-8"));
-        return res.json({ logoUrl: data.logoUrl || null });
+        if (data.logoUrl && !data.logoUrl.startsWith("data:image") && !data.logoUrl.includes("frutigo-logo-oficial-amarillo")) {
+          return res.json({ logoUrl: data.logoUrl });
+        }
       }
     } catch (err) {
       console.error("Error al leer el logo personalizado:", err);
     }
-    return res.json({ logoUrl: null });
+    return res.json({ logoUrl: "https://frutigo.com.mx/logo.svg" });
   });
 
   app.post("/api/admin/logo", async (req, res) => {
@@ -2825,6 +2867,177 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     return res.json(fallbackAssetLinks);
   });
 
+  // Helper to apply Landing Page Content to raw HTML
+  function applyLandingPageContentToHtml(html: string, pageData: any): string {
+    if (!pageData) return html;
+    let updated = html;
+
+    if (pageData.title) {
+      updated = updated.replace(/<title>[\s\S]*?<\/title>/i, `<title>${pageData.title}</title>`);
+      updated = updated.replace(/<meta\s+property=["']og:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:title" content="${pageData.title.replace(/"/g, '&quot;')}" />`);
+      updated = updated.replace(/<meta\s+name=["']twitter:title["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="twitter:title" content="${pageData.title.replace(/"/g, '&quot;')}" />`);
+    }
+    if (pageData.metaDescription) {
+      updated = updated.replace(/<meta\s+name=["']description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="description" content="${pageData.metaDescription.replace(/"/g, '&quot;')}" />`);
+      updated = updated.replace(/<meta\s+property=["']og:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta property="og:description" content="${pageData.metaDescription.replace(/"/g, '&quot;')}" />`);
+      updated = updated.replace(/<meta\s+name=["']twitter:description["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="twitter:description" content="${pageData.metaDescription.replace(/"/g, '&quot;')}" />`);
+    }
+    if (pageData.keywords) {
+      updated = updated.replace(/<meta\s+name=["']keywords["']\s+content=["'][\s\S]*?["']\s*\/?>/i, `<meta name="keywords" content="${pageData.keywords.replace(/"/g, '&quot;')}" />`);
+    }
+    if (pageData.topBarText) {
+      updated = updated.replace(/<div\s+class=["']top-bar["']>[\s\S]*?<\/div>/i, `<div class="top-bar">${pageData.topBarText}</div>`);
+    }
+    if (pageData.badgeText) {
+      updated = updated.replace(/<div\s+class=["']badge-hero["']>[\s\S]*?<\/div>/i, `<div class="badge-hero">${pageData.badgeText}</div>`);
+    }
+    if (pageData.heroH1Prefix || pageData.heroH1Highlight) {
+      const h1Html = `<h1>${pageData.heroH1Prefix ? pageData.heroH1Prefix + ' ' : ''}<span>${pageData.heroH1Highlight || ''}</span></h1>`;
+      updated = updated.replace(/<h1>[\s\S]*?<\/h1>/i, h1Html);
+    }
+    if (pageData.heroDesc) {
+      updated = updated.replace(/<p\s+class=["']hero-desc["']>[\s\S]*?<\/p>/i, `<p class="hero-desc">${pageData.heroDesc}</p>`);
+    }
+    if (pageData.benefit1 || pageData.benefit2 || pageData.benefit3 || pageData.benefit4) {
+      const benefits = [pageData.benefit1, pageData.benefit2, pageData.benefit3, pageData.benefit4].filter(Boolean);
+      const benefitsHtml = `<ul class="hero-benefits-list">\n` + 
+        benefits.map((b: string) => `          <li><span class="check-icon">✓</span> ${b}</li>`).join('\n') +
+        `\n        </ul>`;
+      updated = updated.replace(/<ul\s+class=["']hero-benefits-list["']>[\s\S]*?<\/ul>/i, benefitsHtml);
+    }
+    if (pageData.cardTitle) {
+      updated = updated.replace(/(<div\s+class=["']hero-card["']>[\s\S]*?<h3>)[\s\S]*?(<\/h3>)/i, `$1${pageData.cardTitle}$2`);
+    }
+    if (pageData.cardDesc) {
+      updated = updated.replace(/(<div\s+class=["']hero-card["']>[\s\S]*?<h3>[\s\S]*?<\/h3>\s*<p>)[\s\S]*?(<\/p>)/i, `$1${pageData.cardDesc}$2`);
+    }
+    if (pageData.cardStatNumber) {
+      updated = updated.replace(/<div\s+class=["']stat-number["']>[\s\S]*?<\/div>/i, `<div class="stat-number">${pageData.cardStatNumber}</div>`);
+    }
+    if (pageData.cardStatText) {
+      updated = updated.replace(/<div\s+class=["']stat-text["']>[\s\S]*?<\/div>/i, `<div class="stat-text">${pageData.cardStatText}</div>`);
+    }
+    if (pageData.ctaBannerTitle) {
+      updated = updated.replace(/(<div\s+class=["']cta-banner["']>[\s\S]*?<h2>)[\s\S]*?(<\/h2>)/i, `$1${pageData.ctaBannerTitle}$2`);
+    }
+    if (pageData.ctaBannerDesc) {
+      updated = updated.replace(/(<div\s+class=["']cta-banner["']>[\s\S]*?<h2>[\s\S]*?<\/h2>\s*<p>)[\s\S]*?(<\/p>)/i, `$1${pageData.ctaBannerDesc}$2`);
+    }
+    if (pageData.whatsappPhone) {
+      const cleanPhone = pageData.whatsappPhone.replace(/[^0-9]/g, "");
+      const pretext = encodeURIComponent(pageData.whatsappPretext || "Hola, me interesa información de Fruti Go Driver");
+      const waUrl = `https://wa.me/${cleanPhone}?text=${pretext}`;
+      updated = updated.replace(/https:\/\/wa\.me\/[0-9]+(?:\?text=[^"'\s>]*)?/g, waUrl);
+    }
+
+    return updated;
+  }
+
+  // Endpoints to manage landing pages text content from the Admin Panel
+  app.get("/api/admin/landing-pages", (_req, res) => {
+    try {
+      if (fs.existsSync(LANDING_PAGES_FILE)) {
+        const data = JSON.parse(fs.readFileSync(LANDING_PAGES_FILE, "utf-8"));
+        return res.json(data);
+      }
+      return res.json(DEFAULT_LANDING_PAGES);
+    } catch (e: any) {
+      console.error("Error reading landingPagesConfig.json:", e);
+      return res.json(DEFAULT_LANDING_PAGES);
+    }
+  });
+
+  app.post("/api/admin/landing-pages", (req, res) => {
+    const { password, pages } = req.body;
+    if (password !== "1234" && password !== "fruti05") {
+      return res.status(401).json({ error: "Acceso no autorizado" });
+    }
+
+    if (!pages || typeof pages !== "object") {
+      return res.status(400).json({ error: "Datos de páginas inválidos" });
+    }
+
+    try {
+      // 1. Save config JSON
+      fs.writeFileSync(LANDING_PAGES_FILE, JSON.stringify(pages, null, 2));
+
+      // 2. Update the actual HTML files in public (and dist if exists)
+      Object.entries(pages).forEach(([id, pageData]: [string, any]) => {
+        const filename = pageData.filename || `${id}.html`;
+        const publicPath = path.join(process.cwd(), "public", filename);
+        if (fs.existsSync(publicPath)) {
+          const original = fs.readFileSync(publicPath, "utf-8");
+          const updated = applyLandingPageContentToHtml(original, pageData);
+          fs.writeFileSync(publicPath, updated, "utf-8");
+        }
+
+        const distPath = path.join(process.cwd(), "dist", filename);
+        if (fs.existsSync(distPath)) {
+          const original = fs.readFileSync(distPath, "utf-8");
+          const updated = applyLandingPageContentToHtml(original, pageData);
+          fs.writeFileSync(distPath, updated, "utf-8");
+        }
+      });
+
+      return res.json({ 
+        success: true, 
+        message: "Páginas SEO y textos actualizados y publicados correctamente en la web." 
+      });
+    } catch (e: any) {
+      console.error("Error saving landing pages content:", e);
+      return res.status(500).json({ error: "Error al guardar: " + e.message });
+    }
+  });
+
+  // Dedicated SEO Landing Pages for Fruti Go Driver services
+  const driverLandingPages: Record<string, string> = {
+    "/taxis": "taxis.html",
+    "/taxis.html": "taxis.html",
+    "/ciudad-a-ciudad": "ciudad-a-ciudad.html",
+    "/ciudad-a-ciudad.html": "ciudad-a-ciudad.html",
+    "/fletes-y-carga": "fletes-y-carga.html",
+    "/fletes-y-carga.html": "fletes-y-carga.html",
+    "/taxi-pet": "taxi-pet.html",
+    "/taxi-pet.html": "taxi-pet.html"
+  };
+
+  const driverPageKeyMap: Record<string, string> = {
+    "taxis.html": "taxis",
+    "ciudad-a-ciudad.html": "ciudad-a-ciudad",
+    "fletes-y-carga.html": "fletes-y-carga",
+    "taxi-pet.html": "taxi-pet"
+  };
+
+  Object.entries(driverLandingPages).forEach(([route, filename]) => {
+    app.get(route, (_req, res) => {
+      let filePath = path.join(process.cwd(), "public", filename);
+      if (!fs.existsSync(filePath)) {
+        filePath = path.join(process.cwd(), "dist", filename);
+      }
+      if (fs.existsSync(filePath)) {
+        let html = fs.readFileSync(filePath, "utf-8");
+        const pageKey = driverPageKeyMap[filename];
+        if (pageKey) {
+          try {
+            let configData: any = null;
+            if (fs.existsSync(LANDING_PAGES_FILE)) {
+              configData = JSON.parse(fs.readFileSync(LANDING_PAGES_FILE, "utf-8"));
+            } else {
+              configData = DEFAULT_LANDING_PAGES;
+            }
+            if (configData && configData[pageKey]) {
+              html = applyLandingPageContentToHtml(html, configData[pageKey]);
+            }
+          } catch (e) {}
+        }
+        res.setHeader("Content-Type", "text/html; charset=utf-8");
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        return res.send(html);
+      }
+      return res.status(404).send("Página no encontrada");
+    });
+  });
+
   // Direct SEO HTML server route for home, store, articles, institutional, developer, media and legal pages
   app.get([
     "/",
@@ -2875,14 +3088,14 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         const profile = getFounderProfileData();
         const articleId = req.params.id || (req.query.art as string) || (req.query.id as string);
 
-        let customTitle = "Fruti Go | Paquetería Exprés, Taxi Pet y Tienda en Línea";
-        let customDescription = "Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet. Tienda oficial en línea de Fruti Go con delivery exprés de frutas frescas en Guadalajara y México.";
+        let customTitle = "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara";
+        let customDescription = "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.";
         let canonicalUrl = `https://frutigo.com.mx${req.path === "/" ? "" : req.path}`;
         let ogType = "website";
         let jsonLdScript = "";
 
         const pathTitles: Record<string, string> = {
-          "/": "Fruti Go | Paquetería Exprés, Taxi Pet y Tienda en Línea",
+          "/": "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
           "/politicas": "Fruti Go | Políticas de Envío, Entrega y Garantía de Frescura",
           "/politicas-de-envio": "Fruti Go | Políticas de Envío, Entrega y Garantía de Frescura",
           "/tienda": "Fruti Go | Catálogo de Frutas y Verduras Frescas con Envío a Domicilio",
@@ -2900,7 +3113,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           "/desarrollador": "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go",
           "/sobre-el-desarrollador": "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go",
           "/fundador": "Alberto Reyes Sandoval | Creador, Desarrollador Principal y Fundador de Fruti Go",
-          "/sobre-el-desarrollador/articulos": "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go",
+          "/sobre-el-desarrollador/articulos": "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
           "/sobre-el-desarrollador/medios": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
           "/sobre-el-desarrollador/galeria": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
           "/desarrollador/medios": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
@@ -2909,15 +3122,21 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           "/galeria": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
           "/multimedia": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
           "/prensa": "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go",
-          "/articulos": "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go",
-          "/registrofrutigo": "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
-          "/registro": "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
-          "/registro-app": "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go",
-          "/registro-frutigo": "Registro Fruti Go | Crea tu Cuenta Oficial en la App Fruti Go"
+          "/articulos": "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+          "/registrofrutigo": "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+          "/registro": "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+          "/registro-app": "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+          "/registro-frutigo": "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara"
         };
 
         const pathDescriptions: Record<string, string> = {
-          "/": "Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet. Tienda oficial en línea de Fruti Go con delivery exprés de frutas frescas en Guadalajara y México.",
+          "/": "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+          "/articulos": "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+          "/sobre-el-desarrollador/articulos": "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+          "/registrofrutigo": "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+          "/registro": "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+          "/registro-app": "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+          "/registro-frutigo": "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
           "/politicas": "Políticas oficiales de operación, cobertura geográfica, tiempos de entrega rápida, estándares de inocuidad y garantías de devolución en Fruti Go México.",
           "/politicas-de-envio": "Políticas oficiales de operación, cobertura geográfica, tiempos de entrega rápida, estándares de inocuidad y garantías de devolución en Fruti Go México.",
           "/tienda": "Explora nuestro catálogo en línea de frutas y verduras frescas. Realiza tu pedido con entrega rápida a domicilio en Guadalajara.",
@@ -2935,7 +3154,6 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           "/desarrollador": "Alberto Reyes Sandoval nació el 29 de julio de 1973 en Zamora, Michoacán. Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx). Trayectoria en ingeniería de software e ITESO.",
           "/sobre-el-desarrollador": "Alberto Reyes Sandoval nació el 29 de julio de 1973 en Zamora, Michoacán. Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx). Trayectoria en ingeniería de software e ITESO.",
           "/fundador": "Alberto Reyes Sandoval nació el 29 de julio de 1973 en Zamora, Michoacán. Creador, Desarrollador Principal y Fundador de Fruti Go (https://frutigo.com.mx). Trayectoria en ingeniería de software e ITESO.",
-          "/sobre-el-desarrollador/articulos": "Artículos y ensayos sobre arquitectura de software, desarrollo full-stack y tecnología por Alberto Reyes Sandoval.",
           "/sobre-el-desarrollador/medios": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
           "/sobre-el-desarrollador/galeria": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
           "/desarrollador/medios": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
@@ -2943,12 +3161,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           "/medios": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
           "/galeria": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
           "/multimedia": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
-          "/prensa": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go.",
-          "/articulos": "Artículos y ensayos sobre arquitectura de software, desarrollo full-stack y tecnología por Alberto Reyes Sandoval.",
-          "/registrofrutigo": "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
-          "/registro": "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
-          "/registro-app": "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store.",
-          "/registro-frutigo": "Regístrate en la app oficial de Fruti Go (frutigo.com.mx). Crea tu cuenta con tu nombre, correo y teléfono para ordenar frutas frescas, paquetería urbana y taxi pet. Descarga la app en Google Play Store."
+          "/prensa": "Archivo multimedia oficial, galería fotográfica, videos y presentaciones de infraestructura de Alberto Reyes Sandoval en Fruti Go."
         };
 
         // Check if an individual article is requested
@@ -3026,8 +3239,8 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
           req.path.endsWith("/medios") ||
           req.path.endsWith("/galeria")
         ) {
-          customTitle = pathTitles[req.path] || (req.path.includes("articulos") ? "Artículos y Publicaciones Técnicas | Alberto Reyes Sandoval - Fruti Go" : "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go");
-          customDescription = pathDescriptions[req.path] || (req.path.includes("articulos") ? "Artículos oficiales, publicaciones técnicas y ensayos sobre arquitectura de software, logística B2B y tecnología en Fruti Go por Alberto Reyes Sandoval." : profile.bioP1);
+          customTitle = pathTitles[req.path] || (req.path.includes("articulos") ? "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara" : "Galería y Medios Oficiales | Alberto Reyes Sandoval - Fruti Go");
+          customDescription = pathDescriptions[req.path] || (req.path.includes("articulos") ? "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver." : profile.bioP1);
           if (req.path.includes("articulos")) {
             canonicalUrl = "https://frutigo.com.mx/articulos";
           } else if (req.path.includes("medios") || req.path.includes("galeria") || req.path.includes("multimedia") || req.path.includes("prensa")) {

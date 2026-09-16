@@ -12,22 +12,22 @@ export const FRUTIGO_FAQS: FaqItemData[] = [
   {
     id: "faq-1",
     question: "¿Qué servicios ofrece FrutiGo en la Zona Sur de Guadalajara?",
-    answerHtml: `FrutiGo ofrece en su Fase 1 servicios de <strong>paquetería exprés local ultrarrápida</strong> y <strong>Taxi Pet</strong> para el traslado seguro y cómodo de mascotas en toda la Zona Sur de Guadalajara, Jalisco. En su Fase 2, se integrará el marketplace de fruta fresca y alimentos locales. Puedes solicitar todos estos servicios descargando la <a href="https://play.google.com/store/apps/details?id=com.tuapp.frutigo" target="_blank" rel="noopener noreferrer" class="text-zinc-900 font-bold underline hover:text-black">aplicación de FrutiGo en Google Play Store</a> o visitando nuestra web oficial <a href="https://frutigo.com.mx" class="text-zinc-900 font-bold underline hover:text-black">frutigo.com.mx</a>.`
+    answerHtml: `FrutiGo ofrece en su Fase 1 servicios de <strong>paquetería exprés local ultrarrápida</strong> y <strong>Taxi Pet</strong> para el traslado seguro y cómodo de mascotas en toda la Zona Sur de Guadalajara, Jalisco. En su Fase 2, se integrará el marketplace de fruta fresca y alimentos locales. Puedes solicitar todos estos servicios descargando la <a href="https://play.google.com/store/apps/details?id=com.frutigo.app" target="_blank" rel="noopener noreferrer" class="text-brand-green font-bold underline hover:text-emerald-700">aplicación de FrutiGo en Google Play Store</a> o visitando nuestra web oficial <a href="https://frutigo.com.mx" class="text-brand-green font-bold underline hover:text-emerald-700">frutigo.com.mx</a>.`
   },
   {
     id: "faq-2",
     question: "¿Cómo funciona el servicio de Taxi Pet para el traslado de mascotas?",
-    answerHtml: `El servicio de Taxi Pet de FrutiGo está diseñado exclusivamente para el <strong>traslado seguro, climatizado y con protocolos de cuidado</strong> para perros, gatos y otras mascotas en la Zona Sur de Guadalajara. Los viajes se solicitan en tiempo real desde la <a href="https://play.google.com/store/apps/details?id=com.tuapp.frutigo" target="_blank" rel="noopener noreferrer" class="text-zinc-900 font-bold underline hover:text-black">app móvil de FrutiGo</a>, permitiendo monitorear la ruta por GPS con conductores capacitados y amigables con los animales.`
+    answerHtml: `El servicio de Taxi Pet de FrutiGo está diseñado exclusivamente para el <strong>traslado seguro, climatizado y con protocolos de cuidado</strong> para perros, gatos y otras mascotas en la Zona Sur de Guadalajara. Los viajes se solicitan en tiempo real desde la <a href="https://play.google.com/store/apps/details?id=com.frutigo.app" target="_blank" rel="noopener noreferrer" class="text-brand-green font-bold underline hover:text-emerald-700">app móvil de FrutiGo</a>, permitiendo monitorear la ruta por GPS con conductores capacitados y amigables con los animales.`
   },
   {
     id: "faq-3",
     question: "¿Cuáles son los requisitos y beneficios para trabajar como repartidor en FrutiGo?",
-    answerHtml: `FrutiGo implementa un modelo laboral ético y justo que limita las jornadas a un <strong>máximo de 6 horas diarias</strong> para evitar el agotamiento y promover el bienestar del repartidor, acompañado de comisiones competitivas y transparentes. Para registrarte como socio repartidor (en moto o auto), solo necesitas subir tu identificación oficial y documentación directamente desde la <a href="https://play.google.com/store/apps/details?id=com.tuapp.frutigo" target="_blank" rel="noopener noreferrer" class="text-zinc-900 font-bold underline hover:text-black">aplicación oficial de FrutiGo</a>.`
+    answerHtml: `FrutiGo implementa un modelo laboral ético y justo que limita las jornadas a un <strong>máximo de 6 horas diarias</strong> para evitar el agotamiento y promover el bienestar del repartidor, acompañado de comisiones competitivas y transparentes. Para registrarte como socio repartidor (en moto o auto), solo necesitas subir tu identificación oficial y documentación directamente desde la <a href="https://play.google.com/store/apps/details?id=com.frutigo.app" target="_blank" rel="noopener noreferrer" class="text-brand-green font-bold underline hover:text-emerald-700">aplicación oficial de FrutiGo</a>.`
   },
   {
     id: "faq-4",
     question: "¿Dónde y cómo puedo descargar la aplicación móvil de FrutiGo?",
-    answerHtml: `Puedes descargar la aplicación oficial de FrutiGo para dispositivos Android de forma 100% gratuita directamente desde la <a href="https://play.google.com/store/apps/details?id=com.tuapp.frutigo" target="_blank" rel="noopener noreferrer" class="text-zinc-900 font-bold underline hover:text-black">tienda oficial de Google Play Store</a> o accediendo desde nuestro portal web <a href="https://frutigo.com.mx" class="text-zinc-900 font-bold underline hover:text-black">https://frutigo.com.mx</a> para comenzar a enviar paquetes y solicitar Taxi Pet al instante.`
+    answerHtml: `Puedes descargar la aplicación oficial de FrutiGo para dispositivos Android de forma 100% gratuita directamente desde la <a href="https://play.google.com/store/apps/details?id=com.frutigo.app" target="_blank" rel="noopener noreferrer" class="text-brand-green font-bold underline hover:text-emerald-700">tienda oficial de Google Play Store</a> o accediendo desde nuestro portal web <a href="https://frutigo.com.mx" class="text-brand-green font-bold underline hover:text-emerald-700">https://frutigo.com.mx</a> para comenzar a enviar paquetes y solicitar Taxi Pet al instante.`
   },
   {
     id: "faq-5",
@@ -41,19 +41,19 @@ export default function FaqSection({ className = "" }: { className?: string }) {
     <section 
       id="seccion-faq" 
       aria-labelledby="faq-main-heading"
-      className={`py-12 px-4 sm:px-6 bg-zinc-50 border-t border-zinc-200 rounded-3xl my-8 ${className}`}
+      className={`py-12 px-4 sm:px-6 bg-emerald-50/40 border-t border-brand-green/20 rounded-3xl my-8 ${className}`}
     >
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Encabezado */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-100 text-zinc-900 rounded-full text-xs font-black uppercase tracking-wider border border-zinc-300">
-            <HelpCircle className="w-3.5 h-3.5 text-zinc-700" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-green text-brand-yellow rounded-full text-xs font-black uppercase tracking-wider border border-brand-yellow/30 shadow-xs">
+            <HelpCircle className="w-3.5 h-3.5 text-brand-yellow" />
             <span>Centro de Ayuda & FAQ Oficial</span>
           </div>
-          <h2 id="faq-main-heading" className="text-2xl sm:text-3xl font-black text-zinc-900 tracking-tight">
+          <h2 id="faq-main-heading" className="text-2xl sm:text-3xl font-black text-brand-green tracking-tight">
             Preguntas Frecuentes sobre FrutiGo
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-zinc-600 max-w-2xl mx-auto leading-relaxed font-medium">
             Conoce todo sobre nuestros servicios de paquetería exprés, Taxi Pet seguro, trabajo digno para repartidores y apoyo al comercio local en Guadalajara.
           </p>
         </div>
@@ -64,25 +64,25 @@ export default function FaqSection({ className = "" }: { className?: string }) {
             <details
               key={faq.id}
               id={`faq-item-${index + 1}`}
-              className="group bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-xs hover:border-zinc-300 open:border-zinc-900 open:shadow-md transition-all duration-200"
+              className="group bg-white border border-brand-green/15 rounded-2xl overflow-hidden shadow-xs hover:border-brand-green/40 open:border-brand-green open:shadow-md transition-all duration-200"
               {...(index === 0 ? { open: true } : {})}
             >
-              <summary className="flex items-center justify-between p-4 sm:p-5 text-left text-sm sm:text-base font-bold text-zinc-900 cursor-pointer list-none select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900">
+              <summary className="flex items-center justify-between p-4 sm:p-5 text-left text-sm sm:text-base font-bold text-zinc-900 cursor-pointer list-none select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green">
                 <span className="pr-4 flex items-center gap-2.5">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-zinc-100 text-zinc-800 text-xs font-black shrink-0 border border-zinc-200">
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-brand-green text-xs font-black shrink-0 border border-brand-green/20">
                     {index + 1}
                   </span>
-                  <span>{faq.question}</span>
+                  <span className="group-open:text-brand-green font-extrabold">{faq.question}</span>
                 </span>
-                <span className="w-8 h-8 rounded-full bg-zinc-100 group-open:bg-zinc-900 group-open:text-white text-zinc-600 flex items-center justify-center shrink-0 transition-transform duration-200 group-open:rotate-180">
+                <span className="w-8 h-8 rounded-full bg-emerald-50 group-open:bg-brand-green group-open:text-brand-yellow text-brand-green flex items-center justify-center shrink-0 transition-transform duration-200 group-open:rotate-180 border border-brand-green/20">
                   <ChevronDown className="w-4 h-4" />
                 </span>
               </summary>
 
-              <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-1 text-xs sm:text-sm text-zinc-700 leading-relaxed border-t border-zinc-100">
+              <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-1 text-xs sm:text-sm text-zinc-700 leading-relaxed border-t border-brand-green/10 bg-emerald-50/20">
                 <div 
                   dangerouslySetInnerHTML={{ __html: faq.answerHtml }}
-                  className="space-y-2 prose prose-sm max-w-none prose-a:text-zinc-900 prose-a:font-bold hover:prose-a:underline"
+                  className="space-y-2 prose prose-sm max-w-none prose-a:text-brand-green prose-a:font-bold hover:prose-a:underline"
                 />
               </div>
             </details>
@@ -90,23 +90,23 @@ export default function FaqSection({ className = "" }: { className?: string }) {
         </div>
 
         {/* Banner de llamada a la acción en la app */}
-        <div className="mt-8 p-5 bg-zinc-900 rounded-2xl text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg border border-zinc-800">
+        <div className="mt-8 p-5 bg-gradient-to-r from-emerald-800 to-brand-green rounded-2xl text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl border border-brand-yellow/30">
           <div className="text-center sm:text-left space-y-1">
             <h3 className="text-base font-black text-white flex items-center justify-center sm:justify-start gap-2">
-              <Sparkles className="w-4 h-4 text-zinc-400" />
+              <Sparkles className="w-4 h-4 text-brand-yellow" />
               <span>¿Listo para enviar paquetes o solicitar Taxi Pet?</span>
             </h3>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-emerald-100 font-medium">
               Descarga gratis la app de FrutiGo en Google Play Store y comienza hoy mismo.
             </p>
           </div>
           <a
-            href="https://play.google.com/store/apps/details?id=com.tuapp.frutigo"
+            href="https://play.google.com/store/apps/details?id=com.frutigo.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 bg-white hover:bg-zinc-100 text-zinc-950 font-black text-xs rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-2 whitespace-nowrap"
+            className="px-5 py-2.5 bg-brand-yellow hover:bg-yellow-400 text-brand-black font-black text-xs rounded-xl shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center gap-2 whitespace-nowrap border border-brand-yellow/50 cursor-pointer"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-4 h-4 text-brand-black" />
             <span>Descargar en Google Play</span>
           </a>
         </div>

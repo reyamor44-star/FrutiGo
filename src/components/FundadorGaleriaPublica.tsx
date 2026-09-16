@@ -179,8 +179,8 @@ export default function FundadorGaleriaPublica() {
               onClick={() => setActiveFilter("all")}
               className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeFilter === "all"
-                  ? "bg-zinc-900 text-white shadow-sm"
-                  : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60"
+                  ? "bg-brand-green text-brand-yellow shadow-sm border border-brand-yellow/30"
+                  : "text-zinc-600 hover:text-brand-green hover:bg-zinc-200/60"
               }`}
             >
               <Filter className="w-3.5 h-3.5" />
@@ -190,8 +190,8 @@ export default function FundadorGaleriaPublica() {
               onClick={() => setActiveFilter("image")}
               className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeFilter === "image"
-                  ? "bg-zinc-900 text-white shadow-sm"
-                  : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60"
+                  ? "bg-brand-green text-brand-yellow shadow-sm border border-brand-yellow/30"
+                  : "text-zinc-600 hover:text-brand-green hover:bg-zinc-200/60"
               }`}
             >
               <ImageIcon className="w-3.5 h-3.5" />
@@ -201,8 +201,8 @@ export default function FundadorGaleriaPublica() {
               onClick={() => setActiveFilter("video")}
               className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeFilter === "video"
-                  ? "bg-zinc-900 text-white shadow-sm"
-                  : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60"
+                  ? "bg-brand-green text-brand-yellow shadow-sm border border-brand-yellow/30"
+                  : "text-zinc-600 hover:text-brand-green hover:bg-zinc-200/60"
               }`}
             >
               <VideoIcon className="w-3.5 h-3.5" />
@@ -262,7 +262,7 @@ export default function FundadorGaleriaPublica() {
                         >
                           <video src={item.url} className="w-full h-full object-cover opacity-80" />
                           <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover/btn:bg-black/10 transition">
-                            <div className="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-700 text-white flex items-center justify-center shadow-xl group-hover/btn:scale-110 transition">
+                            <div className="w-14 h-14 rounded-full bg-brand-green border border-brand-yellow/40 text-brand-yellow flex items-center justify-center shadow-xl group-hover/btn:scale-110 transition">
                               <Play className="w-7 h-7 fill-current ml-0.5" />
                             </div>
                           </div>
@@ -296,8 +296,8 @@ export default function FundadorGaleriaPublica() {
                             loading="lazy"
                           />
                           <div className="absolute inset-0 bg-black/30 group-hover/btn:bg-black/10 transition flex items-center justify-center">
-                            <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-700 text-white flex items-center justify-center shadow-2xl group-hover/btn:scale-110 transition">
-                              <Youtube className="w-8 h-8 fill-current text-white" />
+                            <div className="w-16 h-16 rounded-full bg-brand-green border border-brand-yellow/40 text-brand-yellow flex items-center justify-center shadow-2xl group-hover/btn:scale-110 transition">
+                              <Youtube className="w-8 h-8 fill-current text-brand-yellow" />
                             </div>
                           </div>
                         </button>
@@ -307,9 +307,9 @@ export default function FundadorGaleriaPublica() {
                     {/* Type Overlay Badge (Hidden when actively playing video to keep controls 100% visible) */}
                     {!isPlaying && item.type !== "image" && (
                       <div className="absolute top-3 left-3 z-10 pointer-events-none">
-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md text-white shadow-md bg-zinc-900/90 border border-zinc-700`}>
-                          {item.type === "video" && <VideoIcon className="w-3 h-3 text-zinc-300" />}
-                          {item.type === "youtube" && <Youtube className="w-3 h-3 text-zinc-300" />}
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider backdrop-blur-md text-white shadow-md bg-brand-green/90 border border-brand-yellow/30`}>
+                          {item.type === "video" && <VideoIcon className="w-3 h-3 text-brand-yellow" />}
+                          {item.type === "youtube" && <Youtube className="w-3 h-3 text-brand-yellow" />}
                           {item.type === "youtube" ? "YouTube" : "Video"}
                         </span>
                       </div>
@@ -353,14 +353,14 @@ export default function FundadorGaleriaPublica() {
         )}
 
         {/* Strategic Cross-linking Callout: Connects Medios to Sobre el Desarrollador */}
-        <div className="p-4 sm:p-6 bg-zinc-100 border border-zinc-300 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs mt-6">
+        <div className="p-4 sm:p-6 bg-emerald-50/60 border border-brand-green/20 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs mt-6">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-zinc-900 text-white flex items-center justify-center font-black shrink-0 shadow-sm">
+            <div className="w-11 h-11 rounded-2xl bg-brand-green text-brand-yellow flex items-center justify-center font-black shrink-0 shadow-sm border border-brand-yellow/30">
               <UserCheck className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-black tracking-wider text-zinc-600 block">Infraestructura y Visión</span>
-              <h3 className="text-sm sm:text-base font-black text-zinc-900">
+              <span className="text-[10px] uppercase font-black tracking-wider text-brand-green block">Infraestructura y Visión</span>
+              <h3 className="text-sm sm:text-base font-black text-brand-green">
                 Acerca de FrutiGo Technologies — Infraestructura de Sistemas
               </h3>
               <p className="text-xs text-zinc-600 font-medium mt-0.5">
@@ -376,11 +376,11 @@ export default function FundadorGaleriaPublica() {
               window.history.pushState(null, "", "/desarrollador");
               window.dispatchEvent(new Event("popstate"));
             }}
-            className="w-full sm:w-auto px-5 py-3 bg-zinc-900 hover:bg-black text-white text-xs font-black rounded-xl shadow-sm flex items-center justify-center gap-2 shrink-0 transition-transform active:scale-95 cursor-pointer border border-zinc-800"
+            className="w-full sm:w-auto px-5 py-3 bg-brand-green hover:bg-emerald-800 text-brand-yellow text-xs font-black rounded-xl shadow-sm flex items-center justify-center gap-2 shrink-0 transition-transform active:scale-95 cursor-pointer border border-brand-yellow/40"
             title="Conoce la plataforma y visión tecnológica de FrutiGo"
           >
             <span>Ver Infraestructura y Visión</span>
-            <ExternalLink className="w-4 h-4" />
+            <ExternalLink className="w-4 h-4 text-brand-yellow" />
           </a>
         </div>
       </section>

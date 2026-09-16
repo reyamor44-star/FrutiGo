@@ -15,7 +15,8 @@ import {
   ExternalLink,
   Send,
   Bookmark,
-  Link as LinkIcon
+  Link as LinkIcon,
+  Download
 } from "lucide-react";
 import { sortArticlesNewestFirst } from "../utils/articleUtils";
 import ExpandableImage from "./ExpandableImage";
@@ -40,9 +41,13 @@ export interface FounderArticle {
 
 interface FundadorArticulosPublicosProps {
   className?: string;
+  autoFocusLatest?: boolean;
 }
 
-export default function FundadorArticulosPublicos({ className = "" }: FundadorArticulosPublicosProps) {
+export default function FundadorArticulosPublicos({ 
+  className = "",
+  autoFocusLatest = false 
+}: FundadorArticulosPublicosProps) {
   const [articles, setArticles] = useState<FounderArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -190,10 +195,29 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
         targetId = rawHash.replace("articulo-", "");
       } else if (rawHash.startsWith("art-")) {
         targetId = rawHash;
+      } else if (rawHash === "latest" || rawHash === "ultimo" || rawHash === "reciente") {
+        targetId = "latest";
       } else if (queryArt) {
         targetId = queryArt;
       } else if (path.includes("/articulo/")) {
         targetId = path.split("/articulo/")[1]?.replace(/\/$/, "");
+      } else if (
+        autoFocusLatest || 
+        path === "/articulos" || 
+        path.endsWith("/articulos") || 
+        searchParams.get("art") === "latest" ||
+        searchParams.get("articulo") === "latest" ||
+        searchParams.get("ultimo") === "true"
+      ) {
+        targetId = "latest";
+      }
+
+      // If targeting latest article, resolve to articles[0]
+      if (targetId === "latest" || targetId === "ultimo" || targetId === "reciente") {
+        const newest = articles[0];
+        if (newest && newest.id) {
+          targetId = newest.id;
+        }
       }
 
       if (targetId) {
@@ -211,11 +235,11 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
             if (el) {
               el.scrollIntoView({ behavior: "smooth", block: "start" });
             }
-          }, 300);
+          }, 350);
 
           setTimeout(() => {
             setHighlightedId((prev) => (prev === found.id ? null : prev));
-          }, 7000);
+          }, 8000);
           return;
         }
       }
@@ -390,14 +414,14 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
 
           {/* Category Filter Pills */}
           {categories.length > 0 && (
-            <div className="flex items-center gap-1.5 bg-zinc-100 p-1.5 rounded-2xl border border-zinc-200 self-start md:self-auto shrink-0 overflow-x-auto max-w-full">
+            <div className="flex items-center gap-1.5 bg-emerald-50/60 p-1.5 rounded-2xl border border-brand-green/20 self-start md:self-auto shrink-0 overflow-x-auto max-w-full">
               <button
                 type="button"
                 onClick={() => setActiveCategory("todos")}
                 className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap cursor-pointer ${
                   activeCategory === "todos"
-                    ? "bg-zinc-900 text-white shadow-xs"
-                    : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60"
+                    ? "bg-brand-green text-brand-yellow shadow-xs border border-brand-yellow/30"
+                    : "text-zinc-700 hover:text-brand-green hover:bg-emerald-100/60"
                 }`}
               >
                 Todos ({articles.length})
@@ -409,8 +433,8 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                   onClick={() => setActiveCategory(cat)}
                   className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap cursor-pointer ${
                     activeCategory === cat
-                      ? "bg-zinc-900 text-white shadow-xs"
-                      : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60"
+                      ? "bg-brand-green text-brand-yellow shadow-xs border border-brand-yellow/30"
+                      : "text-zinc-700 hover:text-brand-green hover:bg-emerald-100/60"
                   }`}
                 >
                   {cat}
@@ -435,15 +459,70 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                 id={`articulo-${article.id}`}
                 className={`rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border transition-all duration-500 space-y-4 sm:space-y-6 relative overflow-hidden group scroll-mt-28 ${
                   isHighlighted
-                    ? "bg-white border-zinc-900 ring-2 ring-zinc-900/20 shadow-xl"
-                    : "bg-zinc-50 hover:bg-white border-zinc-200 shadow-2xs sm:shadow-sm"
+                    ? "bg-white border-brand-green ring-2 ring-brand-green/20 shadow-xl"
+                    : "bg-emerald-50/20 hover:bg-white border-brand-green/15 shadow-2xs sm:shadow-sm"
                 }`}
               >
-                {/* Highlight Badge if navigated via deep link */}
-                {isHighlighted && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-900 text-white rounded-full text-xs font-black uppercase tracking-wider shadow-sm">
-                    <Bookmark className="w-3.5 h-3.5" />
-                    Artículo Seleccionado
+                <div className="flex flex-wrap items-center gap-2">
+                  {/* Latest badge if index 0 */}
+                  {index === 0 && (
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-400 text-zinc-900 rounded-full text-xs font-black uppercase tracking-wider shadow-sm border border-amber-500/40">
+                      <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
+                      Último Artículo Publicado
+                    </div>
+                  )}
+
+                  {/* Highlight Badge if navigated via deep link */}
+                  {isHighlighted && (
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-green text-brand-yellow rounded-full text-xs font-black uppercase tracking-wider shadow-sm border border-brand-yellow/30">
+                      <Bookmark className="w-3.5 h-3.5 text-brand-yellow" />
+                      Artículo Seleccionado
+                    </div>
+                  )}
+                </div>
+
+                {/* Taxi Driver 0% Commission Registration Banner for Article */}
+                {(article.id === "art-1788985997905" || article.title.toLowerCase().includes("comisión") || article.title.toLowerCase().includes("libertad") || article.title.toLowerCase().includes("conductor")) && (
+                  <div className="p-4 sm:p-5 bg-gradient-to-r from-emerald-900 via-brand-green to-emerald-900 rounded-2xl text-white shadow-md border border-brand-yellow/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-md bg-brand-yellow text-brand-black text-[10px] font-black uppercase tracking-wider">
+                          0% Comisión en Guadalajara
+                        </span>
+                        <span className="text-xs text-emerald-200 font-bold">Fruti Go Driver</span>
+                      </div>
+                      <h4 className="text-base sm:text-lg font-black text-white">
+                        ¿Eres taxista o conductor independiente en la ZMG?
+                      </h4>
+                      <p className="text-xs text-emerald-100 max-w-xl leading-relaxed">
+                        Regístrate hoy mismo, aprovecha 2 meses sin comisión, cobra el 100% de tus viajes en efectivo al instante y negocia tu tarifa directamente con el pasajero.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                      <a
+                        href="/registrofrutigo"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.history.pushState(null, "", "/registrofrutigo");
+                          window.dispatchEvent(new PopStateEvent("popstate"));
+                        }}
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-yellow hover:bg-yellow-400 text-brand-black font-black text-xs shadow-md transition-transform active:scale-95 cursor-pointer border border-brand-yellow/50"
+                      >
+                        <span>Registrarme con 0% Comisión</span>
+                        <ExternalLink className="w-3.5 h-3.5 text-brand-black" />
+                      </a>
+
+                      <a
+                        href="https://play.google.com/store/apps/details?id=com.frutigo.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition active:scale-95"
+                      >
+                        <Download className="w-3.5 h-3.5 text-brand-yellow" />
+                        <span>Google Play</span>
+                      </a>
+                    </div>
                   </div>
                 )}
 
@@ -451,8 +530,8 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                 <div className="flex flex-wrap items-center justify-between gap-2.5 text-xs border-b border-zinc-200 pb-3 sm:pb-4">
                   <div className="flex flex-wrap items-center gap-2">
                     {article.category && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-zinc-100 text-zinc-900 font-bold uppercase text-[10px] tracking-wider border border-zinc-300">
-                        <Tag className="w-3 h-3 text-zinc-600" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-emerald-50 text-brand-green font-bold uppercase text-[10px] tracking-wider border border-brand-green/20">
+                        <Tag className="w-3 h-3 text-brand-green" />
                         {article.category}
                       </span>
                     )}
@@ -465,12 +544,12 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
 
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                     <span className="inline-flex items-center gap-1.5 text-zinc-800 font-bold text-[10px] sm:text-[11px] bg-white px-2.5 py-1 rounded-full border border-zinc-200 shadow-2xs">
-                      <UserCheck className="w-3.5 h-3.5 text-zinc-700" />
+                      <UserCheck className="w-3.5 h-3.5 text-brand-green" />
                       Autor: {article.authorName || "FrutiGo Technologies"}
                     </span>
 
-                    <span className="inline-flex items-center gap-1.5 text-zinc-900 font-bold text-[10px] sm:text-[11px] bg-zinc-100 px-2.5 py-1 rounded-full border border-zinc-200 shadow-2xs">
-                      <FileText className="w-3.5 h-3.5 text-zinc-600" />
+                    <span className="inline-flex items-center gap-1.5 text-brand-green font-bold text-[10px] sm:text-[11px] bg-emerald-50 px-2.5 py-1 rounded-full border border-brand-green/20 shadow-2xs">
+                      <FileText className="w-3.5 h-3.5 text-brand-green" />
                       Firmado por: {article.signedBy || article.authorName || "FrutiGo Technologies"}
                     </span>
 
@@ -478,17 +557,17 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                     <button
                       type="button"
                       onClick={() => handleShare(article)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-white hover:bg-zinc-900 text-zinc-800 hover:text-white border border-zinc-300 transition-all duration-200 cursor-pointer shadow-2xs active:scale-95 ml-auto"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-white hover:bg-brand-green text-zinc-800 hover:text-brand-yellow border border-zinc-300 hover:border-brand-green transition-all duration-200 cursor-pointer shadow-2xs active:scale-95 ml-auto"
                       title="Compartir este artículo"
                     >
                       {copiedId === article.id ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-zinc-900 group-hover:text-white" />
+                          <Check className="w-3.5 h-3.5 text-brand-green group-hover:text-brand-yellow" />
                           <span>¡Copiado!</span>
                         </>
                       ) : (
                         <>
-                          <Share2 className="w-3.5 h-3.5 text-zinc-600" />
+                          <Share2 className="w-3.5 h-3.5 text-brand-green" />
                           <span>Compartir</span>
                         </>
                       )}
@@ -497,17 +576,17 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                 </div>
 
                 {/* Article Title */}
-                <h3 className="text-lg sm:text-3xl font-black text-zinc-900 tracking-tight leading-snug">
+                <h3 className="text-lg sm:text-3xl font-black text-brand-green tracking-tight leading-snug">
                   {article.title}
                 </h3>
 
                 {/* Article Summary Box */}
                 {article.summary && (
-                  <div className="p-3 sm:p-5 bg-zinc-100 rounded-xl sm:rounded-2xl border-l-4 border-zinc-900 border-t border-r border-b border-zinc-200 space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-700 block">
+                  <div className="p-3 sm:p-5 bg-emerald-50/50 rounded-xl sm:rounded-2xl border-l-4 border-brand-green border-t border-r border-b border-brand-green/20 space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-brand-green block">
                       Síntesis Ejecutiva
                     </span>
-                    <p className="text-xs sm:text-base text-zinc-900 font-medium italic leading-relaxed break-words">
+                    <p className="text-xs sm:text-base text-zinc-800 font-medium italic leading-relaxed break-words">
                       "{article.summary}"
                     </p>
                   </div>
@@ -526,8 +605,8 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                 {validImages.length > 0 && (
                   <div className="pt-4 border-t border-zinc-200 space-y-3">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-zinc-700" />
-                      <h4 className="text-xs font-black uppercase tracking-wider text-zinc-900">
+                      <Sparkles className="w-4 h-4 text-brand-yellow" />
+                      <h4 className="text-xs font-black uppercase tracking-wider text-brand-green">
                         Imágenes Ilustrativas de la Publicación ({validImages.length} de 3)
                       </h4>
                     </div>
@@ -570,36 +649,36 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                 )}
 
                 {/* Footer de Firma y Autoría Oficial */}
-                <div className="pt-4 border-t border-zinc-200 flex flex-wrap items-center justify-between gap-3 bg-zinc-100 p-4 rounded-2xl border border-zinc-200">
+                <div className="pt-4 border-t border-brand-green/20 flex flex-wrap items-center justify-between gap-3 bg-emerald-50/40 p-4 rounded-2xl border border-brand-green/15">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center font-black shadow-xs shrink-0 text-sm">
+                    <div className="w-9 h-9 rounded-xl bg-brand-green text-brand-yellow flex items-center justify-center font-black shadow-xs shrink-0 text-sm border border-brand-yellow/30">
                       ✍️
                     </div>
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-zinc-600 block">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-brand-green block">
                         Firma Digital & Autoría
                       </span>
-                      <p className="text-xs font-black text-zinc-900">
-                        Autor: <span className="text-zinc-900 font-bold">{article.authorName || "FrutiGo Technologies"}</span>
+                      <p className="text-xs font-black text-brand-green">
+                        Autor: <span className="text-zinc-800 font-bold">{article.authorName || "FrutiGo Technologies"}</span>
                       </p>
                     </div>
                   </div>
 
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-zinc-300 text-zinc-900 rounded-xl font-bold text-xs shadow-2xs">
-                    <UserCheck className="w-3.5 h-3.5 text-zinc-700" />
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-brand-green/20 text-brand-green rounded-xl font-bold text-xs shadow-2xs">
+                    <UserCheck className="w-3.5 h-3.5 text-brand-green" />
                     <span>Firmado por:</span>
                     <strong className="text-zinc-950 font-black">{article.signedBy || article.authorName || "FrutiGo Technologies"}</strong>
                   </div>
                 </div>
 
                 {/* Dedicated Article Sharing Action Bar */}
-                <div className="bg-zinc-100 rounded-2xl p-3 sm:p-4 border border-zinc-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <div className="bg-emerald-50/40 rounded-2xl p-3 sm:p-4 border border-brand-green/15 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-zinc-200 text-zinc-800 flex items-center justify-center font-black shrink-0 text-xs">
+                    <div className="w-7 h-7 rounded-lg bg-emerald-100 text-brand-green flex items-center justify-center font-black shrink-0 text-xs border border-brand-green/20">
                       <Share2 className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-black text-zinc-900 block leading-tight">
+                      <span className="text-[11px] font-black text-brand-green block leading-tight">
                         Compartir este artículo directamente:
                       </span>
                       <span className="text-[10px] text-zinc-500 font-mono select-all truncate block max-w-xs sm:max-w-md">
@@ -615,18 +694,18 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                       onClick={() => handleCopyLink(article)}
                       className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer shadow-2xs active:scale-95 ${
                         copiedId === article.id
-                          ? "bg-zinc-900 text-white"
-                          : "bg-white text-zinc-800 hover:bg-zinc-50 border border-zinc-300"
+                          ? "bg-brand-green text-brand-yellow border border-brand-yellow/30"
+                          : "bg-white text-brand-green hover:bg-emerald-50 border border-brand-green/30"
                       }`}
                     >
                       {copiedId === article.id ? (
                         <>
-                          <Check className="w-3.5 h-3.5" />
+                          <Check className="w-3.5 h-3.5 text-brand-yellow" />
                           <span>¡Enlace Copiado!</span>
                         </>
                       ) : (
                         <>
-                          <Copy className="w-3.5 h-3.5 text-zinc-500" />
+                          <Copy className="w-3.5 h-3.5 text-brand-green" />
                           <span>Copiar Enlace</span>
                         </>
                       )}
@@ -637,7 +716,7 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                       href={getWhatsAppShareUrl(article)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-zinc-900 hover:bg-black text-white transition shadow-2xs active:scale-95"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-green hover:bg-emerald-800 text-brand-yellow border border-brand-yellow/30 transition shadow-2xs active:scale-95"
                       title="Compartir por WhatsApp"
                     >
                       <MessageCircle className="w-3.5 h-3.5 fill-current" />
@@ -648,7 +727,7 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                     <button
                       type="button"
                       onClick={() => setActiveShareModal(article)}
-                      className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold bg-zinc-200 hover:bg-zinc-300 text-zinc-800 transition cursor-pointer active:scale-95"
+                      className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold bg-zinc-100 hover:bg-zinc-200 text-zinc-800 transition cursor-pointer active:scale-95 border border-zinc-200"
                       title="Más opciones de compartir"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
@@ -699,7 +778,7 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
             {/* Direct URL Box */}
             <div className="space-y-2">
               <label className="text-xs font-black text-zinc-700">Enlace directo a esta sección del artículo:</label>
-              <div className="flex items-center gap-2 p-2 bg-zinc-100 rounded-xl border border-zinc-200">
+              <div className="flex items-center gap-2 p-2 bg-emerald-50/50 rounded-xl border border-brand-green/20">
                 <input 
                   type="text" 
                   readOnly 
@@ -709,7 +788,7 @@ export default function FundadorArticulosPublicos({ className = "" }: FundadorAr
                 <button
                   type="button"
                   onClick={() => handleCopyLink(activeShareModal)}
-                  className="px-3 py-1.5 bg-zinc-900 text-white rounded-lg text-xs font-bold shrink-0 hover:bg-black transition"
+                  className="px-3.5 py-1.5 bg-brand-green hover:bg-emerald-800 text-brand-yellow rounded-lg text-xs font-black shrink-0 transition border border-brand-yellow/30 cursor-pointer"
                 >
                   {copiedId === activeShareModal.id ? "¡Copiado!" : "Copiar"}
                 </button>

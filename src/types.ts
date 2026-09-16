@@ -135,3 +135,58 @@ export interface ClientProfile {
   direccion?: string;
   address?: string;
 }
+
+export interface LandingPageContent {
+  id: "taxis" | "ciudad-a-ciudad" | "fletes-y-carga" | "taxi-pet";
+  path: string;
+  url: string;
+  filename: string;
+  name: string;
+  icon: string;
+  themeColor: string;
+
+  // SEO Google tags
+  title: string;
+  metaDescription: string;
+  keywords: string;
+
+  // Visual text on page
+  topBarText: string;
+  badgeText: string;
+  heroH1Prefix: string;
+  heroH1Highlight: string;
+  heroDesc: string;
+
+  // Key benefits bullets
+  benefit1: string;
+  benefit2: string;
+  benefit3: string;
+  benefit4: string;
+
+  // Card
+  cardTitle: string;
+  cardDesc: string;
+  cardStatNumber: string;
+  cardStatText: string;
+
+  // Features Section
+  sectionTag: string;
+  sectionTitle: string;
+  sectionSubtitle: string;
+
+  // WhatsApp
+  whatsappPhone: string;
+  whatsappPretext: string;
+
+  // Banner CTA
+  ctaBannerTitle: string;
+  ctaBannerDesc: string;
+
+  // FAQ
+  faq1Question: string;
+  faq1Answer: string;
+  faq2Question: string;
+  faq2Answer: string;
+  faq3Question: string;
+  faq3Answer: string;
+}

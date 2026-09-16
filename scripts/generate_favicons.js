@@ -20,7 +20,7 @@ async function generateFavicons() {
     { name: 'icon-192.png', size: 192 },
     { name: 'android-chrome-512x512.png', size: 512 },
     { name: 'icon-512.png', size: 512 },
-    { name: 'logo.png', size: 512 }
+    { name: 'logo.png', size: 1200 }
   ];
 
   for (const target of targets) {
@@ -28,7 +28,7 @@ async function generateFavicons() {
     await sharp(svgBuffer, { density: 300 })
       .resize(target.size, target.size, {
         fit: 'contain',
-        background: { r: 255, g: 255, b: 255, alpha: 1 }
+        background: { r: 0, g: 0, b: 0, alpha: 0 }
       })
       .png({ compressionLevel: 9, quality: 100 })
       .toFile(outputPath);

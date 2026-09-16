@@ -1,10 +1,12 @@
-# Robots.txt para Fruti Go
+# Robots.txt para Fruti Go Driver
 User-agent: *
 Allow: /
 
 # Desbloquear todas las rutas clave e imágenes
-Allow: /registrofrutigo
-Allow: /registro
+Allow: /taxis
+Allow: /ciudad-a-ciudad
+Allow: /fletes-y-carga
+Allow: /taxi-pet
 Allow: /tienda
 Allow: /sobre-el-desarrollador
 Allow: /desarrollador
@@ -14,6 +16,8 @@ Allow: /sobre-nosotros
 Allow: /soporte
 Allow: /terminos
 Allow: /privacidad
+Allow: /logo.svg
+Allow: /logo.png
 Allow: /uploads/
 
 # Ubicación oficial del Mapa del Sitio

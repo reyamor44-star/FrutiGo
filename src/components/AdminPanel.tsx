@@ -39,7 +39,8 @@ import {
   UserCheck,
   Building2,
   BookOpen,
-  Tag
+  Tag,
+  Globe
 } from "lucide-react";
 import { Product, TopBannerData, OpenPayConfig, OrderSummary, PdfConfig, ClientProfile } from "../types";
 import { DEFAULT_PRODUCTS } from "../data/defaultStoreData";
@@ -51,6 +52,7 @@ import { getProductWhiteBgImage } from "../utils/productImages";
 import { FounderProfileCard, FounderData, DEFAULT_FOUNDER_DATA } from "./FounderProfileCard";
 import AdminFundadorMedia from "./AdminFundadorMedia";
 import AdminUsuariosFirestore from "./AdminUsuariosFirestore";
+import AdminLandingPages from "./AdminLandingPages";
 import { compressImageFile } from "../utils/imageCompressor";
 
 interface AdminPanelProps {
@@ -98,7 +100,7 @@ export default function AdminPanel({
   const [loginError, setLoginError] = useState<string | null>(null);
 
   // Navigation Tabs inside Admin
-  const [activeTab, setActiveTab] = useState<"banner" | "products" | "bulk-upload" | "logo" | "openpay" | "pdf" | "orders" | "sat" | "clients" | "usuarios-firestore" | "desarrollador" | "fundador-media">((): any => {
+  const [activeTab, setActiveTab] = useState<"banner" | "products" | "bulk-upload" | "logo" | "openpay" | "pdf" | "orders" | "sat" | "clients" | "usuarios-firestore" | "desarrollador" | "fundador-media" | "landing-pages">((): any => {
     if (typeof window !== "undefined") {
       try {
         const saved = localStorage.getItem("fg_admin_tab");
@@ -511,6 +513,16 @@ export default function AdminPanel({
         search.includes("subida-productos")
       ) {
         setActiveTab("bulk-upload");
+      }
+      if (
+        path.includes("landing") ||
+        hash.includes("landing") ||
+        search.includes("landing") ||
+        path.includes("seo") ||
+        hash.includes("seo") ||
+        search.includes("seo")
+      ) {
+        setActiveTab("landing-pages");
       }
     }
   }, []);
@@ -1445,6 +1457,21 @@ export default function AdminPanel({
           >
             <ImageIcon className="w-4 h-4 text-brand-yellow" />
             <span>Galería Institucional (/medios)</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("landing-pages")}
+            className={`flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all whitespace-nowrap ${
+              activeTab === "landing-pages"
+                ? "bg-brand-green text-white shadow-md ring-2 ring-brand-yellow/50"
+                : "text-zinc-600 hover:bg-zinc-200/60"
+            }`}
+          >
+            <Globe className="w-4 h-4 text-brand-yellow" />
+            <span className="flex items-center gap-1.5">
+              <span>Páginas SEO Google (4 URLs)</span>
+              <span className="px-1.5 py-0.5 bg-brand-yellow text-zinc-950 rounded-full text-[10px] font-black">4</span>
+            </span>
           </button>
         </div>
 
@@ -4228,6 +4255,11 @@ export default function AdminPanel({
           {/* TAB 12: USUARIOS FIRESTORE (DEFAULT) EN TIEMPO REAL */}
           {activeTab === "usuarios-firestore" && (
             <AdminUsuariosFirestore onNotify={showToast} />
+          )}
+
+          {/* TAB 13: PÁGINAS SEO GOOGLE (4 URLS) */}
+          {activeTab === "landing-pages" && (
+            <AdminLandingPages adminPassword={password} />
           )}
         </div>
       </div>

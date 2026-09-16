@@ -1,123 +1,171 @@
-<svg viewBox="0 0 500 500" width="500" height="500" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Clean white background -->
-  <rect width="500" height="500" fill="#FFFFFF" />
+<svg viewBox="0 0 1000 1000" width="1000" height="1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Top Yellow Prism Roof Gradients -->
+    <linearGradient id="roofTopLeft" x1="500" y1="24" x2="134" y2="252" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFCA00" />
+      <stop offset="60%" stop-color="#F0A500" />
+      <stop offset="100%" stop-color="#D68E00" />
+    </linearGradient>
+    <linearGradient id="roofTopRight" x1="500" y1="24" x2="866" y2="252" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFF65C" />
+      <stop offset="40%" stop-color="#FFDE1A" />
+      <stop offset="80%" stop-color="#FFC600" />
+      <stop offset="100%" stop-color="#F5B300" />
+    </linearGradient>
+    <linearGradient id="roofSlopeFront" x1="500" y1="146" x2="500" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFD800" />
+      <stop offset="100%" stop-color="#E09500" />
+    </linearGradient>
 
-  <!-- Fruti Go Branding Typography (Fruti) -->
-  <text 
-    x="250" 
-    y="120" 
-    text-anchor="middle" 
-    font-family="system-ui, -apple-system, 'Fredoka', 'Quicksand', 'Comfortaa', 'Arial Rounded MT Bold', sans-serif" 
-    font-weight="900" 
-    font-size="112" 
-    fill="#0F3A1D" 
-    letter-spacing="-1.5"
-  >Fruti</text>
+    <!-- Inside Yellow Hood / Wing -->
+    <linearGradient id="hoodYellowTop" x1="220" y1="320" x2="520" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFF04D" />
+      <stop offset="40%" stop-color="#FFD000" />
+      <stop offset="100%" stop-color="#FFAE00" />
+    </linearGradient>
+    <linearGradient id="hoodYellowShadow" x1="220" y1="440" x2="440" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C78000" />
+      <stop offset="100%" stop-color="#8E5800" />
+    </linearGradient>
 
-  <!-- Fruti Go Branding Typography (Go) -->
-  <text 
-    x="250" 
-    y="234" 
-    text-anchor="middle" 
-    font-family="system-ui, -apple-system, 'Fredoka', 'Quicksand', 'Comfortaa', 'Arial Rounded MT Bold', sans-serif" 
-    font-weight="900" 
-    font-size="124" 
-    fill="#0F3A1D" 
-    letter-spacing="-1.5"
-  >Go</text>
+    <!-- Left Outer Wall Dark Charcoal -->
+    <linearGradient id="leftWallGrad" x1="134" y1="252" x2="320" y2="748" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2B303A" />
+      <stop offset="50%" stop-color="#1C2027" />
+      <stop offset="100%" stop-color="#12151B" />
+    </linearGradient>
 
-  <!-- Delivery Motorcycle & Driver Graphic -->
-  <g fill="#0F3A1D" stroke="#0F3A1D">
+    <!-- Metallic Steel & Chrome Gradients for Right 3D 'G' -->
+    <linearGradient id="metalTopSlant" x1="500" y1="320" x2="866" y2="252" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="30%" stop-color="#D8DFEA" />
+      <stop offset="70%" stop-color="#B4BFD0" />
+      <stop offset="100%" stop-color="#8E9AAB" />
+    </linearGradient>
+    <linearGradient id="metalRightOuter" x1="866" y1="252" x2="680" y2="748" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D6DCE6" />
+      <stop offset="35%" stop-color="#AAB4C4" />
+      <stop offset="70%" stop-color="#788394" />
+      <stop offset="100%" stop-color="#505967" />
+    </linearGradient>
+    <linearGradient id="metalBarTop" x1="866" y1="490" x2="540" y2="490" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E8EDF5" />
+      <stop offset="40%" stop-color="#CBD4E1" />
+      <stop offset="100%" stop-color="#98A4B6" />
+    </linearGradient>
+    <linearGradient id="metalBarBottom" x1="540" y1="560" x2="866" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#383E4B" />
+      <stop offset="100%" stop-color="#1E222A" />
+    </linearGradient>
+    <linearGradient id="metalLowerSlope" x1="500" y1="740" x2="866" y2="748" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8F99AB" />
+      <stop offset="50%" stop-color="#636D7F" />
+      <stop offset="100%" stop-color="#3E4653" />
+    </linearGradient>
 
-    <!-- Insulated Delivery Box (Rear Box) -->
-    <rect x="142" y="272" width="112" height="72" rx="8" ry="8" fill="#FFFFFF" stroke-width="7" stroke-linejoin="round" />
-    <!-- Vertical Compartment Divider -->
-    <line x1="198" y1="272" x2="198" y2="344" stroke-width="5" />
+    <!-- Bottom Base Facets -->
+    <linearGradient id="bottomBaseRight" x1="500" y1="976" x2="866" y2="748" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3A414E" />
+      <stop offset="50%" stop-color="#5D6777" />
+      <stop offset="100%" stop-color="#818D9F" />
+    </linearGradient>
+    <linearGradient id="bottomBaseLeft" x1="134" y1="748" x2="500" y2="976" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#181B22" />
+      <stop offset="50%" stop-color="#242A34" />
+      <stop offset="100%" stop-color="#373F4D" />
+    </linearGradient>
 
-    <!-- Left Compartment: Hot Meal Cloche (Platillo con Campana) -->
-    <!-- Base Plate -->
-    <line x1="156" y1="326" x2="184" y2="326" stroke-width="4" stroke-linecap="round" />
-    <!-- Dome Cover -->
-    <path d="M 156 326 C 156 308 184 308 184 326 Z" fill="#0F3A1D" stroke="none" />
-    <!-- Dome Knob Handle -->
-    <circle cx="170" cy="305" r="3" fill="#0F3A1D" stroke="none" />
-    <!-- Steam Waves -->
-    <path d="M 163 298 C 161 293 166 290 164 285" fill="none" stroke-width="3" stroke-linecap="round" />
-    <path d="M 170 298 C 168 293 173 290 171 285" fill="none" stroke-width="3" stroke-linecap="round" />
-    <path d="M 177 298 C 175 293 180 290 178 285" fill="none" stroke-width="3" stroke-linecap="round" />
+    <!-- Steering Wheel Gradients -->
+    <linearGradient id="wheelRimMetal" x1="385" y1="470" x2="615" y2="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D1D7E2" />
+      <stop offset="35%" stop-color="#9DA6B5" />
+      <stop offset="75%" stop-color="#6A7383" />
+      <stop offset="100%" stop-color="#474E5C" />
+    </linearGradient>
+    <linearGradient id="wheelHubMetal" x1="470" y1="555" x2="530" y2="615" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#B6BFCF" />
+      <stop offset="50%" stop-color="#7D8798" />
+      <stop offset="100%" stop-color="#4A5260" />
+    </linearGradient>
 
-    <!-- Right Compartment: Fresh Milk Bottle & Apple -->
-    <!-- Milk Bottle (Top Right) -->
-    <rect x="218" y="286" width="14" height="22" rx="2" fill="#0F3A1D" stroke="none" />
-    <rect x="221" y="282" width="8" height="4" rx="1" fill="#0F3A1D" stroke="none" />
-    <!-- Apple (Bottom Right) -->
-    <circle cx="214" cy="326" r="8" fill="#0F3A1D" stroke="none" />
-    <path d="M 214 318 C 216 314 218 314 219 312" fill="none" stroke-width="2.5" stroke-linecap="round" />
+    <filter id="cubeShadow" x="-12%" y="-12%" width="124%" height="124%">
+      <feDropShadow dx="0" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
 
-    <!-- Motorcycle Driver / Rider -->
-    <!-- Cap & Head -->
-    <path d="M 252 282 C 248 262 274 252 288 262 C 298 258 310 262 312 268 C 304 270 296 270 292 276 C 290 286 276 292 258 288 Z" fill="#0F3A1D" stroke="none" />
-    <path d="M 288 268 L 314 268 C 318 268 320 271 316 273 L 292 276 Z" fill="#0F3A1D" stroke="none" /> <!-- Cap visor pointing right -->
+  <g filter="url(#cubeShadow)">
+    <!-- 1. Deep Black Interior Cavity -->
+    <polygon points="134,252 500,320 866,252 866,748 500,976 134,748" fill="#07090C" />
 
-    <!-- Driver Body / Torso Leaning Forward -->
-    <path d="M 254 286 L 230 332 L 272 332 C 286 316 292 300 280 286 Z" fill="#0F3A1D" stroke="none" />
+    <!-- 2. Yellow Prism Roof (Top Isometric Facets) -->
+    <!-- Left Slope (Golden shadow) -->
+    <polygon points="500,24 134,252 500,146" fill="url(#roofTopLeft)" />
+    <!-- Right Slope (Sunlit Canary) -->
+    <polygon points="500,24 866,252 500,146" fill="url(#roofTopRight)" />
+    <!-- Front Under-Bevel of Roof -->
+    <polygon points="500,146 134,252 320,296 500,320 680,296 866,252" fill="url(#roofSlopeFront)" />
+    <!-- Top Central Spine Crest Highlight -->
+    <line x1="500" y1="24" x2="500" y2="146" stroke="#FFFDE6" stroke-width="4" stroke-linecap="round" opacity="0.85" />
+    <line x1="500" y1="24" x2="866" y2="252" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.4" />
 
-    <!-- Arms & Handlebars -->
-    <path d="M 270 300 L 308 316 L 312 328" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- 3. Left Hexagon Outer Wall & Yellow Vehicle Hood/Wing Feature -->
+    <polygon points="134,252 320,340 320,700 134,748" fill="url(#leftWallGrad)" />
+    <!-- Yellow Hood / Vehicle Wing inside left cavity -->
+    <polygon points="320,340 540,268 540,380 360,460 320,700" fill="url(#hoodYellowTop)" />
+    <!-- Folded under-shadow of yellow hood -->
+    <polygon points="320,340 360,460 320,700" fill="url(#hoodYellowShadow)" />
+    <!-- Crisp highlight on vehicle hood edge -->
+    <line x1="320" y1="340" x2="540" y2="268" stroke="#FFF699" stroke-width="4.5" stroke-linecap="round" opacity="0.7" />
 
-    <!-- Leg & Footrest -->
-    <path d="M 258 332 L 276 368 L 296 368" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- 4. Steering Wheel (Volante en el Centro de la Cavidad) -->
+    <g transform="translate(500, 586)">
+      <!-- Shadow behind the wheel -->
+      <circle cx="0" cy="0" r="125" fill="none" stroke="#000000" stroke-width="32" opacity="0.6" />
+      <!-- Outer metallic steering rim -->
+      <circle cx="0" cy="0" r="125" fill="none" stroke="url(#wheelRimMetal)" stroke-width="28" />
+      <!-- Top Chrome Reflection Arc -->
+      <path d="M -108,-62 A 125 125 0 0 1 108,-62" fill="none" stroke="#FFFFFF" stroke-width="4.5" opacity="0.55" />
+      
+      <!-- Central Hub -->
+      <circle cx="0" cy="0" r="48" fill="url(#wheelHubMetal)" stroke="#353C47" stroke-width="3.5" />
+      <circle cx="0" cy="0" r="26" fill="#14171E" />
+      <circle cx="0" cy="0" r="10" fill="#838B9B" opacity="0.9" />
+      
+      <!-- 3 Spokes (Left, Right, Bottom) -->
+      <path d="M -44,-12 L -111,-12 L -111,14 L -44,14 Z" fill="url(#wheelRimMetal)" />
+      <path d="M 44,-12 L 111,-12 L 111,14 L 44,14 Z" fill="url(#wheelRimMetal)" />
+      <path d="M -14,42 L -14,111 L 14,111 L 14,42 Z" fill="url(#wheelRimMetal)" />
+      
+      <!-- Spoke Chrome Top Highlights -->
+      <line x1="-109" y1="-10" x2="-46" y2="-10" stroke="#FFFFFF" stroke-width="2" opacity="0.65" />
+      <line x1="46" y1="-10" x2="109" y2="-10" stroke="#FFFFFF" stroke-width="2" opacity="0.65" />
+      <line x1="-12" y1="44" x2="-12" y2="109" stroke="#FFFFFF" stroke-width="2" opacity="0.45" />
+    </g>
 
-    <!-- Motorcycle Seat & Frame -->
-    <path d="M 226 338 L 290 338" stroke-width="8" stroke-linecap="round" />
+    <!-- 5. 3D Metallic 'G' Structure on Right Side -->
+    <!-- Top Inward Bevel under Yellow Roof -->
+    <polygon points="500,320 866,252 750,332 510,420" fill="url(#metalTopSlant)" />
+    
+    <!-- Outer Right Wall of G -->
+    <polygon points="866,252 866,748 745,675 745,332" fill="url(#metalRightOuter)" />
+    <!-- Right outer vertical chiseled light bevel -->
+    <line x1="866" y1="252" x2="866" y2="748" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" opacity="0.7" />
+    
+    <!-- G Horizontal Inward Bar (Towards Steering Wheel) -->
+    <polygon points="590,465 866,465 866,548 590,548" fill="url(#metalBarTop)" />
+    <polygon points="590,548 866,548 745,675 590,675" fill="url(#metalBarBottom)" />
+    <!-- Front facet of G Central Bar -->
+    <polygon points="590,465 625,445 625,568 590,548" fill="#F3F6FA" />
 
-    <!-- Motorcycle Front Steering Fork & Handlebar Mirror -->
-    <line x1="295" y1="300" x2="295" y2="310" stroke-width="4" stroke-linecap="round" />
-    <circle cx="295" cy="297" r="4" fill="#0F3A1D" stroke="none" /> <!-- Mirror -->
-    <line x1="312" y1="324" x2="352" y2="390" stroke-width="7" stroke-linecap="round" />
+    <!-- G Lower Diagonal Ramp / Bottom Curve -->
+    <polygon points="500,740 745,675 866,748 500,976" fill="url(#metalLowerSlope)" />
+    <polygon points="500,740 745,675 640,626 500,666" fill="#2D333D" />
 
-    <!-- Front Headlight -->
-    <path d="M 322 332 L 332 336 L 328 346 L 318 342 Z" fill="#0F3A1D" stroke="none" />
-
-    <!-- Motorcycle Engine Block & Chassis -->
-    <rect x="252" y="348" width="48" height="32" rx="6" fill="#0F3A1D" stroke="none" />
-
-    <!-- Exhaust Pipe -->
-    <path d="M 240 376 L 195 382" stroke-width="6" stroke-linecap="round" />
-
-    <!-- Rear Wheel (Left Wheel) -->
-    <circle cx="195" cy="390" r="32" fill="#FFFFFF" stroke-width="9" />
-    <circle cx="195" cy="390" r="14" fill="#0F3A1D" stroke="none" />
-    <!-- Spokes -->
-    <line x1="195" y1="358" x2="195" y2="422" stroke-width="3" />
-    <line x1="163" y1="390" x2="227" y2="390" stroke-width="3" />
-
-    <!-- Rear Mudguard / Fender -->
-    <path d="M 163 385 C 163 358 190 352 220 358" fill="none" stroke-width="7" stroke-linecap="round" />
-
-    <!-- Front Wheel (Right Wheel) -->
-    <circle cx="352" cy="390" r="32" fill="#FFFFFF" stroke-width="9" />
-    <circle cx="352" cy="390" r="14" fill="#0F3A1D" stroke="none" />
-    <!-- Spokes -->
-    <line x1="352" y1="358" x2="352" y2="422" stroke-width="3" />
-    <line x1="320" y1="390" x2="384" y2="390" stroke-width="3" />
-
-    <!-- Front Mudguard / Fender -->
-    <path d="M 320 385 C 320 358 352 352 380 378" fill="none" stroke-width="7" stroke-linecap="round" />
-
-    <!-- Road Center Dashed Line -->
-    <line x1="230" y1="446" x2="310" y2="446" stroke-width="6" stroke-dasharray="14 10" stroke-linecap="round" />
-
-    <!-- Speed Motion Rays (Bottom Left) -->
-    <polygon points="45,432 165,392 155,402 35,442" fill="#0F3A1D" stroke="none" />
-    <polygon points="65,446 145,420 138,428 58,454" fill="#0F3A1D" stroke="none" />
-
-    <!-- Speed Motion Rays (Bottom Right) -->
-    <polygon points="335,392 455,432 465,442 345,402" fill="#0F3A1D" stroke="none" />
-    <polygon points="355,420 435,446 442,454 362,428" fill="#0F3A1D" stroke="none" />
-
-    <!-- Sparkle Accent Star (Bottom Right) -->
-    <path d="M 462 422 Q 462 432 472 432 Q 462 432 462 442 Q 462 432 452 432 Q 462 432 462 422 Z" fill="#0F3A1D" stroke="none" />
-
+    <!-- 6. Bottom Hexagon Base Facets -->
+    <polygon points="134,748 500,976 500,832 134,748" fill="url(#bottomBaseLeft)" />
+    <polygon points="500,976 866,748 745,675 500,832" fill="url(#bottomBaseRight)" />
+    
+    <!-- Bottom Chiseled Seam Highlight Line -->
+    <line x1="500" y1="832" x2="500" y2="976" stroke="#CCD3DF" stroke-width="4" stroke-linecap="round" opacity="0.7" />
   </g>
 </svg>

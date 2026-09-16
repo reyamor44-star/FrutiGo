@@ -186,14 +186,14 @@ export default function SocialFooterLinks({ className = "" }: SocialFooterLinksP
     <div className={`w-full ${className}`}>
       <div className="flex flex-col space-y-3">
         {/* Header Label */}
-        <div className="flex items-center justify-between gap-2 border-b border-zinc-200 pb-2">
+        <div className="flex items-center justify-between gap-2 border-b border-brand-green/15 pb-2">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-zinc-700 shadow-xs" />
-            <h4 className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-zinc-900">
+            <span className="w-2 h-2 rounded-full bg-brand-green shadow-xs" />
+            <h4 className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-brand-green">
               Canales & Enlaces Institucionales
             </h4>
           </div>
-          <span className="text-[10px] sm:text-[11px] text-zinc-700 font-bold bg-zinc-100 border border-zinc-200 px-2.5 py-0.5 rounded-full shadow-2xs">
+          <span className="text-[10px] sm:text-[11px] text-brand-green font-bold bg-emerald-50 border border-brand-green/20 px-2.5 py-0.5 rounded-full shadow-2xs">
             {SOCIAL_LINKS.length} canales corporativos
           </span>
         </div>
@@ -212,9 +212,9 @@ export default function SocialFooterLinks({ className = "" }: SocialFooterLinksP
                 rel={isEmail ? undefined : "noopener noreferrer"}
                 aria-label={link.ariaLabel}
                 title={`${link.name}${link.badge ? ` (${link.badge})` : ""}`}
-                className="group/soc inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-zinc-300/90 bg-white hover:bg-zinc-900 text-zinc-800 hover:text-white shadow-2xs transition-all duration-200 active:scale-95 text-[11px] font-bold cursor-pointer"
+                className="group/soc inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-brand-green/20 bg-white hover:bg-brand-green text-brand-green hover:text-brand-yellow hover:border-brand-green shadow-2xs transition-all duration-200 active:scale-95 text-[11px] font-bold cursor-pointer"
               >
-                <span className="shrink-0 text-zinc-600 group-hover/soc:text-white transition-colors duration-200">
+                <span className="shrink-0 text-brand-green group-hover/soc:text-brand-yellow transition-colors duration-200">
                   <IconComp className="w-3.5 h-3.5" />
                 </span>
                 <span className="text-[11px] font-extrabold tracking-tight whitespace-nowrap">

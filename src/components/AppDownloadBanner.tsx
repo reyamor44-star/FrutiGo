@@ -57,7 +57,7 @@ export default function AppDownloadBanner({
         target="_blank"
         rel="noopener noreferrer"
         title="Descarga nuestra app y empieza a utilizar nuestro servicio de paquetería y taxi pet en Google Play"
-        className="group relative block overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-zinc-950 via-emerald-950 to-zinc-900 border-2 border-emerald-500/70 hover:border-brand-yellow text-white shadow-xl hover:shadow-2xl hover:shadow-emerald-900/30 transition-all duration-300 transform active:scale-[0.99] cursor-pointer"
+        className="group relative block overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-brand-green via-emerald-900 to-brand-green border-2 border-brand-yellow/60 hover:border-brand-yellow text-white shadow-xl hover:shadow-2xl hover:shadow-brand-green/30 transition-all duration-300 transform active:scale-[0.99] cursor-pointer"
       >
         {/* Glow ambient background circles */}
         <div className="absolute -top-10 -right-10 w-48 h-48 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-400/30 transition-colors" />

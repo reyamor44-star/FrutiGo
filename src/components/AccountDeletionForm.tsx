@@ -102,12 +102,12 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 15 }}
-          className="w-24 h-24 bg-zinc-100 text-zinc-900 rounded-full flex items-center justify-center mb-8 border border-zinc-300"
+          className="w-24 h-24 bg-brand-green text-brand-yellow rounded-full flex items-center justify-center mb-8 shadow-lg shadow-brand-green/20 border-2 border-brand-yellow/30"
         >
           <CheckCircle2 className="w-12 h-12" />
         </motion.div>
         
-        <h2 className="text-3xl font-black tracking-tight text-zinc-900 mb-4">
+        <h2 className="text-3xl font-black tracking-tight text-brand-green mb-4">
           {t.successTitle}
         </h2>
         
@@ -115,14 +115,14 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
           {t.successDesc}
         </p>
 
-        <div className="bg-zinc-100 border border-zinc-300 rounded-3xl p-6 text-zinc-800 max-w-md shadow-sm mb-8">
+        <div className="bg-emerald-50/70 border border-brand-green/20 rounded-3xl p-6 text-emerald-950 max-w-md shadow-sm mb-8">
           <p className="text-sm font-bold leading-relaxed">
             {t.successAlert}
           </p>
         </div>
 
         <p className="text-xs text-zinc-500 font-mono">
-          {t.successContact} <span className="font-bold underline text-zinc-900">frutigo33@gmail.com</span>
+          {t.successContact} <span className="font-bold underline text-brand-green">frutigo33@gmail.com</span>
         </p>
       </motion.div>
     );
@@ -132,7 +132,7 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
     <div className="relative z-10">
       {/* Block Header */}
       <div className="mb-8">
-        <h2 className="text-2xl md:text-3xl font-black tracking-tight text-zinc-900 mb-2">
+        <h2 className="text-2xl md:text-3xl font-black tracking-tight text-brand-green mb-2">
           {t.title}
         </h2>
         <p className="text-zinc-500 text-sm font-medium">
@@ -141,8 +141,8 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
       </div>
 
       {/* Warning Policy Box */}
-      <div className="bg-zinc-100 border-l-4 border-zinc-800 rounded-r-2xl p-5 mb-8 text-zinc-800 flex gap-4 items-start shadow-xs border border-zinc-200">
-        <AlertTriangle className="w-6 h-6 text-zinc-700 flex-shrink-0 mt-0.5" />
+      <div className="bg-emerald-50/60 border-l-4 border-brand-green rounded-r-2xl p-5 mb-8 text-emerald-950 flex gap-4 items-start shadow-xs border border-brand-green/10">
+        <AlertTriangle className="w-6 h-6 text-brand-green flex-shrink-0 mt-0.5" />
         <div className="text-sm font-bold leading-relaxed">
           {t.warning}
         </div>
@@ -171,7 +171,7 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
                   value={formData.name}
                   onChange={(e) => setFormData(p => ({ ...p, name: e.target.value }))}
                   placeholder={t.fullNamePlaceholder}
-                  className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-zinc-900 font-medium text-zinc-800 transition"
+                  className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-brand-green font-medium text-zinc-800 transition"
                 />
               </div>
             </div>
@@ -186,7 +186,7 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
                   value={formData.email}
                   onChange={(e) => setFormData(p => ({ ...p, email: e.target.value }))}
                   placeholder={t.emailPlaceholder}
-                  className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-zinc-900 font-medium text-zinc-800 transition"
+                  className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-brand-green font-medium text-zinc-800 transition"
                 />
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
                   value={formData.phone}
                   onChange={(e) => setFormData(p => ({ ...p, phone: e.target.value }))}
                   placeholder={t.phonePlaceholder}
-                  className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-zinc-900 font-medium text-zinc-800 transition"
+                  className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-brand-green font-medium text-zinc-800 transition"
                 />
               </div>
             </div>
@@ -215,7 +215,7 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
                 <select
                   value={formData.reason}
                   onChange={(e) => setFormData(p => ({ ...p, reason: e.target.value }))}
-                  className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-zinc-900 font-medium text-zinc-800 transition appearance-none cursor-pointer"
+                  className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-brand-green font-medium text-zinc-800 transition appearance-none cursor-pointer"
                 >
                   <option value="">{t.selectReason}</option>
                   <option value={t.reasons.noUse}>{t.reasons.noUse}</option>
@@ -241,7 +241,7 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
                 value={formData.comments}
                 onChange={(e) => setFormData(p => ({ ...p, comments: e.target.value }))}
                 placeholder={t.commentsPlaceholder}
-                className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-zinc-900 font-medium text-zinc-800 transition leading-relaxed resize-none"
+                className="w-full pl-12 pr-4 py-3 bg-zinc-50 border border-zinc-300 rounded-xl outline-none focus:border-brand-green font-medium text-zinc-800 transition leading-relaxed resize-none"
               />
             </div>
           </div>
@@ -252,7 +252,7 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
               type="checkbox"
               checked={formData.confirm}
               onChange={(e) => setFormData(p => ({ ...p, confirm: e.target.checked }))}
-              className="mt-1 accent-zinc-900 w-4 h-4 cursor-pointer"
+              className="mt-1 accent-brand-green w-4 h-4 cursor-pointer"
             />
             <span className="text-xs text-zinc-700 font-semibold leading-relaxed">
               {t.confirmCheckbox}
@@ -263,15 +263,15 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full bg-zinc-900 text-white font-bold py-4 px-6 rounded-2xl shadow-sm flex items-center justify-center gap-2 hover:bg-black transition disabled:opacity-50 text-base cursor-pointer"
+            className="w-full bg-brand-green hover:bg-emerald-800 text-brand-yellow font-black py-4 px-6 rounded-2xl shadow-lg shadow-brand-green/20 border border-brand-yellow/30 flex items-center justify-center gap-2 transition disabled:opacity-50 text-base cursor-pointer transform active:scale-98"
           >
             {status === "submitting" ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" /> {t.submitting}
+                <Loader2 className="w-5 h-5 animate-spin text-brand-yellow" /> {t.submitting}
               </>
             ) : (
               <>
-                {t.submitButton} <ArrowRight className="w-5 h-5" />
+                {t.submitButton} <ArrowRight className="w-5 h-5 text-brand-yellow" />
               </>
             )}
           </button>
@@ -279,8 +279,8 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
 
         {/* Contact Info Column */}
         <div className="md:col-span-4 space-y-6">
-          <div className="bg-zinc-50 border border-zinc-200 rounded-3xl p-6 shadow-xs">
-            <h3 className="font-bold text-zinc-900 text-sm uppercase tracking-wider mb-4">
+          <div className="bg-emerald-50/40 border border-brand-green/20 rounded-3xl p-6 shadow-xs">
+            <h3 className="font-bold text-brand-green text-sm uppercase tracking-wider mb-4">
               {t.contactTitle}
             </h3>
             
@@ -289,32 +289,32 @@ export default function AccountDeletionForm({ lang = "es" }: Props) {
             </p>
 
             <div className="space-y-4 font-bold text-sm">
-              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-zinc-200">
-                <div className="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-zinc-700 border border-zinc-200">
+              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-brand-green/20 shadow-2xs">
+                <div className="w-10 h-10 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green border border-brand-green/20">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="text-[10px] uppercase font-bold text-zinc-400">{t.emailLabel}</span>
-                  <a href="mailto:frutigo33@gmail.com" className="text-zinc-800 hover:text-black truncate">
+                  <a href="mailto:frutigo33@gmail.com" className="text-brand-green hover:underline truncate">
                     frutigo33@gmail.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-zinc-200">
-                <div className="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-zinc-700 border border-zinc-200">
+              <div className="flex items-center gap-3 bg-white p-3.5 rounded-2xl border border-brand-green/20 shadow-2xs">
+                <div className="w-10 h-10 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green border border-brand-green/20">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase font-bold text-zinc-400">{t.phoneLabel}</span>
-                  <a href="tel:3317093598" className="text-zinc-800 hover:text-black">
+                  <a href="tel:3317093598" className="text-brand-green hover:underline">
                     3317093598
                   </a>
                 </div>
               </div>
             </div>
             
-            <div className="mt-6 pt-4 border-t border-zinc-200 text-[10px] text-zinc-500 leading-normal font-medium text-center whitespace-pre-line">
+            <div className="mt-6 pt-4 border-t border-brand-green/20 text-[10px] text-zinc-500 leading-normal font-medium text-center whitespace-pre-line">
               {t.hours}
             </div>
           </div>

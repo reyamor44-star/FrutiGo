@@ -1,6 +1,6 @@
 {
   "name": "Fruti Go",
-  "description": "Plataforma oficial de FrutiGo Technologies y FrutiGo Logistics. Distribución agroalimentaria B2B/B2C, logística inteligente de última milla y comercio digital en México.",
+  "description": "Registro de Taxis en Fruti Go Driver con 0% de comisión en la ZMG. Los taxistas pueden registrarse para negociar viajes en línea con ganancias 100% en efectivo al instante.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

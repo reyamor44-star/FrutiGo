@@ -21,29 +21,29 @@ const CORE_BRAND_KEYWORDS =
 
 export const SEO_SECTION_DATA: Record<string, SeoConfig> = {
   inicio: {
-    title: "FrutiGo Technologies & Logistics | Envíos Última Milla y Comercio B2B/B2C",
-    ogTitle: "FrutiGo Technologies & Logistics | Envíos Última Milla y Comercio B2B/B2C",
-    twitterTitle: "FrutiGo Technologies & Logistics | Envíos Última Milla y Comercio B2B/B2C",
+    title: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+    ogTitle: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+    twitterTitle: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
     description:
-      "Plataforma de infraestructura logística, envíos de última milla y comercio B2B/B2C. Reparto a domicilio, frutas y verduras al mayoreo en Zapopan, abastecimiento a restaurantes y delivery en Los Cabos, San José del Cabo y Cabo San Lucas.",
+      "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
     ogDescription:
-      "Plataforma de infraestructura logística, envíos de última milla y comercio B2B/B2C. Reparto a domicilio, frutas y verduras al mayoreo en Zapopan y delivery en Los Cabos.",
-    keywords: `${CORE_BRAND_KEYWORDS}, delivery México, paquetería express Guadalajara, taxi pet Zapopan`,
+      "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Registro de Taxis Guadalajara, Fruti Go Driver, taxistas ZMG, 0% comisión taxi, viajes en línea taxi Guadalajara, negociar viajes taxi`,
     canonicalUrl: "https://frutigo.com.mx/",
     ogType: "website",
     image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "FrutiGo Technologies & Logistics - Envíos Última Milla y Comercio B2B/B2C",
+    imageAlt: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
     schemaJsonLd: {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "FrutiGo",
+      "name": "Fruti Go Driver",
       "alternateName": ["Fruti Go", "frutigo", "FrutiGo Technologies", "FrutiGo Logistics"],
       "url": "https://frutigo.com.mx",
       "logo": "https://frutigo.com.mx/logo.png",
       "sameAs": [
         "https://play.google.com/store/apps/details?id=com.frutigo.app"
       ],
-      "description": "Plataforma de infraestructura logística, envíos de última milla y comercio B2B/B2C."
+      "description": "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG."
     }
   },
   tienda: {
@@ -266,40 +266,40 @@ export const SEO_SECTION_DATA: Record<string, SeoConfig> = {
     imageAlt: "FrutiGo Technologies - Gestión de Cuenta",
   },
   articulos: {
-    title: "FrutiGo Technologies | Artículos Técnicos e Infraestructura de Sistemas",
-    ogTitle: "FrutiGo Technologies | Artículos Técnicos e Infraestructura de Sistemas",
-    twitterTitle: "FrutiGo Technologies | Artículos Técnicos e Infraestructura de Sistemas",
+    title: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+    ogTitle: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+    twitterTitle: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
     description:
-      "Publicaciones técnicas, análisis de arquitectura de software y logística urbana desarrollados por FrutiGo Technologies.",
-    keywords: `${CORE_BRAND_KEYWORDS}, artículos FrutiGo Technologies, arquitectura software FrutiGo, ingeniería logística FrutiGo Technologies`,
+      "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Registro de Taxis Guadalajara, Fruti Go Driver, taxistas ZMG, 0% comisión taxi, viajes en línea taxi Guadalajara, negociar viajes taxi, artículos FrutiGo`,
     canonicalUrl: "https://frutigo.com.mx/articulos",
-    ogType: "website",
+    ogType: "article",
     image: DEFAULT_BRAND_IMAGE,
-    imageAlt: "FrutiGo Technologies - Publicaciones Técnicas",
+    imageAlt: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
   },
   registro: {
-    title: "FrutiGo Technologies | Registro Institucional en la Plataforma",
-    ogTitle: "FrutiGo Technologies | Registro Institucional en la Plataforma",
-    twitterTitle: "FrutiGo Technologies | Registro Institucional en la Plataforma",
+    title: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+    ogTitle: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+    twitterTitle: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
     description:
-      "Acceso y registro a la infraestructura digital de FrutiGo Technologies y FrutiGo Logistics. Descarga nuestra aplicación oficial en Google Play Store.",
-    keywords: `${CORE_BRAND_KEYWORDS}, Registro FrutiGo, app FrutiGo Technologies, FrutiGo Logistics, descargar app FrutiGo`,
+      "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Registro de Taxis Guadalajara, Fruti Go Driver, taxistas ZMG, 0% comisión taxi, registrar taxi Guadalajara, FrutiGo Driver`,
     canonicalUrl: "https://frutigo.com.mx/registrofrutigo",
     ogType: "website",
-    image: "https://frutigo.com.mx/frutigo-logo-oficial-amarillo.svg",
-    imageAlt: "FrutiGo Technologies - Registro Oficial",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
   },
   registrofrutigo: {
-    title: "FrutiGo Technologies | Registro Institucional en la Plataforma",
-    ogTitle: "FrutiGo Technologies | Registro Institucional en la Plataforma",
-    twitterTitle: "FrutiGo Technologies | Registro Institucional en la Plataforma",
+    title: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+    ogTitle: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
+    twitterTitle: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
     description:
-      "Acceso y registro a la infraestructura digital de FrutiGo Technologies y FrutiGo Logistics. Descarga nuestra aplicación oficial en Google Play Store.",
-    keywords: `${CORE_BRAND_KEYWORDS}, Registro FrutiGo, app FrutiGo Technologies, FrutiGo Logistics, descargar app FrutiGo`,
+      "Los taxistas pueden registrarse para negociar viajes en línea con 0% de comisión en la ZMG. Ganancias 100% en efectivo al instante, sin comisiones abusivas y trato directo con el pasajero en Fruti Go Driver.",
+    keywords: `${CORE_BRAND_KEYWORDS}, Registro de Taxis Guadalajara, Fruti Go Driver, taxistas ZMG, 0% comisión taxi, registrar taxi Guadalajara, FrutiGo Driver`,
     canonicalUrl: "https://frutigo.com.mx/registrofrutigo",
     ogType: "website",
-    image: "https://frutigo.com.mx/frutigo-logo-oficial-amarillo.svg",
-    imageAlt: "FrutiGo Technologies - Registro Oficial",
+    image: DEFAULT_BRAND_IMAGE,
+    imageAlt: "Registro de Taxis en Fruti Go Driver | 0% Comisión en Guadalajara",
   },
 };
 

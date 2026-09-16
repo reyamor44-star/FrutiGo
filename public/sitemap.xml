@@ -14,23 +14,46 @@
     </image:image>
   </url>
 
-  <!-- Página Oficial de Registro en la App Fruti Go -->
+  <!-- Landing Pages Oficiales Fruti Go Driver -->
   <url>
-    <loc>https://frutigo.com.mx/registrofrutigo</loc>
-    <lastmod>2026-08-17</lastmod>
+    <loc>https://frutigo.com.mx/taxis</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <priority>0.98</priority>
     <image:image>
-      <image:loc>https://frutigo.com.mx/frutigo-logo-oficial-amarillo.svg</image:loc>
-      <image:title>Registro Oficial Fruti Go - Crea tu Cuenta en la App</image:title>
-      <image:caption>Formulario de registro para la app Fruti Go de delivery exprés, paquetería urbana y taxi pet.</image:caption>
+      <image:loc>https://frutigo.com.mx/logo.png</image:loc>
+      <image:title>Registro de Taxis en Fruti Go Driver - 0% Comisión</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://frutigo.com.mx/registro</loc>
-    <lastmod>2026-08-17</lastmod>
+    <loc>https://frutigo.com.mx/ciudad-a-ciudad</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.95</priority>
+    <priority>0.98</priority>
+    <image:image>
+      <image:loc>https://frutigo.com.mx/logo.png</image:loc>
+      <image:title>Viajes Foráneos e Intermunicipales en Fruti Go Driver</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://frutigo.com.mx/fletes-y-carga</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.98</priority>
+    <image:image>
+      <image:loc>https://frutigo.com.mx/logo.png</image:loc>
+      <image:title>Fletes, Mudanzas y Carga Ligera en Fruti Go Driver</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://frutigo.com.mx/taxi-pet</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.98</priority>
+    <image:image>
+      <image:loc>https://frutigo.com.mx/logo.png</image:loc>
+      <image:title>Transporte de Mascotas Taxi Pet en Fruti Go Driver</image:title>
+    </image:image>
   </url>
 
   <!-- Secciones Institucionales -->
@@ -65,7 +88,19 @@
   <!-- Páginas de Infraestructura y Visión Tecnológica -->
   <url>
     <loc>https://frutigo.com.mx/nosotros</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://frutigo.com.mx/desarrollador</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://frutigo.com.mx/sobre-el-desarrollador</loc>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>

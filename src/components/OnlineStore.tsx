@@ -1344,7 +1344,7 @@ export default function OnlineStore({
                 title="Regístrate en la App Fruti Go"
               >
                 <img
-                  src="/frutigo-logo-oficial-amarillo.svg"
+                  src="/logo.svg"
                   alt="Logo Fruti Go"
                   className="w-4 h-4 object-contain rounded-sm shrink-0"
                 />
@@ -1501,7 +1501,7 @@ export default function OnlineStore({
                 className="w-full flex items-center gap-2.5 p-3 bg-gradient-to-r from-[#FABF08] to-[#F59E0B] text-[#0F3A1D] rounded-2xl font-black text-xs border border-[#0F3A1D]/20 shadow-md cursor-pointer active:scale-95"
               >
                 <img
-                  src="/frutigo-logo-oficial-amarillo.svg"
+                  src="/logo.svg"
                   alt="Logo Fruti Go"
                   className="w-5 h-5 object-contain rounded-md"
                 />

@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { adminLogin, getAdminPassword } from "./lib/adminAuth";
 import { useState, useEffect, ChangeEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
@@ -959,7 +960,7 @@ export default function App() {
       const res = await fetch("/api/pdf-config", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: pass || "1234", pdfConfig: newConfig }),
+        body: JSON.stringify({ password: pass, pdfConfig: newConfig }),
       });
       return res.ok;
     } catch {
@@ -1087,7 +1088,7 @@ export default function App() {
           fetch("/api/pdf-config", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ password: "1234", pdfConfig: localPdf }),
+            body: JSON.stringify({ password: getAdminPassword(), pdfConfig: localPdf }),
           }).catch(() => {});
         }
       })
@@ -2482,9 +2483,9 @@ export default function App() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  onKeyDown={(e) => {
+                  onKeyDown={async (e) => {
                     if (e.key === "Enter") {
-                      if (password === "fruti05") {
+                      if (await adminLogin(password)) {
                         setIsAdmin(true);
                         setShowLogin(false);
                         fetchDeletionRequests();
@@ -2497,8 +2498,8 @@ export default function App() {
                   placeholder="••••••"
                 />
                 <button
-                  onClick={() => {
-                    if (password === "fruti05") {
+                  onClick={async () => {
+                    if (await adminLogin(password)) {
                       setIsAdmin(true);
                       setShowLogin(false);
                       fetchDeletionRequests();

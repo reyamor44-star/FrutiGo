@@ -1,3 +1,4 @@
+import { adminLogin, getAdminPassword } from "../lib/adminAuth";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { 
   Lock, 
@@ -90,13 +91,13 @@ export default function AdminPanel({
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
       try {
-        return localStorage.getItem("fg_admin_auth") === "true";
+        return localStorage.getItem("fg_admin_auth") === "true" && !!getAdminPassword();
       } catch (e) {}
     }
     return false;
   });
   const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("1234");
+  const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState<string | null>(null);
 
   // Navigation Tabs inside Admin
@@ -362,7 +363,7 @@ export default function AdminPanel({
           fetch("/api/admin/sat-emisor-config", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ password: "1234", satConfig: merged })
+            body: JSON.stringify({ password: getAdminPassword(), satConfig: merged })
           }).catch(() => {});
         }
       })
@@ -535,16 +536,16 @@ export default function AdminPanel({
     setTimeout(() => setToastMsg(null), 3500);
   };
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if ((username === "admin" || username === "fruti") && (password === "1234" || password === "fruti05")) {
+    if ((username === "admin" || username === "fruti") && (await adminLogin(password))) {
       setIsAuthenticated(true);
       setLoginError(null);
       try {
         localStorage.setItem("fg_admin_auth", "true");
       } catch (e) {}
     } else {
-      setLoginError("Usuario o contraseña incorrectos. Usa 'admin' y '1234'.");
+      setLoginError("Usuario o contraseña incorrectos.");
     }
   };
 
@@ -707,7 +708,7 @@ export default function AdminPanel({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          password: password || "1234",
+          password,
           rawText: bulkInputText
         })
       });
@@ -2465,7 +2466,7 @@ export default function AdminPanel({
                       type="password"
                       value={opPrivateKey}
                       onChange={(e) => setOpPrivateKey(e.target.value)}
-                      placeholder="sk_ecd829b752774461b8cbc9383f4a414c"
+                      placeholder="sk_••••••••"
                       className="w-full px-3.5 py-2.5 bg-white border border-zinc-300 rounded-xl text-xs font-mono font-bold text-zinc-800"
                     />
                   </div>

@@ -6,3 +6,9 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Secretos y datos personales: nunca versionar
+openpay_config.json
+sat_emisor_config.json
+sat_clientes.json
+invoices.json

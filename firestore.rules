@@ -1,8 +1,49 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Administrador = usuario de Firebase Auth con custom claim admin=true.
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Contenido público del sitio: lectura libre, escritura solo admin.
+    match /products/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /settings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /founder/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /articles/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Datos personales / fiscales: solo admin (o el servidor con Admin SDK).
+    match /orders/{id} {
+      allow read, write: if isAdmin();
+    }
+    match /invoices/{id} {
+      allow read, write: if isAdmin();
+    }
+    match /sat_clients/{id} {
+      allow read, write: if isAdmin();
+    }
+    match /usuarios/{uid} {
+      allow read, write: if isAdmin() || (request.auth != null && request.auth.uid == uid);
+    }
+    match /app_users/{uid} {
+      allow read, write: if isAdmin() || (request.auth != null && request.auth.uid == uid);
+    }
+
+    // Todo lo demás queda cerrado.
     match /{document=**} {
-      allow read, write: if true;
+      allow read, write: if false;
     }
   }
 }

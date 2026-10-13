@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import express from "express";
 import path from "path";
 import cors from "cors";
@@ -277,7 +278,11 @@ async function startServer() {
   }
 
 
-  app.use(cors());
+  const allowedOrigins = String(process.env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((o) => o.trim())
+    .filter(Boolean);
+  app.use(cors({ origin: allowedOrigins.length ? allowedOrigins : false }));
   app.use(express.json({ limit: "25mb" }));
   app.use(express.urlencoded({ limit: "25mb", extended: true }));
 
@@ -288,6 +293,41 @@ async function startServer() {
   }
   app.use("/uploads", express.static(UPLOADS_DIR));
   app.use(express.static(path.join(process.cwd(), "public")));
+
+  // Admin: la contraseña vive solo en la variable de entorno ADMIN_PASSWORD.
+  // Sin ella, todas las rutas de administración responden 401.
+  const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || "");
+  const isAdminRequest = (req: any): boolean => {
+    if (!ADMIN_PASSWORD) return false;
+    const candidates = [
+      req.headers?.["x-admin-password"],
+      req.body?.password,
+      req.query?.password,
+    ];
+    const expected = Buffer.from(ADMIN_PASSWORD);
+    return candidates.some((value) => {
+      if (typeof value !== "string" || !value) return false;
+      const given = Buffer.from(value);
+      return given.length === expected.length && crypto.timingSafeEqual(given, expected);
+    });
+  };
+  const requireAdmin = (req: any, res: any, next: any) => {
+    if (req.method === "OPTIONS" || isAdminRequest(req)) return next();
+    return res.status(401).json({ error: "Acceso no autorizado" });
+  };
+  app.post("/api/admin/login", (req, res) => {
+    if (!isAdminRequest(req)) return res.status(401).json({ error: "Acceso no autorizado" });
+    return res.json({ success: true });
+  });
+  app.use("/api/admin", requireAdmin);
+  app.use("/api/solucionfactura", requireAdmin);
+  app.post(/^\/api\/founder\/.+/, requireAdmin);
+  app.put(/^\/api\/founder\/.+/, requireAdmin);
+  app.delete(/^\/api\/founder\/.+/, requireAdmin);
+  app.post("/api/pdf-config", requireAdmin);
+  app.post("/api/policies", requireAdmin);
+  app.get("/api/invoices", requireAdmin);
+  app.get("/api/orders", requireAdmin);
 
   // Health check
   app.get("/api/health", (req, res) => {
@@ -1049,7 +1089,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
   const savePdfConfigHandler = (req: any, res: any) => {
     const { password, pdfConfig, pdfLogoUrl, pdfQrUrl } = req.body || {};
     // If password provided, check it (allow empty password for internal sync if valid config passed)
-    if (password && password !== "fruti05" && password !== "1234") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -1079,7 +1119,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
     emisorRazonSocial: "FRUTI GO DISTRIBUIDORA B2B S.A. DE C.V.",
     emisorRegimenFiscal: "601 - General de Ley Personas Morales",
     emisorZipCode: "44100",
-    sfApiToken: process.env.SOLUCION_FACTURA_TOKEN || "sfv2_6cVXpxLEigdhCEHxHCI6RRjmMbcv1CTV1EtyGNaVeBLdsns6xgjXXRdtzawavZJF",
+    sfApiToken: process.env.SOLUCION_FACTURA_TOKEN || "",
     sfEnvironment: "production",
     csdCertPem: "",
     csdKeyPem: "",
@@ -1093,7 +1133,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         const parsed = JSON.parse(raw);
         const currentToken = parsed.sfApiToken && !parsed.sfApiToken.includes("PEGA_AQUÍ")
           ? parsed.sfApiToken
-          : "sfv2_6cVXpxLEigdhCEHxHCI6RRjmMbcv1CTV1EtyGNaVeBLdsns6xgjXXRdtzawavZJF";
+          : (process.env.SOLUCION_FACTURA_TOKEN || "");
 
         const config = {
           emisorRfc: parsed.emisorRfc || defaultSatEmisorConfig.emisorRfc,
@@ -1125,18 +1165,29 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
   app.get("/api/sat-emisor-config", (req, res) => {
     const config = getSatEmisorConfig();
     // Hide password for security when returning to public client if needed, or return config
-    const safeConfig = { ...config };
-    delete (safeConfig as any).csdPassword;
+    const safeConfig: any = { ...config };
+    delete safeConfig.csdPassword;
+    delete safeConfig.csdKeyPem;
+    delete safeConfig.sfApiToken;
     return res.json(safeConfig);
   });
 
+  const maskSecret = (value: unknown): string => {
+    const v = String(value || "");
+    return v ? `****${v.slice(-4)}` : "";
+  };
+
   app.get("/api/admin/sat-emisor-config", (req, res) => {
-    return res.json(getSatEmisorConfig());
+    const config: any = { ...getSatEmisorConfig() };
+    config.sfApiToken = maskSecret(config.sfApiToken);
+    config.csdPassword = maskSecret(config.csdPassword);
+    if (config.csdKeyPem) config.csdKeyPem = "****";
+    return res.json(config);
   });
 
   app.post("/api/admin/sat-emisor-config", (req, res) => {
     const { password, satConfig } = req.body || {};
-    if (password && password !== "fruti05" && password !== "1234") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -1162,13 +1213,22 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         sfApiToken: tokenToSave,
         sfEnvironment: incoming.sfEnvironment || existing.sfEnvironment || "production",
         csdCertPem: incoming.csdCertPem && incoming.csdCertPem.trim() ? incoming.csdCertPem.trim() : existing.csdCertPem,
-        csdKeyPem: incoming.csdKeyPem && incoming.csdKeyPem.trim() ? incoming.csdKeyPem.trim() : existing.csdKeyPem,
-        csdPassword: incoming.csdPassword && incoming.csdPassword.trim() ? incoming.csdPassword.trim() : existing.csdPassword,
+        csdKeyPem: incoming.csdKeyPem && incoming.csdKeyPem.trim() && !incoming.csdKeyPem.startsWith("****") ? incoming.csdKeyPem.trim() : existing.csdKeyPem,
+        csdPassword: incoming.csdPassword && incoming.csdPassword.trim() && !incoming.csdPassword.startsWith("****") ? incoming.csdPassword.trim() : existing.csdPassword,
         updatedAt: new Date().toISOString()
       };
 
       fs.writeFileSync(SAT_EMISOR_FILE, JSON.stringify(configToSave, null, 2));
-      return res.json({ success: true, message: "Configuración del Emisor SAT guardada con éxito", satConfig: configToSave });
+      return res.json({
+        success: true,
+        message: "Configuración del Emisor SAT guardada con éxito",
+        satConfig: {
+          ...configToSave,
+          sfApiToken: maskSecret(configToSave.sfApiToken),
+          csdPassword: maskSecret(configToSave.csdPassword),
+          csdKeyPem: configToSave.csdKeyPem ? "****" : "",
+        },
+      });
     } catch (err) {
       console.error("Error al guardar SAT Emisor config:", err);
       return res.status(500).json({ error: "Error al guardar la configuración del Emisor SAT" });
@@ -1296,7 +1356,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.get("/api/solucionfactura/clientes", async (req, res) => {
     const satEmisor = getSatEmisorConfig();
-    const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "sfv2_4BOJ0TMGNe5raAdX6vThmfIcs41q3jUf39d9zHX1sahscSArYWyS9V4eIxuRiJ83";
+    const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "";
 
     let apiClients: any[] = [];
     if (sfToken) {
@@ -1409,7 +1469,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/solucionfactura/sync-clientes", async (req, res) => {
     const satEmisor = getSatEmisorConfig();
-    const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "sfv2_4BOJ0TMGNe5raAdX6vThmfIcs41q3jUf39d9zHX1sahscSArYWyS9V4eIxuRiJ83";
+    const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "";
 
     let apiClients: any[] = [];
     if (sfToken) {
@@ -1431,7 +1491,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
   // 2. SOLUCIÓN FACTURA v2: PRODUCT CATALOG SYNC
   app.get("/api/solucionfactura/productos", async (req, res) => {
     const satEmisor = getSatEmisorConfig();
-    const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "sfv2_6cVXpxLEigdhCEHxHCI6RRjmMbcv1CTV1EtyGNaVeBLdsns6xgjXXRdtzawavZJF";
+    const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "";
 
     let sfProducts: any[] = [];
     if (sfToken) {
@@ -1446,7 +1506,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/solucionfactura/sync-productos", async (req, res) => {
     const satEmisor = getSatEmisorConfig();
-    const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "sfv2_4BOJ0TMGNe5raAdX6vThmfIcs41q3jUf39d9zHX1sahscSArYWyS9V4eIxuRiJ83";
+    const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "";
 
     let sfProducts: any[] = [];
     if (sfToken) {
@@ -1510,7 +1570,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
   app.post("/api/solucionfactura/sync-all", async (req, res) => {
     try {
       const satEmisor = getSatEmisorConfig();
-      const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "sfv2_4BOJ0TMGNe5raAdX6vThmfIcs41q3jUf39d9zHX1sahscSArYWyS9V4eIxuRiJ83";
+      const sfToken = satEmisor.sfApiToken || process.env.SOLUCION_FACTURA_TOKEN || "";
 
       let apiClients: any[] = [];
       let apiProducts: any[] = [];
@@ -1898,7 +1958,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/admin/logo", async (req, res) => {
     const { password, logoUrl } = req.body;
-    if (password !== "fruti05" && password !== "1234") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -1940,7 +2000,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/admin/banner", async (req, res) => {
     const { password, bannerUrl, bannerUrlEs, bannerUrlEn, title, subtitle, ctaText } = req.body;
-    if (password !== "fruti05" && password !== "1234") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -2314,28 +2374,29 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
   });
 
   // OpenPay Config Endpoint
-  app.get("/api/openpay", (req, res) => {
+  // Llave privada: OPENPAY_PRIVATE_KEY (o openpay_config.json fuera de git).
+  const readOpenpayConfig = () => {
+    let file: any = {};
     try {
-      if (fs.existsSync(OPENPAY_FILE)) {
-        const data = JSON.parse(fs.readFileSync(OPENPAY_FILE, "utf-8"));
-        return res.json({
-          openpayUrl: data.openpayUrl || "",
-          merchantId: data.merchantId || "mhary0zwpt8y6jwt6fju",
-          publicKey: data.publicKey || "pk_ecd829b752774461b8cbc9383f4a414c",
-          privateKey: data.privateKey || "sk_cc06c6561cf34230ba69f1751da1596d",
-          sandboxMode: data.sandboxMode !== undefined ? data.sandboxMode : true,
-        });
-      }
+      if (fs.existsSync(OPENPAY_FILE)) file = JSON.parse(fs.readFileSync(OPENPAY_FILE, "utf-8"));
     } catch (err) {
       console.error("Error al leer configuración OpenPay:", err);
     }
-    return res.json({
-      openpayUrl: "",
-      merchantId: "mhary0zwpt8y6jwt6fju",
-      publicKey: "pk_ecd829b752774461b8cbc9383f4a414c",
-      privateKey: "sk_cc06c6561cf34230ba69f1751da1596d",
-      sandboxMode: true
-    });
+    const envSandbox = process.env.OPENPAY_SANDBOX;
+    return {
+      openpayUrl: String(file.openpayUrl || ""),
+      merchantId: String(process.env.OPENPAY_MERCHANT_ID || file.merchantId || "").trim(),
+      publicKey: String(process.env.OPENPAY_PUBLIC_KEY || file.publicKey || "").trim(),
+      privateKey: String(process.env.OPENPAY_PRIVATE_KEY || file.privateKey || "").trim(),
+      sandboxMode: envSandbox !== undefined
+        ? envSandbox !== "false"
+        : file.sandboxMode !== undefined ? Boolean(file.sandboxMode) : true,
+    };
+  };
+
+  app.get("/api/openpay", (req, res) => {
+    const { privateKey, ...publicConfig } = readOpenpayConfig();
+    return res.json({ ...publicConfig, hasPrivateKey: !!privateKey });
   });
 
   // OpenPay Real REST API Charge Endpoint
@@ -2346,22 +2407,9 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
       const effectiveSourceId = source_id || sourceId;
       const effectiveRedirectUrl = redirect_url || redirectUrl || "https://ais-dev-jnwlinxsqg7dxkhfiboly5-94195196706.us-east5.run.app/";
 
-      // Default / Saved OpenPay credentials
-      let merchantId = "mhary0zwpt8y6jwt6fju";
-      let privateKey = "sk_cc06c6561cf34230ba69f1751da1596d";
-      let publicKey = "pk_ecd829b752774461b8cbc9383f4a414c";
-      let isSandbox = true;
-
-      if (fs.existsSync(OPENPAY_FILE)) {
-        try {
-          const cfg = JSON.parse(fs.readFileSync(OPENPAY_FILE, "utf-8"));
-          if (cfg.merchantId) merchantId = cfg.merchantId.trim();
-          if (cfg.privateKey) privateKey = cfg.privateKey.trim();
-          if (cfg.publicKey) publicKey = cfg.publicKey.trim();
-          if (cfg.sandboxMode !== undefined) isSandbox = Boolean(cfg.sandboxMode);
-        } catch (e) {
-          console.error("Error leyendo OPENPAY_FILE:", e);
-        }
+      const { merchantId, privateKey, sandboxMode: isSandbox } = readOpenpayConfig();
+      if (!merchantId || !privateKey) {
+        return res.status(500).json({ error: "OpenPay no está configurado en el servidor" });
       }
 
       // Base URL according to sandbox mode
@@ -2413,7 +2461,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
       }
 
       // API Key: OpenPay private key (sk_...) or public key (pk_...)
-      const authApiKey = privateKey || publicKey || "sk_ecd829b752774461b8cbc9383f4a414c";
+      const authApiKey = privateKey;
       const basicAuthToken = Buffer.from(`${authApiKey}:`).toString("base64");
 
       console.log(`📡 enviando cobro a OpenPay (${baseUrl}) para Merchant: ${merchantId}...`);
@@ -2497,7 +2545,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/admin/openpay", (req, res) => {
     const { password, openpayUrl, merchantId, publicKey, privateKey, sandboxMode } = req.body;
-    if (password !== "fruti05" && password !== "1234") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -2506,12 +2554,15 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
         openpayUrl: openpayUrl || "",
         merchantId: merchantId || "",
         publicKey: publicKey || "",
-        privateKey: privateKey || "",
+        privateKey: privateKey && !String(privateKey).startsWith("****")
+          ? privateKey
+          : readOpenpayConfig().privateKey,
         sandboxMode: sandboxMode !== undefined ? sandboxMode : true,
         updatedAt: new Date().toISOString()
       };
       fs.writeFileSync(OPENPAY_FILE, JSON.stringify(configData, null, 2));
-      return res.json({ success: true, message: "Configuración OpenPay guardada", data: configData });
+      const { privateKey: _omit, ...safeData } = configData;
+      return res.json({ success: true, message: "Configuración OpenPay guardada", data: safeData });
     } catch (err) {
       res.status(500).json({ error: "Error al guardar la configuración OpenPay" });
     }
@@ -2563,7 +2614,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/admin/orders/status", (req, res) => {
     const { password, orderId, status, invoiceAllowedByAdmin } = req.body;
-    if (password !== "fruti05" && password !== "1234") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -2606,7 +2657,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/policies", (req, res) => {
     const { password, data } = req.body;
-    if (password !== "fruti05") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Contraseña incorrecta" });
     }
 
@@ -2686,7 +2737,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.get("/api/admin/app-users", (req, res) => {
     const { password } = req.query;
-    if (password !== "fruti05" && password !== "1234") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -2765,7 +2816,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.get("/api/admin/deletion-requests", (req, res) => {
     const { password } = req.query;
-    if (password !== "fruti05") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -2782,7 +2833,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/admin/deletion-requests/resolve", (req, res) => {
     const { password, id, action } = req.body; // action: 'resolve' or 'delete'
-    if (password !== "fruti05") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 
@@ -2949,7 +3000,7 @@ La tecnología no debe ser complicada ni costosa; debe resolver problemas reales
 
   app.post("/api/admin/landing-pages", (req, res) => {
     const { password, pages } = req.body;
-    if (password !== "1234" && password !== "fruti05") {
+    if (!isAdminRequest(req)) {
       return res.status(401).json({ error: "Acceso no autorizado" });
     }
 

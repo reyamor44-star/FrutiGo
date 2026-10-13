@@ -99,7 +99,7 @@ export default function AdminLandingPages({ adminPassword }: AdminLandingPagesPr
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          password: adminPassword || "1234",
+          password: adminPassword,
           pages: pagesData
         })
       });
